@@ -1,0 +1,781 @@
+﻿id,source,brand,model,year,mileage,price_asked,wilaya,condition,url,scraped_at,source_weight,paint_flag,is_duplicate
+a0b616f0-dd20-4c55-82f9-70f17cf04630,Ouedkniss,Renault,Symbol,2018,85000,1850000,16 - Alger,bon,https://www.ouedkniss.com/automobiles/symbol/mock-ad-0,2026-05-14T10:49:03.440496+00:00,0.6,,False
+a35226c5-40be-46c9-b09e-93ad44547a7d,Ouedkniss,Renault,Symbol,2018,85000,1850000,16 - Alger,bon,https://www.ouedkniss.com/automobiles/symbol/mock-ad-1,2026-05-14T10:49:03.826097+00:00,0.6,,False
+1ab0b3a4-d2a4-45f6-a076-aa2e053abcd4,Ouedkniss,Renault,Symbol,2018,85000,1850000,16 - Alger,bon,https://www.ouedkniss.com/automobiles/symbol/mock-ad-2,2026-05-14T10:49:04.043725+00:00,0.6,,False
+2cce1fae-35f5-4cdf-b6fa-83c534196df7,Ouedkniss,Renault,Symbol,2018,85000,1850000,16 - Alger,bon,https://www.ouedkniss.com/automobiles/symbol/mock-ad-3,2026-05-14T10:49:04.252804+00:00,0.6,,False
+bb920929-2470-4eff-8468-2eef30db6cfe,Ouedkniss,Renault,Symbol,2018,85000,1850000,16 - Alger,bon,https://www.ouedkniss.com/automobiles/symbol/mock-ad-4,2026-05-14T10:49:04.514681+00:00,0.6,,False
+f68bdd3c-1c54-417e-9c94-08297bef74e9,Ouedkniss,Renault,Symbol,2018,85000,1850000,16 - Alger,bon,https://www.ouedkniss.com/automobiles/symbol/mock-ad-5,2026-05-14T10:49:04.74877+00:00,0.6,,False
+e791c034-8e35-41a4-9ac8-6dd87346ed2c,Ouedkniss,Renault,Symbol,2018,85000,1850000,16 - Alger,bon,https://www.ouedkniss.com/automobiles/symbol/mock-ad-6,2026-05-14T10:49:05.040528+00:00,0.6,,False
+8c754c35-637e-4fa5-8436-a5dd1e1e8f07,Ouedkniss,Renault,Symbol,2018,85000,1850000,16 - Alger,bon,https://www.ouedkniss.com/automobiles/symbol/mock-ad-7,2026-05-14T10:49:05.26136+00:00,0.6,,False
+cbba02b8-40b1-462d-839d-af1c87675313,Ouedkniss,Renault,Symbol,2018,85000,1850000,16 - Alger,bon,https://www.ouedkniss.com/automobiles/symbol/mock-ad-8,2026-05-14T10:49:05.519346+00:00,0.6,,False
+739bdb6c-f894-4606-a70c-6a980da3e022,Ouedkniss,Renault,Symbol,2018,85000,1850000,16 - Alger,bon,https://www.ouedkniss.com/automobiles/symbol/mock-ad-9,2026-05-14T10:49:05.768777+00:00,0.6,,False
+07b6db85-7266-4681-a5e4-4dc6d31202df,Ouedkniss,Renault,Symbol,2018,85000,1850000,16 - Alger,bon,https://www.ouedkniss.com/automobiles/stepway/mock-ad-0,2026-05-14T10:49:12.283908+00:00,0.6,,False
+3f12ab42-2886-4f04-a6dc-011a2656bf75,Ouedkniss,Renault,Symbol,2018,85000,1850000,16 - Alger,bon,https://www.ouedkniss.com/automobiles/stepway/mock-ad-1,2026-05-14T10:49:12.543927+00:00,0.6,,False
+a4023213-7f78-47ae-97d1-a6e7e0eef9a7,Ouedkniss,Renault,Symbol,2018,85000,1850000,16 - Alger,bon,https://www.ouedkniss.com/automobiles/stepway/mock-ad-2,2026-05-14T10:49:12.749078+00:00,0.6,,False
+022ddd34-f357-470c-84ea-b0cbc4b4d3f4,Ouedkniss,Renault,Symbol,2018,85000,1850000,16 - Alger,bon,https://www.ouedkniss.com/automobiles/stepway/mock-ad-3,2026-05-14T10:49:13.014277+00:00,0.6,,False
+4d744759-0bd1-43a8-a572-43fd3c02d691,Ouedkniss,Renault,Symbol,2018,85000,1850000,16 - Alger,bon,https://www.ouedkniss.com/automobiles/stepway/mock-ad-4,2026-05-14T10:49:13.339491+00:00,0.6,,False
+bb72186c-a707-4d3e-b2d2-4bcdebdbc742,Ouedkniss,Renault,Symbol,2018,85000,1850000,16 - Alger,bon,https://www.ouedkniss.com/automobiles/stepway/mock-ad-5,2026-05-14T10:49:13.544671+00:00,0.6,,False
+43507773-289c-4acc-9d32-3b5af5e04596,Ouedkniss,Renault,Symbol,2018,85000,1850000,16 - Alger,bon,https://www.ouedkniss.com/automobiles/stepway/mock-ad-6,2026-05-14T10:49:13.755746+00:00,0.6,,False
+6e27502b-c28c-4be0-a25e-427c314e9e62,Ouedkniss,Renault,Symbol,2018,85000,1850000,16 - Alger,bon,https://www.ouedkniss.com/automobiles/stepway/mock-ad-7,2026-05-14T10:49:14.054699+00:00,0.6,,False
+773ba35a-9ed8-43ee-8032-ded3c1ec562e,Ouedkniss,Renault,Symbol,2018,85000,1850000,16 - Alger,bon,https://www.ouedkniss.com/automobiles/stepway/mock-ad-8,2026-05-14T10:49:14.325924+00:00,0.6,,False
+6e5a8280-4938-4a9e-b27b-ffd7f3bf972b,Ouedkniss,Renault,Symbol,2018,85000,1850000,16 - Alger,bon,https://www.ouedkniss.com/automobiles/stepway/mock-ad-9,2026-05-14T10:49:14.558708+00:00,0.6,,False
+58738f2a-927a-4888-a62c-fb026a1510ff,Ouedkniss,Renault,Symbol,2018,85000,1850000,16 - Alger,bon,https://www.ouedkniss.com/automobiles/208/mock-ad-0,2026-05-14T10:49:20.996851+00:00,0.6,,False
+ca6181b8-37aa-4fad-9116-93f8d2a7b9a1,Ouedkniss,Renault,Symbol,2018,85000,1850000,16 - Alger,bon,https://www.ouedkniss.com/automobiles/208/mock-ad-1,2026-05-14T10:49:21.219028+00:00,0.6,,False
+9e9033f2-aa34-4efe-84ca-de3427d183be,Ouedkniss,Renault,Symbol,2018,85000,1850000,16 - Alger,bon,https://www.ouedkniss.com/automobiles/208/mock-ad-2,2026-05-14T10:49:21.438632+00:00,0.6,,False
+73e792cc-4034-4690-ad83-e61fe9911683,Ouedkniss,Renault,Symbol,2018,85000,1850000,16 - Alger,bon,https://www.ouedkniss.com/automobiles/208/mock-ad-3,2026-05-14T10:49:21.721779+00:00,0.6,,False
+182e2a75-79ab-40b8-94c1-2212569e5b3a,Ouedkniss,Renault,Symbol,2018,85000,1850000,16 - Alger,bon,https://www.ouedkniss.com/automobiles/208/mock-ad-4,2026-05-14T10:49:21.955768+00:00,0.6,,False
+6df22e74-da79-480b-9544-6c219c5af24f,Ouedkniss,Renault,Symbol,2018,85000,1850000,16 - Alger,bon,https://www.ouedkniss.com/automobiles/208/mock-ad-5,2026-05-14T10:49:22.187288+00:00,0.6,,False
+19e4fe02-f548-442e-a2e5-186c3dd48df0,Ouedkniss,Renault,Symbol,2018,85000,1850000,16 - Alger,bon,https://www.ouedkniss.com/automobiles/208/mock-ad-6,2026-05-14T10:49:22.404746+00:00,0.6,,False
+226be36e-5d8d-4bda-91cc-9a53eeba0ace,Ouedkniss,Renault,Symbol,2018,85000,1850000,16 - Alger,bon,https://www.ouedkniss.com/automobiles/208/mock-ad-7,2026-05-14T10:49:22.624162+00:00,0.6,,False
+355bf8f4-6d26-4b43-a9a3-8b27a90f25a1,Ouedkniss,Renault,Symbol,2018,85000,1850000,16 - Alger,bon,https://www.ouedkniss.com/automobiles/208/mock-ad-8,2026-05-14T10:49:22.848511+00:00,0.6,,False
+dece0c51-38c7-489a-8411-8ed5e542735c,Ouedkniss,Renault,Symbol,2018,85000,1850000,16 - Alger,bon,https://www.ouedkniss.com/automobiles/208/mock-ad-9,2026-05-14T10:49:23.071831+00:00,0.6,,False
+77f0dddd-e89c-4365-b0fb-5091b9a2a179,ouedkniss_reference,Renault,Symbol,2015,25000,645000,Sétif,excellent,seed/renault/symbol/2015/25000/excellent,2026-05-15T10:46:57.191983+00:00,0.6,,False
+fc370918-8fec-4da4-9bf8-53d7d950d447,ouedkniss_reference,Renault,Symbol,2015,45000,635000,Blida,excellent,seed/renault/symbol/2015/45000/excellent,2026-05-15T10:46:57.613115+00:00,0.6,,False
+38ad81dd-4065-43e2-b7d2-879f3d61cbe5,ouedkniss_reference,Renault,Symbol,2015,60000,578000,Oran,bon,seed/renault/symbol/2015/60000/bon,2026-05-15T10:46:57.970364+00:00,0.6,,False
+22a806bc-27f4-4b43-a8c0-56f3d30dd8a5,ouedkniss_reference,Renault,Symbol,2015,75000,564000,Alger,bon,seed/renault/symbol/2015/75000/bon,2026-05-15T10:46:58.416926+00:00,0.6,,False
+3d32bdf0-dd2a-4c46-a388-a5fc74c6104c,ouedkniss_reference,Renault,Symbol,2015,90000,541000,Constantine,bon,seed/renault/symbol/2015/90000/bon,2026-05-15T10:46:58.810306+00:00,0.6,,False
+be6617de-052d-4890-9dbc-3403a77f722c,ouedkniss_reference,Renault,Symbol,2015,110000,548000,Annaba,bon,seed/renault/symbol/2015/110000/bon,2026-05-15T10:46:59.202754+00:00,0.6,,False
+ed402fa1-8734-442f-b588-780d9c5d75c2,ouedkniss_reference,Renault,Symbol,2015,130000,459000,Oran,moyen,seed/renault/symbol/2015/130000/moyen,2026-05-15T10:46:59.666189+00:00,0.6,,False
+d7643e9c-862b-4ef9-bb7f-12e626ab3e7a,ouedkniss_reference,Renault,Symbol,2015,155000,444000,Annaba,moyen,seed/renault/symbol/2015/155000/moyen,2026-05-15T10:47:00.298458+00:00,0.6,,False
+0ef49b07-8503-4060-a3e9-8c6b8803f4aa,ouedkniss_reference,Renault,Symbol,2015,180000,404000,Annaba,moyen,seed/renault/symbol/2015/180000/moyen,2026-05-15T10:47:00.647664+00:00,0.6,,False
+cfb1e35c-0338-47b7-b5c2-6a397d3f5e62,ouedkniss_reference,Renault,Symbol,2015,220000,320000,Constantine,mauvais,seed/renault/symbol/2015/220000/mauvais,2026-05-15T10:47:00.997979+00:00,0.6,,False
+818e2b77-078c-47b7-8515-019a7ced6ca0,ouedkniss_reference,Renault,Symbol,2016,25000,729000,Oran,excellent,seed/renault/symbol/2016/25000/excellent,2026-05-15T10:47:01.355652+00:00,0.6,,False
+4150bbd1-d630-4373-8082-865806f40717,ouedkniss_reference,Renault,Symbol,2016,45000,757000,Blida,excellent,seed/renault/symbol/2016/45000/excellent,2026-05-15T10:47:01.707381+00:00,0.6,,False
+a5a3ee98-d8b5-4411-a597-3c408f1dffaa,ouedkniss_reference,Renault,Symbol,2016,60000,694000,Oran,bon,seed/renault/symbol/2016/60000/bon,2026-05-15T10:47:02.10913+00:00,0.6,,False
+83211e27-e694-47b8-af17-754f3321d974,ouedkniss_reference,Renault,Symbol,2016,75000,650000,Blida,bon,seed/renault/symbol/2016/75000/bon,2026-05-15T10:47:02.466743+00:00,0.6,,False
+4291ec63-7f76-4f15-b250-91d43d5071df,ouedkniss_reference,Renault,Symbol,2016,90000,631000,Constantine,bon,seed/renault/symbol/2016/90000/bon,2026-05-15T10:47:02.796915+00:00,0.6,,False
+7b432f78-d5c8-4e81-ae97-efda86bc8944,ouedkniss_reference,Renault,Symbol,2016,110000,592000,Blida,bon,seed/renault/symbol/2016/110000/bon,2026-05-15T10:47:03.226535+00:00,0.6,,False
+6a714e3c-ec02-4653-991e-50759edd672b,ouedkniss_reference,Renault,Symbol,2016,130000,496000,Blida,moyen,seed/renault/symbol/2016/130000/moyen,2026-05-15T10:47:03.921376+00:00,0.6,,False
+e6425c12-5541-4762-b506-67f1b7e624f3,ouedkniss_reference,Renault,Symbol,2016,155000,482000,Blida,moyen,seed/renault/symbol/2016/155000/moyen,2026-05-15T10:47:04.306459+00:00,0.6,,False
+afeaa4da-37f0-42b4-a7eb-fc0d837f116f,ouedkniss_reference,Renault,Symbol,2016,180000,447000,Tizi Ouzou,moyen,seed/renault/symbol/2016/180000/moyen,2026-05-15T10:47:04.67476+00:00,0.6,,False
+d980c741-dce3-424e-8e85-a147fa8ddb31,ouedkniss_reference,Renault,Symbol,2016,220000,351000,Constantine,mauvais,seed/renault/symbol/2016/220000/mauvais,2026-05-15T10:47:05.048673+00:00,0.6,,False
+353a2cdf-de1d-42a6-bb74-8aa8edbcfd50,ouedkniss_reference,Renault,Symbol,2017,25000,797000,Sétif,excellent,seed/renault/symbol/2017/25000/excellent,2026-05-15T10:47:05.406901+00:00,0.6,,False
+1aae9932-98d4-44d3-9a82-656456bf3a82,ouedkniss_reference,Renault,Symbol,2017,45000,788000,Constantine,excellent,seed/renault/symbol/2017/45000/excellent,2026-05-15T10:47:05.778805+00:00,0.6,,False
+2d81ca27-25fa-4ea0-b3a4-4f1376d706a3,ouedkniss_reference,Renault,Symbol,2017,60000,701000,Tizi Ouzou,bon,seed/renault/symbol/2017/60000/bon,2026-05-15T10:47:06.145516+00:00,0.6,,False
+f2405a4c-224c-4d53-bbab-e842bf2862dd,ouedkniss_reference,Renault,Symbol,2017,75000,681000,Constantine,bon,seed/renault/symbol/2017/75000/bon,2026-05-15T10:47:06.501211+00:00,0.6,,False
+b539ee2c-18b7-4fd6-aacc-451e582dfa9e,ouedkniss_reference,Renault,Symbol,2017,90000,696000,Oran,bon,seed/renault/symbol/2017/90000/bon,2026-05-15T10:47:06.875648+00:00,0.6,,False
+8304ed16-a1bc-4eff-bfff-914372cacaf6,ouedkniss_reference,Renault,Symbol,2017,110000,668000,Sétif,bon,seed/renault/symbol/2017/110000/bon,2026-05-15T10:47:07.274059+00:00,0.6,,False
+9511c5a5-0d94-45e5-9b0d-23cd06b83b28,ouedkniss_reference,Renault,Symbol,2017,130000,565000,Alger,moyen,seed/renault/symbol/2017/130000/moyen,2026-05-15T10:47:07.671609+00:00,0.6,,False
+b43aabce-efa4-4300-896b-e811b19bc5f1,ouedkniss_reference,Renault,Symbol,2017,155000,539000,Constantine,moyen,seed/renault/symbol/2017/155000/moyen,2026-05-15T10:47:08.036091+00:00,0.6,,False
+4d213c54-9bd6-43ce-9b83-9e0b5dd9e65e,ouedkniss_reference,Renault,Symbol,2017,180000,508000,Alger,moyen,seed/renault/symbol/2017/180000/moyen,2026-05-15T10:47:08.410719+00:00,0.6,,False
+3d20f9cc-eb1c-4b80-9a57-cad5922a8dcf,ouedkniss_reference,Renault,Symbol,2017,220000,378000,Alger,mauvais,seed/renault/symbol/2017/220000/mauvais,2026-05-15T10:47:08.796923+00:00,0.6,,False
+2ab9a2b2-ae45-4a9b-8d93-f538e6a00c62,ouedkniss_reference,Renault,Symbol,2018,25000,936000,Sétif,excellent,seed/renault/symbol/2018/25000/excellent,2026-05-15T10:47:09.187576+00:00,0.6,,False
+a98c391d-2a67-40b6-a96c-7960dc739689,ouedkniss_reference,Renault,Symbol,2018,45000,886000,Annaba,excellent,seed/renault/symbol/2018/45000/excellent,2026-05-15T10:47:09.61528+00:00,0.6,,False
+bd81d7a5-9862-44dc-b0e2-a34b2ab6fadd,ouedkniss_reference,Renault,Symbol,2018,60000,787000,Alger,bon,seed/renault/symbol/2018/60000/bon,2026-05-15T10:47:10.014993+00:00,0.6,,False
+bcf45f62-4e1a-4f1b-906d-95f0f743370d,ouedkniss_reference,Renault,Symbol,2018,75000,748000,Boumerdès,bon,seed/renault/symbol/2018/75000/bon,2026-05-15T10:47:10.395337+00:00,0.6,,False
+5574a660-cee9-4993-b3b3-5689f26d309e,ouedkniss_reference,Renault,Symbol,2018,90000,743000,Boumerdès,bon,seed/renault/symbol/2018/90000/bon,2026-05-15T10:47:10.767287+00:00,0.6,,False
+dbeabc4b-817a-49db-8cc6-07c626e61d6e,ouedkniss_reference,Renault,Symbol,2018,110000,743000,Alger,bon,seed/renault/symbol/2018/110000/bon,2026-05-15T10:47:11.155174+00:00,0.6,,False
+f54c99be-a416-49f0-ad22-c9a765e8e48c,ouedkniss_reference,Renault,Symbol,2018,130000,597000,Oran,moyen,seed/renault/symbol/2018/130000/moyen,2026-05-15T10:47:11.573926+00:00,0.6,,False
+3af6ecfb-e2e0-4346-88a2-f72975b2a096,ouedkniss_reference,Renault,Symbol,2018,155000,597000,Boumerdès,moyen,seed/renault/symbol/2018/155000/moyen,2026-05-15T10:47:11.986534+00:00,0.6,,False
+a7e511f8-23fa-4a54-ab76-a711d3ab84b4,ouedkniss_reference,Renault,Symbol,2018,180000,542000,Annaba,moyen,seed/renault/symbol/2018/180000/moyen,2026-05-15T10:47:12.405263+00:00,0.6,,False
+f3aac2ed-9a30-44a5-8fb3-db99aefcbfa1,ouedkniss_reference,Renault,Symbol,2018,220000,403000,Tizi Ouzou,mauvais,seed/renault/symbol/2018/220000/mauvais,2026-05-15T10:47:12.853039+00:00,0.6,,False
+9ba37363-13f7-4786-a585-d20335277974,ouedkniss_reference,Renault,Symbol,2019,25000,972000,Constantine,excellent,seed/renault/symbol/2019/25000/excellent,2026-05-15T10:47:13.246556+00:00,0.6,,False
+8650c383-e956-4d6c-a132-108d898c40b0,ouedkniss_reference,Renault,Symbol,2019,45000,1012000,Alger,excellent,seed/renault/symbol/2019/45000/excellent,2026-05-15T10:47:13.638808+00:00,0.6,,False
+e84f7a8f-4309-4103-86cc-a8a2cec64c71,ouedkniss_reference,Renault,Symbol,2019,60000,870000,Annaba,bon,seed/renault/symbol/2019/60000/bon,2026-05-15T10:47:14.036205+00:00,0.6,,False
+9b420afc-ecfe-4dae-a0fc-04e69766ab0f,ouedkniss_reference,Renault,Symbol,2019,75000,874000,Tizi Ouzou,bon,seed/renault/symbol/2019/75000/bon,2026-05-15T10:47:14.378176+00:00,0.6,,False
+f179dc23-ccb7-432e-834a-211312bd9ca2,ouedkniss_reference,Renault,Symbol,2019,90000,807000,Sétif,bon,seed/renault/symbol/2019/90000/bon,2026-05-15T10:47:14.791138+00:00,0.6,,False
+b56c312b-082d-4785-a12f-d1bd636e1f62,ouedkniss_reference,Renault,Symbol,2019,110000,845000,Blida,bon,seed/renault/symbol/2019/110000/bon,2026-05-15T10:47:15.208501+00:00,0.6,,False
+800b08e0-737e-441c-b42e-ccca97aa1461,ouedkniss_reference,Renault,Symbol,2019,130000,674000,Boumerdès,moyen,seed/renault/symbol/2019/130000/moyen,2026-05-15T10:47:15.573428+00:00,0.6,,False
+3936a7fb-65c5-4ed7-b3da-a50e9bfb4945,ouedkniss_reference,Renault,Symbol,2019,155000,629000,Oran,moyen,seed/renault/symbol/2019/155000/moyen,2026-05-15T10:47:16.038818+00:00,0.6,,False
+7f55c8c7-21d8-4965-95b9-537e3fb7cf1a,ouedkniss_reference,Renault,Symbol,2019,180000,635000,Tizi Ouzou,moyen,seed/renault/symbol/2019/180000/moyen,2026-05-15T10:47:16.476921+00:00,0.6,,False
+7f3e6bcf-b7fa-4148-b410-16698bb780e8,ouedkniss_reference,Renault,Symbol,2019,220000,453000,Alger,mauvais,seed/renault/symbol/2019/220000/mauvais,2026-05-15T10:47:16.818951+00:00,0.6,,False
+0730e2ce-4e5f-4454-a496-0b4c209bf91e,ouedkniss_reference,Renault,Symbol,2020,25000,1133000,Blida,excellent,seed/renault/symbol/2020/25000/excellent,2026-05-15T10:49:17.372236+00:00,0.6,,False
+7d0be151-4c80-4696-9be9-ce9add715278,ouedkniss_reference,Renault,Symbol,2020,45000,1129000,Boumerdès,excellent,seed/renault/symbol/2020/45000/excellent,2026-05-15T10:49:17.739324+00:00,0.6,,False
+3216e298-a132-41b2-b427-0a696d2ce995,ouedkniss_reference,Renault,Symbol,2020,60000,969000,Alger,bon,seed/renault/symbol/2020/60000/bon,2026-05-15T10:49:18.435388+00:00,0.6,,False
+ecab41f6-9d9d-4623-b10f-ca012a3d0557,ouedkniss_reference,Renault,Symbol,2020,75000,1012000,Blida,bon,seed/renault/symbol/2020/75000/bon,2026-05-15T10:49:18.793072+00:00,0.6,,False
+d91dad0b-f62c-4634-8452-804fca838556,ouedkniss_reference,Renault,Symbol,2020,90000,895000,Alger,bon,seed/renault/symbol/2020/90000/bon,2026-05-15T10:49:19.136492+00:00,0.6,,False
+e24df399-1e61-4841-8c64-de51cff6661d,ouedkniss_reference,Renault,Symbol,2020,110000,917000,Alger,bon,seed/renault/symbol/2020/110000/bon,2026-05-15T10:49:19.466156+00:00,0.6,,False
+1e385477-1354-45a9-bfa7-e32babee133f,ouedkniss_reference,Renault,Symbol,2020,130000,755000,Alger,moyen,seed/renault/symbol/2020/130000/moyen,2026-05-15T10:49:19.916223+00:00,0.6,,False
+97586746-59cd-4ac2-9622-32b4d94592bd,ouedkniss_reference,Renault,Symbol,2020,155000,742000,Constantine,moyen,seed/renault/symbol/2020/155000/moyen,2026-05-15T10:49:20.278572+00:00,0.6,,False
+70956b34-713f-49ab-91b4-f3157153edba,ouedkniss_reference,Renault,Symbol,2020,180000,700000,Boumerdès,moyen,seed/renault/symbol/2020/180000/moyen,2026-05-15T10:49:20.701112+00:00,0.6,,False
+550afccd-8409-4c19-961f-47daa555da26,ouedkniss_reference,Renault,Symbol,2020,220000,522000,Boumerdès,mauvais,seed/renault/symbol/2020/220000/mauvais,2026-05-15T10:49:21.548488+00:00,0.6,,False
+700a229d-cf50-41c1-b2eb-00c3e325334f,ouedkniss_reference,Renault,Clio,2016,25000,878000,Alger,excellent,seed/renault/clio/2016/25000/excellent,2026-05-15T10:49:21.937026+00:00,0.6,,False
+903152f3-c293-4769-b3b7-e7576841d07e,ouedkniss_reference,Renault,Clio,2016,45000,867000,Sétif,excellent,seed/renault/clio/2016/45000/excellent,2026-05-15T10:49:22.287415+00:00,0.6,,False
+3324e12b-7bf4-48a8-8f9b-92850886357d,ouedkniss_reference,Renault,Clio,2016,60000,809000,Tizi Ouzou,bon,seed/renault/clio/2016/60000/bon,2026-05-15T10:49:22.641578+00:00,0.6,,False
+d0b75348-2e4a-4289-b7cb-b6dea6085fc3,ouedkniss_reference,Renault,Clio,2016,75000,768000,Blida,bon,seed/renault/clio/2016/75000/bon,2026-05-15T10:49:22.958214+00:00,0.6,,False
+b02dcef8-37cb-4452-a560-1165956875f6,ouedkniss_reference,Renault,Clio,2016,90000,714000,Alger,bon,seed/renault/clio/2016/90000/bon,2026-05-15T10:49:23.334089+00:00,0.6,,False
+0403dbd7-6250-4779-84c0-1af014aa77d5,ouedkniss_reference,Renault,Clio,2016,110000,686000,Oran,bon,seed/renault/clio/2016/110000/bon,2026-05-15T10:49:23.7131+00:00,0.6,,False
+ad5de3c1-fe4d-4836-bc92-11e5bcc58321,ouedkniss_reference,Renault,Clio,2016,130000,570000,Tizi Ouzou,moyen,seed/renault/clio/2016/130000/moyen,2026-05-15T10:49:24.05864+00:00,0.6,,False
+1a6e9d3a-8e6d-4db6-87cb-f99cc5b3b09f,ouedkniss_reference,Renault,Clio,2016,155000,583000,Blida,moyen,seed/renault/clio/2016/155000/moyen,2026-05-15T10:49:24.382632+00:00,0.6,,False
+e712ec25-2dbc-4d5b-8ab8-564241166a1c,ouedkniss_reference,Renault,Clio,2016,180000,549000,Oran,moyen,seed/renault/clio/2016/180000/moyen,2026-05-15T10:49:24.737817+00:00,0.6,,False
+0dfc0908-8fab-4348-a9e5-ddfd55de2705,ouedkniss_reference,Renault,Clio,2016,220000,393000,Oran,mauvais,seed/renault/clio/2016/220000/mauvais,2026-05-15T10:49:25.099154+00:00,0.6,,False
+06107577-982f-47c1-9e8f-76653b1caebf,ouedkniss_reference,Renault,Clio,2017,25000,969000,Blida,excellent,seed/renault/clio/2017/25000/excellent,2026-05-15T10:49:25.449466+00:00,0.6,,False
+6422969b-2949-4923-8a36-7234e38e0bd8,ouedkniss_reference,Renault,Clio,2017,45000,903000,Sétif,excellent,seed/renault/clio/2017/45000/excellent,2026-05-15T10:49:25.846776+00:00,0.6,,False
+6f64d93c-78d4-4ba2-a7ed-2710ede46c3c,ouedkniss_reference,Renault,Clio,2017,60000,820000,Alger,bon,seed/renault/clio/2017/60000/bon,2026-05-15T10:49:26.207892+00:00,0.6,,False
+dee4c91f-227f-4444-a769-9e609e93ff30,ouedkniss_reference,Renault,Clio,2017,75000,832000,Oran,bon,seed/renault/clio/2017/75000/bon,2026-05-15T10:49:26.5679+00:00,0.6,,False
+f26f45a5-7118-4cff-96ee-69325f2c1248,ouedkniss_reference,Renault,Clio,2017,90000,795000,Annaba,bon,seed/renault/clio/2017/90000/bon,2026-05-15T10:49:26.918982+00:00,0.6,,False
+98895f2f-eef3-4e5b-97a2-d689cbdda35a,ouedkniss_reference,Renault,Clio,2017,110000,772000,Boumerdès,bon,seed/renault/clio/2017/110000/bon,2026-05-15T10:49:27.586823+00:00,0.6,,False
+e7561906-0ca9-4246-9618-f446cb17e8ed,ouedkniss_reference,Renault,Clio,2017,130000,666000,Blida,moyen,seed/renault/clio/2017/130000/moyen,2026-05-15T10:49:28.003069+00:00,0.6,,False
+8c3cd601-bf75-4cd6-91bd-83f71acc895c,ouedkniss_reference,Renault,Clio,2017,155000,602000,Boumerdès,moyen,seed/renault/clio/2017/155000/moyen,2026-05-15T10:49:28.355917+00:00,0.6,,False
+af62938c-3bf1-423a-8718-87ee8e2c7e00,ouedkniss_reference,Renault,Clio,2017,180000,610000,Boumerdès,moyen,seed/renault/clio/2017/180000/moyen,2026-05-15T10:49:28.696682+00:00,0.6,,False
+280801e0-8c76-4de7-9846-d119ba071c01,ouedkniss_reference,Renault,Clio,2017,220000,441000,Oran,mauvais,seed/renault/clio/2017/220000/mauvais,2026-05-15T10:49:29.084375+00:00,0.6,,False
+0146ceaa-2213-4cc7-b59e-2f0385355edf,ouedkniss_reference,Renault,Clio,2018,25000,1143000,Constantine,excellent,seed/renault/clio/2018/25000/excellent,2026-05-15T10:49:29.428724+00:00,0.6,,False
+33069bcf-d5d0-4b94-a911-4ff763fa3bb2,ouedkniss_reference,Renault,Clio,2018,45000,1099000,Sétif,excellent,seed/renault/clio/2018/45000/excellent,2026-05-15T10:49:29.81049+00:00,0.6,,False
+4d7713a2-2727-47e1-aa17-7f99d8a2856e,ouedkniss_reference,Renault,Clio,2018,60000,948000,Boumerdès,bon,seed/renault/clio/2018/60000/bon,2026-05-15T10:49:30.14992+00:00,0.6,,False
+6ef4dd53-0e7f-4d54-86a4-4a3dd52e83ba,ouedkniss_reference,Renault,Clio,2018,75000,941000,Oran,bon,seed/renault/clio/2018/75000/bon,2026-05-15T10:49:30.539894+00:00,0.6,,False
+c09b7072-9069-466e-9dde-e5b3499ac70c,ouedkniss_reference,Renault,Clio,2018,90000,912000,Alger,bon,seed/renault/clio/2018/90000/bon,2026-05-15T10:49:30.886695+00:00,0.6,,False
+fc5cb9d2-079b-4495-8d20-12b639c78e0c,ouedkniss_reference,Renault,Clio,2018,110000,894000,Alger,bon,seed/renault/clio/2018/110000/bon,2026-05-15T10:49:31.262326+00:00,0.6,,False
+1554a6d5-4442-4d7a-b316-d4cf901724a6,ouedkniss_reference,Renault,Clio,2018,130000,771000,Boumerdès,moyen,seed/renault/clio/2018/130000/moyen,2026-05-15T10:49:31.66464+00:00,0.6,,False
+a8e69b08-c7e8-4074-95b1-efa9195d7172,ouedkniss_reference,Renault,Clio,2018,155000,703000,Sétif,moyen,seed/renault/clio/2018/155000/moyen,2026-05-15T10:49:32.346045+00:00,0.6,,False
+3b5b7726-7548-4065-be21-9ef046f97505,ouedkniss_reference,Renault,Clio,2018,180000,684000,Constantine,moyen,seed/renault/clio/2018/180000/moyen,2026-05-15T10:49:32.707139+00:00,0.6,,False
+f0334758-3944-41f5-af17-5cc86c50ad38,ouedkniss_reference,Renault,Clio,2018,220000,532000,Sétif,mauvais,seed/renault/clio/2018/220000/mauvais,2026-05-15T10:49:33.076738+00:00,0.6,,False
+98d57d37-d9c6-4464-b135-dafeb9196d6d,ouedkniss_reference,Renault,Clio,2019,25000,1281000,Tizi Ouzou,excellent,seed/renault/clio/2019/25000/excellent,2026-05-15T10:49:33.51363+00:00,0.6,,False
+82b1077e-6e58-4370-b8f5-14386db2b883,ouedkniss_reference,Renault,Clio,2019,45000,1193000,Tizi Ouzou,excellent,seed/renault/clio/2019/45000/excellent,2026-05-15T10:49:33.905917+00:00,0.6,,False
+6e54eaa0-bebd-4bf8-ad93-dc78b47584e0,ouedkniss_reference,Renault,Clio,2019,60000,1086000,Constantine,bon,seed/renault/clio/2019/60000/bon,2026-05-15T10:49:34.394295+00:00,0.6,,False
+ea54be0b-edab-495a-be9a-a6c597b64664,ouedkniss_reference,Renault,Clio,2019,75000,1033000,Oran,bon,seed/renault/clio/2019/75000/bon,2026-05-15T10:49:34.892276+00:00,0.6,,False
+f4d6031c-defc-46eb-9357-909907650a9c,ouedkniss_reference,Renault,Clio,2019,90000,1031000,Sétif,bon,seed/renault/clio/2019/90000/bon,2026-05-15T10:49:35.297997+00:00,0.6,,False
+8c35b9ca-dd67-43fb-aa23-c5f6bb48f2ea,ouedkniss_reference,Renault,Clio,2019,110000,990000,Constantine,bon,seed/renault/clio/2019/110000/bon,2026-05-15T10:49:35.739729+00:00,0.6,,False
+adce9a51-afc7-4ff4-8e5e-4c35807e4529,ouedkniss_reference,Renault,Clio,2019,130000,838000,Alger,moyen,seed/renault/clio/2019/130000/moyen,2026-05-15T10:49:36.145183+00:00,0.6,,False
+336cd17b-0f90-41f3-a169-fc78741bc71e,ouedkniss_reference,Renault,Clio,2019,155000,812000,Blida,moyen,seed/renault/clio/2019/155000/moyen,2026-05-15T10:49:36.494511+00:00,0.6,,False
+ab587a18-9e5d-4d1f-8cfe-7040f7bfbc02,ouedkniss_reference,Renault,Clio,2019,180000,777000,Constantine,moyen,seed/renault/clio/2019/180000/moyen,2026-05-15T10:49:36.879532+00:00,0.6,,False
+fcb879af-077a-45f7-97a0-342994d2d46f,ouedkniss_reference,Renault,Clio,2019,220000,557000,Blida,mauvais,seed/renault/clio/2019/220000/mauvais,2026-05-15T10:49:37.227608+00:00,0.6,,False
+ccaebce2-7924-41e0-becf-1c8b2c985b10,ouedkniss_reference,Renault,Clio,2020,25000,1380000,Blida,excellent,seed/renault/clio/2020/25000/excellent,2026-05-15T10:49:37.688421+00:00,0.6,,False
+15f9cfdc-026b-418e-b295-aeb5f910b274,ouedkniss_reference,Renault,Clio,2020,45000,1325000,Blida,excellent,seed/renault/clio/2020/45000/excellent,2026-05-15T10:49:38.038743+00:00,0.6,,False
+c784ded6-eedd-4807-abf4-489e53518f3b,ouedkniss_reference,Renault,Clio,2020,60000,1232000,Blida,bon,seed/renault/clio/2020/60000/bon,2026-05-15T10:49:38.384322+00:00,0.6,,False
+34d4f8cc-3c38-45b6-8055-94532b2f419f,ouedkniss_reference,Renault,Clio,2020,75000,1175000,Tizi Ouzou,bon,seed/renault/clio/2020/75000/bon,2026-05-15T10:49:38.791401+00:00,0.6,,False
+0916ee51-6345-4092-99c7-0f4d493cc194,ouedkniss_reference,Renault,Clio,2020,90000,1203000,Blida,bon,seed/renault/clio/2020/90000/bon,2026-05-15T10:49:39.167025+00:00,0.6,,False
+108ea681-054c-4508-ab85-d95205434809,ouedkniss_reference,Renault,Clio,2020,110000,1120000,Oran,bon,seed/renault/clio/2020/110000/bon,2026-05-15T10:49:39.544793+00:00,0.6,,False
+e0cc5122-520c-4898-9519-f9733618a50c,ouedkniss_reference,Renault,Clio,2020,130000,981000,Alger,moyen,seed/renault/clio/2020/130000/moyen,2026-05-15T10:49:39.914458+00:00,0.6,,False
+d9cfb84d-59fb-4341-b0a3-45fe896f996e,ouedkniss_reference,Renault,Clio,2020,155000,959000,Alger,moyen,seed/renault/clio/2020/155000/moyen,2026-05-15T10:49:40.288779+00:00,0.6,,False
+83266da6-214c-415e-b550-37ee37bb5686,ouedkniss_reference,Renault,Clio,2020,180000,848000,Alger,moyen,seed/renault/clio/2020/180000/moyen,2026-05-15T10:49:40.664754+00:00,0.6,,False
+c3d2ce84-6b0f-4128-a6cd-390d91d649c2,ouedkniss_reference,Renault,Clio,2020,220000,658000,Alger,mauvais,seed/renault/clio/2020/220000/mauvais,2026-05-15T10:49:40.994403+00:00,0.6,,False
+c858d474-5882-455a-8221-a66c6c190d39,ouedkniss_reference,Dacia,Logan,2016,25000,641000,Oran,excellent,seed/dacia/logan/2016/25000/excellent,2026-05-15T10:49:41.353263+00:00,0.6,,False
+38f95be5-da8f-45f5-a0ce-1c9e09d9d9b4,ouedkniss_reference,Dacia,Logan,2016,45000,660000,Boumerdès,excellent,seed/dacia/logan/2016/45000/excellent,2026-05-15T10:49:41.726625+00:00,0.6,,False
+f1992a0a-483c-478d-abf3-5f3ebcae4d06,ouedkniss_reference,Dacia,Logan,2016,60000,577000,Boumerdès,bon,seed/dacia/logan/2016/60000/bon,2026-05-15T10:49:42.109344+00:00,0.6,,False
+8aa67081-8782-4659-a431-e3e448df2bdb,ouedkniss_reference,Dacia,Logan,2016,75000,587000,Boumerdès,bon,seed/dacia/logan/2016/75000/bon,2026-05-15T10:49:42.454314+00:00,0.6,,False
+df2eaf40-d699-4d9b-b8b3-ab38abcf3d93,ouedkniss_reference,Dacia,Logan,2016,90000,524000,Boumerdès,bon,seed/dacia/logan/2016/90000/bon,2026-05-15T10:49:42.85447+00:00,0.6,,False
+c3edd13b-d590-43ca-953a-25b330c76997,ouedkniss_reference,Dacia,Logan,2016,110000,550000,Sétif,bon,seed/dacia/logan/2016/110000/bon,2026-05-15T10:49:43.214496+00:00,0.6,,False
+cb31f7bb-e1c9-4eb3-919f-4d46dae203e7,ouedkniss_reference,Dacia,Logan,2016,130000,426000,Sétif,moyen,seed/dacia/logan/2016/130000/moyen,2026-05-15T10:49:43.546896+00:00,0.6,,False
+3bdef933-56d1-4544-b0c2-25475dd72cef,ouedkniss_reference,Dacia,Logan,2016,155000,436000,Annaba,moyen,seed/dacia/logan/2016/155000/moyen,2026-05-15T10:49:43.944063+00:00,0.6,,False
+39669257-b6f6-46ab-9953-5b2c80e3363f,ouedkniss_reference,Dacia,Logan,2016,180000,385000,Tizi Ouzou,moyen,seed/dacia/logan/2016/180000/moyen,2026-05-15T10:49:44.298219+00:00,0.6,,False
+e46de28e-2bfe-4892-b7e5-695a46500dc1,ouedkniss_reference,Dacia,Logan,2016,220000,315000,Boumerdès,mauvais,seed/dacia/logan/2016/220000/mauvais,2026-05-15T10:49:44.69412+00:00,0.6,,False
+432f222e-9cde-4a39-a13e-7d90dd033ae9,ouedkniss_reference,Dacia,Logan,2017,25000,750000,Tizi Ouzou,excellent,seed/dacia/logan/2017/25000/excellent,2026-05-15T10:49:45.066296+00:00,0.6,,False
+8b40f39d-187b-4821-950d-0bf486b0a589,ouedkniss_reference,Dacia,Logan,2017,45000,692000,Blida,excellent,seed/dacia/logan/2017/45000/excellent,2026-05-15T10:49:45.426153+00:00,0.6,,False
+8707e780-cc2a-4622-8009-65d4cc955bc2,ouedkniss_reference,Dacia,Logan,2017,60000,645000,Boumerdès,bon,seed/dacia/logan/2017/60000/bon,2026-05-15T10:49:45.796954+00:00,0.6,,False
+3c1980e7-dc5e-4841-b1c5-1092521d0ae7,ouedkniss_reference,Dacia,Logan,2017,75000,596000,Blida,bon,seed/dacia/logan/2017/75000/bon,2026-05-15T10:49:46.219563+00:00,0.6,,False
+7d34f43e-92dc-49b4-9b87-df15236f4957,ouedkniss_reference,Dacia,Logan,2017,90000,596000,Tizi Ouzou,bon,seed/dacia/logan/2017/90000/bon,2026-05-15T10:49:46.604608+00:00,0.6,,False
+31151981-542f-4e2a-94ba-5ac8cacf988c,ouedkniss_reference,Dacia,Logan,2017,110000,579000,Sétif,bon,seed/dacia/logan/2017/110000/bon,2026-05-15T10:49:47.014897+00:00,0.6,,False
+b185af73-7e45-4f30-9f17-a784f8c6ad71,ouedkniss_reference,Dacia,Logan,2017,130000,481000,Tizi Ouzou,moyen,seed/dacia/logan/2017/130000/moyen,2026-05-15T10:49:47.477128+00:00,0.6,,False
+f5bc857e-2edd-47c9-8456-dd267630978d,ouedkniss_reference,Dacia,Logan,2017,155000,484000,Boumerdès,moyen,seed/dacia/logan/2017/155000/moyen,2026-05-15T10:49:47.902924+00:00,0.6,,False
+a302acf9-e39c-4e93-b123-8fde7a7a3a1e,ouedkniss_reference,Dacia,Logan,2017,180000,461000,Sétif,moyen,seed/dacia/logan/2017/180000/moyen,2026-05-15T10:49:48.597788+00:00,0.6,,False
+403ed884-313f-4342-935a-15473e5a9963,ouedkniss_reference,Dacia,Logan,2017,220000,350000,Boumerdès,mauvais,seed/dacia/logan/2017/220000/mauvais,2026-05-15T10:49:49.236454+00:00,0.6,,False
+4b28b079-7a27-4821-84ca-0124262bb770,ouedkniss_reference,Dacia,Logan,2018,25000,782000,Blida,excellent,seed/dacia/logan/2018/25000/excellent,2026-05-15T10:49:49.607032+00:00,0.6,,False
+8d2bcd9f-cfbf-450a-bfa5-f5eca6ccd584,ouedkniss_reference,Dacia,Logan,2018,45000,776000,Annaba,excellent,seed/dacia/logan/2018/45000/excellent,2026-05-15T10:49:50.006936+00:00,0.6,,False
+840ad378-ad76-42d8-ba44-81606dc69b62,ouedkniss_reference,Dacia,Logan,2018,60000,738000,Alger,bon,seed/dacia/logan/2018/60000/bon,2026-05-15T10:49:50.328313+00:00,0.6,,False
+b0da14b1-5cce-4f29-ad16-ee25cf0d48e5,ouedkniss_reference,Dacia,Logan,2018,75000,718000,Boumerdès,bon,seed/dacia/logan/2018/75000/bon,2026-05-15T10:49:50.668003+00:00,0.6,,False
+0fa45bfd-fd08-441e-8eeb-aac70f612df4,ouedkniss_reference,Dacia,Logan,2018,90000,660000,Tizi Ouzou,bon,seed/dacia/logan/2018/90000/bon,2026-05-15T10:49:51.234137+00:00,0.6,,False
+a057383e-66bf-47cc-9df8-59974096f55b,ouedkniss_reference,Dacia,Logan,2018,110000,684000,Annaba,bon,seed/dacia/logan/2018/110000/bon,2026-05-15T10:49:51.65791+00:00,0.6,,False
+f54a44e3-304a-4242-bdd0-d317298e70cb,ouedkniss_reference,Dacia,Logan,2018,130000,565000,Constantine,moyen,seed/dacia/logan/2018/130000/moyen,2026-05-15T10:49:52.016507+00:00,0.6,,False
+88215a8e-c03d-4fd6-9d83-5368d0f3ed2b,ouedkniss_reference,Dacia,Logan,2018,155000,535000,Boumerdès,moyen,seed/dacia/logan/2018/155000/moyen,2026-05-15T10:49:52.369349+00:00,0.6,,False
+4b0ac092-0305-48d6-bb37-47416667b1db,ouedkniss_reference,Dacia,Logan,2018,180000,497000,Annaba,moyen,seed/dacia/logan/2018/180000/moyen,2026-05-15T10:49:52.687333+00:00,0.6,,False
+ef7a12e1-4dc0-4b46-9068-15a10604e192,ouedkniss_reference,Dacia,Logan,2018,220000,366000,Constantine,mauvais,seed/dacia/logan/2018/220000/mauvais,2026-05-15T10:49:53.017272+00:00,0.6,,False
+7cdd238a-3664-4be7-aba4-fdf2e847740e,ouedkniss_reference,Dacia,Logan,2019,25000,896000,Annaba,excellent,seed/dacia/logan/2019/25000/excellent,2026-05-15T10:49:53.365411+00:00,0.6,,False
+50c72d85-72a6-423e-8f6d-32e521af237d,ouedkniss_reference,Dacia,Logan,2019,45000,854000,Constantine,excellent,seed/dacia/logan/2019/45000/excellent,2026-05-15T10:49:53.739696+00:00,0.6,,False
+fbaae677-40e7-4a01-af14-5f1fba6dcc21,ouedkniss_reference,Dacia,Logan,2019,60000,830000,Alger,bon,seed/dacia/logan/2019/60000/bon,2026-05-15T10:49:54.073599+00:00,0.6,,False
+1e64d36c-3e39-429f-b01e-7357dcd1f871,ouedkniss_reference,Dacia,Logan,2019,75000,827000,Sétif,bon,seed/dacia/logan/2019/75000/bon,2026-05-15T10:49:54.417753+00:00,0.6,,False
+8b55dd10-1706-4c91-9a52-af5f38ee007d,ouedkniss_reference,Dacia,Logan,2019,90000,776000,Sétif,bon,seed/dacia/logan/2019/90000/bon,2026-05-15T10:49:54.758622+00:00,0.6,,False
+328fade7-36c6-4c72-9d84-682c4c4955a7,ouedkniss_reference,Dacia,Logan,2019,110000,746000,Alger,bon,seed/dacia/logan/2019/110000/bon,2026-05-15T10:49:55.117494+00:00,0.6,,False
+92f46c0d-122e-44e9-b620-0972784a118b,ouedkniss_reference,Dacia,Logan,2019,130000,621000,Sétif,moyen,seed/dacia/logan/2019/130000/moyen,2026-05-15T10:49:55.481244+00:00,0.6,,False
+3b3d880b-5574-44a7-939a-147d9fdf594f,ouedkniss_reference,Dacia,Logan,2019,155000,624000,Blida,moyen,seed/dacia/logan/2019/155000/moyen,2026-05-15T10:49:55.835369+00:00,0.6,,False
+51add3ea-c695-4458-b1e8-3b01d3e24fa5,ouedkniss_reference,Dacia,Logan,2019,180000,583000,Tizi Ouzou,moyen,seed/dacia/logan/2019/180000/moyen,2026-05-15T10:49:56.286416+00:00,0.6,,False
+5887d6eb-620b-4d9f-b4dc-549d6f2598da,ouedkniss_reference,Dacia,Logan,2019,220000,441000,Alger,mauvais,seed/dacia/logan/2019/220000/mauvais,2026-05-15T10:49:56.62718+00:00,0.6,,False
+4d823fae-79db-43d8-a80c-dfda3c94807f,ouedkniss_reference,Dacia,Logan,2020,25000,1023000,Oran,excellent,seed/dacia/logan/2020/25000/excellent,2026-05-15T10:49:56.955745+00:00,0.6,,False
+e20c94de-8220-4ed4-87a4-6ec134af833d,ouedkniss_reference,Dacia,Logan,2020,45000,1038000,Oran,excellent,seed/dacia/logan/2020/45000/excellent,2026-05-15T10:49:57.3266+00:00,0.6,,False
+7014aa46-e4ac-4294-9920-a043b43ab868,ouedkniss_reference,Dacia,Logan,2020,60000,924000,Blida,bon,seed/dacia/logan/2020/60000/bon,2026-05-15T10:49:57.70528+00:00,0.6,,False
+4197afc3-45fc-442c-9539-b7a9a156a3ca,ouedkniss_reference,Dacia,Logan,2020,75000,932000,Tizi Ouzou,bon,seed/dacia/logan/2020/75000/bon,2026-05-15T10:49:58.032477+00:00,0.6,,False
+5eede509-a72b-4bd4-bd05-a03b0499c5ac,ouedkniss_reference,Dacia,Logan,2020,90000,908000,Tizi Ouzou,bon,seed/dacia/logan/2020/90000/bon,2026-05-15T10:49:58.361183+00:00,0.6,,False
+d73894e3-1067-4759-8c0f-206968b624e1,ouedkniss_reference,Dacia,Logan,2020,110000,843000,Alger,bon,seed/dacia/logan/2020/110000/bon,2026-05-15T10:49:58.742841+00:00,0.6,,False
+f8de3957-4b0e-4843-8bac-ab3a6169aabf,ouedkniss_reference,Dacia,Logan,2020,130000,733000,Tizi Ouzou,moyen,seed/dacia/logan/2020/130000/moyen,2026-05-15T10:49:59.147231+00:00,0.6,,False
+07333ab9-49f1-4a2a-8373-74cab18a79db,ouedkniss_reference,Dacia,Logan,2020,155000,680000,Boumerdès,moyen,seed/dacia/logan/2020/155000/moyen,2026-05-15T10:49:59.499778+00:00,0.6,,False
+bc6b49e0-11cc-4542-a24b-1e42ba399157,ouedkniss_reference,Dacia,Logan,2020,180000,642000,Tizi Ouzou,moyen,seed/dacia/logan/2020/180000/moyen,2026-05-15T10:49:59.936981+00:00,0.6,,False
+2b02afb1-d52d-4b16-a64d-969486d0139c,ouedkniss_reference,Dacia,Logan,2020,220000,477000,Sétif,mauvais,seed/dacia/logan/2020/220000/mauvais,2026-05-15T10:50:00.26353+00:00,0.6,,False
+909dd7ae-2296-4a3f-aea5-b99b0c03ee67,ouedkniss_reference,Dacia,Sandero,2016,25000,815000,Annaba,excellent,seed/dacia/sandero/2016/25000/excellent,2026-05-15T10:50:00.778166+00:00,0.6,,False
+61acffd4-5806-45ed-8406-3ad67ccfa65c,ouedkniss_reference,Dacia,Sandero,2016,45000,759000,Boumerdès,excellent,seed/dacia/sandero/2016/45000/excellent,2026-05-15T10:50:01.225483+00:00,0.6,,False
+9d028ce3-781a-4c0e-8478-e3243a076a80,ouedkniss_reference,Dacia,Sandero,2016,60000,704000,Blida,bon,seed/dacia/sandero/2016/60000/bon,2026-05-15T10:50:01.947785+00:00,0.6,,False
+2d539406-e89e-4f14-9e60-b20688a39b92,ouedkniss_reference,Dacia,Sandero,2016,75000,677000,Oran,bon,seed/dacia/sandero/2016/75000/bon,2026-05-15T10:50:02.297344+00:00,0.6,,False
+7c9a09df-7faf-4bf6-a023-48d03e331bce,ouedkniss_reference,Dacia,Sandero,2016,90000,656000,Constantine,bon,seed/dacia/sandero/2016/90000/bon,2026-05-15T10:50:02.756632+00:00,0.6,,False
+3a34da1c-17c3-41fa-9b5b-c886e7b226cb,ouedkniss_reference,Dacia,Sandero,2016,110000,621000,Tizi Ouzou,bon,seed/dacia/sandero/2016/110000/bon,2026-05-15T10:50:03.121501+00:00,0.6,,False
+850ade84-5949-434d-b4e2-d29896850261,ouedkniss_reference,Dacia,Sandero,2016,130000,525000,Boumerdès,moyen,seed/dacia/sandero/2016/130000/moyen,2026-05-15T10:50:03.505457+00:00,0.6,,False
+bda4844b-cea5-46f1-9c2a-d9161fb3993d,ouedkniss_reference,Dacia,Sandero,2016,155000,499000,Blida,moyen,seed/dacia/sandero/2016/155000/moyen,2026-05-15T10:50:03.849852+00:00,0.6,,False
+c1d37cc5-dbbb-4684-8d7e-506ea968a846,ouedkniss_reference,Dacia,Sandero,2016,180000,477000,Blida,moyen,seed/dacia/sandero/2016/180000/moyen,2026-05-15T10:50:04.202981+00:00,0.6,,False
+d4854f25-cf6b-4cfe-9ee3-39ba13050986,ouedkniss_reference,Dacia,Sandero,2016,220000,355000,Constantine,mauvais,seed/dacia/sandero/2016/220000/mauvais,2026-05-15T10:50:04.563863+00:00,0.6,,False
+3525a28f-72b3-47ce-9820-3284092f4e07,ouedkniss_reference,Dacia,Sandero,2017,25000,872000,Boumerdès,excellent,seed/dacia/sandero/2017/25000/excellent,2026-05-15T10:50:04.929901+00:00,0.6,,False
+b8050cc1-81f8-4e7e-9145-afd7b1912bd4,ouedkniss_reference,Dacia,Sandero,2017,45000,866000,Tizi Ouzou,excellent,seed/dacia/sandero/2017/45000/excellent,2026-05-15T10:50:05.280323+00:00,0.6,,False
+7e254da4-e06f-4a31-a124-eca69c00201d,ouedkniss_reference,Dacia,Sandero,2017,60000,754000,Annaba,bon,seed/dacia/sandero/2017/60000/bon,2026-05-15T10:50:05.623579+00:00,0.6,,False
+c1f7ccb9-0c83-40b1-b1c7-7adc48cac8be,ouedkniss_reference,Dacia,Sandero,2017,75000,767000,Annaba,bon,seed/dacia/sandero/2017/75000/bon,2026-05-15T10:50:05.978854+00:00,0.6,,False
+30c5f560-53af-4855-a2e3-dbc063e9423a,ouedkniss_reference,Dacia,Sandero,2017,90000,747000,Constantine,bon,seed/dacia/sandero/2017/90000/bon,2026-05-15T10:50:06.318302+00:00,0.6,,False
+35715bc5-f264-47d0-bdb6-f8dcb88fe7a8,ouedkniss_reference,Dacia,Sandero,2017,110000,703000,Blida,bon,seed/dacia/sandero/2017/110000/bon,2026-05-15T10:50:06.707338+00:00,0.6,,False
+59361bf3-278f-4269-832f-137affac429b,ouedkniss_reference,Dacia,Sandero,2017,130000,592000,Tizi Ouzou,moyen,seed/dacia/sandero/2017/130000/moyen,2026-05-15T10:50:07.09348+00:00,0.6,,False
+b2d78ffb-ca33-40ae-8263-c96cb0bd50f8,ouedkniss_reference,Dacia,Sandero,2017,155000,542000,Blida,moyen,seed/dacia/sandero/2017/155000/moyen,2026-05-15T10:50:07.45594+00:00,0.6,,False
+06d82eb6-c632-4c56-af59-5e93a2ffb985,ouedkniss_reference,Dacia,Sandero,2017,180000,542000,Alger,moyen,seed/dacia/sandero/2017/180000/moyen,2026-05-15T10:50:07.827917+00:00,0.6,,False
+c59b15e6-85f8-433a-b4c5-821639f91d6c,ouedkniss_reference,Dacia,Sandero,2017,220000,429000,Alger,mauvais,seed/dacia/sandero/2017/220000/mauvais,2026-05-15T10:50:08.200058+00:00,0.6,,False
+41b993d1-2f0d-4fb0-8390-a917591d46a0,ouedkniss_reference,Dacia,Sandero,2018,25000,1025000,Blida,excellent,seed/dacia/sandero/2018/25000/excellent,2026-05-15T10:50:08.579025+00:00,0.6,,False
+7918fb01-1a17-44c0-9578-fb4882f05717,ouedkniss_reference,Dacia,Sandero,2018,45000,975000,Sétif,excellent,seed/dacia/sandero/2018/45000/excellent,2026-05-15T10:50:08.949413+00:00,0.6,,False
+87b31a2b-48e3-4a2b-83c1-139ee74501b0,ouedkniss_reference,Dacia,Sandero,2018,60000,887000,Oran,bon,seed/dacia/sandero/2018/60000/bon,2026-05-15T10:50:09.314794+00:00,0.6,,False
+178b175a-0a39-4920-a711-eb86d1985b84,ouedkniss_reference,Dacia,Sandero,2018,75000,823000,Alger,bon,seed/dacia/sandero/2018/75000/bon,2026-05-15T10:50:09.673669+00:00,0.6,,False
+0026e30e-a5e6-4b2b-8430-3b881de126f2,ouedkniss_reference,Dacia,Sandero,2018,90000,845000,Sétif,bon,seed/dacia/sandero/2018/90000/bon,2026-05-15T10:50:09.996274+00:00,0.6,,False
+f9c3f54c-cbee-4225-9f17-81ec695edde6,ouedkniss_reference,Dacia,Sandero,2018,110000,792000,Annaba,bon,seed/dacia/sandero/2018/110000/bon,2026-05-15T10:50:10.327015+00:00,0.6,,False
+e0f3c709-c76b-4956-be66-9066d4bf9361,ouedkniss_reference,Dacia,Sandero,2018,130000,647000,Sétif,moyen,seed/dacia/sandero/2018/130000/moyen,2026-05-15T10:50:10.659998+00:00,0.6,,False
+0b406320-d5f9-4d7f-b091-df76697f2751,ouedkniss_reference,Dacia,Sandero,2018,155000,642000,Blida,moyen,seed/dacia/sandero/2018/155000/moyen,2026-05-15T10:50:10.998298+00:00,0.6,,False
+a798bfe0-be56-40c8-a386-c699bfccab66,ouedkniss_reference,Dacia,Sandero,2018,180000,612000,Oran,moyen,seed/dacia/sandero/2018/180000/moyen,2026-05-15T10:50:11.335534+00:00,0.6,,False
+e3745ac8-e937-4432-9138-7315f0ff853a,ouedkniss_reference,Dacia,Sandero,2018,220000,468000,Constantine,mauvais,seed/dacia/sandero/2018/220000/mauvais,2026-05-15T10:50:11.699801+00:00,0.6,,False
+9909e125-576f-45e2-8217-557b5810a3fe,ouedkniss_reference,Dacia,Sandero,2019,25000,1162000,Sétif,excellent,seed/dacia/sandero/2019/25000/excellent,2026-05-15T10:50:12.033975+00:00,0.6,,False
+2dda69bc-9659-41d7-aa7e-af19be5771f3,ouedkniss_reference,Dacia,Sandero,2019,45000,1110000,Constantine,excellent,seed/dacia/sandero/2019/45000/excellent,2026-05-15T10:50:12.386767+00:00,0.6,,False
+821e6643-63ce-4218-b22f-4aa45babf9bb,ouedkniss_reference,Dacia,Sandero,2019,60000,952000,Sétif,bon,seed/dacia/sandero/2019/60000/bon,2026-05-15T10:50:12.746815+00:00,0.6,,False
+814815da-6271-48b0-9e9a-010450602bd2,ouedkniss_reference,Dacia,Sandero,2019,75000,952000,Alger,bon,seed/dacia/sandero/2019/75000/bon,2026-05-15T10:50:13.088774+00:00,0.6,,False
+72912839-5555-463b-829f-85662f38cad3,ouedkniss_reference,Dacia,Sandero,2019,90000,955000,Oran,bon,seed/dacia/sandero/2019/90000/bon,2026-05-15T10:50:13.44757+00:00,0.6,,False
+ed896c85-db36-412d-95b5-4fcfeb514cfa,ouedkniss_reference,Dacia,Sandero,2019,110000,891000,Oran,bon,seed/dacia/sandero/2019/110000/bon,2026-05-15T10:50:13.793248+00:00,0.6,,False
+3dd09e24-fd35-47c5-a3ac-3117905e44dc,ouedkniss_reference,Dacia,Sandero,2019,130000,764000,Oran,moyen,seed/dacia/sandero/2019/130000/moyen,2026-05-15T10:50:14.179551+00:00,0.6,,False
+d1472f00-4305-4c91-ad0e-573b4f0e00ce,ouedkniss_reference,Dacia,Sandero,2019,155000,692000,Tizi Ouzou,moyen,seed/dacia/sandero/2019/155000/moyen,2026-05-15T10:50:14.532381+00:00,0.6,,False
+07bc9cf7-3a5d-4b27-9ce6-53cc586e25e2,ouedkniss_reference,Dacia,Sandero,2019,180000,716000,Annaba,moyen,seed/dacia/sandero/2019/180000/moyen,2026-05-15T10:50:14.914092+00:00,0.6,,False
+bb193f84-326e-4c40-a01d-634a56711e8c,ouedkniss_reference,Dacia,Sandero,2019,220000,510000,Tizi Ouzou,mauvais,seed/dacia/sandero/2019/220000/mauvais,2026-05-15T10:50:15.256669+00:00,0.6,,False
+3ee7bdd7-2a0f-450c-bb4e-4695232816c7,ouedkniss_reference,Dacia,Sandero,2020,25000,1290000,Constantine,excellent,seed/dacia/sandero/2020/25000/excellent,2026-05-15T10:50:15.599217+00:00,0.6,,False
+a4854522-cbdb-41ae-858b-b3b3c4865d8e,ouedkniss_reference,Dacia,Sandero,2020,45000,1269000,Blida,excellent,seed/dacia/sandero/2020/45000/excellent,2026-05-15T10:50:15.944753+00:00,0.6,,False
+b463c4ea-14a8-4384-839f-c959fa1a58a1,ouedkniss_reference,Dacia,Sandero,2020,60000,1159000,Annaba,bon,seed/dacia/sandero/2020/60000/bon,2026-05-15T10:50:16.30713+00:00,0.6,,False
+2b3094bf-a2c6-4c06-ba96-6a96a7a1d778,ouedkniss_reference,Dacia,Sandero,2020,75000,1057000,Sétif,bon,seed/dacia/sandero/2020/75000/bon,2026-05-15T10:50:16.675689+00:00,0.6,,False
+128b592e-5cb3-4f85-a23b-98de14e2d55f,ouedkniss_reference,Dacia,Sandero,2020,90000,1064000,Blida,bon,seed/dacia/sandero/2020/90000/bon,2026-05-15T10:50:17.044+00:00,0.6,,False
+aa778010-4b42-45d5-953e-909edf953ba2,ouedkniss_reference,Dacia,Sandero,2020,110000,1043000,Annaba,bon,seed/dacia/sandero/2020/110000/bon,2026-05-15T10:50:17.423406+00:00,0.6,,False
+7ccbb42a-8747-4f52-b222-c125389b7c47,ouedkniss_reference,Dacia,Sandero,2020,130000,878000,Blida,moyen,seed/dacia/sandero/2020/130000/moyen,2026-05-15T10:50:17.865095+00:00,0.6,,False
+4ff81f1c-cabe-40fd-a72f-e3df177c2af9,ouedkniss_reference,Dacia,Sandero,2020,155000,854000,Sétif,moyen,seed/dacia/sandero/2020/155000/moyen,2026-05-15T10:50:18.221236+00:00,0.6,,False
+7c1b8d39-ddb5-41cb-99ef-d31a42cc7874,ouedkniss_reference,Dacia,Sandero,2020,180000,796000,Boumerdès,moyen,seed/dacia/sandero/2020/180000/moyen,2026-05-15T10:50:18.575525+00:00,0.6,,False
+5b07d5d2-8f16-42cc-86cc-9d9054487876,ouedkniss_reference,Dacia,Sandero,2020,220000,565000,Alger,mauvais,seed/dacia/sandero/2020/220000/mauvais,2026-05-15T10:50:18.946252+00:00,0.6,,False
+ffc000e3-e5f3-45e2-b69b-202cb50c9343,ouedkniss_reference,Toyota,Corolla,2015,25000,1664000,Oran,excellent,seed/toyota/corolla/2015/25000/excellent,2026-05-15T10:50:19.29278+00:00,0.6,,False
+3b3d3570-d09d-429d-845b-7789aef88520,ouedkniss_reference,Toyota,Corolla,2015,45000,1587000,Sétif,excellent,seed/toyota/corolla/2015/45000/excellent,2026-05-15T10:50:19.649291+00:00,0.6,,False
+22c4a053-4785-4dab-bf2b-020ca6403c3d,ouedkniss_reference,Toyota,Corolla,2015,60000,1469000,Alger,bon,seed/toyota/corolla/2015/60000/bon,2026-05-15T10:50:20.012782+00:00,0.6,,False
+160ae40b-340c-4312-8e13-41b409ccfdf0,ouedkniss_reference,Toyota,Corolla,2015,75000,1375000,Tizi Ouzou,bon,seed/toyota/corolla/2015/75000/bon,2026-05-15T10:50:20.369232+00:00,0.6,,False
+9f4663a5-725a-46ff-9734-9e67ae9a7e35,ouedkniss_reference,Toyota,Corolla,2015,90000,1371000,Annaba,bon,seed/toyota/corolla/2015/90000/bon,2026-05-15T10:50:20.77434+00:00,0.6,,False
+e346e226-e979-4102-ab9d-bd1e16712d56,ouedkniss_reference,Toyota,Corolla,2015,110000,1378000,Sétif,bon,seed/toyota/corolla/2015/110000/bon,2026-05-15T10:50:21.139598+00:00,0.6,,False
+8caf3f01-3f74-4177-beae-dc71d4563e01,ouedkniss_reference,Toyota,Corolla,2015,130000,1067000,Boumerdès,moyen,seed/toyota/corolla/2015/130000/moyen,2026-05-15T10:50:21.53801+00:00,0.6,,False
+0a7acdac-ab40-4716-9980-02ea449cd661,ouedkniss_reference,Toyota,Corolla,2015,155000,1007000,Oran,moyen,seed/toyota/corolla/2015/155000/moyen,2026-05-15T10:50:21.913661+00:00,0.6,,False
+e02fb2be-f4c1-48be-9a6d-684f5c653984,ouedkniss_reference,Toyota,Corolla,2015,180000,969000,Blida,moyen,seed/toyota/corolla/2015/180000/moyen,2026-05-15T10:50:22.316931+00:00,0.6,,False
+8f214112-f541-4b13-a91e-ca9072420086,ouedkniss_reference,Toyota,Corolla,2015,220000,744000,Blida,mauvais,seed/toyota/corolla/2015/220000/mauvais,2026-05-15T10:50:22.676807+00:00,0.6,,False
+b4890037-5cf9-4627-bd40-11750e9c91ca,ouedkniss_reference,Toyota,Corolla,2016,25000,1745000,Tizi Ouzou,excellent,seed/toyota/corolla/2016/25000/excellent,2026-05-15T10:50:23.047858+00:00,0.6,,False
+fc5f094a-0538-49ac-9987-ba8ad1551151,ouedkniss_reference,Toyota,Corolla,2016,45000,1748000,Alger,excellent,seed/toyota/corolla/2016/45000/excellent,2026-05-15T10:50:23.428092+00:00,0.6,,False
+40f8fccf-56d1-4865-940f-07a8ccb3a704,ouedkniss_reference,Toyota,Corolla,2016,60000,1616000,Boumerdès,bon,seed/toyota/corolla/2016/60000/bon,2026-05-15T10:50:23.956096+00:00,0.6,,False
+065ce5d3-3b39-41d9-9c23-cbbc5a550f1c,ouedkniss_reference,Toyota,Corolla,2016,75000,1546000,Blida,bon,seed/toyota/corolla/2016/75000/bon,2026-05-15T10:50:24.61254+00:00,0.6,,False
+e79ac736-d680-4bb9-94b9-f18809992aa4,ouedkniss_reference,Toyota,Corolla,2016,90000,1554000,Constantine,bon,seed/toyota/corolla/2016/90000/bon,2026-05-15T10:50:24.983779+00:00,0.6,,False
+fbd8c21e-4fe3-4bf5-9515-3111dff1797f,ouedkniss_reference,Toyota,Corolla,2016,110000,1495000,Blida,bon,seed/toyota/corolla/2016/110000/bon,2026-05-15T10:50:25.34825+00:00,0.6,,False
+4c1e8749-ce0c-4c88-84b4-5879ca20b515,ouedkniss_reference,Toyota,Corolla,2016,130000,1257000,Sétif,moyen,seed/toyota/corolla/2016/130000/moyen,2026-05-15T10:50:25.745404+00:00,0.6,,False
+b4da09af-9cbd-427e-b537-55bedaf3aa72,ouedkniss_reference,Toyota,Corolla,2016,155000,1200000,Alger,moyen,seed/toyota/corolla/2016/155000/moyen,2026-05-15T10:50:26.10728+00:00,0.6,,False
+f22c94a8-878f-4c80-8128-3da63960fcb5,ouedkniss_reference,Toyota,Corolla,2016,180000,1100000,Constantine,moyen,seed/toyota/corolla/2016/180000/moyen,2026-05-15T10:50:26.466791+00:00,0.6,,False
+717d0bc8-e82e-4295-84ca-75761a16756d,ouedkniss_reference,Toyota,Corolla,2016,220000,859000,Boumerdès,mauvais,seed/toyota/corolla/2016/220000/mauvais,2026-05-15T10:50:26.813241+00:00,0.6,,False
+c22d52f7-d2e4-49ed-9cbf-4215c9504f87,ouedkniss_reference,Toyota,Corolla,2017,25000,2032000,Blida,excellent,seed/toyota/corolla/2017/25000/excellent,2026-05-15T10:50:27.157353+00:00,0.6,,False
+321a026b-0e9d-4bad-9c0d-2135d4f6df3a,ouedkniss_reference,Toyota,Corolla,2017,45000,1924000,Boumerdès,excellent,seed/toyota/corolla/2017/45000/excellent,2026-05-15T10:50:27.879006+00:00,0.6,,False
+fb75dbf6-ac6f-477e-9868-f8f82decd934,ouedkniss_reference,Toyota,Corolla,2017,60000,1864000,Oran,bon,seed/toyota/corolla/2017/60000/bon,2026-05-15T10:50:28.266676+00:00,0.6,,False
+024694f9-9573-4656-bc45-c2d88b1ee19e,ouedkniss_reference,Toyota,Corolla,2017,75000,1670000,Boumerdès,bon,seed/toyota/corolla/2017/75000/bon,2026-05-15T10:50:28.634928+00:00,0.6,,False
+3acb4348-b089-48a2-b689-2dd7e7b40a87,ouedkniss_reference,Toyota,Corolla,2017,90000,1741000,Blida,bon,seed/toyota/corolla/2017/90000/bon,2026-05-15T10:50:29.022517+00:00,0.6,,False
+ae6fc015-a8dd-4039-bdb3-1f34c309de43,ouedkniss_reference,Toyota,Corolla,2017,110000,1641000,Blida,bon,seed/toyota/corolla/2017/110000/bon,2026-05-15T10:50:29.428137+00:00,0.6,,False
+b9e37d90-38f5-42ce-a027-ce7188806c5d,ouedkniss_reference,Toyota,Corolla,2017,130000,1343000,Tizi Ouzou,moyen,seed/toyota/corolla/2017/130000/moyen,2026-05-15T10:50:29.796907+00:00,0.6,,False
+7654f9a5-ae18-4b5e-a59b-86f5dd755c7f,ouedkniss_reference,Toyota,Corolla,2017,155000,1258000,Boumerdès,moyen,seed/toyota/corolla/2017/155000/moyen,2026-05-15T10:50:30.144063+00:00,0.6,,False
+6f5f6c2a-ff9f-4837-a901-a2bbfe1cada9,ouedkniss_reference,Toyota,Corolla,2017,180000,1261000,Boumerdès,moyen,seed/toyota/corolla/2017/180000/moyen,2026-05-15T10:50:30.48179+00:00,0.6,,False
+db2b58f3-ef10-4f66-8518-619697a8b760,ouedkniss_reference,Toyota,Corolla,2017,220000,980000,Sétif,mauvais,seed/toyota/corolla/2017/220000/mauvais,2026-05-15T10:50:30.811749+00:00,0.6,,False
+cd3058f8-b750-4ed1-881f-b0472c52a77e,ouedkniss_reference,Toyota,Corolla,2018,25000,2288000,Blida,excellent,seed/toyota/corolla/2018/25000/excellent,2026-05-15T10:50:31.169326+00:00,0.6,,False
+e758d8a7-5a7c-414a-8b9c-b22b620255b4,ouedkniss_reference,Toyota,Corolla,2018,45000,2115000,Boumerdès,excellent,seed/toyota/corolla/2018/45000/excellent,2026-05-15T10:50:31.508957+00:00,0.6,,False
+a24cb7e2-9119-4878-b2aa-f16aed42843b,ouedkniss_reference,Toyota,Corolla,2018,60000,1895000,Constantine,bon,seed/toyota/corolla/2018/60000/bon,2026-05-15T10:50:31.911103+00:00,0.6,,False
+ad93ebfc-8623-4503-a0f9-1091d1549cf9,ouedkniss_reference,Toyota,Corolla,2018,75000,1876000,Annaba,bon,seed/toyota/corolla/2018/75000/bon,2026-05-15T10:50:32.256595+00:00,0.6,,False
+4c6ecbfd-8165-496f-ac1d-7e06546b75d3,ouedkniss_reference,Toyota,Corolla,2018,90000,1915000,Tizi Ouzou,bon,seed/toyota/corolla/2018/90000/bon,2026-05-15T10:50:32.601075+00:00,0.6,,False
+be58ccde-a8b0-4eea-bd30-073f003843af,ouedkniss_reference,Toyota,Corolla,2018,110000,1797000,Alger,bon,seed/toyota/corolla/2018/110000/bon,2026-05-15T10:50:33.237183+00:00,0.6,,False
+b0a9f795-8920-4aa1-bcf1-25f30f649cde,ouedkniss_reference,Toyota,Corolla,2018,130000,1570000,Sétif,moyen,seed/toyota/corolla/2018/130000/moyen,2026-05-15T10:50:33.595913+00:00,0.6,,False
+4ded6b1e-18b5-4bba-a8c5-5674e2cf6c05,ouedkniss_reference,Toyota,Corolla,2018,155000,1471000,Oran,moyen,seed/toyota/corolla/2018/155000/moyen,2026-05-15T10:50:33.945043+00:00,0.6,,False
+c0ac97b0-696f-4bac-bdb9-67be6208b8ff,ouedkniss_reference,Toyota,Corolla,2018,180000,1385000,Blida,moyen,seed/toyota/corolla/2018/180000/moyen,2026-05-15T10:50:34.288239+00:00,0.6,,False
+83104a50-f5a2-49d2-8b81-13ac62d73cc4,ouedkniss_reference,Toyota,Corolla,2018,220000,992000,Annaba,mauvais,seed/toyota/corolla/2018/220000/mauvais,2026-05-15T10:50:34.669772+00:00,0.6,,False
+47e4127b-45f7-4be2-9f47-80d57683406a,ouedkniss_reference,Toyota,Corolla,2019,25000,2460000,Oran,excellent,seed/toyota/corolla/2019/25000/excellent,2026-05-15T10:50:35.006258+00:00,0.6,,False
+f80e8e48-05bb-49d1-86b2-aa811cedda93,ouedkniss_reference,Toyota,Corolla,2019,45000,2520000,Tizi Ouzou,excellent,seed/toyota/corolla/2019/45000/excellent,2026-05-15T10:50:35.315751+00:00,0.6,,False
+d42547fb-10e7-414d-837c-fe0e6106a12d,ouedkniss_reference,Toyota,Corolla,2019,60000,2329000,Tizi Ouzou,bon,seed/toyota/corolla/2019/60000/bon,2026-05-15T10:50:35.694705+00:00,0.6,,False
+d99b5181-d4fc-4fff-a521-d74bd6c42920,ouedkniss_reference,Toyota,Corolla,2019,75000,2142000,Boumerdès,bon,seed/toyota/corolla/2019/75000/bon,2026-05-15T10:50:36.040446+00:00,0.6,,False
+04d0d436-0511-42e1-a9c2-9c14046b97f0,ouedkniss_reference,Toyota,Corolla,2019,90000,2093000,Boumerdès,bon,seed/toyota/corolla/2019/90000/bon,2026-05-15T10:50:36.391993+00:00,0.6,,False
+5150df64-8f6e-45c3-b383-06afa448f7ba,ouedkniss_reference,Toyota,Corolla,2019,110000,1958000,Alger,bon,seed/toyota/corolla/2019/110000/bon,2026-05-15T10:50:36.797579+00:00,0.6,,False
+7a6dde80-f19b-4f3c-8481-a759b800eb20,ouedkniss_reference,Toyota,Corolla,2019,130000,1680000,Tizi Ouzou,moyen,seed/toyota/corolla/2019/130000/moyen,2026-05-15T10:50:37.218564+00:00,0.6,,False
+37ca1686-b28c-47bc-852a-5a960598551f,ouedkniss_reference,Toyota,Corolla,2019,155000,1653000,Annaba,moyen,seed/toyota/corolla/2019/155000/moyen,2026-05-15T10:50:37.57531+00:00,0.6,,False
+2fac3c7c-ae7f-4dc2-8844-5f31cdc30936,ouedkniss_reference,Toyota,Corolla,2019,180000,1608000,Boumerdès,moyen,seed/toyota/corolla/2019/180000/moyen,2026-05-15T10:50:37.915667+00:00,0.6,,False
+8434466f-48bd-48d5-b8c4-1c19e71ad13f,ouedkniss_reference,Toyota,Corolla,2019,220000,1231000,Constantine,mauvais,seed/toyota/corolla/2019/220000/mauvais,2026-05-15T10:50:38.311566+00:00,0.6,,False
+a8a5dc9e-a36e-4923-bae6-32ca0370fcb7,ouedkniss_reference,Toyota,Corolla,2020,25000,2724000,Sétif,excellent,seed/toyota/corolla/2020/25000/excellent,2026-05-15T10:50:38.664428+00:00,0.6,,False
+a6ac50da-5151-4969-9040-afd84b5c5105,ouedkniss_reference,Toyota,Corolla,2020,45000,2673000,Constantine,excellent,seed/toyota/corolla/2020/45000/excellent,2026-05-15T10:50:39.018221+00:00,0.6,,False
+96de854f-ec04-4b8e-a47a-83f2bec6aa56,ouedkniss_reference,Toyota,Corolla,2020,60000,2540000,Annaba,bon,seed/toyota/corolla/2020/60000/bon,2026-05-15T10:50:39.3796+00:00,0.6,,False
+0f4ffd33-d494-4169-9af8-7198a6eff625,ouedkniss_reference,Toyota,Corolla,2020,75000,2440000,Boumerdès,bon,seed/toyota/corolla/2020/75000/bon,2026-05-15T10:50:39.809053+00:00,0.6,,False
+752ce57a-d05e-47ae-a616-997e244c5887,ouedkniss_reference,Toyota,Corolla,2020,90000,2492000,Sétif,bon,seed/toyota/corolla/2020/90000/bon,2026-05-15T10:50:40.154786+00:00,0.6,,False
+23e83850-68e4-49e0-91d6-bbecf7f1a582,ouedkniss_reference,Toyota,Corolla,2020,110000,2385000,Annaba,bon,seed/toyota/corolla/2020/110000/bon,2026-05-15T10:50:40.473129+00:00,0.6,,False
+88087585-200a-4051-9b02-2db865f9620a,ouedkniss_reference,Toyota,Corolla,2020,130000,1999000,Oran,moyen,seed/toyota/corolla/2020/130000/moyen,2026-05-15T10:50:41.098925+00:00,0.6,,False
+61411a6e-b6fe-47a6-b295-2d1f2b466302,ouedkniss_reference,Toyota,Corolla,2020,155000,1921000,Tizi Ouzou,moyen,seed/toyota/corolla/2020/155000/moyen,2026-05-15T10:50:41.45361+00:00,0.6,,False
+3004aa24-3da3-40ed-b90a-85ec0a103ca2,ouedkniss_reference,Toyota,Corolla,2020,180000,1713000,Tizi Ouzou,moyen,seed/toyota/corolla/2020/180000/moyen,2026-05-15T10:50:41.803833+00:00,0.6,,False
+0edb2448-7dcc-42f4-9887-b00a058b87fc,ouedkniss_reference,Toyota,Corolla,2020,220000,1319000,Oran,mauvais,seed/toyota/corolla/2020/220000/mauvais,2026-05-15T10:50:42.337851+00:00,0.6,,False
+e9c61a4d-eb76-473a-8481-90f62d6c158e,ouedkniss_reference,Toyota,Yaris,2016,25000,1100000,Annaba,excellent,seed/toyota/yaris/2016/25000/excellent,2026-05-15T10:50:42.706212+00:00,0.6,,False
+d4097972-6197-4f60-8920-de6a69eef9ab,ouedkniss_reference,Toyota,Yaris,2016,45000,1110000,Tizi Ouzou,excellent,seed/toyota/yaris/2016/45000/excellent,2026-05-15T10:50:43.038687+00:00,0.6,,False
+b9902ea7-eb22-48c7-8d49-9384302b3678,ouedkniss_reference,Toyota,Yaris,2016,60000,951000,Constantine,bon,seed/toyota/yaris/2016/60000/bon,2026-05-15T10:50:43.427533+00:00,0.6,,False
+7375e07a-5054-403e-9c51-4506bb1e62cd,ouedkniss_reference,Toyota,Yaris,2016,75000,1001000,Sétif,bon,seed/toyota/yaris/2016/75000/bon,2026-05-15T10:50:43.79476+00:00,0.6,,False
+455fa366-e911-4434-92ec-bf24798ecd6d,ouedkniss_reference,Toyota,Yaris,2016,90000,937000,Sétif,bon,seed/toyota/yaris/2016/90000/bon,2026-05-15T10:50:44.172666+00:00,0.6,,False
+cfcf268f-127f-4395-ac8d-e5ffc50f37f0,ouedkniss_reference,Toyota,Yaris,2016,110000,879000,Tizi Ouzou,bon,seed/toyota/yaris/2016/110000/bon,2026-05-15T10:50:44.555436+00:00,0.6,,False
+364c9747-503e-4039-a64d-d5f0e289d867,ouedkniss_reference,Toyota,Yaris,2016,130000,780000,Sétif,moyen,seed/toyota/yaris/2016/130000/moyen,2026-05-15T10:50:44.898701+00:00,0.6,,False
+6969a448-9cb3-44d2-af07-874c3484bb35,ouedkniss_reference,Toyota,Yaris,2016,155000,716000,Blida,moyen,seed/toyota/yaris/2016/155000/moyen,2026-05-15T10:50:45.332043+00:00,0.6,,False
+564a5f4b-daf3-413d-a0ac-e35bfc7fe019,ouedkniss_reference,Toyota,Yaris,2016,180000,685000,Tizi Ouzou,moyen,seed/toyota/yaris/2016/180000/moyen,2026-05-15T10:50:45.974645+00:00,0.6,,False
+903285f6-5784-4d72-85d5-53cbf744c6c1,ouedkniss_reference,Toyota,Yaris,2016,220000,508000,Tizi Ouzou,mauvais,seed/toyota/yaris/2016/220000/mauvais,2026-05-15T10:50:46.353206+00:00,0.6,,False
+00aa38e5-3e88-4dc7-86f2-d9d3cd3ff82c,ouedkniss_reference,Toyota,Yaris,2017,25000,1269000,Annaba,excellent,seed/toyota/yaris/2017/25000/excellent,2026-05-15T10:50:46.74683+00:00,0.6,,False
+8f542d30-cd81-4131-b9a4-8492aede21da,ouedkniss_reference,Toyota,Yaris,2017,45000,1212000,Tizi Ouzou,excellent,seed/toyota/yaris/2017/45000/excellent,2026-05-15T10:50:47.155049+00:00,0.6,,False
+e7333df6-593a-46e4-80ab-cdf31b1eaf13,ouedkniss_reference,Toyota,Yaris,2017,60000,1069000,Blida,bon,seed/toyota/yaris/2017/60000/bon,2026-05-15T10:50:47.514834+00:00,0.6,,False
+d0d4d586-05d4-4482-a2a8-6ee0776b2670,ouedkniss_reference,Toyota,Yaris,2017,75000,1026000,Tizi Ouzou,bon,seed/toyota/yaris/2017/75000/bon,2026-05-15T10:50:47.85801+00:00,0.6,,False
+706d33c8-bb7c-4e21-9d23-3be995d86e05,ouedkniss_reference,Toyota,Yaris,2017,90000,1005000,Oran,bon,seed/toyota/yaris/2017/90000/bon,2026-05-15T10:50:48.252703+00:00,0.6,,False
+1962b2f2-8851-4644-a11e-69c638c23972,ouedkniss_reference,Toyota,Yaris,2017,110000,1022000,Oran,bon,seed/toyota/yaris/2017/110000/bon,2026-05-15T10:50:48.629464+00:00,0.6,,False
+ad2511f0-152a-4770-a2cb-948707485640,ouedkniss_reference,Toyota,Yaris,2017,130000,885000,Blida,moyen,seed/toyota/yaris/2017/130000/moyen,2026-05-15T10:50:48.987145+00:00,0.6,,False
+4c2d903b-744e-4589-9471-6097f085c284,ouedkniss_reference,Toyota,Yaris,2017,155000,818000,Constantine,moyen,seed/toyota/yaris/2017/155000/moyen,2026-05-15T10:50:49.332812+00:00,0.6,,False
+0206d825-3f70-4f28-97a5-dd59edf8990b,ouedkniss_reference,Toyota,Yaris,2017,180000,730000,Boumerdès,moyen,seed/toyota/yaris/2017/180000/moyen,2026-05-15T10:50:49.705033+00:00,0.6,,False
+29a0e251-51d2-4db3-8999-2a91d9ffb3ab,ouedkniss_reference,Toyota,Yaris,2017,220000,573000,Blida,mauvais,seed/toyota/yaris/2017/220000/mauvais,2026-05-15T10:50:50.195546+00:00,0.6,,False
+26c7b927-05ba-4c4a-b626-18d004fc3fcb,ouedkniss_reference,Toyota,Yaris,2018,25000,1459000,Alger,excellent,seed/toyota/yaris/2018/25000/excellent,2026-05-15T10:50:50.591623+00:00,0.6,,False
+93c83428-90a1-4c79-86ca-e33b53ac175e,ouedkniss_reference,Toyota,Yaris,2018,45000,1331000,Blida,excellent,seed/toyota/yaris/2018/45000/excellent,2026-05-15T10:50:50.938345+00:00,0.6,,False
+03820161-2dad-4f15-a690-dcefe7dc5ad9,ouedkniss_reference,Toyota,Yaris,2018,60000,1187000,Boumerdès,bon,seed/toyota/yaris/2018/60000/bon,2026-05-15T10:50:51.596193+00:00,0.6,,False
+57e54d5b-ef14-4a58-84e2-946ea5244486,ouedkniss_reference,Toyota,Yaris,2018,75000,1202000,Constantine,bon,seed/toyota/yaris/2018/75000/bon,2026-05-15T10:50:52.049551+00:00,0.6,,False
+3c607386-a7de-453f-abb0-d8980fb421f6,ouedkniss_reference,Toyota,Yaris,2018,90000,1168000,Tizi Ouzou,bon,seed/toyota/yaris/2018/90000/bon,2026-05-15T10:50:52.412067+00:00,0.6,,False
+65af3ba2-11e0-4d6d-a5e1-449ff7679d4b,ouedkniss_reference,Toyota,Yaris,2018,110000,1141000,Alger,bon,seed/toyota/yaris/2018/110000/bon,2026-05-15T10:50:52.826024+00:00,0.6,,False
+20a0c624-ea2f-4734-b242-aeaeac6c1160,ouedkniss_reference,Toyota,Yaris,2018,130000,1000000,Alger,moyen,seed/toyota/yaris/2018/130000/moyen,2026-05-15T10:50:53.147675+00:00,0.6,,False
+986a88dc-1cdc-42d9-9a15-5d814a1e5ec7,ouedkniss_reference,Toyota,Yaris,2018,155000,945000,Oran,moyen,seed/toyota/yaris/2018/155000/moyen,2026-05-15T10:50:53.510066+00:00,0.6,,False
+3207a2cd-a4a5-4124-9acc-e498ba1dc9bd,ouedkniss_reference,Toyota,Yaris,2018,180000,838000,Blida,moyen,seed/toyota/yaris/2018/180000/moyen,2026-05-15T10:50:53.880698+00:00,0.6,,False
+efe41f3e-8b33-4e89-b532-da7c01ec1c8b,ouedkniss_reference,Toyota,Yaris,2018,220000,678000,Annaba,mauvais,seed/toyota/yaris/2018/220000/mauvais,2026-05-15T10:50:54.268593+00:00,0.6,,False
+b7f521d3-f363-46f9-8e2d-57ebb5b7d309,ouedkniss_reference,Toyota,Yaris,2019,25000,1568000,Oran,excellent,seed/toyota/yaris/2019/25000/excellent,2026-05-15T10:50:54.59975+00:00,0.6,,False
+80f39dbe-a68e-4b4a-91a2-e4dca004db45,ouedkniss_reference,Toyota,Yaris,2019,45000,1551000,Tizi Ouzou,excellent,seed/toyota/yaris/2019/45000/excellent,2026-05-15T10:50:54.952636+00:00,0.6,,False
+daa1ac94-e903-4cbb-82b5-cce267e1a15a,ouedkniss_reference,Toyota,Yaris,2019,60000,1406000,Constantine,bon,seed/toyota/yaris/2019/60000/bon,2026-05-15T10:50:55.306482+00:00,0.6,,False
+0020f634-3e42-4e0a-8a64-958631b7a7f9,ouedkniss_reference,Toyota,Yaris,2019,75000,1428000,Alger,bon,seed/toyota/yaris/2019/75000/bon,2026-05-15T10:50:55.6928+00:00,0.6,,False
+3d58011f-51d1-4517-aeb7-0eb298a6d47f,ouedkniss_reference,Toyota,Yaris,2019,90000,1412000,Constantine,bon,seed/toyota/yaris/2019/90000/bon,2026-05-15T10:50:56.046796+00:00,0.6,,False
+6e7a4924-78af-4a5c-a7f2-1dc853cf2e73,ouedkniss_reference,Toyota,Yaris,2019,110000,1310000,Blida,bon,seed/toyota/yaris/2019/110000/bon,2026-05-15T10:50:56.406865+00:00,0.6,,False
+de489246-6d21-4029-9444-0aa222871e99,ouedkniss_reference,Toyota,Yaris,2019,130000,1091000,Annaba,moyen,seed/toyota/yaris/2019/130000/moyen,2026-05-15T10:50:56.776493+00:00,0.6,,False
+18629bd7-f2aa-47f0-ab38-f430199f360b,ouedkniss_reference,Toyota,Yaris,2019,155000,1024000,Annaba,moyen,seed/toyota/yaris/2019/155000/moyen,2026-05-15T10:50:57.252852+00:00,0.6,,False
+397319af-a179-4309-b042-13930ac2123a,ouedkniss_reference,Toyota,Yaris,2019,180000,948000,Sétif,moyen,seed/toyota/yaris/2019/180000/moyen,2026-05-15T10:50:57.606866+00:00,0.6,,False
+cd64d76e-2664-4415-b16f-ecbc96070aad,ouedkniss_reference,Toyota,Yaris,2019,220000,769000,Annaba,mauvais,seed/toyota/yaris/2019/220000/mauvais,2026-05-15T10:50:58.004306+00:00,0.6,,False
+2b95eb31-ecef-4f5b-ab8d-ea5173a2863f,ouedkniss_reference,Toyota,Yaris,2020,25000,1820000,Oran,excellent,seed/toyota/yaris/2020/25000/excellent,2026-05-15T10:50:58.324392+00:00,0.6,,False
+d728f5fe-56c3-4ab7-83c9-066146a0d3ac,ouedkniss_reference,Toyota,Yaris,2020,45000,1742000,Alger,excellent,seed/toyota/yaris/2020/45000/excellent,2026-05-15T10:50:58.713921+00:00,0.6,,False
+c61c0594-36a6-4fa5-a6f4-9eedc8d0c921,ouedkniss_reference,Toyota,Yaris,2020,60000,1680000,Oran,bon,seed/toyota/yaris/2020/60000/bon,2026-05-15T10:50:59.180115+00:00,0.6,,False
+dd30cbf8-8975-470a-8b41-07a79c3a89c6,ouedkniss_reference,Toyota,Yaris,2020,75000,1639000,Constantine,bon,seed/toyota/yaris/2020/75000/bon,2026-05-15T10:50:59.586836+00:00,0.6,,False
+b421e67f-e0b9-4744-8328-df14438de5ea,ouedkniss_reference,Toyota,Yaris,2020,90000,1469000,Boumerdès,bon,seed/toyota/yaris/2020/90000/bon,2026-05-15T10:51:00.008103+00:00,0.6,,False
+ba26a2ce-0aec-4a6b-92f9-a48badb7a677,ouedkniss_reference,Toyota,Yaris,2020,110000,1474000,Oran,bon,seed/toyota/yaris/2020/110000/bon,2026-05-15T10:51:00.344278+00:00,0.6,,False
+cee29a19-8638-47ae-9912-3fde35f67e29,ouedkniss_reference,Toyota,Yaris,2020,130000,1220000,Alger,moyen,seed/toyota/yaris/2020/130000/moyen,2026-05-15T10:51:00.712814+00:00,0.6,,False
+0327d560-a485-4f83-ba0a-ac94f80ea145,ouedkniss_reference,Toyota,Yaris,2020,155000,1196000,Alger,moyen,seed/toyota/yaris/2020/155000/moyen,2026-05-15T10:51:01.109694+00:00,0.6,,False
+8bfbe2d3-964c-489a-829a-88c1c1330599,ouedkniss_reference,Toyota,Yaris,2020,180000,1069000,Alger,moyen,seed/toyota/yaris/2020/180000/moyen,2026-05-15T10:51:01.768544+00:00,0.6,,False
+b411afc4-4f14-4caa-bc75-d9d66d060573,ouedkniss_reference,Toyota,Yaris,2020,220000,884000,Alger,mauvais,seed/toyota/yaris/2020/220000/mauvais,2026-05-15T10:51:02.108028+00:00,0.6,,False
+483d5610-d0f1-4b16-b463-8d81749f00cf,ouedkniss_reference,Hyundai,Elantra,2015,25000,938000,Tizi Ouzou,excellent,seed/hyundai/elantra/2015/25000/excellent,2026-05-15T10:51:02.469256+00:00,0.6,,False
+26d7f80d-70aa-4a7b-b503-3a11d61cf404,ouedkniss_reference,Hyundai,Elantra,2015,45000,921000,Boumerdès,excellent,seed/hyundai/elantra/2015/45000/excellent,2026-05-15T10:51:02.869118+00:00,0.6,,False
+b07a756c-f8b7-455d-a5da-81a58571ca35,ouedkniss_reference,Hyundai,Elantra,2015,60000,825000,Constantine,bon,seed/hyundai/elantra/2015/60000/bon,2026-05-15T10:51:03.315275+00:00,0.6,,False
+4dfbe8e6-977f-4f98-ba6c-95160a9fa304,ouedkniss_reference,Hyundai,Elantra,2015,75000,830000,Boumerdès,bon,seed/hyundai/elantra/2015/75000/bon,2026-05-15T10:51:03.656146+00:00,0.6,,False
+180d839b-ff87-45c1-a0b9-e9a529418abc,ouedkniss_reference,Hyundai,Elantra,2015,90000,831000,Alger,bon,seed/hyundai/elantra/2015/90000/bon,2026-05-15T10:51:03.994681+00:00,0.6,,False
+6d8ec4e8-3288-42fe-8994-a422b3ca9acb,ouedkniss_reference,Hyundai,Elantra,2015,110000,801000,Alger,bon,seed/hyundai/elantra/2015/110000/bon,2026-05-15T10:51:04.382093+00:00,0.6,,False
+143d58e3-801e-4378-923c-1158d98dd75c,ouedkniss_reference,Hyundai,Elantra,2015,130000,627000,Sétif,moyen,seed/hyundai/elantra/2015/130000/moyen,2026-05-15T10:51:04.774565+00:00,0.6,,False
+ab38fc35-5290-47b7-ac3c-f2d0c789a3bc,ouedkniss_reference,Hyundai,Elantra,2015,155000,648000,Boumerdès,moyen,seed/hyundai/elantra/2015/155000/moyen,2026-05-15T10:51:05.124931+00:00,0.6,,False
+82f3769b-6cab-4d28-9264-296981a87151,ouedkniss_reference,Hyundai,Elantra,2015,180000,563000,Constantine,moyen,seed/hyundai/elantra/2015/180000/moyen,2026-05-15T10:51:05.468168+00:00,0.6,,False
+11aaf759-5111-46dc-8b16-8fcd94ea6742,ouedkniss_reference,Hyundai,Elantra,2015,220000,463000,Constantine,mauvais,seed/hyundai/elantra/2015/220000/mauvais,2026-05-15T10:51:05.867655+00:00,0.6,,False
+de400d4f-6bbd-4300-9e52-b64ef38d06f2,ouedkniss_reference,Hyundai,Elantra,2016,25000,1035000,Blida,excellent,seed/hyundai/elantra/2016/25000/excellent,2026-05-15T10:51:06.188098+00:00,0.6,,False
+89abc984-78c0-412a-bcdb-e19f0ad68171,ouedkniss_reference,Hyundai,Elantra,2016,45000,1051000,Oran,excellent,seed/hyundai/elantra/2016/45000/excellent,2026-05-15T10:51:06.539831+00:00,0.6,,False
+8e92821b-7ddd-41a9-9fdb-f25f62bdec51,ouedkniss_reference,Hyundai,Elantra,2016,60000,895000,Alger,bon,seed/hyundai/elantra/2016/60000/bon,2026-05-15T10:51:06.915294+00:00,0.6,,False
+145bb16f-064c-4bbf-90e1-2f4d2b57329b,ouedkniss_reference,Hyundai,Elantra,2016,75000,913000,Boumerdès,bon,seed/hyundai/elantra/2016/75000/bon,2026-05-15T10:51:07.27186+00:00,0.6,,False
+baba5579-1667-4d8d-8d21-4ccc77353f34,ouedkniss_reference,Hyundai,Elantra,2016,90000,859000,Sétif,bon,seed/hyundai/elantra/2016/90000/bon,2026-05-15T10:51:07.619821+00:00,0.6,,False
+3812b130-100a-4189-95a7-eef569bedb1e,ouedkniss_reference,Hyundai,Elantra,2016,110000,845000,Constantine,bon,seed/hyundai/elantra/2016/110000/bon,2026-05-15T10:51:07.986886+00:00,0.6,,False
+420d9f2a-e903-4caf-836c-8e585ce8a0ad,ouedkniss_reference,Hyundai,Elantra,2016,130000,694000,Blida,moyen,seed/hyundai/elantra/2016/130000/moyen,2026-05-15T10:51:08.385297+00:00,0.6,,False
+437f15c0-1e41-4775-99c9-2e133139c1f0,ouedkniss_reference,Hyundai,Elantra,2016,155000,660000,Boumerdès,moyen,seed/hyundai/elantra/2016/155000/moyen,2026-05-15T10:51:08.744128+00:00,0.6,,False
+5e35f72a-be9d-490e-8686-6b2d205c8ace,ouedkniss_reference,Hyundai,Elantra,2016,180000,619000,Oran,moyen,seed/hyundai/elantra/2016/180000/moyen,2026-05-15T10:51:09.136702+00:00,0.6,,False
+f4ff001a-1a9f-4935-84bb-1b146f1dfbaf,ouedkniss_reference,Hyundai,Elantra,2016,220000,471000,Boumerdès,mauvais,seed/hyundai/elantra/2016/220000/mauvais,2026-05-15T10:51:09.521923+00:00,0.6,,False
+ea2adad3-a638-48a5-8ee0-6a9e99be8174,ouedkniss_reference,Hyundai,Elantra,2017,25000,1103000,Tizi Ouzou,excellent,seed/hyundai/elantra/2017/25000/excellent,2026-05-15T10:51:10.187594+00:00,0.6,,False
+0db5f90a-edec-4bab-946b-4d7742bcd074,ouedkniss_reference,Hyundai,Elantra,2017,45000,1146000,Alger,excellent,seed/hyundai/elantra/2017/45000/excellent,2026-05-15T10:51:10.596051+00:00,0.6,,False
+cbc2082f-c329-4c9b-bcd3-bb43d463ef0a,ouedkniss_reference,Hyundai,Elantra,2017,60000,1034000,Blida,bon,seed/hyundai/elantra/2017/60000/bon,2026-05-15T10:51:11.023148+00:00,0.6,,False
+8e87f2bc-6a03-4b3d-a9c6-9ea7f1fcaac5,ouedkniss_reference,Hyundai,Elantra,2017,75000,978000,Annaba,bon,seed/hyundai/elantra/2017/75000/bon,2026-05-15T10:51:11.749052+00:00,0.6,,False
+67f41065-f9cf-443d-8e45-70ce9a94fbd7,ouedkniss_reference,Hyundai,Elantra,2017,90000,1012000,Blida,bon,seed/hyundai/elantra/2017/90000/bon,2026-05-15T10:51:12.124674+00:00,0.6,,False
+0d85f66c-a221-4f56-ba84-7c1b4a4212a6,ouedkniss_reference,Hyundai,Elantra,2017,110000,979000,Annaba,bon,seed/hyundai/elantra/2017/110000/bon,2026-05-15T10:51:12.500546+00:00,0.6,,False
+54d74af7-4c3c-4887-85b8-0f3e8b0809a2,ouedkniss_reference,Hyundai,Elantra,2017,130000,756000,Tizi Ouzou,moyen,seed/hyundai/elantra/2017/130000/moyen,2026-05-15T10:51:12.898619+00:00,0.6,,False
+ffbf8f07-1e7a-460b-8485-e4e3e174b709,ouedkniss_reference,Hyundai,Elantra,2017,155000,733000,Blida,moyen,seed/hyundai/elantra/2017/155000/moyen,2026-05-15T10:51:13.277903+00:00,0.6,,False
+4989cee9-c24c-4a56-8fcb-b7dc93106f97,ouedkniss_reference,Hyundai,Elantra,2017,180000,729000,Blida,moyen,seed/hyundai/elantra/2017/180000/moyen,2026-05-15T10:51:13.642192+00:00,0.6,,False
+17eb82ff-1bc2-4b39-92a0-1262196a472d,ouedkniss_reference,Hyundai,Elantra,2017,220000,550000,Boumerdès,mauvais,seed/hyundai/elantra/2017/220000/mauvais,2026-05-15T10:51:13.994332+00:00,0.6,,False
+ebb8ab3c-3bf9-4cd3-b151-3c86dee0b8cf,ouedkniss_reference,Hyundai,Elantra,2018,25000,1297000,Blida,excellent,seed/hyundai/elantra/2018/25000/excellent,2026-05-15T10:51:14.406581+00:00,0.6,,False
+e547ec5d-59c7-4d40-911e-014f576db6ce,ouedkniss_reference,Hyundai,Elantra,2018,45000,1190000,Sétif,excellent,seed/hyundai/elantra/2018/45000/excellent,2026-05-15T10:51:14.772622+00:00,0.6,,False
+cdda06e5-1c29-4f8f-8ae3-9c5bca05e193,ouedkniss_reference,Hyundai,Elantra,2018,60000,1099000,Sétif,bon,seed/hyundai/elantra/2018/60000/bon,2026-05-15T10:51:15.166043+00:00,0.6,,False
+6ac54ba9-fa4e-46ef-b4ad-9f52ec6c435b,ouedkniss_reference,Hyundai,Elantra,2018,75000,1118000,Sétif,bon,seed/hyundai/elantra/2018/75000/bon,2026-05-15T10:51:15.546586+00:00,0.6,,False
+3892f583-942b-4faa-a626-f8b43a9055f2,ouedkniss_reference,Hyundai,Elantra,2018,90000,1070000,Annaba,bon,seed/hyundai/elantra/2018/90000/bon,2026-05-15T10:51:15.940068+00:00,0.6,,False
+9a4a1828-6347-4b3d-8f02-55e49974e0a9,ouedkniss_reference,Hyundai,Elantra,2018,110000,1061000,Sétif,bon,seed/hyundai/elantra/2018/110000/bon,2026-05-15T10:51:16.327817+00:00,0.6,,False
+0b36fd40-a5aa-4ca9-bbfc-6397c853932c,ouedkniss_reference,Hyundai,Elantra,2018,130000,850000,Boumerdès,moyen,seed/hyundai/elantra/2018/130000/moyen,2026-05-15T10:51:16.750129+00:00,0.6,,False
+066a6533-baf7-412f-adfb-ce5d1b523573,ouedkniss_reference,Hyundai,Elantra,2018,155000,820000,Annaba,moyen,seed/hyundai/elantra/2018/155000/moyen,2026-05-15T10:51:17.154491+00:00,0.6,,False
+3ff56b15-78ad-4f5a-b278-102a4fa4a8f7,ouedkniss_reference,Hyundai,Elantra,2018,180000,774000,Tizi Ouzou,moyen,seed/hyundai/elantra/2018/180000/moyen,2026-05-15T10:51:17.583661+00:00,0.6,,False
+7ee15211-b011-4e62-aa3a-908104704062,ouedkniss_reference,Hyundai,Elantra,2018,220000,586000,Oran,mauvais,seed/hyundai/elantra/2018/220000/mauvais,2026-05-15T10:51:17.922951+00:00,0.6,,False
+c4a61314-2619-4da4-95d6-ee94294a2e02,ouedkniss_reference,Hyundai,Elantra,2019,25000,1444000,Sétif,excellent,seed/hyundai/elantra/2019/25000/excellent,2026-05-15T10:51:18.346679+00:00,0.6,,False
+98512ba5-c42b-4bae-87f5-f6025f810b2d,ouedkniss_reference,Hyundai,Elantra,2019,45000,1349000,Annaba,excellent,seed/hyundai/elantra/2019/45000/excellent,2026-05-15T10:51:18.761779+00:00,0.6,,False
+1b08e237-1a16-40e0-a227-15f25a0943f0,ouedkniss_reference,Hyundai,Elantra,2019,60000,1306000,Tizi Ouzou,bon,seed/hyundai/elantra/2019/60000/bon,2026-05-15T10:51:19.120699+00:00,0.6,,False
+f659a2c3-4f7e-4900-9c4c-d25505d32e2c,ouedkniss_reference,Hyundai,Elantra,2019,75000,1257000,Alger,bon,seed/hyundai/elantra/2019/75000/bon,2026-05-15T10:51:19.508165+00:00,0.6,,False
+35ae14ca-1956-4155-acf9-9f139b6fa00d,ouedkniss_reference,Hyundai,Elantra,2019,90000,1267000,Sétif,bon,seed/hyundai/elantra/2019/90000/bon,2026-05-15T10:51:19.882733+00:00,0.6,,False
+1db18e00-7655-4fa4-a5ea-795df498bed9,ouedkniss_reference,Hyundai,Elantra,2019,110000,1221000,Boumerdès,bon,seed/hyundai/elantra/2019/110000/bon,2026-05-15T10:51:20.202192+00:00,0.6,,False
+04df7e31-c6c6-4c4b-91ef-289c2b626774,ouedkniss_reference,Hyundai,Elantra,2019,130000,968000,Blida,moyen,seed/hyundai/elantra/2019/130000/moyen,2026-05-15T10:51:20.613491+00:00,0.6,,False
+e4c1c754-28b2-455e-8a61-2ceb540a1b1e,ouedkniss_reference,Hyundai,Elantra,2019,155000,987000,Blida,moyen,seed/hyundai/elantra/2019/155000/moyen,2026-05-15T10:51:21.031064+00:00,0.6,,False
+41ab3830-e41e-4b30-8e66-6ed8961da01e,ouedkniss_reference,Hyundai,Elantra,2019,180000,936000,Annaba,moyen,seed/hyundai/elantra/2019/180000/moyen,2026-05-15T10:51:21.435421+00:00,0.6,,False
+2fc378b5-1fc2-4a3b-9af5-532cc6955708,ouedkniss_reference,Hyundai,Elantra,2019,220000,687000,Alger,mauvais,seed/hyundai/elantra/2019/220000/mauvais,2026-05-15T10:51:21.820812+00:00,0.6,,False
+e653fd1e-c9bc-4784-8951-3a84e766e745,ouedkniss_reference,Hyundai,Elantra,2020,25000,1695000,Sétif,excellent,seed/hyundai/elantra/2020/25000/excellent,2026-05-15T10:51:22.169553+00:00,0.6,,False
+3861b818-b2be-46e7-aea7-c9aed32034ca,ouedkniss_reference,Hyundai,Elantra,2020,45000,1619000,Oran,excellent,seed/hyundai/elantra/2020/45000/excellent,2026-05-15T10:51:22.48321+00:00,0.6,,False
+feee2bc4-6e68-4c5d-8f28-d2e20d46d45c,ouedkniss_reference,Hyundai,Elantra,2020,60000,1533000,Alger,bon,seed/hyundai/elantra/2020/60000/bon,2026-05-15T10:51:22.828797+00:00,0.6,,False
+fc5a73f6-8f72-4fd1-b65e-989371d1280c,ouedkniss_reference,Hyundai,Elantra,2020,75000,1421000,Alger,bon,seed/hyundai/elantra/2020/75000/bon,2026-05-15T10:51:23.147414+00:00,0.6,,False
+3f5560a7-b4cd-4c46-bdea-3df81cecbf4a,ouedkniss_reference,Hyundai,Elantra,2020,90000,1373000,Sétif,bon,seed/hyundai/elantra/2020/90000/bon,2026-05-15T10:51:23.555443+00:00,0.6,,False
+bde9d44a-0894-40a7-96c3-aac0d5a8ae16,ouedkniss_reference,Hyundai,Elantra,2020,110000,1287000,Annaba,bon,seed/hyundai/elantra/2020/110000/bon,2026-05-15T10:51:23.896078+00:00,0.6,,False
+c7607c4b-a615-41f4-898e-7c7b71cd7e95,ouedkniss_reference,Hyundai,Elantra,2020,130000,1128000,Blida,moyen,seed/hyundai/elantra/2020/130000/moyen,2026-05-15T10:51:24.259681+00:00,0.6,,False
+30164741-7ee1-40ce-877a-c8247dd071d7,ouedkniss_reference,Hyundai,Elantra,2020,155000,1111000,Oran,moyen,seed/hyundai/elantra/2020/155000/moyen,2026-05-15T10:51:24.659357+00:00,0.6,,False
+5e8d60cb-14ab-4d2a-9780-c77f5407b412,ouedkniss_reference,Hyundai,Elantra,2020,180000,992000,Boumerdès,moyen,seed/hyundai/elantra/2020/180000/moyen,2026-05-15T10:51:25.024276+00:00,0.6,,False
+62a7f4a9-d37a-4da0-a22b-d572e4d98a9c,ouedkniss_reference,Hyundai,Elantra,2020,220000,738000,Oran,mauvais,seed/hyundai/elantra/2020/220000/mauvais,2026-05-15T10:51:25.675056+00:00,0.6,,False
+af6dd731-bff3-477c-9096-9ccd403c79fb,ouedkniss_reference,Hyundai,i10,2016,25000,607000,Blida,excellent,seed/hyundai/i10/2016/25000/excellent,2026-05-15T10:51:26.044909+00:00,0.6,,False
+145c2265-275b-4d5d-93b8-cd6be38f5eb1,ouedkniss_reference,Hyundai,i10,2016,45000,600000,Tizi Ouzou,excellent,seed/hyundai/i10/2016/45000/excellent,2026-05-15T10:51:26.407134+00:00,0.6,,False
+ac2911d4-af47-4d66-9f82-f5428db51058,ouedkniss_reference,Hyundai,i10,2016,60000,577000,Constantine,bon,seed/hyundai/i10/2016/60000/bon,2026-05-15T10:51:26.767072+00:00,0.6,,False
+b018c549-6ba8-49fc-bc07-54420b334c40,ouedkniss_reference,Hyundai,i10,2016,75000,529000,Blida,bon,seed/hyundai/i10/2016/75000/bon,2026-05-15T10:51:27.129679+00:00,0.6,,False
+bdde8092-2c74-48eb-8771-8b093bab02e0,ouedkniss_reference,Hyundai,i10,2016,90000,556000,Oran,bon,seed/hyundai/i10/2016/90000/bon,2026-05-15T10:51:27.514755+00:00,0.6,,False
+bb66ff13-d45c-4037-bcf2-cac005277109,ouedkniss_reference,Hyundai,i10,2016,110000,496000,Oran,bon,seed/hyundai/i10/2016/110000/bon,2026-05-15T10:51:27.867504+00:00,0.6,,False
+44276f1a-62f0-4dff-a5d6-f49fd21fbb91,ouedkniss_reference,Hyundai,i10,2016,130000,423000,Constantine,moyen,seed/hyundai/i10/2016/130000/moyen,2026-05-15T10:51:28.23836+00:00,0.6,,False
+6f9e2caa-2f6f-442d-9beb-81398a0ee2ea,ouedkniss_reference,Hyundai,i10,2016,155000,421000,Blida,moyen,seed/hyundai/i10/2016/155000/moyen,2026-05-15T10:51:28.613998+00:00,0.6,,False
+7e491451-57f0-4d78-8cb6-21c00eaf1aa4,ouedkniss_reference,Hyundai,i10,2016,180000,386000,Sétif,moyen,seed/hyundai/i10/2016/180000/moyen,2026-05-15T10:51:28.98952+00:00,0.6,,False
+cd9e9a3d-0197-4a55-97f2-ea7d9fa2cca9,ouedkniss_reference,Hyundai,i10,2016,220000,295000,Annaba,mauvais,seed/hyundai/i10/2016/220000/mauvais,2026-05-15T10:51:29.377835+00:00,0.6,,False
+f3161c77-b520-4af5-b6e5-011b94f2dca7,ouedkniss_reference,Hyundai,i10,2017,25000,697000,Constantine,excellent,seed/hyundai/i10/2017/25000/excellent,2026-05-15T10:51:29.74071+00:00,0.6,,False
+17b5b639-6aa0-42ab-891d-cd03f7ff64f9,ouedkniss_reference,Hyundai,i10,2017,45000,668000,Sétif,excellent,seed/hyundai/i10/2017/45000/excellent,2026-05-15T10:51:30.058993+00:00,0.6,,False
+d74f9b84-3208-4345-88b7-0b67b6219299,ouedkniss_reference,Hyundai,i10,2017,60000,643000,Alger,bon,seed/hyundai/i10/2017/60000/bon,2026-05-15T10:51:30.397118+00:00,0.6,,False
+4205bac4-7717-40ad-ac91-f937b79fc5fc,ouedkniss_reference,Hyundai,i10,2017,75000,620000,Sétif,bon,seed/hyundai/i10/2017/75000/bon,2026-05-15T10:51:30.744047+00:00,0.6,,False
+e54de67c-c53c-48af-a8a5-3f004b465592,ouedkniss_reference,Hyundai,i10,2017,90000,603000,Boumerdès,bon,seed/hyundai/i10/2017/90000/bon,2026-05-15T10:51:31.11495+00:00,0.6,,False
+ad6703b6-2a5b-4466-bc07-dbf9cfaf539a,ouedkniss_reference,Hyundai,i10,2017,110000,553000,Oran,bon,seed/hyundai/i10/2017/110000/bon,2026-05-15T10:51:31.479043+00:00,0.6,,False
+93b4c671-cbfb-45c3-8667-4d7d310043de,ouedkniss_reference,Hyundai,i10,2017,130000,481000,Boumerdès,moyen,seed/hyundai/i10/2017/130000/moyen,2026-05-15T10:51:31.876699+00:00,0.6,,False
+517c0997-920a-494a-b03f-791e20f5e855,ouedkniss_reference,Hyundai,i10,2017,155000,472000,Blida,moyen,seed/hyundai/i10/2017/155000/moyen,2026-05-15T10:51:32.254917+00:00,0.6,,False
+6615be29-bb43-4841-9c6d-76e217f447ed,ouedkniss_reference,Hyundai,i10,2017,180000,415000,Alger,moyen,seed/hyundai/i10/2017/180000/moyen,2026-05-15T10:51:32.661539+00:00,0.6,,False
+595b7306-6fc0-4b1a-8c51-8e4425074b94,ouedkniss_reference,Hyundai,i10,2017,220000,326000,Annaba,mauvais,seed/hyundai/i10/2017/220000/mauvais,2026-05-15T10:51:32.987772+00:00,0.6,,False
+9e8cff18-7bf3-4891-b0f9-216d98e61d5a,ouedkniss_reference,Hyundai,i10,2018,25000,807000,Constantine,excellent,seed/hyundai/i10/2018/25000/excellent,2026-05-15T10:51:33.325251+00:00,0.6,,False
+f93ef37e-ddfa-4d3a-821a-c98db19ec756,ouedkniss_reference,Hyundai,i10,2018,45000,729000,Tizi Ouzou,excellent,seed/hyundai/i10/2018/45000/excellent,2026-05-15T10:51:33.67557+00:00,0.6,,False
+4df8b025-344e-44e9-b67d-e3e146d77eee,ouedkniss_reference,Hyundai,i10,2018,60000,670000,Blida,bon,seed/hyundai/i10/2018/60000/bon,2026-05-15T10:51:34.036902+00:00,0.6,,False
+4e8b3545-85c4-4c65-95b7-5ca5d0923bfc,ouedkniss_reference,Hyundai,i10,2018,75000,679000,Blida,bon,seed/hyundai/i10/2018/75000/bon,2026-05-15T10:51:34.46279+00:00,0.6,,False
+b469f082-b564-47cc-81f4-7390abe5061b,ouedkniss_reference,Hyundai,i10,2018,90000,641000,Boumerdès,bon,seed/hyundai/i10/2018/90000/bon,2026-05-15T10:51:34.861191+00:00,0.6,,False
+6bc5dc06-01cf-4203-92e0-bebb42a11bda,ouedkniss_reference,Hyundai,i10,2018,110000,630000,Blida,bon,seed/hyundai/i10/2018/110000/bon,2026-05-15T10:51:35.272823+00:00,0.6,,False
+71f82530-0d82-45bd-8a1c-9c265dc3078d,ouedkniss_reference,Hyundai,i10,2018,130000,552000,Tizi Ouzou,moyen,seed/hyundai/i10/2018/130000/moyen,2026-05-15T10:51:35.608759+00:00,0.6,,False
+8ddfd853-0fb2-4698-8ad9-4f72c0db2f0a,ouedkniss_reference,Hyundai,i10,2018,155000,527000,Tizi Ouzou,moyen,seed/hyundai/i10/2018/155000/moyen,2026-05-15T10:51:35.948356+00:00,0.6,,False
+bccfa341-6d77-4292-9fad-d40abe1dc803,ouedkniss_reference,Hyundai,i10,2018,180000,494000,Sétif,moyen,seed/hyundai/i10/2018/180000/moyen,2026-05-15T10:51:36.289355+00:00,0.6,,False
+977be7c2-95d1-4eba-838e-5da43a008595,ouedkniss_reference,Hyundai,i10,2018,220000,352000,Annaba,mauvais,seed/hyundai/i10/2018/220000/mauvais,2026-05-15T10:51:36.677921+00:00,0.6,,False
+a9662ef5-2155-4d78-8158-6c824e4c6441,ouedkniss_reference,Hyundai,i10,2019,25000,894000,Sétif,excellent,seed/hyundai/i10/2019/25000/excellent,2026-05-15T10:51:37.058349+00:00,0.6,,False
+03606cf0-bf79-41b8-82ed-f91235b3762f,ouedkniss_reference,Hyundai,i10,2019,45000,894000,Alger,excellent,seed/hyundai/i10/2019/45000/excellent,2026-05-15T10:51:37.486814+00:00,0.6,,False
+10f7903e-cd66-40dd-97b0-9f0c2ba8cc6d,ouedkniss_reference,Hyundai,i10,2019,60000,792000,Constantine,bon,seed/hyundai/i10/2019/60000/bon,2026-05-15T10:51:37.953635+00:00,0.6,,False
+edab1a48-ab0d-4c32-8a35-2764593029cd,ouedkniss_reference,Hyundai,i10,2019,75000,740000,Sétif,bon,seed/hyundai/i10/2019/75000/bon,2026-05-15T10:51:38.309556+00:00,0.6,,False
+e1c02774-aca5-4e44-84c6-4b24e30c1ac1,ouedkniss_reference,Hyundai,i10,2019,90000,718000,Annaba,bon,seed/hyundai/i10/2019/90000/bon,2026-05-15T10:51:38.676097+00:00,0.6,,False
+1d805a73-8b04-4fed-98a9-497b7b607e4c,ouedkniss_reference,Hyundai,i10,2019,110000,698000,Tizi Ouzou,bon,seed/hyundai/i10/2019/110000/bon,2026-05-15T10:51:39.04813+00:00,0.6,,False
+aa7f16e9-9b77-4785-be8a-d76911e9c279,ouedkniss_reference,Hyundai,i10,2019,130000,636000,Alger,moyen,seed/hyundai/i10/2019/130000/moyen,2026-05-15T10:51:39.393641+00:00,0.6,,False
+fca8a7c3-567a-4288-8db7-8be54806e2b4,ouedkniss_reference,Hyundai,i10,2019,155000,591000,Boumerdès,moyen,seed/hyundai/i10/2019/155000/moyen,2026-05-15T10:51:39.773+00:00,0.6,,False
+d75e7e1b-c71d-420c-a444-da8844a1d848,ouedkniss_reference,Hyundai,i10,2019,180000,556000,Annaba,moyen,seed/hyundai/i10/2019/180000/moyen,2026-05-15T10:51:40.16647+00:00,0.6,,False
+c77f4a46-b211-4e7e-9cd1-be0790dbd51d,ouedkniss_reference,Hyundai,i10,2019,220000,427000,Oran,mauvais,seed/hyundai/i10/2019/220000/mauvais,2026-05-15T10:51:40.567228+00:00,0.6,,False
+85faabe6-8712-4517-bde1-eb388295d710,ouedkniss_reference,Hyundai,i10,2020,25000,983000,Sétif,excellent,seed/hyundai/i10/2020/25000/excellent,2026-05-15T10:51:40.947935+00:00,0.6,,False
+be78d267-63fd-4320-a245-023013ce5694,ouedkniss_reference,Hyundai,i10,2020,45000,1000000,Blida,excellent,seed/hyundai/i10/2020/45000/excellent,2026-05-15T10:51:41.368112+00:00,0.6,,False
+ddcfa1cd-5931-4e39-946b-722f21eb023c,ouedkniss_reference,Hyundai,i10,2020,60000,888000,Tizi Ouzou,bon,seed/hyundai/i10/2020/60000/bon,2026-05-15T10:51:41.75777+00:00,0.6,,False
+c9c62189-e796-476d-9da5-0396ea8e0e91,ouedkniss_reference,Hyundai,i10,2020,75000,906000,Blida,bon,seed/hyundai/i10/2020/75000/bon,2026-05-15T10:51:42.163568+00:00,0.6,,False
+591f3bf3-16ee-49d2-ad0d-15abf32fe431,ouedkniss_reference,Hyundai,i10,2020,90000,804000,Blida,bon,seed/hyundai/i10/2020/90000/bon,2026-05-15T10:51:42.555445+00:00,0.6,,False
+e469326a-1121-4471-a5fa-395021da5ffd,ouedkniss_reference,Hyundai,i10,2020,110000,783000,Constantine,bon,seed/hyundai/i10/2020/110000/bon,2026-05-15T10:51:42.936657+00:00,0.6,,False
+2d7f7f5c-b98f-457c-9102-19e2ca76477a,ouedkniss_reference,Hyundai,i10,2020,130000,664000,Annaba,moyen,seed/hyundai/i10/2020/130000/moyen,2026-05-15T10:51:43.324994+00:00,0.6,,False
+8b4843bc-dc7b-4cb7-87a7-da3b04dd16ea,ouedkniss_reference,Hyundai,i10,2020,155000,618000,Sétif,moyen,seed/hyundai/i10/2020/155000/moyen,2026-05-15T10:51:43.696341+00:00,0.6,,False
+edb6f27d-e21a-44f7-b285-deb33bdf77f8,ouedkniss_reference,Hyundai,i10,2020,180000,603000,Alger,moyen,seed/hyundai/i10/2020/180000/moyen,2026-05-15T10:51:44.067005+00:00,0.6,,False
+9e38ea6e-d0f1-462c-8888-7b530ebbb3ce,ouedkniss_reference,Hyundai,i10,2020,220000,461000,Sétif,mauvais,seed/hyundai/i10/2020/220000/mauvais,2026-05-15T10:51:44.458211+00:00,0.6,,False
+16b41d94-d494-4b82-97fe-57d97fd27f8e,ouedkniss_reference,Peugeot,206,2008,25000,313000,Tizi Ouzou,excellent,seed/peugeot/206/2008/25000/excellent,2026-05-15T10:51:44.940613+00:00,0.6,,False
+cd9a96e7-5c64-4219-9bef-581e8f6e2ba8,ouedkniss_reference,Peugeot,206,2008,45000,314000,Sétif,excellent,seed/peugeot/206/2008/45000/excellent,2026-05-15T10:51:45.288735+00:00,0.6,,False
+44989938-4dcf-470d-892b-4790bf89214a,ouedkniss_reference,Peugeot,206,2008,60000,293000,Oran,bon,seed/peugeot/206/2008/60000/bon,2026-05-15T10:51:45.62786+00:00,0.6,,False
+8297f722-4027-484f-a647-0e90ba8090ea,ouedkniss_reference,Peugeot,206,2008,75000,296000,Blida,bon,seed/peugeot/206/2008/75000/bon,2026-05-15T10:51:45.996112+00:00,0.6,,False
+1fa185be-c790-46a7-bdd6-1df9ab81149b,ouedkniss_reference,Peugeot,206,2008,90000,270000,Oran,bon,seed/peugeot/206/2008/90000/bon,2026-05-15T10:51:46.427065+00:00,0.6,,False
+433468c7-ed8f-48e5-8c39-d37dd22cdde3,ouedkniss_reference,Peugeot,206,2008,110000,271000,Tizi Ouzou,bon,seed/peugeot/206/2008/110000/bon,2026-05-15T10:51:46.761764+00:00,0.6,,False
+e05b296b-43bd-4e57-864d-d524303fb734,ouedkniss_reference,Peugeot,206,2008,130000,224000,Oran,moyen,seed/peugeot/206/2008/130000/moyen,2026-05-15T10:51:47.51084+00:00,0.6,,False
+8eb2f2fd-e10a-40b6-8c2a-c259fbcdcf6b,ouedkniss_reference,Peugeot,206,2008,155000,216000,Alger,moyen,seed/peugeot/206/2008/155000/moyen,2026-05-15T10:51:47.910345+00:00,0.6,,False
+165f5c0d-9e5e-48f7-98b2-4621c7c1d0b9,ouedkniss_reference,Peugeot,206,2008,180000,203000,Annaba,moyen,seed/peugeot/206/2008/180000/moyen,2026-05-15T10:51:48.2881+00:00,0.6,,False
+2a80e945-bc8d-4d73-8663-abf7b788bf84,ouedkniss_reference,Peugeot,206,2008,220000,146000,Oran,mauvais,seed/peugeot/206/2008/220000/mauvais,2026-05-15T10:51:48.645719+00:00,0.6,,False
+b50a1b1e-63d0-401c-8502-835409bf7879,ouedkniss_reference,Peugeot,206,2010,25000,390000,Tizi Ouzou,excellent,seed/peugeot/206/2010/25000/excellent,2026-05-15T10:51:48.987665+00:00,0.6,,False
+f079bc64-f76b-4ad0-9887-2cf387c014cc,ouedkniss_reference,Peugeot,206,2010,45000,384000,Blida,excellent,seed/peugeot/206/2010/45000/excellent,2026-05-15T10:51:49.359923+00:00,0.6,,False
+c1a72b78-a22a-4130-954d-7ee8af937058,ouedkniss_reference,Peugeot,206,2010,60000,336000,Sétif,bon,seed/peugeot/206/2010/60000/bon,2026-05-15T10:51:49.729921+00:00,0.6,,False
+a07088fe-4307-4b29-ac51-22822eb26b73,ouedkniss_reference,Peugeot,206,2010,75000,328000,Annaba,bon,seed/peugeot/206/2010/75000/bon,2026-05-15T10:51:50.212924+00:00,0.6,,False
+c5239b0f-91db-4ccd-97ab-c91a18aeda61,ouedkniss_reference,Peugeot,206,2010,90000,324000,Alger,bon,seed/peugeot/206/2010/90000/bon,2026-05-15T10:51:50.587416+00:00,0.6,,False
+64c6355e-ecf0-4f44-a6af-8e99dfa3d48c,ouedkniss_reference,Peugeot,206,2010,110000,317000,Blida,bon,seed/peugeot/206/2010/110000/bon,2026-05-15T10:51:50.92693+00:00,0.6,,False
+a4e2df32-6544-41da-80f3-f097b885a5fd,ouedkniss_reference,Peugeot,206,2010,130000,271000,Blida,moyen,seed/peugeot/206/2010/130000/moyen,2026-05-15T10:51:51.308531+00:00,0.6,,False
+b3843b3d-7799-43b3-a7b5-16357e8454fe,ouedkniss_reference,Peugeot,206,2010,155000,241000,Oran,moyen,seed/peugeot/206/2010/155000/moyen,2026-05-15T10:51:51.716599+00:00,0.6,,False
+cf888802-ee81-43d9-a7f1-a0a755b8ef10,ouedkniss_reference,Peugeot,206,2010,180000,244000,Blida,moyen,seed/peugeot/206/2010/180000/moyen,2026-05-15T10:51:52.069377+00:00,0.6,,False
+d2b87db7-17a4-4270-b2f4-3cc678225d4a,ouedkniss_reference,Peugeot,206,2010,220000,187000,Oran,mauvais,seed/peugeot/206/2010/220000/mauvais,2026-05-15T10:51:52.468993+00:00,0.6,,False
+c5f5cb77-e07a-490c-ba1b-3762dff1e21f,ouedkniss_reference,Peugeot,206,2012,25000,465000,Tizi Ouzou,excellent,seed/peugeot/206/2012/25000/excellent,2026-05-15T10:51:52.84335+00:00,0.6,,False
+a2b9c13a-e742-4254-821b-8554254929ca,ouedkniss_reference,Peugeot,206,2012,45000,432000,Sétif,excellent,seed/peugeot/206/2012/45000/excellent,2026-05-15T10:51:53.217789+00:00,0.6,,False
+ce39d428-79d1-41fb-9a86-936ce76c5dae,ouedkniss_reference,Peugeot,206,2012,60000,403000,Annaba,bon,seed/peugeot/206/2012/60000/bon,2026-05-15T10:51:53.579154+00:00,0.6,,False
+25fb0c14-5385-4140-a6f8-004374432741,ouedkniss_reference,Peugeot,206,2012,75000,407000,Annaba,bon,seed/peugeot/206/2012/75000/bon,2026-05-15T10:51:53.947389+00:00,0.6,,False
+e13f1e68-e04a-4afd-96ec-d95ed7244699,ouedkniss_reference,Peugeot,206,2012,90000,367000,Blida,bon,seed/peugeot/206/2012/90000/bon,2026-05-15T10:51:54.306349+00:00,0.6,,False
+df46e085-f6e9-4bf3-b35b-9b7f8351b22d,ouedkniss_reference,Peugeot,206,2012,110000,367000,Oran,bon,seed/peugeot/206/2012/110000/bon,2026-05-15T10:51:54.654103+00:00,0.6,,False
+b304cd0d-c1f8-48cf-93ff-8e948e081392,ouedkniss_reference,Peugeot,206,2012,130000,320000,Sétif,moyen,seed/peugeot/206/2012/130000/moyen,2026-05-15T10:51:55.028608+00:00,0.6,,False
+150b266e-7a84-4224-abcb-6ff764488834,ouedkniss_reference,Peugeot,206,2012,155000,294000,Oran,moyen,seed/peugeot/206/2012/155000/moyen,2026-05-15T10:51:55.387341+00:00,0.6,,False
+8d0920d6-3f2c-43da-a451-47fc10708a77,ouedkniss_reference,Peugeot,206,2012,180000,292000,Sétif,moyen,seed/peugeot/206/2012/180000/moyen,2026-05-15T10:51:55.728526+00:00,0.6,,False
+e5e140b5-8759-4645-b703-8d91ed9ce20c,ouedkniss_reference,Peugeot,206,2012,220000,215000,Tizi Ouzou,mauvais,seed/peugeot/206/2012/220000/mauvais,2026-05-15T10:51:56.075018+00:00,0.6,,False
+fbf241d4-da3f-418c-b560-7e2880860170,ouedkniss_reference,Peugeot,208,2016,25000,928000,Constantine,excellent,seed/peugeot/208/2016/25000/excellent,2026-05-15T10:51:56.424175+00:00,0.6,,False
+0ec97114-b37a-4047-8353-32e9210e405c,ouedkniss_reference,Peugeot,208,2016,45000,895000,Constantine,excellent,seed/peugeot/208/2016/45000/excellent,2026-05-15T10:51:56.769795+00:00,0.6,,False
+426de703-0809-45d6-bba2-7cad89352c35,ouedkniss_reference,Peugeot,208,2016,60000,799000,Blida,bon,seed/peugeot/208/2016/60000/bon,2026-05-15T10:51:57.138379+00:00,0.6,,False
+7707c5fb-5514-401c-8f6c-3220e331eadf,ouedkniss_reference,Peugeot,208,2016,75000,803000,Annaba,bon,seed/peugeot/208/2016/75000/bon,2026-05-15T10:51:57.470703+00:00,0.6,,False
+e8c51be1-80dd-478c-a546-6a36782406af,ouedkniss_reference,Peugeot,208,2016,90000,769000,Constantine,bon,seed/peugeot/208/2016/90000/bon,2026-05-15T10:51:58.004584+00:00,0.6,,False
+f4a6ff68-b6f4-4cf0-ae36-93d827190933,ouedkniss_reference,Peugeot,208,2016,110000,704000,Tizi Ouzou,bon,seed/peugeot/208/2016/110000/bon,2026-05-15T10:51:58.398229+00:00,0.6,,False
+040b0468-4822-42b1-903b-a74ce91406c4,ouedkniss_reference,Peugeot,208,2016,130000,602000,Alger,moyen,seed/peugeot/208/2016/130000/moyen,2026-05-15T10:51:58.757035+00:00,0.6,,False
+28a396fd-3a5e-4b27-b0ac-f4d8f6bb677d,ouedkniss_reference,Peugeot,208,2016,155000,584000,Blida,moyen,seed/peugeot/208/2016/155000/moyen,2026-05-15T10:51:59.267037+00:00,0.6,,False
+54ebb8d3-cd97-4e6b-854a-11dda407ebf8,ouedkniss_reference,Peugeot,208,2016,180000,557000,Constantine,moyen,seed/peugeot/208/2016/180000/moyen,2026-05-15T10:51:59.693194+00:00,0.6,,False
+b51d3520-20c7-471e-8334-3dd2c8f25f88,ouedkniss_reference,Peugeot,208,2016,220000,431000,Alger,mauvais,seed/peugeot/208/2016/220000/mauvais,2026-05-15T10:52:00.058083+00:00,0.6,,False
+dde77c81-e747-4957-9e02-b27ae00ac0dc,ouedkniss_reference,Peugeot,208,2017,25000,1022000,Constantine,excellent,seed/peugeot/208/2017/25000/excellent,2026-05-15T10:52:00.435887+00:00,0.6,,False
+f322df44-8e69-4ee7-8214-7efb65e216ad,ouedkniss_reference,Peugeot,208,2017,45000,906000,Sétif,excellent,seed/peugeot/208/2017/45000/excellent,2026-05-15T10:52:00.846306+00:00,0.6,,False
+f027445e-1cef-4251-8faf-9f08875e6b00,ouedkniss_reference,Peugeot,208,2017,60000,857000,Tizi Ouzou,bon,seed/peugeot/208/2017/60000/bon,2026-05-15T10:52:01.1896+00:00,0.6,,False
+5bf54e02-1aa9-4037-8735-d8744df81839,ouedkniss_reference,Peugeot,208,2017,75000,874000,Alger,bon,seed/peugeot/208/2017/75000/bon,2026-05-15T10:52:01.548275+00:00,0.6,,False
+ba4e9911-e0c5-4da3-8535-627259ff581f,ouedkniss_reference,Peugeot,208,2017,90000,826000,Tizi Ouzou,bon,seed/peugeot/208/2017/90000/bon,2026-05-15T10:52:01.89386+00:00,0.6,,False
+09f10009-8779-42c9-a705-b8b8a36947e2,ouedkniss_reference,Peugeot,208,2017,110000,801000,Sétif,bon,seed/peugeot/208/2017/110000/bon,2026-05-15T10:52:02.246792+00:00,0.6,,False
+ae80a032-606a-4e43-8eaa-3ce29aaa8420,ouedkniss_reference,Peugeot,208,2017,130000,670000,Oran,moyen,seed/peugeot/208/2017/130000/moyen,2026-05-15T10:52:02.586259+00:00,0.6,,False
+6f53b4c9-b620-4456-8815-fb88d43f8175,ouedkniss_reference,Peugeot,208,2017,155000,620000,Annaba,moyen,seed/peugeot/208/2017/155000/moyen,2026-05-15T10:52:02.935473+00:00,0.6,,False
+88e73862-9270-44a2-b935-555f26918a10,ouedkniss_reference,Peugeot,208,2017,180000,593000,Alger,moyen,seed/peugeot/208/2017/180000/moyen,2026-05-15T10:52:03.307673+00:00,0.6,,False
+ad36d569-b353-40f1-8b94-3ada7e2be148,ouedkniss_reference,Peugeot,208,2017,220000,443000,Blida,mauvais,seed/peugeot/208/2017/220000/mauvais,2026-05-15T10:52:03.722915+00:00,0.6,,False
+8351859f-76f8-4bae-b005-0e9b831fee14,ouedkniss_reference,Peugeot,208,2018,25000,1117000,Tizi Ouzou,excellent,seed/peugeot/208/2018/25000/excellent,2026-05-15T10:52:04.085274+00:00,0.6,,False
+190f5295-57a0-4df1-b19d-30894b90c4c4,ouedkniss_reference,Peugeot,208,2018,45000,1113000,Alger,excellent,seed/peugeot/208/2018/45000/excellent,2026-05-15T10:52:04.412696+00:00,0.6,,False
+89dcfa64-5698-4ba8-864a-674b8d47d0f4,ouedkniss_reference,Peugeot,208,2018,60000,966000,Boumerdès,bon,seed/peugeot/208/2018/60000/bon,2026-05-15T10:52:04.752324+00:00,0.6,,False
+6bc597ef-6fd0-4da5-a4ce-2beccd14d382,ouedkniss_reference,Peugeot,208,2018,75000,971000,Sétif,bon,seed/peugeot/208/2018/75000/bon,2026-05-15T10:52:05.123135+00:00,0.6,,False
+3d4f1209-409d-4538-ac50-d632f599e7e3,ouedkniss_reference,Peugeot,208,2018,90000,952000,Oran,bon,seed/peugeot/208/2018/90000/bon,2026-05-15T10:52:05.481131+00:00,0.6,,False
+e0b9ea5b-9d78-4127-97be-6b7f979e9424,ouedkniss_reference,Peugeot,208,2018,110000,877000,Alger,bon,seed/peugeot/208/2018/110000/bon,2026-05-15T10:52:05.834051+00:00,0.6,,False
+285faaaf-bc9a-4d2a-9ca5-0b8e527ef227,ouedkniss_reference,Peugeot,208,2018,130000,745000,Oran,moyen,seed/peugeot/208/2018/130000/moyen,2026-05-15T10:52:06.16633+00:00,0.6,,False
+161efc96-4535-482d-8ccd-d8ff140d87d3,ouedkniss_reference,Peugeot,208,2018,155000,739000,Oran,moyen,seed/peugeot/208/2018/155000/moyen,2026-05-15T10:52:06.514564+00:00,0.6,,False
+528beb08-06cc-4f48-a5d7-f49afd4a0e1c,ouedkniss_reference,Peugeot,208,2018,180000,651000,Blida,moyen,seed/peugeot/208/2018/180000/moyen,2026-05-15T10:52:06.867111+00:00,0.6,,False
+fc73b59e-0241-4413-86ae-dbcae0968a81,ouedkniss_reference,Peugeot,208,2018,220000,521000,Alger,mauvais,seed/peugeot/208/2018/220000/mauvais,2026-05-15T10:52:07.238099+00:00,0.6,,False
+1188c127-5880-4fa0-bcfc-0408a6f6765a,ouedkniss_reference,Peugeot,208,2019,25000,1265000,Alger,excellent,seed/peugeot/208/2019/25000/excellent,2026-05-15T10:52:07.593183+00:00,0.6,,False
+bdd7c78d-8378-4a9f-ad08-138f2b6aaa95,ouedkniss_reference,Peugeot,208,2019,45000,1206000,Annaba,excellent,seed/peugeot/208/2019/45000/excellent,2026-05-15T10:52:07.966531+00:00,0.6,,False
+885946b3-8c8e-49d0-b27e-90cf6a9ea0bd,ouedkniss_reference,Peugeot,208,2019,60000,1065000,Constantine,bon,seed/peugeot/208/2019/60000/bon,2026-05-15T10:52:08.367559+00:00,0.6,,False
+d9a76685-7247-44e9-b1ce-9ec35964600c,ouedkniss_reference,Peugeot,208,2019,75000,1080000,Oran,bon,seed/peugeot/208/2019/75000/bon,2026-05-15T10:52:08.723204+00:00,0.6,,False
+248f4e07-906f-4075-9f0c-3e0789a11c05,ouedkniss_reference,Peugeot,208,2019,90000,992000,Tizi Ouzou,bon,seed/peugeot/208/2019/90000/bon,2026-05-15T10:52:09.109611+00:00,0.6,,False
+4667d948-ba1c-49f9-ab17-d9d4b75cb5ee,ouedkniss_reference,Peugeot,208,2019,110000,954000,Oran,bon,seed/peugeot/208/2019/110000/bon,2026-05-15T10:52:09.446738+00:00,0.6,,False
+50c48e34-645e-4dbb-b7a5-10359f2be926,ouedkniss_reference,Peugeot,208,2019,130000,842000,Oran,moyen,seed/peugeot/208/2019/130000/moyen,2026-05-15T10:52:09.83082+00:00,0.6,,False
+882fca00-a6e4-49f8-a6d8-1f31d261cc6c,ouedkniss_reference,Peugeot,208,2019,155000,832000,Tizi Ouzou,moyen,seed/peugeot/208/2019/155000/moyen,2026-05-15T10:52:10.276848+00:00,0.6,,False
+b176090d-e216-463b-8f66-c105c0d39c9d,ouedkniss_reference,Peugeot,208,2019,180000,737000,Sétif,moyen,seed/peugeot/208/2019/180000/moyen,2026-05-15T10:52:10.675536+00:00,0.6,,False
+a549cbc1-e20f-49bc-9e5d-90f27077e6c7,ouedkniss_reference,Peugeot,208,2019,220000,584000,Blida,mauvais,seed/peugeot/208/2019/220000/mauvais,2026-05-15T10:52:11.077604+00:00,0.6,,False
+4350f752-b3d7-4335-b0a2-14bda0b4e359,ouedkniss_reference,Peugeot,208,2020,25000,1419000,Annaba,excellent,seed/peugeot/208/2020/25000/excellent,2026-05-15T10:52:11.444808+00:00,0.6,,False
+621e3bdd-1436-4431-9692-aad897523bf7,ouedkniss_reference,Peugeot,208,2020,45000,1299000,Tizi Ouzou,excellent,seed/peugeot/208/2020/45000/excellent,2026-05-15T10:52:11.828848+00:00,0.6,,False
+d486c8e5-b890-4e9a-9b89-43bf30b34b05,ouedkniss_reference,Peugeot,208,2020,60000,1194000,Tizi Ouzou,bon,seed/peugeot/208/2020/60000/bon,2026-05-15T10:52:12.358032+00:00,0.6,,False
+f4202c05-8e56-43c3-ad4f-305e232137d1,ouedkniss_reference,Peugeot,208,2020,75000,1229000,Boumerdès,bon,seed/peugeot/208/2020/75000/bon,2026-05-15T10:52:12.768541+00:00,0.6,,False
+ebe128d5-2643-412a-a21e-fd4f5ee2dbe2,ouedkniss_reference,Peugeot,208,2020,90000,1223000,Blida,bon,seed/peugeot/208/2020/90000/bon,2026-05-15T10:52:13.122487+00:00,0.6,,False
+c3645773-6207-4fcc-bb15-8fa5556c2b90,ouedkniss_reference,Peugeot,208,2020,110000,1137000,Sétif,bon,seed/peugeot/208/2020/110000/bon,2026-05-15T10:52:13.493355+00:00,0.6,,False
+ed8a1a75-e2bb-4328-b966-6a12e353a5cc,ouedkniss_reference,Peugeot,208,2020,130000,909000,Annaba,moyen,seed/peugeot/208/2020/130000/moyen,2026-05-15T10:52:14.188089+00:00,0.6,,False
+5b0e231f-4e84-4085-a456-aa06d2f78b85,ouedkniss_reference,Peugeot,208,2020,155000,906000,Annaba,moyen,seed/peugeot/208/2020/155000/moyen,2026-05-15T10:52:14.595965+00:00,0.6,,False
+681571b8-7f6a-44db-b33b-41ae312c908b,ouedkniss_reference,Peugeot,208,2020,180000,842000,Oran,moyen,seed/peugeot/208/2020/180000/moyen,2026-05-15T10:52:14.95268+00:00,0.6,,False
+71be19e5-2f32-49ae-86ad-53aded6bfafe,ouedkniss_reference,Peugeot,208,2020,220000,634000,Boumerdès,mauvais,seed/peugeot/208/2020/220000/mauvais,2026-05-15T10:52:15.307716+00:00,0.6,,False
+5cba315f-0970-4df0-9d9b-4da382cb451e,ouedkniss_reference,Volkswagen,Polo,2016,25000,1006000,Alger,excellent,seed/volkswagen/polo/2016/25000/excellent,2026-05-15T10:52:15.659248+00:00,0.6,,False
+7c29b169-8877-44eb-b85d-9540f85df983,ouedkniss_reference,Volkswagen,Polo,2016,45000,940000,Blida,excellent,seed/volkswagen/polo/2016/45000/excellent,2026-05-15T10:52:16.020401+00:00,0.6,,False
+b31c3329-2738-4013-9606-58d09a9724c0,ouedkniss_reference,Volkswagen,Polo,2016,60000,875000,Boumerdès,bon,seed/volkswagen/polo/2016/60000/bon,2026-05-15T10:52:16.345747+00:00,0.6,,False
+813cd5a6-54d6-4259-bcdd-407224523dab,ouedkniss_reference,Volkswagen,Polo,2016,75000,902000,Tizi Ouzou,bon,seed/volkswagen/polo/2016/75000/bon,2026-05-15T10:52:16.754919+00:00,0.6,,False
+22859b43-64f2-43a3-8a75-20f6739fe38c,ouedkniss_reference,Volkswagen,Polo,2016,90000,838000,Constantine,bon,seed/volkswagen/polo/2016/90000/bon,2026-05-15T10:52:17.216939+00:00,0.6,,False
+51615edc-b518-4f4e-8f05-6caebeeb0a5a,ouedkniss_reference,Volkswagen,Polo,2016,110000,795000,Constantine,bon,seed/volkswagen/polo/2016/110000/bon,2026-05-15T10:52:17.604522+00:00,0.6,,False
+56c45e57-16aa-489b-bde3-4959a34ab20c,ouedkniss_reference,Volkswagen,Polo,2016,130000,675000,Constantine,moyen,seed/volkswagen/polo/2016/130000/moyen,2026-05-15T10:52:17.977914+00:00,0.6,,False
+7c32aec3-5dd9-4594-8387-98a22c177c3b,ouedkniss_reference,Volkswagen,Polo,2016,155000,625000,Annaba,moyen,seed/volkswagen/polo/2016/155000/moyen,2026-05-15T10:52:18.337699+00:00,0.6,,False
+be0ccd0d-e1d3-442c-a621-0b375cb3d07a,ouedkniss_reference,Volkswagen,Polo,2016,180000,598000,Oran,moyen,seed/volkswagen/polo/2016/180000/moyen,2026-05-15T10:52:18.687042+00:00,0.6,,False
+f179e9fb-efa2-4d84-97a5-386aee876af6,ouedkniss_reference,Volkswagen,Polo,2016,220000,479000,Blida,mauvais,seed/volkswagen/polo/2016/220000/mauvais,2026-05-15T10:52:19.036167+00:00,0.6,,False
+50301d62-8d6e-4d51-bb01-282f14b5ba64,ouedkniss_reference,Volkswagen,Polo,2017,25000,1077000,Boumerdès,excellent,seed/volkswagen/polo/2017/25000/excellent,2026-05-15T10:52:19.438274+00:00,0.6,,False
+a3873201-b955-4051-b151-7eaddf320d1d,ouedkniss_reference,Volkswagen,Polo,2017,45000,1077000,Constantine,excellent,seed/volkswagen/polo/2017/45000/excellent,2026-05-15T10:52:19.844834+00:00,0.6,,False
+7359bb4d-7bd4-48d7-b75b-1e45ef6cad47,ouedkniss_reference,Volkswagen,Polo,2017,60000,966000,Boumerdès,bon,seed/volkswagen/polo/2017/60000/bon,2026-05-15T10:52:20.456901+00:00,0.6,,False
+1dd407b3-5535-4b36-aecf-bb07fcfd671c,ouedkniss_reference,Volkswagen,Polo,2017,75000,952000,Tizi Ouzou,bon,seed/volkswagen/polo/2017/75000/bon,2026-05-15T10:52:20.801381+00:00,0.6,,False
+1ffc956d-98e7-4fa6-8893-5aba9fddb6b7,ouedkniss_reference,Volkswagen,Polo,2017,90000,930000,Annaba,bon,seed/volkswagen/polo/2017/90000/bon,2026-05-15T10:52:21.171197+00:00,0.6,,False
+ff3b8511-59af-480e-8985-89b49657b106,ouedkniss_reference,Volkswagen,Polo,2017,110000,862000,Boumerdès,bon,seed/volkswagen/polo/2017/110000/bon,2026-05-15T10:52:21.497277+00:00,0.6,,False
+b6ceee9c-2232-4b07-9c15-1ea8e6d3329f,ouedkniss_reference,Volkswagen,Polo,2017,130000,746000,Sétif,moyen,seed/volkswagen/polo/2017/130000/moyen,2026-05-15T10:52:21.899326+00:00,0.6,,False
+0a69078d-c362-4cac-bb10-97c4de3d981e,ouedkniss_reference,Volkswagen,Polo,2017,155000,716000,Boumerdès,moyen,seed/volkswagen/polo/2017/155000/moyen,2026-05-15T10:52:22.27492+00:00,0.6,,False
+b55e77d0-b761-4cba-91c0-1f449ca7f931,ouedkniss_reference,Volkswagen,Polo,2017,180000,687000,Constantine,moyen,seed/volkswagen/polo/2017/180000/moyen,2026-05-15T10:52:22.642162+00:00,0.6,,False
+80e57bec-5d47-4dc8-ba42-e0ce80b46fea,ouedkniss_reference,Volkswagen,Polo,2017,220000,522000,Alger,mauvais,seed/volkswagen/polo/2017/220000/mauvais,2026-05-15T10:52:22.979281+00:00,0.6,,False
+cb2f0b1e-f6ae-4b35-bd3e-db8479670653,ouedkniss_reference,Volkswagen,Polo,2018,25000,1217000,Alger,excellent,seed/volkswagen/polo/2018/25000/excellent,2026-05-15T10:52:23.383837+00:00,0.6,,False
+3a4aa96b-9b16-4337-8d08-348e7414bd78,ouedkniss_reference,Volkswagen,Polo,2018,45000,1216000,Sétif,excellent,seed/volkswagen/polo/2018/45000/excellent,2026-05-15T10:52:23.747473+00:00,0.6,,False
+4965ce18-365c-464a-8858-bd9e1a1a802e,ouedkniss_reference,Volkswagen,Polo,2018,60000,1060000,Sétif,bon,seed/volkswagen/polo/2018/60000/bon,2026-05-15T10:52:24.155345+00:00,0.6,,False
+8eb26bd9-bc65-48df-97d6-43ba93b8735e,ouedkniss_reference,Volkswagen,Polo,2018,75000,1121000,Tizi Ouzou,bon,seed/volkswagen/polo/2018/75000/bon,2026-05-15T10:52:24.516568+00:00,0.6,,False
+4f45ee02-7cab-425f-80a1-2169653c8ae2,ouedkniss_reference,Volkswagen,Polo,2018,90000,1005000,Sétif,bon,seed/volkswagen/polo/2018/90000/bon,2026-05-15T10:52:24.913816+00:00,0.6,,False
+de0426eb-3f04-4c24-adca-481b5c33dc28,ouedkniss_reference,Volkswagen,Polo,2018,110000,1026000,Constantine,bon,seed/volkswagen/polo/2018/110000/bon,2026-05-15T10:52:25.257074+00:00,0.6,,False
+aff9a370-66ff-46e0-9eea-d6151a68b2e5,ouedkniss_reference,Volkswagen,Polo,2018,130000,832000,Sétif,moyen,seed/volkswagen/polo/2018/130000/moyen,2026-05-15T10:52:25.637408+00:00,0.6,,False
+3919ac41-e400-4fb7-96c6-d449c4598af4,ouedkniss_reference,Volkswagen,Polo,2018,155000,773000,Tizi Ouzou,moyen,seed/volkswagen/polo/2018/155000/moyen,2026-05-15T10:52:25.999741+00:00,0.6,,False
+d6767514-4798-4fa9-afe2-4ff74256fabb,ouedkniss_reference,Volkswagen,Polo,2018,180000,736000,Tizi Ouzou,moyen,seed/volkswagen/polo/2018/180000/moyen,2026-05-15T10:52:26.382717+00:00,0.6,,False
+e3374172-98de-4e47-8bc1-1e9ad1800c4c,ouedkniss_reference,Volkswagen,Polo,2018,220000,604000,Boumerdès,mauvais,seed/volkswagen/polo/2018/220000/mauvais,2026-05-15T10:52:26.739348+00:00,0.6,,False
+cf34a829-e9fc-4510-b919-644e0d335532,ouedkniss_reference,Volkswagen,Polo,2019,25000,1464000,Alger,excellent,seed/volkswagen/polo/2019/25000/excellent,2026-05-15T10:52:27.112242+00:00,0.6,,False
+51798b89-82dd-4991-900e-985897b422e6,ouedkniss_reference,Volkswagen,Polo,2019,45000,1373000,Blida,excellent,seed/volkswagen/polo/2019/45000/excellent,2026-05-15T10:52:27.484264+00:00,0.6,,False
+79d8dd2f-ec74-47e4-8cca-3117430fd290,ouedkniss_reference,Volkswagen,Polo,2019,60000,1288000,Sétif,bon,seed/volkswagen/polo/2019/60000/bon,2026-05-15T10:52:27.908916+00:00,0.6,,False
+aced28b7-e52b-4cf6-8564-56dfc80bfe17,ouedkniss_reference,Volkswagen,Polo,2019,75000,1196000,Alger,bon,seed/volkswagen/polo/2019/75000/bon,2026-05-15T10:52:28.327781+00:00,0.6,,False
+e854e9c7-a0ef-465f-818f-1b0dc3078a89,ouedkniss_reference,Volkswagen,Polo,2019,90000,1193000,Constantine,bon,seed/volkswagen/polo/2019/90000/bon,2026-05-15T10:52:28.66866+00:00,0.6,,False
+62d8cf63-63a2-4d02-8225-b463a007e5c1,ouedkniss_reference,Volkswagen,Polo,2019,110000,1119000,Oran,bon,seed/volkswagen/polo/2019/110000/bon,2026-05-15T10:52:29.059765+00:00,0.6,,False
+9c56286a-691f-49b5-9261-3f4e0d81883c,ouedkniss_reference,Volkswagen,Polo,2019,130000,952000,Alger,moyen,seed/volkswagen/polo/2019/130000/moyen,2026-05-15T10:52:29.429394+00:00,0.6,,False
+da14965c-f213-4ff6-88a2-a1a934f1f047,ouedkniss_reference,Volkswagen,Polo,2019,155000,920000,Alger,moyen,seed/volkswagen/polo/2019/155000/moyen,2026-05-15T10:52:29.794325+00:00,0.6,,False
+45679fcb-9cbe-4d85-a439-5ed1f7464e79,ouedkniss_reference,Volkswagen,Polo,2019,180000,849000,Blida,moyen,seed/volkswagen/polo/2019/180000/moyen,2026-05-15T10:52:30.134996+00:00,0.6,,False
+36fe9bde-dc67-4a32-a6e6-dd428f52a303,ouedkniss_reference,Volkswagen,Polo,2019,220000,625000,Boumerdès,mauvais,seed/volkswagen/polo/2019/220000/mauvais,2026-05-15T10:52:30.503458+00:00,0.6,,False
+09600856-98c5-4e1f-bce4-943b67d1af05,ouedkniss_reference,Volkswagen,Polo,2020,25000,1538000,Sétif,excellent,seed/volkswagen/polo/2020/25000/excellent,2026-05-15T10:52:30.885304+00:00,0.6,,False
+1a3caf97-8ba1-456f-a187-500165b85f92,ouedkniss_reference,Volkswagen,Polo,2020,45000,1588000,Sétif,excellent,seed/volkswagen/polo/2020/45000/excellent,2026-05-15T10:52:31.266579+00:00,0.6,,False
+60278313-07b4-448b-bdac-62500d35fcef,ouedkniss_reference,Volkswagen,Polo,2020,60000,1451000,Boumerdès,bon,seed/volkswagen/polo/2020/60000/bon,2026-05-15T10:52:31.658038+00:00,0.6,,False
+3a6cd8c1-01f8-4d78-86a9-cdf694535965,ouedkniss_reference,Volkswagen,Polo,2020,75000,1397000,Sétif,bon,seed/volkswagen/polo/2020/75000/bon,2026-05-15T10:52:32.346656+00:00,0.6,,False
+e049c639-0fc0-4dde-8217-a06d0f75ac65,ouedkniss_reference,Volkswagen,Polo,2020,90000,1417000,Constantine,bon,seed/volkswagen/polo/2020/90000/bon,2026-05-15T10:52:32.697013+00:00,0.6,,False
+e5f1d2f1-ebae-40de-932d-c5dacf738f3f,ouedkniss_reference,Volkswagen,Polo,2020,110000,1290000,Boumerdès,bon,seed/volkswagen/polo/2020/110000/bon,2026-05-15T10:52:33.009059+00:00,0.6,,False
+be865af5-b190-4789-b08e-e081a52d8879,ouedkniss_reference,Volkswagen,Polo,2020,130000,1100000,Boumerdès,moyen,seed/volkswagen/polo/2020/130000/moyen,2026-05-15T10:52:33.376217+00:00,0.6,,False
+ef20f1ca-2796-4593-b041-8071bcac06c9,ouedkniss_reference,Volkswagen,Polo,2020,155000,1020000,Tizi Ouzou,moyen,seed/volkswagen/polo/2020/155000/moyen,2026-05-15T10:52:33.70865+00:00,0.6,,False
+d6f2f680-7ae1-4c1b-ae15-049332050bf1,ouedkniss_reference,Volkswagen,Polo,2020,180000,952000,Blida,moyen,seed/volkswagen/polo/2020/180000/moyen,2026-05-15T10:52:34.056661+00:00,0.6,,False
+b2383a39-eda7-4967-b760-905b363d053f,ouedkniss_reference,Volkswagen,Polo,2020,220000,717000,Blida,mauvais,seed/volkswagen/polo/2020/220000/mauvais,2026-05-15T10:52:34.375846+00:00,0.6,,False
+1e641c0b-2074-4636-8b55-e844dcd8e5fd,ouedkniss_reference,Volkswagen,Golf,2016,25000,1267000,Tizi Ouzou,excellent,seed/volkswagen/golf/2016/25000/excellent,2026-05-15T10:52:34.738249+00:00,0.6,,False
+dc1dee08-0364-459f-8bd9-95a57575a1f1,ouedkniss_reference,Volkswagen,Golf,2016,45000,1212000,Boumerdès,excellent,seed/volkswagen/golf/2016/45000/excellent,2026-05-15T10:52:35.116232+00:00,0.6,,False
+6d7c1f7e-579d-4476-8892-5ad938a97bbe,ouedkniss_reference,Volkswagen,Golf,2016,60000,1183000,Tizi Ouzou,bon,seed/volkswagen/golf/2016/60000/bon,2026-05-15T10:52:35.469251+00:00,0.6,,False
+fd81b70e-4566-476d-9af3-3da6b727f48b,ouedkniss_reference,Volkswagen,Golf,2016,75000,1094000,Alger,bon,seed/volkswagen/golf/2016/75000/bon,2026-05-15T10:52:35.897364+00:00,0.6,,False
+9d793dac-1a99-4942-9b87-2817f6da8508,ouedkniss_reference,Volkswagen,Golf,2016,90000,1128000,Blida,bon,seed/volkswagen/golf/2016/90000/bon,2026-05-15T10:52:36.298269+00:00,0.6,,False
+8ce3c684-e30a-4720-8f9d-259148d7c38d,ouedkniss_reference,Volkswagen,Golf,2016,110000,1078000,Boumerdès,bon,seed/volkswagen/golf/2016/110000/bon,2026-05-15T10:52:36.647564+00:00,0.6,,False
+10172f27-73c8-4008-afe9-163a3cdfec66,ouedkniss_reference,Volkswagen,Golf,2016,130000,872000,Constantine,moyen,seed/volkswagen/golf/2016/130000/moyen,2026-05-15T10:52:36.993072+00:00,0.6,,False
+84915903-7f29-4c01-8290-5585656fe1a4,ouedkniss_reference,Volkswagen,Golf,2016,155000,848000,Boumerdès,moyen,seed/volkswagen/golf/2016/155000/moyen,2026-05-15T10:52:37.336527+00:00,0.6,,False
+6aad7086-96b4-4b4c-bdc7-47e50ca5990e,ouedkniss_reference,Volkswagen,Golf,2016,180000,773000,Constantine,moyen,seed/volkswagen/golf/2016/180000/moyen,2026-05-15T10:52:37.733684+00:00,0.6,,False
+aac50fe4-02c1-41f0-8f1c-d3566faaf107,ouedkniss_reference,Volkswagen,Golf,2016,220000,609000,Oran,mauvais,seed/volkswagen/golf/2016/220000/mauvais,2026-05-15T10:52:38.121099+00:00,0.6,,False
+941be580-7ff0-4fa2-8826-fe38be3e660d,ouedkniss_reference,Volkswagen,Golf,2017,25000,1425000,Boumerdès,excellent,seed/volkswagen/golf/2017/25000/excellent,2026-05-15T10:52:38.507476+00:00,0.6,,False
+6439dff8-fc5e-42f7-b968-af41d5856cef,ouedkniss_reference,Volkswagen,Golf,2017,45000,1482000,Boumerdès,excellent,seed/volkswagen/golf/2017/45000/excellent,2026-05-15T10:52:38.859136+00:00,0.6,,False
+4096059a-9243-4bb6-8264-f14ed51795be,ouedkniss_reference,Volkswagen,Golf,2017,60000,1308000,Boumerdès,bon,seed/volkswagen/golf/2017/60000/bon,2026-05-15T10:52:39.224077+00:00,0.6,,False
+6a916b12-e58b-4f08-9ea9-88d2f7bdf3cb,ouedkniss_reference,Volkswagen,Golf,2017,75000,1307000,Oran,bon,seed/volkswagen/golf/2017/75000/bon,2026-05-15T10:52:39.549096+00:00,0.6,,False
+57e1882e-484a-4fcd-b254-d0c4027924dd,ouedkniss_reference,Volkswagen,Golf,2017,90000,1262000,Constantine,bon,seed/volkswagen/golf/2017/90000/bon,2026-05-15T10:52:39.927056+00:00,0.6,,False
+196b30ce-b28f-4602-bfba-ceaf9f818dfa,ouedkniss_reference,Volkswagen,Golf,2017,110000,1258000,Tizi Ouzou,bon,seed/volkswagen/golf/2017/110000/bon,2026-05-15T10:52:40.31471+00:00,0.6,,False
+fa364922-a3fd-4500-b697-5a14f5e5f271,ouedkniss_reference,Volkswagen,Golf,2017,130000,1034000,Alger,moyen,seed/volkswagen/golf/2017/130000/moyen,2026-05-15T10:52:40.67718+00:00,0.6,,False
+64caba1a-0fa1-4b62-9be9-537e481bd760,ouedkniss_reference,Volkswagen,Golf,2017,155000,924000,Sétif,moyen,seed/volkswagen/golf/2017/155000/moyen,2026-05-15T10:52:41.036022+00:00,0.6,,False
+34eb75b0-ac31-4084-a0af-503f0250f428,ouedkniss_reference,Volkswagen,Golf,2017,180000,891000,Boumerdès,moyen,seed/volkswagen/golf/2017/180000/moyen,2026-05-15T10:52:41.40544+00:00,0.6,,False
+26e63630-ac34-457a-a994-807cfea665ab,ouedkniss_reference,Volkswagen,Golf,2017,220000,709000,Alger,mauvais,seed/volkswagen/golf/2017/220000/mauvais,2026-05-15T10:52:41.789484+00:00,0.6,,False
+526d2fe8-ae10-479e-86fa-4b829045d824,ouedkniss_reference,Volkswagen,Golf,2018,25000,1689000,Annaba,excellent,seed/volkswagen/golf/2018/25000/excellent,2026-05-15T10:52:42.412512+00:00,0.6,,False
+030a3ae9-b4b5-4624-abdc-13b7845b32b3,ouedkniss_reference,Volkswagen,Golf,2018,45000,1703000,Blida,excellent,seed/volkswagen/golf/2018/45000/excellent,2026-05-15T10:52:42.784444+00:00,0.6,,False
+4c492686-aae5-4f77-81f9-53dbf3a8c8e2,ouedkniss_reference,Volkswagen,Golf,2018,60000,1550000,Boumerdès,bon,seed/volkswagen/golf/2018/60000/bon,2026-05-15T10:52:43.14086+00:00,0.6,,False
+cdb114b7-2456-4729-adc7-fad19c98451f,ouedkniss_reference,Volkswagen,Golf,2018,75000,1397000,Blida,bon,seed/volkswagen/golf/2018/75000/bon,2026-05-15T10:52:43.535546+00:00,0.6,,False
+3eff0036-a138-496c-a0f6-f7bf7a88edc2,ouedkniss_reference,Volkswagen,Golf,2018,90000,1451000,Boumerdès,bon,seed/volkswagen/golf/2018/90000/bon,2026-05-15T10:52:43.913498+00:00,0.6,,False
+46a3ca7a-46ea-4f39-a59c-a230457aceb4,ouedkniss_reference,Volkswagen,Golf,2018,110000,1394000,Blida,bon,seed/volkswagen/golf/2018/110000/bon,2026-05-15T10:52:44.301217+00:00,0.6,,False
+04ca929d-eaad-4d7a-abe3-c094ab8f01ec,ouedkniss_reference,Volkswagen,Golf,2018,130000,1099000,Alger,moyen,seed/volkswagen/golf/2018/130000/moyen,2026-05-15T10:52:44.686269+00:00,0.6,,False
+f6c82663-15fb-41ac-a94a-6826f59d4d44,ouedkniss_reference,Volkswagen,Golf,2018,155000,1128000,Tizi Ouzou,moyen,seed/volkswagen/golf/2018/155000/moyen,2026-05-15T10:52:45.186846+00:00,0.6,,False
+da096bd2-31b4-4f0f-8667-bce81a502db3,ouedkniss_reference,Volkswagen,Golf,2018,180000,1017000,Constantine,moyen,seed/volkswagen/golf/2018/180000/moyen,2026-05-15T10:52:45.549182+00:00,0.6,,False
+9d3a0519-427d-4be4-8c85-d25c553623a4,ouedkniss_reference,Volkswagen,Golf,2018,220000,785000,Annaba,mauvais,seed/volkswagen/golf/2018/220000/mauvais,2026-05-15T10:52:45.88631+00:00,0.6,,False
+f6774bea-d0a2-44e4-be26-881046092106,ouedkniss_reference,Volkswagen,Golf,2019,25000,1886000,Alger,excellent,seed/volkswagen/golf/2019/25000/excellent,2026-05-15T10:52:46.228498+00:00,0.6,,False
+b100abd0-2aa2-4d8e-bf5a-b212c9fbdce3,ouedkniss_reference,Volkswagen,Golf,2019,45000,1824000,Oran,excellent,seed/volkswagen/golf/2019/45000/excellent,2026-05-15T10:52:46.613734+00:00,0.6,,False
+c497f494-34c3-4305-92f6-352532c83dd6,ouedkniss_reference,Volkswagen,Golf,2019,60000,1742000,Sétif,bon,seed/volkswagen/golf/2019/60000/bon,2026-05-15T10:52:46.997591+00:00,0.6,,False
+9273de61-f247-4662-b38b-620b6fcc28dd,ouedkniss_reference,Volkswagen,Golf,2019,75000,1759000,Boumerdès,bon,seed/volkswagen/golf/2019/75000/bon,2026-05-15T10:52:47.348151+00:00,0.6,,False
+103c13fa-a61c-4213-9aca-8af9873fac94,ouedkniss_reference,Volkswagen,Golf,2019,90000,1685000,Sétif,bon,seed/volkswagen/golf/2019/90000/bon,2026-05-15T10:52:47.718754+00:00,0.6,,False
+4c08a2de-b1ef-48de-b995-f711742cb249,ouedkniss_reference,Volkswagen,Golf,2019,110000,1621000,Blida,bon,seed/volkswagen/golf/2019/110000/bon,2026-05-15T10:52:48.083607+00:00,0.6,,False
+4fa2794f-3f3b-434d-a219-07c2afbe13f5,ouedkniss_reference,Volkswagen,Golf,2019,130000,1365000,Alger,moyen,seed/volkswagen/golf/2019/130000/moyen,2026-05-15T10:52:48.513149+00:00,0.6,,False
+9da3183d-ef1a-4d7b-b730-3e405ac1004c,ouedkniss_reference,Volkswagen,Golf,2019,155000,1217000,Blida,moyen,seed/volkswagen/golf/2019/155000/moyen,2026-05-15T10:52:48.900785+00:00,0.6,,False
+c7a1e610-1a2b-4be3-bcc6-f28f0616667e,ouedkniss_reference,Volkswagen,Golf,2019,180000,1192000,Boumerdès,moyen,seed/volkswagen/golf/2019/180000/moyen,2026-05-15T10:52:49.258524+00:00,0.6,,False
+b11256a8-7a4d-4975-aba0-10aac148d8ea,ouedkniss_reference,Volkswagen,Golf,2019,220000,901000,Oran,mauvais,seed/volkswagen/golf/2019/220000/mauvais,2026-05-15T10:52:49.641228+00:00,0.6,,False
+088ef01d-d39d-4e7f-b8bd-7b2de20cc2d4,ouedkniss_reference,Volkswagen,Golf,2020,25000,2130000,Oran,excellent,seed/volkswagen/golf/2020/25000/excellent,2026-05-15T10:52:49.987921+00:00,0.6,,False
+0b4c146f-0ba8-4f0d-8d19-a64bbcb1e2ce,ouedkniss_reference,Volkswagen,Golf,2020,45000,2135000,Constantine,excellent,seed/volkswagen/golf/2020/45000/excellent,2026-05-15T10:52:50.379121+00:00,0.6,,False
+14351193-bd87-4827-9161-7ef7d0707e5a,ouedkniss_reference,Volkswagen,Golf,2020,60000,2036000,Blida,bon,seed/volkswagen/golf/2020/60000/bon,2026-05-15T10:52:50.775209+00:00,0.6,,False
+51c0ed09-a2e3-4535-a501-fe5f132ecd30,ouedkniss_reference,Volkswagen,Golf,2020,75000,1915000,Alger,bon,seed/volkswagen/golf/2020/75000/bon,2026-05-15T10:52:51.166336+00:00,0.6,,False
+466a844d-8cec-4561-a9b8-f4bec5d58789,ouedkniss_reference,Volkswagen,Golf,2020,90000,1816000,Constantine,bon,seed/volkswagen/golf/2020/90000/bon,2026-05-15T10:52:51.509589+00:00,0.6,,False
+d1234450-80ef-4477-b331-0768e11138e5,ouedkniss_reference,Volkswagen,Golf,2020,110000,1856000,Annaba,bon,seed/volkswagen/golf/2020/110000/bon,2026-05-15T10:52:51.887679+00:00,0.6,,False
+fde80562-2025-4f1e-8184-976c5a143992,ouedkniss_reference,Volkswagen,Golf,2020,130000,1571000,Tizi Ouzou,moyen,seed/volkswagen/golf/2020/130000/moyen,2026-05-15T10:52:52.248297+00:00,0.6,,False
+4fe86833-1a8c-405d-bae7-bcdfd685f592,ouedkniss_reference,Volkswagen,Golf,2020,155000,1411000,Annaba,moyen,seed/volkswagen/golf/2020/155000/moyen,2026-05-15T10:52:52.685679+00:00,0.6,,False
+c986fef9-790f-46f8-9a47-5024a95c0b21,ouedkniss_reference,Volkswagen,Golf,2020,180000,1293000,Tizi Ouzou,moyen,seed/volkswagen/golf/2020/180000/moyen,2026-05-15T10:52:53.074546+00:00,0.6,,False
+075edd82-4756-42d2-9847-4bb291f20a25,ouedkniss_reference,Volkswagen,Golf,2020,220000,986000,Constantine,mauvais,seed/volkswagen/golf/2020/220000/mauvais,2026-05-15T10:52:53.476454+00:00,0.6,,False
+8a939cf6-e8e8-4d55-ba65-8e360d1f2c61,ouedkniss_reference,Kia,Picanto,2016,25000,659000,Annaba,excellent,seed/kia/picanto/2016/25000/excellent,2026-05-15T10:52:53.817386+00:00,0.6,,False
+11a70cc6-9533-426b-9b0a-ba01b301bfd5,ouedkniss_reference,Kia,Picanto,2016,45000,697000,Blida,excellent,seed/kia/picanto/2016/45000/excellent,2026-05-15T10:52:54.190493+00:00,0.6,,False
+bd825eb2-2c61-46ac-9a40-3ef5b4c980b8,ouedkniss_reference,Kia,Picanto,2016,60000,618000,Blida,bon,seed/kia/picanto/2016/60000/bon,2026-05-15T10:52:54.579584+00:00,0.6,,False
+ca875493-3527-4e03-94fb-a3cf078ae3d5,ouedkniss_reference,Kia,Picanto,2016,75000,573000,Annaba,bon,seed/kia/picanto/2016/75000/bon,2026-05-15T10:52:54.945251+00:00,0.6,,False
+7c727dc3-8913-4b0e-9d22-6d6a2134911c,ouedkniss_reference,Kia,Picanto,2016,90000,582000,Oran,bon,seed/kia/picanto/2016/90000/bon,2026-05-15T10:52:55.283596+00:00,0.6,,False
+f0399851-a921-4359-8df2-294f923fdab9,ouedkniss_reference,Kia,Picanto,2016,110000,534000,Tizi Ouzou,bon,seed/kia/picanto/2016/110000/bon,2026-05-15T10:52:55.624656+00:00,0.6,,False
+4ee7fc78-6ee2-4fb1-bd4e-e9245f3069e2,ouedkniss_reference,Kia,Picanto,2016,130000,447000,Annaba,moyen,seed/kia/picanto/2016/130000/moyen,2026-05-15T10:52:56.01203+00:00,0.6,,False
+1a6f5dc1-2bb3-4ddf-9190-06e62df4f693,ouedkniss_reference,Kia,Picanto,2016,155000,451000,Sétif,moyen,seed/kia/picanto/2016/155000/moyen,2026-05-15T10:52:56.374443+00:00,0.6,,False
+73342393-71cd-4a64-b51d-b52524d6223a,ouedkniss_reference,Kia,Picanto,2016,180000,417000,Oran,moyen,seed/kia/picanto/2016/180000/moyen,2026-05-15T10:52:56.749021+00:00,0.6,,False
+5ea23d9a-d42e-4d62-bd9e-6e9a11c61876,ouedkniss_reference,Kia,Picanto,2016,220000,323000,Annaba,mauvais,seed/kia/picanto/2016/220000/mauvais,2026-05-15T10:52:57.108819+00:00,0.6,,False
+dc103228-26e5-47cb-a1fa-da5d6195efb3,ouedkniss_reference,Kia,Picanto,2017,25000,786000,Constantine,excellent,seed/kia/picanto/2017/25000/excellent,2026-05-15T10:52:57.436467+00:00,0.6,,False
+e97fdac6-1c9c-4129-b4da-3a345a860957,ouedkniss_reference,Kia,Picanto,2017,45000,749000,Annaba,excellent,seed/kia/picanto/2017/45000/excellent,2026-05-15T10:52:57.797646+00:00,0.6,,False
+a8909091-d1c2-4063-ab3f-ceb4cb0bff9e,ouedkniss_reference,Kia,Picanto,2017,60000,678000,Boumerdès,bon,seed/kia/picanto/2017/60000/bon,2026-05-15T10:52:58.167285+00:00,0.6,,False
+7f7597e3-4172-46ef-ab1e-3d8291926cde,ouedkniss_reference,Kia,Picanto,2017,75000,682000,Oran,bon,seed/kia/picanto/2017/75000/bon,2026-05-15T10:52:58.560785+00:00,0.6,,False
+02882302-c038-4710-8cac-8003428a16a0,ouedkniss_reference,Kia,Picanto,2017,90000,639000,Boumerdès,bon,seed/kia/picanto/2017/90000/bon,2026-05-15T10:52:59.192024+00:00,0.6,,False
+76671145-f633-4d99-b9a5-8bee1a676442,ouedkniss_reference,Kia,Picanto,2017,110000,598000,Sétif,bon,seed/kia/picanto/2017/110000/bon,2026-05-15T10:52:59.618149+00:00,0.6,,False
+ea8d93f1-c33f-4a48-a539-2d1a46e529ab,ouedkniss_reference,Kia,Picanto,2017,130000,518000,Tizi Ouzou,moyen,seed/kia/picanto/2017/130000/moyen,2026-05-15T10:52:59.978169+00:00,0.6,,False
+a116f85e-cc54-43ea-a0d4-e82425fd9bf1,ouedkniss_reference,Kia,Picanto,2017,155000,517000,Oran,moyen,seed/kia/picanto/2017/155000/moyen,2026-05-15T10:53:00.335836+00:00,0.6,,False
+e19d6e0a-83dc-43cb-abfd-d5b492d88354,ouedkniss_reference,Kia,Picanto,2017,180000,470000,Sétif,moyen,seed/kia/picanto/2017/180000/moyen,2026-05-15T10:53:00.704342+00:00,0.6,,False
+e4499609-0397-4972-ad47-777177d50449,ouedkniss_reference,Kia,Picanto,2017,220000,355000,Constantine,mauvais,seed/kia/picanto/2017/220000/mauvais,2026-05-15T10:53:01.06357+00:00,0.6,,False
+f185e000-92ab-44be-9b18-7faa64fb0d74,ouedkniss_reference,Kia,Picanto,2018,25000,875000,Constantine,excellent,seed/kia/picanto/2018/25000/excellent,2026-05-15T10:53:01.398793+00:00,0.6,,False
+9503fdd4-6a92-4079-8414-20f2aba12fc2,ouedkniss_reference,Kia,Picanto,2018,45000,800000,Sétif,excellent,seed/kia/picanto/2018/45000/excellent,2026-05-15T10:53:01.768532+00:00,0.6,,False
+c450398a-716a-4a85-86bf-7db4b9c7fd73,ouedkniss_reference,Kia,Picanto,2018,60000,743000,Tizi Ouzou,bon,seed/kia/picanto/2018/60000/bon,2026-05-15T10:53:02.167039+00:00,0.6,,False
+5bd3c237-d839-4686-b2db-f61e34e3d5f2,ouedkniss_reference,Kia,Picanto,2018,75000,739000,Alger,bon,seed/kia/picanto/2018/75000/bon,2026-05-15T10:53:02.552524+00:00,0.6,,False
+ad8f6c34-b7c0-497d-8992-7dcdcf459ff2,ouedkniss_reference,Kia,Picanto,2018,90000,727000,Boumerdès,bon,seed/kia/picanto/2018/90000/bon,2026-05-15T10:53:02.930203+00:00,0.6,,False
+14bfafb1-37f9-46b8-856d-f79b1c050bec,ouedkniss_reference,Kia,Picanto,2018,110000,675000,Oran,bon,seed/kia/picanto/2018/110000/bon,2026-05-15T10:53:03.312889+00:00,0.6,,False
+d852d247-6e93-41dc-832b-f59b9c1d6371,ouedkniss_reference,Kia,Picanto,2018,130000,607000,Oran,moyen,seed/kia/picanto/2018/130000/moyen,2026-05-15T10:53:03.736547+00:00,0.6,,False
+bb711ab3-f801-4bd4-85f0-018ac54c032b,ouedkniss_reference,Kia,Picanto,2018,155000,587000,Constantine,moyen,seed/kia/picanto/2018/155000/moyen,2026-05-15T10:53:04.125319+00:00,0.6,,False
+a45a6a3b-742d-4083-8360-82986a45203c,ouedkniss_reference,Kia,Picanto,2018,180000,536000,Alger,moyen,seed/kia/picanto/2018/180000/moyen,2026-05-15T10:53:04.487714+00:00,0.6,,False
+5384cd06-6c5b-4a47-a494-fdf5ad48fa3b,ouedkniss_reference,Kia,Picanto,2018,220000,387000,Tizi Ouzou,mauvais,seed/kia/picanto/2018/220000/mauvais,2026-05-15T10:53:04.882493+00:00,0.6,,False
+ac061df0-c632-464e-8c7d-c0e6dd5c242b,ouedkniss_reference,Kia,Picanto,2019,25000,948000,Annaba,excellent,seed/kia/picanto/2019/25000/excellent,2026-05-15T10:53:05.244861+00:00,0.6,,False
+f75d3a09-ceb1-4819-bbcc-35a5b2fd4a51,ouedkniss_reference,Kia,Picanto,2019,45000,944000,Sétif,excellent,seed/kia/picanto/2019/45000/excellent,2026-05-15T10:53:05.607445+00:00,0.6,,False
+d6c45be3-a8a9-4d0c-971e-0126d7fa16a6,ouedkniss_reference,Kia,Picanto,2019,60000,906000,Annaba,bon,seed/kia/picanto/2019/60000/bon,2026-05-15T10:53:05.981797+00:00,0.6,,False
+e94442ce-4c56-4ec2-97f8-454737462a72,ouedkniss_reference,Kia,Picanto,2019,75000,870000,Constantine,bon,seed/kia/picanto/2019/75000/bon,2026-05-15T10:53:06.322556+00:00,0.6,,False
+09d8fa19-0cbf-4441-89e7-60dab7177fc9,ouedkniss_reference,Kia,Picanto,2019,90000,827000,Sétif,bon,seed/kia/picanto/2019/90000/bon,2026-05-15T10:53:06.738938+00:00,0.6,,False
+cac010f4-0262-4abc-8c98-2627d84ce2ec,ouedkniss_reference,Kia,Picanto,2019,110000,788000,Boumerdès,bon,seed/kia/picanto/2019/110000/bon,2026-05-15T10:53:07.095364+00:00,0.6,,False
+a7708320-c7d2-4603-9e2c-2e17e8b22747,ouedkniss_reference,Kia,Picanto,2019,130000,696000,Blida,moyen,seed/kia/picanto/2019/130000/moyen,2026-05-15T10:53:07.438476+00:00,0.6,,False
+0522b9d9-f376-43b0-b4cd-0434877cea87,ouedkniss_reference,Kia,Picanto,2019,155000,641000,Blida,moyen,seed/kia/picanto/2019/155000/moyen,2026-05-15T10:53:07.877748+00:00,0.6,,False
+3e06361f-5883-4eda-b52e-15fc156e8c9f,ouedkniss_reference,Kia,Picanto,2019,180000,592000,Annaba,moyen,seed/kia/picanto/2019/180000/moyen,2026-05-15T10:53:08.237729+00:00,0.6,,False
+93d1307f-c191-4688-869d-c811d972e9f0,ouedkniss_reference,Kia,Picanto,2019,220000,481000,Alger,mauvais,seed/kia/picanto/2019/220000/mauvais,2026-05-15T10:53:08.62447+00:00,0.6,,False
+0640f02a-d537-42ea-80b6-f48e11831653,ouedkniss_reference,Kia,Sportage,2016,25000,2061000,Boumerdès,excellent,seed/kia/sportage/2016/25000/excellent,2026-05-15T10:53:08.966303+00:00,0.6,,False
+a679ffcb-b36e-43ff-a830-d798da2840cf,ouedkniss_reference,Kia,Sportage,2016,45000,2003000,Constantine,excellent,seed/kia/sportage/2016/45000/excellent,2026-05-15T10:53:09.362166+00:00,0.6,,False
+6e162dfd-e838-4969-9ff0-bbfdc8e1d85d,ouedkniss_reference,Kia,Sportage,2016,60000,1716000,Tizi Ouzou,bon,seed/kia/sportage/2016/60000/bon,2026-05-15T10:53:09.718686+00:00,0.6,,False
+a05fcfd6-2e72-4077-a077-fe6fde75b172,ouedkniss_reference,Kia,Sportage,2016,75000,1767000,Tizi Ouzou,bon,seed/kia/sportage/2016/75000/bon,2026-05-15T10:53:10.107371+00:00,0.6,,False
+ff2a6845-04a6-4d72-baf0-17e0ce1b1b41,ouedkniss_reference,Kia,Sportage,2016,90000,1720000,Alger,bon,seed/kia/sportage/2016/90000/bon,2026-05-15T10:53:10.466141+00:00,0.6,,False
+618fb635-82a0-4953-85f5-63e4f81ac6ac,ouedkniss_reference,Kia,Sportage,2016,110000,1664000,Alger,bon,seed/kia/sportage/2016/110000/bon,2026-05-15T10:53:10.833323+00:00,0.6,,False
+36031768-90fe-471e-998d-200f7bff9813,ouedkniss_reference,Kia,Sportage,2016,130000,1293000,Annaba,moyen,seed/kia/sportage/2016/130000/moyen,2026-05-15T10:53:11.181453+00:00,0.6,,False
+6b257b01-c7b3-4e9c-8245-9eee9e8825d4,ouedkniss_reference,Kia,Sportage,2016,155000,1256000,Boumerdès,moyen,seed/kia/sportage/2016/155000/moyen,2026-05-15T10:53:11.515159+00:00,0.6,,False
+69eba1b0-3056-44fc-962b-cdbd33c7b1ed,ouedkniss_reference,Kia,Sportage,2016,180000,1166000,Oran,moyen,seed/kia/sportage/2016/180000/moyen,2026-05-15T10:53:11.912284+00:00,0.6,,False
+66f029a0-e9db-4b5f-9a43-cc65413b4411,ouedkniss_reference,Kia,Sportage,2016,220000,899000,Tizi Ouzou,mauvais,seed/kia/sportage/2016/220000/mauvais,2026-05-15T10:53:12.255347+00:00,0.6,,False
+115bbc88-31fc-45d1-a20c-69b8df6ce811,ouedkniss_reference,Kia,Sportage,2017,25000,2291000,Alger,excellent,seed/kia/sportage/2017/25000/excellent,2026-05-15T10:53:12.628691+00:00,0.6,,False
+a7731eda-b863-4aa4-9173-92a5152a36c0,ouedkniss_reference,Kia,Sportage,2017,45000,2146000,Constantine,excellent,seed/kia/sportage/2017/45000/excellent,2026-05-15T10:53:12.97671+00:00,0.6,,False
+003e52d4-95fa-4204-9f12-ea009b797e83,ouedkniss_reference,Kia,Sportage,2017,60000,2017000,Blida,bon,seed/kia/sportage/2017/60000/bon,2026-05-15T10:53:13.318739+00:00,0.6,,False
+26126d9c-94d6-438b-b3f4-e0e1689f73f7,ouedkniss_reference,Kia,Sportage,2017,75000,1893000,Alger,bon,seed/kia/sportage/2017/75000/bon,2026-05-15T10:53:13.721973+00:00,0.6,,False
+ab938265-111f-4e9d-8927-ce2a29ace89f,ouedkniss_reference,Kia,Sportage,2017,90000,1852000,Constantine,bon,seed/kia/sportage/2017/90000/bon,2026-05-15T10:53:14.081924+00:00,0.6,,False
+9d8b3c28-0dce-4825-b4fa-633bc9be2e95,ouedkniss_reference,Kia,Sportage,2017,110000,1813000,Boumerdès,bon,seed/kia/sportage/2017/110000/bon,2026-05-15T10:53:14.437021+00:00,0.6,,False
+dc68e961-ca0f-4121-a09d-23928b2866ac,ouedkniss_reference,Kia,Sportage,2017,130000,1511000,Oran,moyen,seed/kia/sportage/2017/130000/moyen,2026-05-15T10:53:14.846183+00:00,0.6,,False
+449917c4-ea37-40ac-b4a5-dc0bd6571360,ouedkniss_reference,Kia,Sportage,2017,155000,1428000,Constantine,moyen,seed/kia/sportage/2017/155000/moyen,2026-05-15T10:53:15.189329+00:00,0.6,,False
+7c79d909-42c7-40aa-8e83-0f66f2491995,ouedkniss_reference,Kia,Sportage,2017,180000,1351000,Alger,moyen,seed/kia/sportage/2017/180000/moyen,2026-05-15T10:53:15.538556+00:00,0.6,,False
+fb734cc9-9a23-46c2-8b2b-4d9e25669a57,ouedkniss_reference,Kia,Sportage,2017,220000,993000,Tizi Ouzou,mauvais,seed/kia/sportage/2017/220000/mauvais,2026-05-15T10:53:15.861396+00:00,0.6,,False
+f5b887c2-4193-44e1-9452-9b949d53761d,ouedkniss_reference,Kia,Sportage,2018,25000,2418000,Oran,excellent,seed/kia/sportage/2018/25000/excellent,2026-05-15T10:53:16.234788+00:00,0.6,,False
+396353bc-b1ac-48c5-b062-06319a0a6b28,ouedkniss_reference,Kia,Sportage,2018,45000,2327000,Tizi Ouzou,excellent,seed/kia/sportage/2018/45000/excellent,2026-05-15T10:53:16.613779+00:00,0.6,,False
+d2ab58ef-2ca9-48d8-a6d0-a7f9ba298218,ouedkniss_reference,Kia,Sportage,2018,60000,2326000,Annaba,bon,seed/kia/sportage/2018/60000/bon,2026-05-15T10:53:17.080671+00:00,0.6,,False
+b6fee272-5aa2-4eed-b4f7-6b0c76ef23f6,ouedkniss_reference,Kia,Sportage,2018,75000,2138000,Alger,bon,seed/kia/sportage/2018/75000/bon,2026-05-15T10:53:17.479085+00:00,0.6,,False
+61509f64-2971-44b6-bddf-cbc6ec6d9bc0,ouedkniss_reference,Kia,Sportage,2018,90000,2013000,Oran,bon,seed/kia/sportage/2018/90000/bon,2026-05-15T10:53:17.823454+00:00,0.6,,False
+3895b410-8781-4dd5-a83e-c49835aba416,ouedkniss_reference,Kia,Sportage,2018,110000,1973000,Alger,bon,seed/kia/sportage/2018/110000/bon,2026-05-15T10:53:18.189455+00:00,0.6,,False
+f5890ad4-f4b5-49a9-8dad-c987e5b12016,ouedkniss_reference,Kia,Sportage,2018,130000,1722000,Tizi Ouzou,moyen,seed/kia/sportage/2018/130000/moyen,2026-05-15T10:53:18.56626+00:00,0.6,,False
+d1d8e741-61b1-45f3-9f62-5f71eac1bf44,ouedkniss_reference,Kia,Sportage,2018,155000,1704000,Annaba,moyen,seed/kia/sportage/2018/155000/moyen,2026-05-15T10:53:18.907004+00:00,0.6,,False
+8ecb3c32-ff36-40a9-9091-495c0225a5f8,ouedkniss_reference,Kia,Sportage,2018,180000,1578000,Oran,moyen,seed/kia/sportage/2018/180000/moyen,2026-05-15T10:53:19.360769+00:00,0.6,,False
+1b2ce9f0-0365-4d8e-8f54-404417667085,ouedkniss_reference,Kia,Sportage,2018,220000,1180000,Constantine,mauvais,seed/kia/sportage/2018/220000/mauvais,2026-05-15T10:53:19.716558+00:00,0.6,,False
+05993964-66a4-4a5a-8a97-6a6b45a585e4,ouedkniss_reference,Kia,Sportage,2019,25000,2727000,Constantine,excellent,seed/kia/sportage/2019/25000/excellent,2026-05-15T10:53:20.056621+00:00,0.6,,False
+365e7f83-db00-4dfd-8e6a-e882e62f89eb,ouedkniss_reference,Kia,Sportage,2019,45000,2831000,Constantine,excellent,seed/kia/sportage/2019/45000/excellent,2026-05-15T10:53:20.408417+00:00,0.6,,False
+685b69ab-332a-46e0-bcac-2fcfba2c40fa,ouedkniss_reference,Kia,Sportage,2019,60000,2557000,Oran,bon,seed/kia/sportage/2019/60000/bon,2026-05-15T10:53:20.774257+00:00,0.6,,False
+fa017858-952a-4f43-a890-d83b551a50e2,ouedkniss_reference,Kia,Sportage,2019,75000,2426000,Blida,bon,seed/kia/sportage/2019/75000/bon,2026-05-15T10:53:21.123495+00:00,0.6,,False
+cf70b970-2045-4983-8eb4-7b984c54fc52,ouedkniss_reference,Kia,Sportage,2019,90000,2513000,Oran,bon,seed/kia/sportage/2019/90000/bon,2026-05-15T10:53:21.517095+00:00,0.6,,False
+cc849f67-91d9-4c48-b218-b8f580c5f23e,ouedkniss_reference,Kia,Sportage,2019,110000,2394000,Oran,bon,seed/kia/sportage/2019/110000/bon,2026-05-15T10:53:21.885538+00:00,0.6,,False
+ddb6461a-8b6a-4328-bd8c-a7962a947b10,ouedkniss_reference,Kia,Sportage,2019,130000,2018000,Blida,moyen,seed/kia/sportage/2019/130000/moyen,2026-05-15T10:53:22.248073+00:00,0.6,,False
+0c28e520-0cb6-4a37-a6d8-181b994087ff,ouedkniss_reference,Kia,Sportage,2019,155000,1842000,Boumerdès,moyen,seed/kia/sportage/2019/155000/moyen,2026-05-15T10:53:22.627272+00:00,0.6,,False
+afe191df-993a-49c0-bcb3-9a4b4f0c839e,ouedkniss_reference,Kia,Sportage,2019,180000,1830000,Constantine,moyen,seed/kia/sportage/2019/180000/moyen,2026-05-15T10:53:23.296866+00:00,0.6,,False
+8cd1f652-b189-49cf-897e-dd64cf0e988d,ouedkniss_reference,Kia,Sportage,2019,220000,1315000,Blida,mauvais,seed/kia/sportage/2019/220000/mauvais,2026-05-15T10:53:23.659125+00:00,0.6,,False
+71f07968-c84d-4273-979c-cb72bec6c451,ouedkniss_reference,Kia,Sportage,2020,25000,3154000,Sétif,excellent,seed/kia/sportage/2020/25000/excellent,2026-05-15T10:53:24.073097+00:00,0.6,,False
+6ac21050-642e-4bc8-b2bc-feab6591be44,ouedkniss_reference,Kia,Sportage,2020,45000,3258000,Blida,excellent,seed/kia/sportage/2020/45000/excellent,2026-05-15T10:53:24.446302+00:00,0.6,,False
+0e93dd5a-e366-4694-82d9-34a77d5037e5,ouedkniss_reference,Kia,Sportage,2020,60000,2878000,Oran,bon,seed/kia/sportage/2020/60000/bon,2026-05-15T10:53:24.837488+00:00,0.6,,False
+e8e64387-306b-4f42-a5a0-9e82a5371e1a,ouedkniss_reference,Kia,Sportage,2020,75000,2658000,Constantine,bon,seed/kia/sportage/2020/75000/bon,2026-05-15T10:53:25.25276+00:00,0.6,,False
+07b43901-d9ab-4f54-9cb0-c57ecedfd00b,ouedkniss_reference,Kia,Sportage,2020,90000,2630000,Annaba,bon,seed/kia/sportage/2020/90000/bon,2026-05-15T10:53:25.609294+00:00,0.6,,False
+c77ac98f-b6d1-40f2-a1fa-ac08c9f5a0f6,ouedkniss_reference,Kia,Sportage,2020,110000,2600000,Alger,bon,seed/kia/sportage/2020/110000/bon,2026-05-15T10:53:25.938136+00:00,0.6,,False
+b07e7a23-94aa-4dfb-97cb-b1dd78780a47,ouedkniss_reference,Kia,Sportage,2020,130000,2301000,Annaba,moyen,seed/kia/sportage/2020/130000/moyen,2026-05-15T10:53:26.668729+00:00,0.6,,False
+a656ed88-f607-4f52-9bd4-8684f3cc4c38,ouedkniss_reference,Kia,Sportage,2020,155000,2181000,Boumerdès,moyen,seed/kia/sportage/2020/155000/moyen,2026-05-15T10:53:27.045627+00:00,0.6,,False
+c6dd481b-f825-41d2-b56f-4056e78960ec,ouedkniss_reference,Kia,Sportage,2020,180000,1880000,Oran,moyen,seed/kia/sportage/2020/180000/moyen,2026-05-15T10:53:27.393129+00:00,0.6,,False
+1cce7fe3-dd1e-41a3-a76f-18d3607bda3d,ouedkniss_reference,Kia,Sportage,2020,220000,1500000,Annaba,mauvais,seed/kia/sportage/2020/220000/mauvais,2026-05-15T10:53:27.739139+00:00,0.6,,False
+d9a06877-1ae9-4542-99ba-169952413b9b,ouedkniss_reference,Suzuki,Swift,2016,25000,784000,Sétif,excellent,seed/suzuki/swift/2016/25000/excellent,2026-05-15T10:53:28.099165+00:00,0.6,,False
+e29ef9bf-de69-4212-a225-72d6dc343ac4,ouedkniss_reference,Suzuki,Swift,2016,45000,761000,Constantine,excellent,seed/suzuki/swift/2016/45000/excellent,2026-05-15T10:53:28.516768+00:00,0.6,,False
+12846a67-0c1d-4287-9aa2-d384ea6187b4,ouedkniss_reference,Suzuki,Swift,2016,60000,725000,Alger,bon,seed/suzuki/swift/2016/60000/bon,2026-05-15T10:53:28.883921+00:00,0.6,,False
+2a63e7d5-2a62-42de-a605-efb0f2ea9286,ouedkniss_reference,Suzuki,Swift,2016,75000,738000,Boumerdès,bon,seed/suzuki/swift/2016/75000/bon,2026-05-15T10:53:29.287132+00:00,0.6,,False
+2a3abbbf-fc79-41ed-a3c9-e50a3c8f36cb,ouedkniss_reference,Suzuki,Swift,2016,90000,683000,Alger,bon,seed/suzuki/swift/2016/90000/bon,2026-05-15T10:53:29.673807+00:00,0.6,,False
+af639bfc-a2d0-4179-99b9-154fde6fca9c,ouedkniss_reference,Suzuki,Swift,2016,110000,637000,Sétif,bon,seed/suzuki/swift/2016/110000/bon,2026-05-15T10:53:30.049118+00:00,0.6,,False
+e1b81a72-2c2e-4054-b95b-ce75b1c68ff6,ouedkniss_reference,Suzuki,Swift,2016,130000,571000,Oran,moyen,seed/suzuki/swift/2016/130000/moyen,2026-05-15T10:53:30.41778+00:00,0.6,,False
+c19e7c63-5215-4ab6-a130-4c14d895c142,ouedkniss_reference,Suzuki,Swift,2016,155000,539000,Annaba,moyen,seed/suzuki/swift/2016/155000/moyen,2026-05-15T10:53:30.76792+00:00,0.6,,False
+0db7cc67-a4d4-4d00-af32-16ed8bfbf206,ouedkniss_reference,Suzuki,Swift,2016,180000,508000,Boumerdès,moyen,seed/suzuki/swift/2016/180000/moyen,2026-05-15T10:53:31.166356+00:00,0.6,,False
+a1a9cc0d-29e7-4aee-b3fb-307fa8120114,ouedkniss_reference,Suzuki,Swift,2016,220000,364000,Constantine,mauvais,seed/suzuki/swift/2016/220000/mauvais,2026-05-15T10:53:31.524008+00:00,0.6,,False
+a4de8f27-59e5-4b30-8b7c-d04da65ab699,ouedkniss_reference,Suzuki,Swift,2017,25000,945000,Constantine,excellent,seed/suzuki/swift/2017/25000/excellent,2026-05-15T10:53:31.884007+00:00,0.6,,False
+e04bd3fc-90d0-4e6a-b8e4-1d06ae0b0708,ouedkniss_reference,Suzuki,Swift,2017,45000,855000,Constantine,excellent,seed/suzuki/swift/2017/45000/excellent,2026-05-15T10:53:32.321973+00:00,0.6,,False
+f8509680-3437-4b44-a6a3-9a715685922e,ouedkniss_reference,Suzuki,Swift,2017,60000,845000,Alger,bon,seed/suzuki/swift/2017/60000/bon,2026-05-15T10:53:32.660386+00:00,0.6,,False
+67e2602e-15a4-4e5b-809a-033734d2ed77,ouedkniss_reference,Suzuki,Swift,2017,75000,793000,Annaba,bon,seed/suzuki/swift/2017/75000/bon,2026-05-15T10:53:33.014651+00:00,0.6,,False
+a5e1c4df-4acb-4ee1-abe1-b34bbbbe99d7,ouedkniss_reference,Suzuki,Swift,2017,90000,795000,Oran,bon,seed/suzuki/swift/2017/90000/bon,2026-05-15T10:53:33.36844+00:00,0.6,,False
+85f467c0-ce2d-4e64-88ad-6f3a62eff671,ouedkniss_reference,Suzuki,Swift,2017,110000,780000,Constantine,bon,seed/suzuki/swift/2017/110000/bon,2026-05-15T10:53:33.758386+00:00,0.6,,False
+37c138b2-8f12-44ef-8d36-db8a5ab4c757,ouedkniss_reference,Suzuki,Swift,2017,130000,660000,Boumerdès,moyen,seed/suzuki/swift/2017/130000/moyen,2026-05-15T10:53:34.155573+00:00,0.6,,False
+7082a0f3-a880-4ef0-baf0-67a003e606ee,ouedkniss_reference,Suzuki,Swift,2017,155000,613000,Sétif,moyen,seed/suzuki/swift/2017/155000/moyen,2026-05-15T10:53:34.6068+00:00,0.6,,False
+78d4effe-5bff-43c2-88f7-70c5ca7e9250,ouedkniss_reference,Suzuki,Swift,2017,180000,557000,Oran,moyen,seed/suzuki/swift/2017/180000/moyen,2026-05-15T10:53:34.953741+00:00,0.6,,False
+faac277a-7adb-4976-9ea6-1b1b1457d439,ouedkniss_reference,Suzuki,Swift,2017,220000,416000,Annaba,mauvais,seed/suzuki/swift/2017/220000/mauvais,2026-05-15T10:53:35.306398+00:00,0.6,,False
+738cd005-5fab-4f71-88c4-13ef76d5cea9,ouedkniss_reference,Suzuki,Swift,2018,25000,1091000,Oran,excellent,seed/suzuki/swift/2018/25000/excellent,2026-05-15T10:53:35.68574+00:00,0.6,,False
+adf7b253-0b68-44e4-b6bf-d28c8dd9aff8,ouedkniss_reference,Suzuki,Swift,2018,45000,972000,Constantine,excellent,seed/suzuki/swift/2018/45000/excellent,2026-05-15T10:53:36.073163+00:00,0.6,,False
+c20ed316-47cc-4983-9ddf-b786d6fb58b5,ouedkniss_reference,Suzuki,Swift,2018,60000,935000,Annaba,bon,seed/suzuki/swift/2018/60000/bon,2026-05-15T10:53:36.402228+00:00,0.6,,False
+2018f590-7110-42e7-8180-414b82bb5303,ouedkniss_reference,Suzuki,Swift,2018,75000,858000,Alger,bon,seed/suzuki/swift/2018/75000/bon,2026-05-15T10:53:36.745209+00:00,0.6,,False
+9cbd3f07-d5af-45ae-8af7-4639826452b1,ouedkniss_reference,Suzuki,Swift,2018,90000,852000,Oran,bon,seed/suzuki/swift/2018/90000/bon,2026-05-15T10:53:37.072928+00:00,0.6,,False
+f603031b-8ff1-4f68-86d3-467bc2a0b20d,ouedkniss_reference,Suzuki,Swift,2018,110000,865000,Boumerdès,bon,seed/suzuki/swift/2018/110000/bon,2026-05-15T10:53:37.406473+00:00,0.6,,False
+c5fe8c44-c882-4ef7-b2f8-17a85f14c114,ouedkniss_reference,Suzuki,Swift,2018,130000,698000,Oran,moyen,seed/suzuki/swift/2018/130000/moyen,2026-05-15T10:53:37.801229+00:00,0.6,,False
+b72d7e72-a042-4421-8138-8f110bdeb902,ouedkniss_reference,Suzuki,Swift,2018,155000,653000,Alger,moyen,seed/suzuki/swift/2018/155000/moyen,2026-05-15T10:53:38.237988+00:00,0.6,,False
+5fdac98f-533c-4df0-b3c7-b826a775cc36,ouedkniss_reference,Suzuki,Swift,2018,180000,662000,Tizi Ouzou,moyen,seed/suzuki/swift/2018/180000/moyen,2026-05-15T10:53:38.666522+00:00,0.6,,False
+c051eb04-d184-44b7-8d0d-95934998993f,ouedkniss_reference,Suzuki,Swift,2018,220000,487000,Blida,mauvais,seed/suzuki/swift/2018/220000/mauvais,2026-05-15T10:53:39.12136+00:00,0.6,,False
+f7e945c9-e8d3-42ce-8c0d-b92decbbe02b,ouedkniss_reference,Suzuki,Swift,2019,25000,1162000,Sétif,excellent,seed/suzuki/swift/2019/25000/excellent,2026-05-15T10:53:39.57853+00:00,0.6,,False
+bae1467d-87db-4936-a7f7-8a8bad4bb879,ouedkniss_reference,Suzuki,Swift,2019,45000,1098000,Constantine,excellent,seed/suzuki/swift/2019/45000/excellent,2026-05-15T10:53:40.046447+00:00,0.6,,False
+81f03004-0052-47af-ad19-c437bd42f496,ouedkniss_reference,Suzuki,Swift,2019,60000,1006000,Boumerdès,bon,seed/suzuki/swift/2019/60000/bon,2026-05-15T10:53:40.386221+00:00,0.6,,False
+7ba522e5-b5e6-496c-b8db-40a0258e4cc5,ouedkniss_reference,Suzuki,Swift,2019,75000,980000,Constantine,bon,seed/suzuki/swift/2019/75000/bon,2026-05-15T10:53:40.758096+00:00,0.6,,False
+fb538149-12cf-4898-bf6b-05dcf2c0b6b4,ouedkniss_reference,Suzuki,Swift,2019,90000,1003000,Alger,bon,seed/suzuki/swift/2019/90000/bon,2026-05-15T10:53:41.154102+00:00,0.6,,False
+5de5722e-e50a-422a-9cd1-6106f36c14c3,ouedkniss_reference,Suzuki,Swift,2019,110000,984000,Boumerdès,bon,seed/suzuki/swift/2019/110000/bon,2026-05-15T10:53:41.50241+00:00,0.6,,False
+0a102003-693c-4cd9-b362-6d7e58f95a3f,ouedkniss_reference,Suzuki,Swift,2019,130000,816000,Blida,moyen,seed/suzuki/swift/2019/130000/moyen,2026-05-15T10:53:41.963189+00:00,0.6,,False
+67bed00c-f6bd-4adf-a69c-dfdc2ea28c45,ouedkniss_reference,Suzuki,Swift,2019,155000,732000,Alger,moyen,seed/suzuki/swift/2019/155000/moyen,2026-05-15T10:53:42.343436+00:00,0.6,,False
+892094a9-0811-4c4a-a0b9-c2a5b1d8ed4e,ouedkniss_reference,Suzuki,Swift,2019,180000,681000,Alger,moyen,seed/suzuki/swift/2019/180000/moyen,2026-05-15T10:53:42.780231+00:00,0.6,,False
+00280b5f-587b-430d-8897-e8f299d55eec,ouedkniss_reference,Suzuki,Swift,2019,220000,527000,Oran,mauvais,seed/suzuki/swift/2019/220000/mauvais,2026-05-15T10:53:43.246803+00:00,0.6,,False
+803da06a-c641-40b7-8c6b-0119973d5361,ouedkniss_reference,Suzuki,Swift,2020,25000,1379000,Oran,excellent,seed/suzuki/swift/2020/25000/excellent,2026-05-15T10:53:43.635667+00:00,0.6,,False
+0cdf69a9-1654-4aa4-abb2-57614dd1a229,ouedkniss_reference,Suzuki,Swift,2020,45000,1317000,Sétif,excellent,seed/suzuki/swift/2020/45000/excellent,2026-05-15T10:53:43.987316+00:00,0.6,,False
+9ea8e1c4-ffa4-46dc-939f-88c1ef18aaeb,ouedkniss_reference,Suzuki,Swift,2020,60000,1224000,Tizi Ouzou,bon,seed/suzuki/swift/2020/60000/bon,2026-05-15T10:53:44.358162+00:00,0.6,,False
+2dae31d4-78df-43a6-94db-dc0835f1c531,ouedkniss_reference,Suzuki,Swift,2020,75000,1190000,Boumerdès,bon,seed/suzuki/swift/2020/75000/bon,2026-05-15T10:53:44.698801+00:00,0.6,,False
+c63fe87b-ffda-4b0b-ad1b-a8a3e30d9e0e,ouedkniss_reference,Suzuki,Swift,2020,90000,1117000,Tizi Ouzou,bon,seed/suzuki/swift/2020/90000/bon,2026-05-15T10:53:45.050518+00:00,0.6,,False
+9c5a5eea-a774-4458-8de3-aefd8a75ae34,ouedkniss_reference,Suzuki,Swift,2020,110000,1027000,Constantine,bon,seed/suzuki/swift/2020/110000/bon,2026-05-15T10:53:45.540254+00:00,0.6,,False
+d5dd6c51-d2af-4c55-a8bb-bcf74b93fe74,ouedkniss_reference,Suzuki,Swift,2020,130000,876000,Constantine,moyen,seed/suzuki/swift/2020/130000/moyen,2026-05-15T10:53:45.878516+00:00,0.6,,False
+8f8f9a97-36ec-46ff-be48-8511a181ce8e,ouedkniss_reference,Suzuki,Swift,2020,155000,835000,Oran,moyen,seed/suzuki/swift/2020/155000/moyen,2026-05-15T10:53:46.282917+00:00,0.6,,False
+aa201703-aa49-408b-ab5f-f2e272895cd2,ouedkniss_reference,Suzuki,Swift,2020,180000,770000,Oran,moyen,seed/suzuki/swift/2020/180000/moyen,2026-05-15T10:53:46.794061+00:00,0.6,,False
+b8fdefcd-fba9-4c4e-9524-c2a5a3b37dcf,ouedkniss_reference,Suzuki,Swift,2020,220000,636000,Constantine,mauvais,seed/suzuki/swift/2020/220000/mauvais,2026-05-15T10:53:47.227293+00:00,0.6,,False

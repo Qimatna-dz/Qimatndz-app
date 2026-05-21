@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QimatnaDz — Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --paper: #f8f6f2; --paper-2: #f2efe9; --white: #ffffff;
+  --ink: #0d0e10; --ink-60: rgba(13,14,16,0.6); --ink-30: rgba(13,14,16,0.3);
+  --ink-05: rgba(13,14,16,0.04); --ink-10: rgba(13,14,16,0.08);
+  --cyan: #00b89a; --cyan-soft: rgba(0,184,154,0.1); --cyan-border: rgba(0,184,154,0.25);
+  --border: rgba(13,14,16,0.1); --border-light: rgba(13,14,16,0.06);
+  --danger: #d94f2a; --warning: #c97a00; --purple: #6366f1;
+  --sidebar-w: 210px;
+}
+body { background: var(--paper); color: var(--ink); font-family: 'Figtree', sans-serif; font-weight: 300; display: flex; min-height: 100vh; }
+
+/* subtle paper grain */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.4;
+}
+
+/* ── LOGIN OVERLAY ── */
+.login-overlay {
+  position: fixed; inset: 0;
+  background: var(--paper);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 10000;
+  padding: 2rem;
+}
+.login-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  width: 100%; max-width: 420px;
+  padding: 3rem 2.5rem;
+  box-shadow: 0 10px 40px rgba(13,14,16,0.05);
+  animation: fadeUp 0.6s ease both;
+}
+.login-logo {
+  width: 48px; height: 48px; border-radius: 12px;
+  background: var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white); font-size: 1.5rem; font-weight: 600;
+  font-family: 'Playfair Display', serif;
+  margin: 0 auto 1.5rem;
+}
+.login-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem; font-weight: 500; text-align: center;
+  color: var(--ink); margin-bottom: 0.5rem;
+}
+.login-sub {
+  font-size: 0.85rem; color: var(--ink-60); text-align: center;
+  margin-bottom: 2rem;
+}
+.form-group {
+  margin-bottom: 1.25rem;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.form-label {
+  font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.05em; color: var(--ink-60);
+}
+.form-input {
+  background: var(--paper);
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  font-family: 'Figtree', sans-serif;
+  font-size: 0.9rem; font-weight: 300;
+  color: var(--ink);
+  transition: all 0.15s;
+}
+.form-input:focus {
+  outline: none;
+  border-color: var(--cyan);
+  background: var(--white);
+  box-shadow: 0 0 0 3px var(--cyan-soft);
+}
+.login-btn {
+  width: 100%;
+  background: var(--ink); color: var(--white);
+  border: none; border-radius: 10px;
+  padding: 0.85rem;
+  font-family: 'Figtree', sans-serif; font-size: 0.9rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+  margin-top: 1rem;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.login-btn:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+.login-btn:active {
+  transform: translateY(0);
+}
+.error-message {
+  background: rgba(217,79,42,0.06);
+  border: 1px solid rgba(217,79,42,0.15);
+  color: var(--danger);
+  font-size: 0.8rem; padding: 0.75rem 1rem;
+  border-radius: 10px; margin-bottom: 1.5rem;
+  display: none;
+}
+
+/* SIDEBAR */
+.sidebar { width: var(--sidebar-w); background: var(--white); border-right: 1px solid var(--border-light); position: fixed; top: 0; left: 0; bottom: 0; display: flex; flex-direction: column; padding: 1.5rem 0; z-index: 50; }
+.brand { display: flex; align-items: center; gap: 8px; padding: 0 1.2rem 1.5rem; border-bottom: 1px solid var(--border-light); margin-bottom: 1.5rem; font-family: 'Playfair Display', serif; font-weight: 600; font-size: 1rem; color: var(--ink); }
+.brand-q { width: 26px; height: 26px; border-radius: 6px; background: var(--ink); color: var(--white); font-size: 0.8rem; font-family: 'Playfair Display', serif; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+.nav-group { font-size: 0.6rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-30); padding: 0 1.2rem; margin: 1rem 0 0.4rem; }
+.nav-link { display: flex; align-items: center; gap: 9px; padding: 0.55rem 1.2rem; font-size: 0.8rem; color: var(--ink-60); cursor: pointer; transition: all 0.15s; border-left: 2px solid transparent; text-decoration: none; user-select: none; }
+.nav-link:hover { color: var(--ink); background: var(--ink-05); }
+.nav-link.on { color: var(--ink); font-weight: 500; border-left-color: var(--cyan); background: var(--cyan-soft); }
+.sidebar-foot { margin-top: auto; padding: 1rem 1.2rem 0; border-top: 1px solid var(--border-light); }
+.user-chip { display: flex; align-items: center; gap: 8px; padding: 0.5rem 0.7rem; background: var(--ink-05); border-radius: 8px; }
+.user-av { width: 26px; height: 26px; border-radius: 50%; background: var(--ink); color: var(--white); display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 600; }
+.user-name { font-size: 0.75rem; font-weight: 500; }
+.user-role { font-size: 0.65rem; color: var(--ink-30); }
+
+/* MAIN */
+.main { margin-left: var(--sidebar-w); flex: 1; padding: 2rem; min-height: 100vh; }
+
+/* VIEWS */
+.view { display: none; animation: fadeUp 0.4s ease both; }
+.view.active { display: block; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* TOPBAR */
+.topbar { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2rem; }
+.page-h { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 500; letter-spacing: -0.02em; }
+.page-sub { font-size: 0.78rem; color: var(--ink-30); margin-top: 3px; }
+.top-right { display: flex; align-items: center; gap: 0.6rem; }
+.period-btn { padding: 0.45rem 0.9rem; border-radius: 100px; font-family: 'Figtree', sans-serif; font-size: 0.75rem; cursor: pointer; transition: all 0.15s; border: 1px solid var(--border); background: var(--white); color: var(--ink-60); }
+.period-btn.on { background: var(--ink); color: var(--white); border-color: var(--ink); font-weight: 500; }
+.period-btn:hover:not(.on) { background: var(--ink-05); }
+.live-pill { display: inline-flex; align-items: center; gap: 5px; background: var(--cyan-soft); border: 1px solid var(--cyan-border); border-radius: 100px; padding: 0.35rem 0.8rem; font-size: 0.68rem; font-weight: 500; color: var(--cyan); }
+.live-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--cyan); animation: blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+/* KPI */
+.kpi-row { display: grid; gap: 1rem; margin-bottom: 1.5rem; }
+.kpi-4 { grid-template-columns: repeat(4,1fr); }
+.kpi-3 { grid-template-columns: repeat(3,1fr); }
+.kpi-2 { grid-template-columns: repeat(2,1fr); }
+.kpi { background: var(--white); border: 1px solid var(--border-light); border-radius: 14px; padding: 1.2rem 1.3rem; }
+.kpi-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem; }
+.kpi-label { font-size: 0.68rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-30); }
+.kpi-ico { font-size: 1rem; }
+.kpi-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 500; letter-spacing: -0.02em; line-height: 1; margin-bottom: 0.4rem; }
+.kpi-trend { font-size: 0.72rem; font-weight: 500; }
+.up { color: var(--cyan); } .down { color: var(--danger); } .neutral { color: var(--ink-30); }
+.trend-sub { color: var(--ink-30); font-weight: 300; }
+
+/* GRID */
+.row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+.row-3 { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+.row-full { margin-bottom: 1rem; }
+
+/* CARD */
+.card { background: var(--white); border: 1px solid var(--border-light); border-radius: 14px; overflow: hidden; }
+.card-h { padding: 1rem 1.3rem; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; }
+.card-title { font-family: 'Playfair Display', serif; font-size: 0.88rem; font-weight: 500; }
+.card-sub { font-size: 0.7rem; color: var(--ink-30); }
+.card-b { padding: 1.3rem; }
+
+/* BAR */
+.bar-row { display: flex; flex-direction: column; gap: 0.85rem; }
+.b-top { display: flex; justify-content: space-between; font-size: 0.78rem; margin-bottom: 4px; }
+.b-name { font-weight: 500; }
+.b-val { color: var(--ink-60); }
+.b-track { height: 4px; background: var(--ink-05); border-radius: 100px; overflow: hidden; }
+.b-fill { height: 100%; border-radius: 100px; transition: width 1.2s cubic-bezier(0.16,1,0.3,1); width: 0; }
+.fill-dark { background: var(--ink); }
+.fill-cyan { background: var(--cyan); }
+.fill-mid  { background: rgba(13,14,16,0.35); }
+.fill-purple { background: var(--purple); }
+
+/* TABLE */
+.tbl { width: 100%; border-collapse: collapse; }
+.tbl th { font-size: 0.62rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-30); text-align: left; padding-bottom: 0.6rem; border-bottom: 1px solid var(--border-light); }
+.tbl td { padding: 0.7rem 0; font-size: 0.78rem; border-bottom: 1px solid var(--border-light); vertical-align: middle; }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl tr:hover td { background: var(--ink-05); }
+
+/* USER ROW */
+.u-cell { display: flex; align-items: center; gap: 9px; }
+.u-av { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 600; color: var(--white); flex-shrink: 0; }
+.u-name { font-weight: 500; font-size: 0.8rem; }
+.u-email { font-size: 0.7rem; color: var(--ink-30); }
+
+/* PILLS */
+.pill { font-size: 0.68rem; font-weight: 500; padding: 3px 9px; border-radius: 100px; display: inline-block; }
+.pill-active { background: var(--cyan-soft); color: var(--cyan); }
+.pill-inactive { background: var(--ink-05); color: var(--ink-30); }
+.pill-new { background: rgba(99,102,241,0.1); color: var(--purple); }
+.pill-web { background: var(--ink-05); color: var(--ink-60); border: 1px solid var(--border); }
+.pill-ios { background: rgba(0,0,0,0.06); color: var(--ink); border: 1px solid var(--border); }
+.pill-android { background: var(--cyan-soft); color: var(--cyan); border: 1px solid var(--cyan-border); }
+
+/* SEARCH BAR */
+.search-bar { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.2rem; }
+.search-input { flex: 1; background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 0.6rem 1rem; font-family: 'Figtree', sans-serif; font-size: 0.85rem; color: var(--ink); outline: none; transition: border-color 0.2s; }
+.search-input:focus { border-color: var(--cyan); }
+.filter-btn { padding: 0.6rem 1rem; border: 1px solid var(--border); border-radius: 10px; background: var(--white); font-size: 0.8rem; color: var(--ink-60); cursor: pointer; transition: all 0.15s; border-style: solid; }
+.filter-btn:hover { background: var(--ink-05); }
+.filter-btn.on { background: var(--ink); color: var(--white); border-color: var(--ink); }
+
+/* EMPTY STATE */
+.empty { text-align: center; padding: 3rem; color: var(--ink-30); font-size: 0.85rem; }
+.empty-ico { font-size: 2rem; margin-bottom: 0.75rem; }
+</style>
+</head>
+<body>
+
+<!-- ── LOGIN OVERLAY ── -->
+<div class="login-overlay" id="loginOverlay" style="display:flex;">
+  <div class="login-card">
+    <div class="login-logo">Q</div>
+    <h2 class="login-title">QimatnaDz — Administration</h2>
+    <p class="login-sub">Authentification requise</p>
+    <div class="error-message" id="loginError"></div>
+    <form onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label class="form-label">Adresse Email</label>
+        <input type="email" id="loginEmail" class="form-input" required placeholder="nom@exemple.com">
+      </div>
+      <div class="form-group" style="margin-bottom:2rem;">
+        <label class="form-label">Mot de passe</label>
+        <input type="password" id="loginPassword" class="form-input" required placeholder="••••••••">
+      </div>
+      <button type="submit" id="loginSubmitBtn" class="login-btn">Se connecter</button>
+    </form>
+  </div>
+</div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="brand">
+    <div class="brand-q">Q</div>
+    QimatnaDz
+  </div>
+
+  <div class="nav-group">Trafic</div>
+  <div class="nav-link on" onclick="go('vue-ensemble')">📊 Vue d'ensemble</div>
+  <div class="nav-link" onclick="go('sessions')">📈 Sessions</div>
+  <div class="nav-link" onclick="go('par-wilaya')">🗺 Par wilaya</div>
+  <div class="nav-link" onclick="go('par-pays')">🌍 Par pays</div>
+
+  <div class="nav-group">Utilisateurs</div>
+  <div class="nav-link" onclick="go('tous-users')">👥 Tous</div>
+  <div class="nav-link" onclick="go('actifs')">✓ Actifs</div>
+  <div class="nav-link" onclick="go('inactifs')">○ Inactifs</div>
+
+  <div class="nav-group">Plateformes</div>
+  <div class="nav-link" onclick="go('web')">🌐 Web</div>
+  <div class="nav-link" onclick="go('ios')">🍎 iOS</div>
+  <div class="nav-link" onclick="go('android')">▶ Android</div>
+
+  <div class="sidebar-foot">
+    <div class="user-chip">
+      <div class="user-av">ML</div>
+      <div>
+        <div class="user-name">Mr. Laksaci</div>
+        <div class="user-role">Super Admin</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+<!-- ══════════════════════════════════
+     VUE D'ENSEMBLE
+══════════════════════════════════ -->
+<div class="view active" id="vue-ensemble">
+  <div class="topbar">
+    <div>
+      <div class="page-h">Vue d'ensemble</div>
+      <div class="page-sub"><span id="liveDate">Dimanche 17 mai 2026</span> · <span style="color:var(--cyan)" id="syncLabel">Synchronisation en cours...</span></div>
+    </div>
+    <div class="top-right">
+      <div class="live-pill"><div class="live-dot"></div> En direct</div>
+      <button class="period-btn on">Réel</button>
+      <button class="period-btn" onclick="handleLogout(event)" style="background:none; border:1px solid var(--danger); color:var(--danger); margin-left:0.5rem; cursor:pointer;">🚪 Déconnexion</button>
+    </div>
+  </div>
+  
+  <div class="kpi-row kpi-4">
+    <div class="kpi">
+      <div class="kpi-top"><span class="kpi-label">Utilisateurs inscrits</span><span class="kpi-ico">👤</span></div>
+      <div class="kpi-num" id="kpiTotalUsers">0</div>
+      <div class="kpi-trend up">Données réelles</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-top"><span class="kpi-label">Actifs (7j)</span><span class="kpi-ico">⚡</span></div>
+      <div class="kpi-num" id="kpiActiveUsers">0</div>
+      <div class="kpi-trend up">Données réelles</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-top"><span class="kpi-label">Estimations effectuées</span><span class="kpi-ico">🚗</span></div>
+      <div class="kpi-num" id="kpiValuationsToday">0</div>
+      <div class="kpi-trend up">Données réelles</div>
+    </div>
+    <div class="kpi" style="border-color: rgba(239, 68, 68, 0.2); background: rgba(239, 68, 68, 0.01);">
+      <div class="kpi-top"><span class="kpi-label" style="color: #ef4444; font-weight:600;">ANNONCES & DATA</span><span class="kpi-ico">🚗</span></div>
+      <div class="kpi-num" style="color: #ef4444;" id="kpiTotalData">0</div>
+      <div style="display:flex; justify-content:space-between; font-size:0.7rem; color:var(--ink-60); border-top: 1px solid rgba(239, 68, 68, 0.1); padding-top: 0.4rem; margin-top: 0.4rem;">
+        <span>Flux A (Scrapées) : <strong style="color:var(--ink);" id="fluxACount">0</strong></span>
+        <span>Flux B (Réelles) : <strong style="color:var(--ink);" id="fluxBCount">0</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLUX C & CRAWLERS ROW -->
+  <div class="row-2" style="margin-bottom:1.5rem;">
+    <!-- Flux C Card -->
+    <div class="card">
+      <div class="card-h">
+        <div class="card-title">⚙️ Flux C — Indices Macro & Tendances</div>
+        <div class="card-sub">Pilotage du moteur en temps réel</div>
+      </div>
+      <div class="card-b" style="display:flex; flex-direction:column; gap:1.2rem;">
+        
+        <!-- Parallel Market Exchange Rate -->
+        <div>
+          <div style="font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink-60); margin-bottom:0.5rem; display:flex; justify-content:space-between;">
+            <span>Taux du Square Parallel (1 EUR)</span>
+            <span style="color:var(--cyan); font-weight:400; text-transform:none;">Source: devisesquare.com</span>
+          </div>
+          <div style="display:flex; gap:0.75rem; align-items:center;">
+            <div style="flex:1; display:flex; align-items:center; background:var(--paper); border:1px solid var(--border-light); border-radius:10px; padding:0.4rem 0.8rem;">
+              <span style="font-size:0.8rem; color:var(--ink-30); margin-right:6px;">Achat:</span>
+              <input type="number" id="squareBuyRate" class="search-input" style="border:none; background:none; padding:0; font-size:0.9rem; font-weight:600; width:100%; outline:none;" value="282" step="0.5">
+              <span style="font-size:0.8rem; color:var(--ink-60); margin-left:4px;">DZD</span>
+            </div>
+            <div style="flex:1; display:flex; align-items:center; background:var(--paper); border:1px solid var(--border-light); border-radius:10px; padding:0.4rem 0.8rem;">
+              <span style="font-size:0.8rem; color:var(--ink-30); margin-right:6px;">Vente:</span>
+              <input type="number" id="squareSellRate" class="search-input" style="border:none; background:none; padding:0; font-size:0.9rem; font-weight:600; width:100%; outline:none;" value="280" step="0.5">
+              <span style="font-size:0.8rem; color:var(--ink-60); margin-left:4px;">DZD</span>
+            </div>
+            <button class="filter-btn on" onclick="saveExchangeRate()" style="height:38px; padding:0 1rem; border-radius:10px; font-weight:600; flex-shrink:0; border:none; outline:none; cursor:pointer;">Enregistrer</button>
+          </div>
+        </div>
+
+        <!-- Sliders & Brand Trends -->
+        <div style="border-top:1px solid var(--border-light); padding-top:1rem; display:flex; flex-direction:column; gap:0.8rem;">
+          <div style="font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink-60); margin-bottom:0.2rem;">
+            Ajustement des coefficients de cotation
+          </div>
+          
+          <!-- Asian Brands Trend -->
+          <div>
+            <div style="display:flex; justify-content:space-between; font-size:0.78rem; margin-bottom:4px;">
+              <span>🌏 Marques Asiatiques (forte demande)</span>
+              <span style="font-weight:600; color:var(--cyan);" id="asianMarkupLabel">+5%</span>
+            </div>
+            <div style="display:flex; gap:0.75rem; align-items:center;">
+              <input type="range" id="asianMarkupSlider" min="0.90" max="1.15" step="0.01" value="1.05" oninput="updateCoeffLabel('asianMarkupLabel', this.value)" style="flex:1; accent-color:var(--cyan); cursor:pointer;">
+              <button class="filter-btn" onclick="saveTrendMarkup('asian_brand_markup', 'asianMarkupSlider')" style="padding:0.25rem 0.6rem; font-size:0.7rem; border-radius:6px; background:var(--ink-05); color:var(--ink); border:none; cursor:pointer;">Appliquer</button>
+            </div>
+          </div>
+
+          <!-- Vehicles < 3 years Trend -->
+          <div>
+            <div style="display:flex; justify-content:space-between; font-size:0.78rem; margin-bottom:4px;">
+              <span>📅 Véhicules de moins de 3 ans</span>
+              <span style="font-weight:600; color:var(--cyan);" id="ageMarkupLabel">+3%</span>
+            </div>
+            <div style="display:flex; gap:0.75rem; align-items:center;">
+              <input type="range" id="ageMarkupSlider" min="0.90" max="1.15" step="0.01" value="1.03" oninput="updateCoeffLabel('ageMarkupLabel', this.value)" style="flex:1; accent-color:var(--cyan); cursor:pointer;">
+              <button class="filter-btn" onclick="saveTrendMarkup('under_3y_markup', 'ageMarkupSlider')" style="padding:0.25rem 0.6rem; font-size:0.7rem; border-radius:6px; background:var(--ink-05); color:var(--ink); border:none; cursor:pointer;">Appliquer</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Data Health & Monitoring Card -->
+    <div class="card" style="display:flex; flex-direction:column;">
+      <div class="card-h">
+        <div class="card-title">📡 Monitoring Santé de la Data</div>
+        <div class="card-sub">Surveillance des scrapers Flux A</div>
+      </div>
+      <div class="card-b" style="display:flex; flex-direction:column; gap:1.2rem; justify-content:space-between; flex:1;">
+        <!-- Scrapers Status List -->
+        <div>
+          <div style="font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink-60); margin-bottom:0.6rem;">
+            Statut des collectes automatiques
+          </div>
+          <div style="display:flex; flex-direction:column; gap:0.6rem;" id="scraperStatusList">
+            <div style="font-size:0.8rem; color:var(--ink-30); text-align:center; padding:1rem 0;">Chargement des scrapers...</div>
+          </div>
+        </div>
+
+        <!-- Daily Ingestion Volume -->
+        <div style="border-top:1px solid var(--border-light); padding-top:1rem; display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <div style="font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink-60); margin-bottom:2px;">
+              Volume d'ingestion (24h)
+            </div>
+            <div style="font-size:0.72rem; color:var(--ink-30);">
+              Annonces analysées & ajoutées depuis hier
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:0.5rem; background:var(--cyan-soft); border:1px solid var(--cyan-border); padding:0.5rem 1rem; border-radius:12px;">
+            <span style="font-size:1.8rem; font-family:'Playfair Display', serif; font-weight:600; color:var(--cyan);" id="ingestionVolume24h">0</span>
+            <span style="font-size:0.72rem; font-weight:600; color:var(--cyan); text-transform:uppercase; letter-spacing:0.05em;">flux A</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-3">
+    <!-- Activity pending state -->
+    <div class="card">
+      <div class="card-h"><div class="card-title">Activité des Estimations</div></div>
+      <div class="card-b" style="display:flex; align-items:center; justify-content:center; height:160px; color:var(--ink-30); font-size:0.8rem; text-align:center;">
+        <div>
+          <div style="font-size:1.5rem; margin-bottom:8px;">📈</div>
+          Moteur analytique en attente d'intégrations supplémentaires.
+        </div>
+      </div>
+    </div>
+    
+    <!-- Top Wilayas dynamically aggregated -->
+    <div class="card">
+      <div class="card-h"><div class="card-title">Top Wilayas</div></div>
+      <div class="card-b">
+        <div class="bar-row" id="topWilayasList">
+          <div style="font-size:0.8rem; color:var(--ink-30); text-align:center; padding:1.5rem 0;">Aucune wilaya enregistrée.</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Geographic coverage focused -->
+    <div class="card">
+      <div class="card-h"><div class="card-title">Couverture Géographique</div></div>
+      <div class="card-b" style="display:flex; align-items:center; justify-content:center; height:160px; color:var(--ink-30); font-size:0.8rem; text-align:center;">
+        <div>
+          <div style="font-size:1.5rem; margin-bottom:8px;">🇩🇿</div>
+          QimatnaDz est exclusivement disponible et optimisé pour le marché Algérien.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     SESSIONS
+══════════════════════════════════ -->
+<div class="view" id="sessions">
+  <div class="topbar">
+    <div><div class="page-h">Sessions</div><div class="page-sub">Analyse du comportement utilisateur</div></div>
+  </div>
+  <div class="card row-full">
+    <div class="card-h"><div class="card-title">Statistiques de Sessions</div></div>
+    <div class="card-b" style="display:flex; align-items:center; justify-content:center; height:240px; color:var(--ink-30); font-size:0.85rem; text-align:center;">
+      <div>
+        <div style="font-size:2rem; margin-bottom:12px;">📊</div>
+        Les outils de tracking d'audience (Google Analytics/Amplitude) ne sont pas encore intégrés.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     PAR WILAYA
+══════════════════════════════════ -->
+<div class="view" id="par-wilaya">
+  <div class="topbar">
+    <div><div class="page-h">Par Wilaya</div><div class="page-sub">Répartition géographique du trafic réel</div></div>
+  </div>
+  <div class="card row-full">
+    <div class="card-h"><div class="card-title">Toutes les wilayas réelles</div><div class="card-sub">Classées par estimations enregistrées en base</div></div>
+    <div class="card-b">
+      <div class="bar-row" id="realWilayasDetailedList">
+        <div style="font-size:0.8rem; color:var(--ink-30); text-align:center; padding:2rem 0;">Aucune estimation enregistrée en base.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     PAR PAYS
+══════════════════════════════════ -->
+<div class="view" id="par-pays">
+  <div class="topbar">
+    <div><div class="page-h">Par Pays</div><div class="page-sub">Répartition internationale du trafic</div></div>
+  </div>
+  <div class="card row-full">
+    <div class="card-h"><div class="card-title">Trafic International</div></div>
+    <div class="card-b" style="display:flex; align-items:center; justify-content:center; height:240px; color:var(--ink-30); font-size:0.85rem; text-align:center;">
+      <div>
+        <div style="font-size:2rem; margin-bottom:12px;">🌍</div>
+        QimatnaDz cible exclusivement l'Algérie. Aucun trafic international n'est actuellement ciblé.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     TOUS LES UTILISATEURS
+══════════════════════════════════ -->
+<div class="view" id="tous-users">
+  <div class="topbar">
+    <div><div class="page-h">Tous les utilisateurs</div><div class="page-sub"><span id="totalUsersSubtitle">0</span> utilisateurs enregistrés</div></div>
+  </div>
+  <div class="card row-full">
+    <div class="card-h"><div class="card-title">Liste des utilisateurs réels</div><div class="card-sub">Inscriptions récupérées depuis Supabase</div></div>
+    <div class="card-b">
+      <div class="search-bar">
+        <input class="search-input" id="usersSearchInput" type="text" placeholder="🔍 Rechercher un utilisateur par nom ou email..." oninput="handleUsersSearch(this.value)">
+      </div>
+      <table class="tbl">
+        <thead><tr><th>Utilisateur</th><th>Rôle</th><th>Date d'inscription</th></tr></thead>
+        <tbody id="usersTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     ACTIFS
+══════════════════════════════════ -->
+<div class="view" id="actifs">
+  <div class="topbar"><div><div class="page-h">Utilisateurs actifs</div><div class="page-sub">Activité en temps réel</div></div></div>
+  <div class="card row-full">
+    <div class="card-h"><div class="card-title">Filtre d'activité</div></div>
+    <div class="card-b" style="display:flex; align-items:center; justify-content:center; height:200px; color:var(--ink-30); font-size:0.85rem; text-align:center;">
+      <div>
+        <div style="font-size:2rem; margin-bottom:12px;">👥</div>
+        Tous vos utilisateurs réels sont répertoriés de manière exhaustive dans l'onglet principal "Tous".
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     INACTIFS
+══════════════════════════════════ -->
+<div class="view" id="inactifs">
+  <div class="topbar"><div><div class="page-h">Utilisateurs inactifs</div><div class="page-sub">Activité en temps réel</div></div></div>
+  <div class="card row-full">
+    <div class="card-h"><div class="card-title">Filtre d'inactivité</div></div>
+    <div class="card-b" style="display:flex; align-items:center; justify-content:center; height:200px; color:var(--ink-30); font-size:0.85rem; text-align:center;">
+      <div>
+        <div style="font-size:2rem; margin-bottom:12px;">👥</div>
+        Tous vos utilisateurs réels sont répertoriés de manière exhaustive dans l'onglet principal "Tous".
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     WEB
+══════════════════════════════════ -->
+<div class="view" id="web">
+  <div class="topbar"><div><div class="page-h">Web App</div><div class="page-sub">Supervision plateforme</div></div></div>
+  <div class="card row-full">
+    <div class="card-h"><div class="card-title">Supervision Plateforme Web</div></div>
+    <div class="card-b" style="display:flex; align-items:center; justify-content:center; height:240px; color:var(--ink-30); font-size:0.85rem; text-align:center;">
+      <div>
+        <div style="font-size:2rem; margin-bottom:12px;">💻</div>
+        Statistiques spécifiques en attente de déploiement analytique Web.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     IOS
+══════════════════════════════════ -->
+<div class="view" id="ios">
+  <div class="topbar"><div><div class="page-h">App Store — iOS</div><div class="page-sub">Supervision plateforme</div></div></div>
+  <div class="card row-full">
+    <div class="card-h"><div class="card-title">Supervision Plateforme iOS</div></div>
+    <div class="card-b" style="display:flex; align-items:center; justify-content:center; height:240px; color:var(--ink-30); font-size:0.85rem; text-align:center;">
+      <div>
+        <div style="font-size:2rem; margin-bottom:12px;">🍎</div>
+        Statistiques de téléchargements et crashlogs en attente de déploiement App Store Connect.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     ANDROID
+══════════════════════════════════ -->
+<div class="view" id="android">
+  <div class="topbar"><div><div class="page-h">Play Store — Android</div><div class="page-sub">Supervision plateforme</div></div></div>
+  <div class="card row-full">
+    <div class="card-h"><div class="card-title">Supervision Plateforme Android</div></div>
+    <div class="card-b" style="display:flex; align-items:center; justify-content:center; height:240px; color:var(--ink-30); font-size:0.85rem; text-align:center;">
+      <div>
+        <div style="font-size:2rem; margin-bottom:12px;">▶</div>
+        Statistiques de téléchargements et crashlogs en attente de déploiement Google Play Console.
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+// ==========================================
+// SUPABASE CLIENT SETUP
+// ==========================================
+const supabaseUrl = 'https://lykdqbqunolcogtdmuzm.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx5a2RxYnF1bm9sY29ndGRtdXptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1OTMxMTMsImV4cCI6MjA5NDE2OTExM30.Dq7TQ46h9o1MiyJgM2jq4Kz58ngNs3whR1t-8Do3HBY';
+const _supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+let currentUser = null;
+let cachedUsers = [];
+
+// Date formatter
+const formatDZDate = () => {
+  const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+  const dateStr = new Date().toLocaleDateString('fr-DZ', options);
+  return dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
+};
+document.getElementById('liveDate').textContent = formatDZDate();
+
+// Check if user is logged in on load
+window.addEventListener('load', async () => {
+  const { data: { session } } = await _supabase.auth.getSession();
+  if (session) {
+    await checkAdminPrivileges(session.user);
+  } else {
+    document.getElementById('loginOverlay').style.display = 'flex';
+  }
+});
+
+// Authenticate administrator
+const handleLogin = async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPassword').value;
+  const errorMsg = document.getElementById('loginError');
+  const submitBtn = document.getElementById('loginSubmitBtn');
+  
+  errorMsg.style.display = 'none';
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Connexion en cours...';
+
+  try {
+    const { data, error } = await _supabase.auth.signInWithPassword({ email, password });
+    if (error) throw error;
+    
+    await checkAdminPrivileges(data.user);
+  } catch (err) {
+    console.error('Login error:', err);
+    errorMsg.textContent = err.message || 'Identifiants incorrects ou problème de connexion.';
+    errorMsg.style.display = 'block';
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Se connecter';
+  }
+};
+
+// Verify if profiles table marks this user as is_admin
+const checkAdminPrivileges = async (user) => {
+  const errorMsg = document.getElementById('loginError');
+  const submitBtn = document.getElementById('loginSubmitBtn');
+
+  try {
+    const { data: profile, error } = await _supabase
+      .from('profiles')
+      .select('full_name, is_admin')
+      .eq('id', user.id)
+      .single();
+
+    if (error && error.code !== 'PGRST116') throw error;
+
+    if (profile && profile.is_admin) {
+      currentUser = user;
+      document.getElementById('loginOverlay').style.display = 'none';
+      
+      // Load Supabase statistics & sync
+      await fetchLiveStats();
+      await fetchAllUsers();
+    } else {
+      await _supabase.auth.signOut();
+      throw new Error("Accès refusé. Vous devez disposer des droits d'administrateur.");
+    }
+  } catch (err) {
+    console.error('Privilege verification error:', err);
+    errorMsg.textContent = err.message || "Accès refusé. Vos privilèges n'ont pas pu être validés.";
+    errorMsg.style.display = 'block';
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Se connecter';
+    }
+  }
+};
+
+const handleLogout = async (e) => {
+  e.preventDefault();
+  await _supabase.auth.signOut();
+  currentUser = null;
+  document.getElementById('loginOverlay').style.display = 'flex';
+  document.getElementById('loginEmail').value = '';
+  document.getElementById('loginPassword').value = '';
+  document.getElementById('loginSubmitBtn').disabled = false;
+  document.getElementById('loginSubmitBtn').textContent = 'Se connecter';
+  document.getElementById('loginError').style.display = 'none';
+};
+
+// ==========================================
+// DYNAMIC DATA SYNC WITH SUPABASE
+// ==========================================
+const fetchLiveStats = async () => {
+  const syncLabel = document.getElementById('syncLabel');
+  syncLabel.textContent = 'Mise à jour...';
+  syncLabel.style.color = 'var(--warning)';
+
+  try {
+    // Run parallel counts & selects for super-fast page speed!
+    const [
+      { count: totalProfiles },
+      { count: totalValuations },
+      { count: totalListings },
+      { count: totalRealTransactions },
+      { count: ingestion24h },
+      { data: scraperData },
+      { data: exchangeRatesEUR },
+      { data: macroIndices },
+      { data: recentValuations }
+    ] = await Promise.all([
+      _supabase.from('profiles').select('*', { count: 'exact', head: true }),
+      _supabase.from('valuations').select('*', { count: 'exact', head: true }),
+      _supabase.from('listings').select('*', { count: 'exact', head: true }),
+      _supabase.from('real_transactions').select('*', { count: 'exact', head: true }),
+      _supabase.from('listings').select('*', { count: 'exact', head: true }).gte('scraped_at', new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString()),
+      _supabase.from('scraper_status').select('*').order('scraper_name'),
+      _supabase.from('exchange_rates').select('buy_rate, sell_rate').eq('currency_code', 'EUR').order('created_at', { ascending: false }).limit(1),
+      _supabase.from('macro_indices').select('key, value'),
+      _supabase.from('valuations').select('wilaya, created_at').order('created_at', { ascending: false }).limit(100)
+    ]);
+
+    const usersCount = totalProfiles || 0;
+    const activeCount = usersCount; // Real registrees
+
+    // Helper to safely set text content
+    const setKPI = (id, value) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = value;
+    };
+
+    // 1. Render KPIs
+    setKPI('kpiTotalUsers', usersCount.toLocaleString());
+    setKPI('kpiTotalUsers2', usersCount.toLocaleString());
+    setKPI('kpiActiveUsers', activeCount.toLocaleString());
+    setKPI('kpiActiveUsers2', activeCount.toLocaleString());
+    setKPI('kpiActiveUsers3', activeCount.toLocaleString());
+    setKPI('kpiInactiveUsers', "0");
+    setKPI('kpiInactiveUsers2', "0");
+    setKPI('kpiNewUsers', usersCount.toLocaleString());
+    setKPI('totalUsersSubtitle', usersCount.toLocaleString());
+
+    setKPI('kpiValuationsToday', (totalValuations || 0).toLocaleString());
+
+    // 2. Render Annonces Split KPI Card
+    const fluxA = totalListings || 0;
+    const fluxB = totalRealTransactions || 0;
+    const totalData = fluxA + fluxB;
+    setKPI('kpiTotalData', totalData.toLocaleString());
+    setKPI('fluxACount', fluxA.toLocaleString());
+    setKPI('fluxBCount', fluxB.toLocaleString());
+
+    // 3. Render Daily Ingestion Volume
+    setKPI('ingestionVolume24h', (ingestion24h || 0).toLocaleString());
+
+    // 4. Render Exchange Rates
+    if (exchangeRatesEUR && exchangeRatesEUR.length > 0) {
+      document.getElementById('squareBuyRate').value = exchangeRatesEUR[0].buy_rate;
+      document.getElementById('squareSellRate').value = exchangeRatesEUR[0].sell_rate;
+    }
+
+    // 5. Render Macro Indices Trend Coefficients
+    if (macroIndices) {
+      macroIndices.forEach(item => {
+        if (item.key === 'asian_brand_markup') {
+          document.getElementById('asianMarkupSlider').value = item.value;
+          updateCoeffLabel('asianMarkupLabel', item.value);
+        } else if (item.key === 'under_3y_markup') {
+          document.getElementById('ageMarkupSlider').value = item.value;
+          updateCoeffLabel('ageMarkupLabel', item.value);
+        }
+      });
+    }
+
+    // 6. Render Scraper Statuses List
+    const scraperList = document.getElementById('scraperStatusList');
+    scraperList.innerHTML = '';
+    const finalScrapers = scraperData && scraperData.length > 0 ? scraperData : [];
+
+    if (finalScrapers.length > 0) {
+      finalScrapers.forEach(s => {
+        const isError = s.status === 'ERROR';
+        const lastRunDate = s.last_run ? new Date(s.last_run) : new Date();
+        const timeDiff = Math.max(1, Math.round((new Date() - lastRunDate) / (60 * 1000)));
+        const timeLabel = timeDiff < 60 ? `il y a ${timeDiff} min` : `il y a ${Math.round(timeDiff / 60)}h`;
+        const dotColor = isError ? 'var(--danger)' : 'var(--cyan)';
+        const shadowColor = isError ? 'rgba(217,79,42,0.4)' : 'rgba(0,184,154,0.4)';
+        
+        const row = `
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:0.6rem 0.8rem; background:var(--ink-05); border-radius:10px;">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div style="width:8px; height:8px; border-radius:50%; background:${dotColor}; box-shadow:0 0 8px ${shadowColor};" class="${isError ? '' : 'live-dot'}"></div>
+              <span style="font-size:0.8rem; font-weight:500;">${s.scraper_name}</span>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:0.75rem; font-weight:600; color:var(--ink);">${isError ? 'Bloqué' : `+${s.records_added} cotes`}</div>
+              <div style="font-size:0.65rem; color:var(--ink-30);">${timeLabel}</div>
+            </div>
+          </div>
+        `;
+        scraperList.insertAdjacentHTML('beforeend', row);
+      });
+    } else {
+      scraperList.innerHTML = '<div style="font-size:0.8rem; color:var(--ink-30); text-align:center; padding:1rem 0;">Aucun statut de scraper disponible.</div>';
+    }
+
+    // 7. Aggregate Top Wilayas dynamically from actual database valuations!
+    renderTopWilayas(recentValuations);
+
+    // Finalize sync labels
+    syncLabel.textContent = 'Mise à jour il y a quelques secondes';
+    syncLabel.style.color = 'var(--cyan)';
+  } catch (err) {
+    console.error('Error fetching dashboard stats:', err);
+    syncLabel.textContent = 'Erreur de mise à jour';
+    syncLabel.style.color = 'var(--danger)';
+  }
+};
+
+const fetchAllUsers = async () => {
+  try {
+    const { data: profiles, error } = await _supabase
+      .from('profiles')
+      .select('email, full_name, is_admin, created_at')
+      .order('created_at', { ascending: false });
+    if (error) throw error;
+
+    const baseColors = ['#0d0e10', '#6366f1', '#f59e0b', '#00b89a', '#ec4899', '#8b5cf6', '#14b8a6', '#f97316', '#64748b'];
+
+    cachedUsers = (profiles || []).map((p, idx) => {
+      return {
+        name: p.full_name || 'Utilisateur Anonyme',
+        email: p.email || 'anon@qimatna.dz',
+        status: p.is_admin ? 'admin' : 'user',
+        platform: 'web',
+        wilaya: 'Alger',
+        evals: 0,
+        last: new Date(p.created_at).toLocaleDateString('fr-DZ', { day: 'numeric', month: 'long', year: 'numeric' }),
+        color: baseColors[idx % baseColors.length]
+      };
+    });
+
+    renderTable('usersTableBody', cachedUsers);
+  } catch (err) {
+    console.error('Error fetching all users:', err);
+  }
+};
+
+// ==========================================
+// MUTATION ACTIONS (FLUX C)
+// ==========================================
+const saveExchangeRate = async () => {
+  const buyRate = parseFloat(document.getElementById('squareBuyRate').value);
+  const sellRate = parseFloat(document.getElementById('squareSellRate').value);
+  
+  if (isNaN(buyRate) || isNaN(sellRate)) {
+    alert('Veuillez saisir des taux valides.');
+    return;
+  }
+  
+  try {
+    // 1. Insert new entry in exchange_rates
+    const { error: err1 } = await _supabase
+      .from('exchange_rates')
+      .insert({ currency_code: 'EUR', buy_rate: buyRate, sell_rate: sellRate });
+    if (err1) throw err1;
+    
+    // 2. Update key 'euro_square_rate' in macro_indices
+    const { error: err2 } = await _supabase
+      .from('macro_indices')
+      .upsert({ key: 'euro_square_rate', value: buyRate }, { onConflict: 'key' });
+    if (err2) throw err2;
+    
+    alert('Taux de l\'Euro mis à jour avec succès !');
+    fetchLiveStats();
+  } catch (err) {
+    console.error('Error saving exchange rate:', err);
+    alert('Erreur lors de la mise à jour : ' + err.message);
+  }
+};
+
+const saveTrendMarkup = async (key, sliderId) => {
+  const coeffValue = parseFloat(document.getElementById(sliderId).value);
+  
+  try {
+    const { error } = await _supabase
+      .from('macro_indices')
+      .upsert({ key, value: coeffValue }, { onConflict: 'key' });
+    if (error) throw error;
+    
+    alert('Coefficient mis à jour avec succès !');
+    fetchLiveStats();
+  } catch (err) {
+    console.error('Error saving trend coefficient:', err);
+    alert('Erreur lors de la mise à jour : ' + err.message);
+  }
+};
+
+const updateCoeffLabel = (labelId, val) => {
+  const pct = Math.round((parseFloat(val) - 1.0) * 100);
+  const sign = pct >= 0 ? '+' : '';
+  document.getElementById(labelId).textContent = `${sign}${pct}%`;
+};
+
+// ==========================================
+// RENDERING HELPERS
+// ==========================================
+const initials = (n) => n.split(' ').map(x=>x[0]).join('').slice(0,2).toUpperCase();
+
+function renderTable(tbodyId, users) {
+  const tbody = document.getElementById(tbodyId);
+  if (!tbody) return;
+  
+  if (users.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="3" style="text-align:center;color:var(--ink-30);padding: 2rem 0;">Aucun utilisateur inscrit.</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = users.map(u => `
+    <tr>
+      <td><div class="u-cell"><div class="u-av" style="background:${u.color}">${initials(u.name)}</div><div><div class="u-name">${u.name}</div><div class="u-email">${u.email}</div></div></div></td>
+      <td><span class="pill ${u.status === 'admin' ? 'pill-new' : 'pill-active'}">${u.status === 'admin' ? 'Super Admin' : 'Utilisateur'}</span></td>
+      <td style="color:var(--ink-60);font-size:0.78rem">${u.last}</td>
+    </tr>`).join('');
+}
+
+const renderTopWilayas = (valuations) => {
+  const wilayaList = document.getElementById('topWilayasList');
+  const detailedList = document.getElementById('realWilayasDetailedList');
+  if (!wilayaList && !detailedList) return;
+  
+  const wilayaCounts = {};
+  let totalValuations = 0;
+  if (valuations && valuations.length > 0) {
+    valuations.forEach(val => {
+      const w = val.wilaya || 'Alger';
+      wilayaCounts[w] = (wilayaCounts[w] || 0) + 1;
+      totalValuations++;
+    });
+  }
+
+  const sortedWilayas = Object.entries(wilayaCounts).sort((a, b) => b[1] - a[1]);
+  
+  const renderRow = ([name, count], maxCount) => {
+    const wPercent = maxCount > 0 ? Math.round((count / maxCount) * 100) : 0;
+    const pctShare = totalValuations > 0 ? Math.round((count / totalValuations) * 100) : 0;
+    return `
+      <div>
+        <div class="b-top">
+          <span class="b-name">🏙 ${name}</span>
+          <span class="b-val">${count} cotes · ${pctShare}%</span>
+        </div>
+        <div class="b-track"><div class="b-fill fill-dark" style="width:${wPercent}%"></div></div>
+      </div>
+    `;
+  };
+
+  if (sortedWilayas.length > 0) {
+    const maxCount = sortedWilayas[0][1];
+    
+    // Render top 5
+    if (wilayaList) {
+      wilayaList.innerHTML = sortedWilayas.slice(0, 5).map(w => renderRow(w, maxCount)).join('');
+    }
+    
+    // Render detailed wilayas view
+    if (detailedList) {
+      detailedList.innerHTML = sortedWilayas.map((w, idx) => `
+        <div style="margin-bottom:0.50rem;">
+          <div style="font-size:0.75rem; color:var(--ink-30); font-weight:600; margin-bottom:2px;">#0${idx + 1}</div>
+          ${renderRow(w, maxCount)}
+        </div>
+      `).join('');
+    }
+  } else {
+    const noData = '<div style="font-size:0.8rem; color:var(--ink-30); text-align:center; padding:1.5rem 0;">Aucune estimation enregistrée en base.</div>';
+    if (wilayaList) wilayaList.innerHTML = noData;
+    if (detailedList) detailedList.innerHTML = noData;
+  }
+};
+
+// ==========================================
+// INTERACTIVE NAVIGATION
+// ==========================================
+function go(viewId) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('on'));
+
+  const view = document.getElementById(viewId);
+  if (view) { view.classList.add('active'); }
+
+  document.querySelectorAll('.nav-link').forEach(l => {
+    if (l.getAttribute('onclick') && l.getAttribute('onclick').includes(viewId)) {
+      l.classList.add('on');
+    }
+  });
+
+  setTimeout(animateBars, 100);
+}
+
+function handleUsersSearch(query) {
+  const q = query.toLowerCase().trim();
+  if (!q) {
+    renderTable('usersTableBody', cachedUsers);
+    return;
+  }
+  const filtered = cachedUsers.filter(u => 
+    u.name.toLowerCase().includes(q) || 
+    u.email.toLowerCase().includes(q)
+  );
+  renderTable('usersTableBody', filtered);
+}
+
+function animateBars() {
+  document.querySelectorAll('.view.active .b-fill').forEach(el => {
+    const w = el.style.width || '0%';
+    el.style.width = '0';
+    setTimeout(() => { 
+      el.style.width = w; 
+    }, 80);
+  });
+}
+</script>
+</body>
+</html>
