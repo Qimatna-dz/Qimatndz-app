@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Platform, I18nManager } from 'react-native';
+import { View, Text, TouchableOpacity, Platform, I18nManager, Alert } from 'react-native';
 import { useEffect } from 'react';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -91,7 +91,13 @@ export default function Splash() {
             <TouchableOpacity
               className="bg-transparent border border-gray-200 w-full py-4 rounded-[100px] flex-row justify-center items-center"
               activeOpacity={0.85}
-              onPress={() => {}}
+              onPress={() => {
+                if (Platform.OS === 'web') {
+                  window.alert("Bientôt disponible !");
+                } else {
+                  Alert.alert("Bientôt disponible", "L'application mobile est en cours de développement !");
+                }
+              }}
             >
               <Text className="text-primary text-[16px] font-body font-medium">
                 📱 Application mobile
