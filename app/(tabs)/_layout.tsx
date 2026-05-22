@@ -21,14 +21,14 @@ export default function TabLayout() {
           backgroundColor: '#F8F7F4',
           borderTopWidth: 1,
           borderTopColor: '#EAE8E3',
-          height: Platform.OS === 'ios' ? (insets.bottom > 0 ? 85 : 70) : 70,
-          paddingBottom: Platform.OS === 'ios' ? (insets.bottom > 0 ? insets.bottom - 5 : 12) : 12,
-          paddingTop: 10,
+          height: Platform.OS === 'ios' ? (insets.bottom > 0 ? 85 : 65) : 65,
+          paddingBottom: Platform.OS === 'ios' ? (insets.bottom > 0 ? insets.bottom - 5 : 5) : 5,
+          paddingTop: 5,
         },
         tabBarLabelStyle: {
           fontFamily: 'DMSans-Medium',
           fontSize: 11,
-          marginTop: 4,
+          paddingBottom: 2,
         },
         headerShown: false,
       }}>
