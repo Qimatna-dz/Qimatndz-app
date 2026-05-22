@@ -76,7 +76,6 @@ export default function Splash() {
             Grâce à notre intelligence artificielle avancée et l'analyse continue du marché algérien. Obtenez une estimation chirurgicale en 1 clic, gratuitement et sans compte.
           </Text>
 
-          {/* Action Buttons */}
           <View className="gap-4">
             <TouchableOpacity
               className="bg-primary w-full py-4 rounded-[100px] flex-row justify-center items-center"
@@ -85,22 +84,6 @@ export default function Splash() {
             >
               <Text className="text-white text-[16px] font-body font-bold">
                 🚀 Estimer mon véhicule
-              </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              className="bg-transparent border border-gray-200 w-full py-4 rounded-[100px] flex-row justify-center items-center"
-              activeOpacity={0.85}
-              onPress={() => {
-                if (Platform.OS === 'web') {
-                  window.alert("Bientôt disponible !");
-                } else {
-                  Alert.alert("Bientôt disponible", "L'application mobile est en cours de développement !");
-                }
-              }}
-            >
-              <Text className="text-primary text-[16px] font-body font-medium">
-                📱 Application mobile
               </Text>
             </TouchableOpacity>
           </View>

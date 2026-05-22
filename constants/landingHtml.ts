@@ -650,7 +650,7 @@ footer {
       </p>
       <div class="hero-actions">
         <a href="/evaluate" target="_parent" class="btn-dark">🚀 Estimer mon véhicule</a>
-        <a href="#" class="btn-outline">📱 Application mobile</a>
+        <a href="#" class="btn-outline" onclick="alert('Bientôt disponible !'); return false;">📱 Application mobile</a>
       </div>
       <div class="hero-trust">
         <div class="trust-item">⚡ Gratuit</div>
