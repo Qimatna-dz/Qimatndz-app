@@ -48,74 +48,65 @@ export default function Splash() {
     <SafeAreaView className="flex-1 bg-background">
       <StatusBar style="dark" />
 
-      {/* Decorative blobs */}
-      <View className="absolute top-[-80] right-[-80] w-[280] h-[280] bg-accent/10 rounded-full" />
-      <View className="absolute bottom-[-40] left-[-60] w-[220] h-[220] bg-primary/5 rounded-full" />
+      {/* Decorative background noise or simple color is already handled by bg-background */}
 
-      <View className="flex-1 justify-between px-8 py-6">
-        {/* Top section */}
-        <View className="flex-1 justify-center items-center">
-          {/* Logo */}
-          <View className="bg-primary w-[72] h-[72] rounded-[22px] items-center justify-center mb-8 shadow-xl">
-            <Text className="text-white text-4xl font-display font-bold">Q</Text>
-          </View>
-
-          {/* Eyebrow */}
-          <View className="flex-row items-center mb-4">
-            <View className="w-8 h-[1px] bg-accent mx-3" />
-            <Text className="text-accent text-[11px] font-body font-bold uppercase tracking-[2px]">
-              {t('splash.eyebrow')}
-            </Text>
-          </View>
-
-          {/* Main headline */}
-          <Text className="text-primary text-[32px] font-display font-bold text-center leading-[38px] mb-4 px-2">
-            {t('splash.title')}
-          </Text>
-
-          {/* Sub-headline */}
-          <Text className="text-text-secondary text-[15px] font-body text-center leading-[24px] px-4">
-            {t('splash.subtitle')}
-          </Text>
+      <View className="flex-1 px-6 py-4 justify-between">
+        {/* Header */}
+        <View className="flex-row justify-between items-center mb-10">
+          <Text className="text-primary text-xl font-display font-bold">Qimatna Dz</Text>
         </View>
 
-        {/* Bottom section */}
-        <View className="w-full">
-          {/* Feature bullets */}
-          <View className="flex-col gap-3 mb-8 px-2">
-            {[
-              { icon: <CheckCircle2 size={15} color="#00B89A" />, text: t('splash.feature1') },
-              { icon: <TrendingUp size={15} color="#00B89A" />, text: t('splash.feature2') },
-            ].map((item, i) => (
-              <View key={i} className="flex-row items-center gap-2">
-                {item.icon}
-                <Text className="text-text-primary text-[13px] font-body font-medium">
-                  {item.text}
-                </Text>
-              </View>
-            ))}
-          </View>
-
-          {/* CTA */}
-          <TouchableOpacity
-            className="bg-accent w-full py-5 rounded-[20px] items-center flex-row justify-center mb-4"
-            activeOpacity={0.85}
-            onPress={() => router.replace('/onboarding')}
-          >
-            <Text className="text-white text-[17px] font-body font-bold mx-2">
-              {t('splash.cta')}
+        {/* Main Content */}
+        <View className="flex-1 justify-center">
+          {/* Eyebrow Badge */}
+          <View className="self-start flex-row items-center bg-accent/10 border border-accent/25 rounded-full px-4 py-2 mb-8">
+            <View className="w-1.5 h-1.5 rounded-full bg-accent mr-2" />
+            <Text className="text-accent text-[10px] font-body font-bold uppercase tracking-wider">
+              {t('splash.eyebrow') || "MARCHÉ AUTOMOBILE ALGÉRIEN • CÔTE EN DIRECT"}
             </Text>
-            {I18nManager.isRTL ? <ArrowLeft size={20} color="#FFFFFF" /> : <ArrowRight size={20} color="#FFFFFF" />}
-          </TouchableOpacity>
-
-          {/* Trust row */}
-          <View className="flex-row justify-center items-center gap-2">
-            <Text className="text-text-muted text-[11px] font-body">{t('splash.trust_free')}</Text>
-            <View className="w-1 h-1 rounded-full bg-text-muted" />
-            <Text className="text-text-muted text-[11px] font-body">{t('splash.trust_no_signup')}</Text>
-            <View className="w-1 h-1 rounded-full bg-text-muted" />
-            <Text className="text-text-muted text-[11px] font-body">{t('splash.trust_anonymous')}</Text>
           </View>
+
+          {/* Headline */}
+          <Text className="text-primary text-[42px] font-display font-bold leading-[48px] mb-6 tracking-tight">
+            Estimez le <Text className="text-accent italic font-display">juste prix</Text> de votre voiture en Algérie.
+          </Text>
+
+          {/* Subtitle */}
+          <Text className="text-text-secondary text-[16px] font-body leading-[26px] mb-10">
+            Grâce à notre intelligence artificielle avancée et l'analyse continue du marché algérien. Obtenez une estimation chirurgicale en 1 clic, gratuitement et sans compte.
+          </Text>
+
+          {/* Action Buttons */}
+          <View className="gap-4">
+            <TouchableOpacity
+              className="bg-primary w-full py-4 rounded-[100px] flex-row justify-center items-center"
+              activeOpacity={0.85}
+              onPress={() => router.replace('/onboarding')}
+            >
+              <Text className="text-white text-[16px] font-body font-bold">
+                🚀 Estimer mon véhicule
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              className="bg-transparent border border-gray-200 w-full py-4 rounded-[100px] flex-row justify-center items-center"
+              activeOpacity={0.85}
+              onPress={() => {}}
+            >
+              <Text className="text-primary text-[16px] font-body font-medium">
+                📱 Application mobile
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        {/* Trust row */}
+        <View className="flex-row justify-center items-center gap-3 pb-6 pt-4">
+          <Text className="text-text-secondary text-[12px] font-body">⚡ Gratuit</Text>
+          <View className="w-1 h-1 rounded-full bg-gray-300" />
+          <Text className="text-text-secondary text-[12px] font-body">Sans inscription</Text>
+          <View className="w-1 h-1 rounded-full bg-gray-300" />
+          <Text className="text-text-secondary text-[12px] font-body">100% anonyme</Text>
         </View>
       </View>
     </SafeAreaView>
