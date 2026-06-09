@@ -59,7 +59,15 @@ def main():
     print("=" * 70)
     print(f"Dossier de travail : {Path(__file__).parent.resolve()}")
     
-    # 1. Scrape Exchange Rates
+    # 0. [DÉFI 1] Nettoyage des annonces périmées (> 90 jours)
+    # CRITIQUE : doit tourner AVANT le scraping pour que les médians
+    # reflètent UNIQUEMENT le marché actuel, pas le passé.
+    print("\n" + "=" * 60)
+    print("🧹 ÉTAPE 0 : NETTOYAGE DES DONNÉES PÉRIMÉES (> 90 JOURS)")
+    print("=" * 60)
+    run_script("cleanup_old_listings.py")
+    
+    # 1. Scrape Exchange Rates (multi-source avec fallback)
     run_script("rate_scraper.py")
     
     # 2. Scrape Sogauto (Now configured for 100 pages!)
@@ -74,9 +82,10 @@ def main():
     except Exception:
         pass
         
-    # 5. Calcul des Prix Médians (CRITIQUE pour le Fallback)
+    # 5. Calcul des Prix Médians + Détection Chocs + Baselines Dynamiques
     print("\n" + "=" * 60)
-    print("🧠 ÉTAPE FINALE : COMPILATION DES STATISTIQUES (PRIX MÉDIANS)")
+    print("🧠 ÉTAPE FINALE : COMPILATION DES STATISTIQUES")
+    print("   → Calcul médians, détection chocs de marché, baselines dynamiques")
     print("=" * 60)
     run_script("update_medians_optimized.py")
         
@@ -87,3 +96,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

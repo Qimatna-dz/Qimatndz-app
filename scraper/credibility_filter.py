@@ -11,220 +11,238 @@ load_dotenv(dotenv_path=Path(__file__).parent.parent / ".env")
 
 ANTHROPIC_KEY = os.getenv("ANTHROPIC_API_KEY")
 
-def evaluate_credibility(listing: dict) -> dict:
-    """
-    Évalue une annonce automobile pour déterminer sa crédibilité et la justesse de son prix.
-    Retourne un dictionnaire: {
-        "is_credible": bool,
-        "corrected_price": int/None,
-        "reason": str,
-        "score": int
-    }
-    """
+SEGMENT_MEDIANS = {
+    "micro-citadine": 1500000,
+    "citadine": 2200000,
+    "berline": 3500000,
+    "suv": 4500000,
+    "luxe": 8000000
+}
+
+def classify_segment(brand: str, model: str) -> str:
+    b = brand.lower()
+    m = model.lower()
+    if any(x in m for x in ["alto", "qq", "spark", "maruti", "atos", "i10", "picanto"]) or b == "maruti":
+        return "micro-citadine"
+    if any(x in m for x in ["clio", "208", "ibiza", "polo", "yaris", "swift", "sandero", "logan", "accent"]):
+        return "citadine"
+    if any(x in m for x in ["golf", "leon", "megane", "octavia", "corolla", "308", "elantra", "civic"]):
+        return "berline"
+    if any(x in m for x in ["tucson", "sportage", "duster", "tiguan", "q3", "3008", "kuga", "stepway", "qashqai", "macan"]):
+        return "suv"
+    if any(x in b for x in ["mercedes", "bmw", "audi", "porsche", "land rover"]) or any(x in m for x in ["land cruiser", "touareg", "prado", "cayenne"]):
+        return "luxe"
+    return "citadine" # Default fallback
+
+def log_ai_cost(input_tokens: int, output_tokens: int):
+    try:
+        from db import get_supabase_client
+        supabase = get_supabase_client()
+        cost_usd = (input_tokens / 1000000) * 0.25 + (output_tokens / 1000000) * 1.25
+        supabase.table("ai_cost_logs").insert({
+            "script_name": "credibility_filter",
+            "tokens_in": input_tokens,
+            "tokens_out": output_tokens,
+            "cost_usd": cost_usd
+        }).execute()
+    except Exception as e:
+        print(f"      [AI LOG WARN] Impossible de logger les coûts: {e}")
+
+def run_algorithmic_prefilter(listing: dict) -> dict:
+    """Run deterministic mathematical rules before calling AI."""
     brand = listing.get("brand", "")
     model = listing.get("model", "")
     year = int(listing.get("year", 0))
     mileage = int(listing.get("mileage", 80000))
     price = int(listing.get("price_asked", 0))
     source = listing.get("source", "unknown")
-    url = listing.get("url", "")
     
     has_correction = False
     correction_reason = ""
     
-    # 1. ÉTAPE A : PRÉ-FILTRAGE RAPIDE & AUTO-CORRECTION EN DUR (0ms)
-    
-    # Détection et correction des erreurs de centimes typiques en Algérie (Années >= 2015)
-    # Les voitures de 2015+ ne coûtent JAMAIS moins de 1 000 000 DZD sur le marché.
-    # Si le prix est dans ces fourchettes, c'est obligatoirement une omission de zéro ou un format centimes.
+    # 1. FIX ZEROS
     if year >= 2015 and source != "ouedkniss_reference":
-        # Détecter si c'est un modèle à très petit budget (micro-citadine)
-        is_budget_car = (
-            any(m in model.lower() for m in ["alto", "qq", "spark", "maruti", "atos"]) or 
-            brand.lower() == "maruti"
-        )
-        
-        # Déterminer si le prix nécessite une correction x10
+        is_budget_car = classify_segment(brand, model) == "micro-citadine"
         should_multiply_x10 = False
+        
         if is_budget_car:
-            # Pour les micro-citadines, on ne multiplie que si c'est vraiment trop bas (ex: 150k -> 1.5M)
-            # Si le prix est >= 450 000 DZD, c'est un prix d'occasion réaliste (ex: 75 millions centimes) -> pas de x10.
             if 100000 <= price <= 300000:
                 should_multiply_x10 = True
         else:
-            # Pour les voitures standards, un prix inférieur à 400 000 DZD est manifestement erroné (ex: 180k -> 1.8M)
             if 100000 <= price <= 400000:
                 should_multiply_x10 = True
 
-        # Cas 1 : Saisie en format centimes (ex: 240,000 DZD au lieu de 2,400,000 DZD)
         if should_multiply_x10:
             old_price = price
             price = price * 10
             has_correction = True
             correction_reason = f"Correction de prix auto (Format centimes x10) : {old_price:,} DZD -> {price:,} DZD."
-        
-        # Cas 2 : Saisie en millions de centimes (ex: 24,000 DZD au lieu de 2,400,000 DZD)
         elif 10000 <= price <= 99000:
             old_price = price
             price = price * 100
             has_correction = True
             correction_reason = f"Correction de prix auto (Format centimes x100) : {old_price:,} DZD -> {price:,} DZD."
 
-    # 2. VALIDATION DES CRITÈRES DE CRÉDIBILITÉ PHYSIQUES ET PRIX PLANCHERS (Après correction éventuelle)
-    
-    # Prix absurde total (inférieur à 100 000 DZD) pour des voitures
+    listing["price_asked"] = price
+
+    # 2. ABSOLUTE ABSURDITY CHECK
     if price < 100000:
-        return {
-            "is_credible": False,
-            "corrected_price": None,
-            "reason": f"Prix suspect : {price:,} DZD est trop bas pour un véhicule sur le marché.",
-            "score": 5
-        }
+        return {"is_credible": False, "corrected_price": None, "reason": f"Prix suspect : {price:,} DZD est trop bas.", "score": 5}
+
+    # 3. RELATIVE RULES BARRICADE
+    segment = classify_segment(brand, model)
+    segment_median = SEGMENT_MEDIANS.get(segment, 2200000)
+    # Reject if price is below 40% of the segment median AND car is recent (>= 2018)
+    if year >= 2018 and price < (segment_median * 0.40):
+        # We don't reject immediately here anymore! We let Claude check the description!
+        # Because a 2019 Tucson at 1.8M might have "chassis refrappé"
+        pass
         
-    # Prix plancher pour véhicules récents (ex: Sandero 2024 à 120 000 DZD corrigé en 1 200 000 DZD)
-    # Même corrigé, 1,2 Millions DZD reste impossible pour un modèle 2022+ ou 2024+. C'est un crédit/leasing ou une arnaque.
-    if year >= 2022 and price < 1500000:
-        return {
-            "is_credible": False,
-            "corrected_price": None,
-            "reason": f"Prix suspect : Même après analyse, {price:,} DZD reste anormalement bas pour un véhicule récent ({year}). Probablement un apport de crédit/leasing ou arnaque.",
-            "score": 8
-        }
-        
-    if year >= 2024 and price < 2200000:
-        return {
-            "is_credible": False,
-            "corrected_price": None,
-            "reason": f"Prix suspect : Même après analyse, {price:,} DZD reste anormalement bas pour un véhicule neuf de {year}. Apport crédit/leasing ou arnaque.",
-            "score": 8
-        }
-        
-    # Véhicule ancien avec kilométrage de véhicule neuf (ex: Golf 2008 avec 50 km)
+    # Mileage limits
     if year < 2018 and mileage < 1000:
-        return {
-            "is_credible": False,
-            "corrected_price": None,
-            "reason": f"Kilométrage suspect : {mileage:,} km est anormalement bas pour un véhicule de {year}.",
-            "score": 10
-        }
-        
-    # Véhicule récent avec kilométrage absurde
+        return {"is_credible": False, "corrected_price": None, "reason": f"Kilométrage suspect : {mileage:,} km pour une voiture de {year}.", "score": 10}
     if year >= 2022 and mileage > 600000:
-        return {
-            "is_credible": False,
-            "corrected_price": None,
-            "reason": f"Kilométrage suspect : {mileage:,} km pour un véhicule très récent ({year}).",
-            "score": 12
-        }
+        return {"is_credible": False, "corrected_price": None, "reason": f"Kilométrage absurde : {mileage:,} km pour {year}.", "score": 12}
 
-    # 3. VERDICT DES CRITÈRES STANDARDS ET RETOUR DES RÉSULTATS
     if has_correction:
-        return {
-            "is_credible": True,
-            "corrected_price": price,
-            "reason": correction_reason,
-            "score": 90
-        }
+        return {"is_credible": True, "corrected_price": price, "reason": correction_reason, "score": 90}
 
-    if 1000000 <= price <= 120000000 and 1000 <= mileage <= 400000:
-        # For standard range prices, also run sequence/pattern check to catch fake prices
-        if price < 3000000:
-            price_str = str(price)
-            sequences = ["123", "234", "345", "456", "567", "678", "789"]
-            if re.sub(r'\D', '', price_str) and re.match(r'^(\d)\1+$', re.sub(r'\D', '', price_str)):
-                return {
-                    "is_credible": False,
-                    "corrected_price": None,
-                    "reason": f"Prix suspect : séquence répétitive détectée ({price:,} DZD).",
-                    "score": 5
-                }
-        return {
-            "is_credible": True,
-            "corrected_price": price,
-            "reason": "Passé par pré-filtrage automatique (paramètres de marché standards).",
-            "score": 95
-        }
+    # 4. PATTERN CHECK
+    if price < 3000000:
+        price_str = str(price)
+        if re.sub(r'\D', '', price_str) and re.match(r'^(\d)\1+$', re.sub(r'\D', '', price_str)):
+            return {"is_credible": False, "corrected_price": None, "reason": f"Séquence répétitive ({price:,} DZD).", "score": 5}
 
-    # 2. ÉTAPE B : FILTRAGE ASSISTÉ PAR L'IA CLAUDE (Pour les cas limites et anomalies de prix)
-    if not ANTHROPIC_KEY or ANTHROPIC_KEY == "...":
-        # Fallback de secours si aucune clé IA n'est définie
-        return {
-            "is_credible": True,
-            "corrected_price": price,
-            "reason": "Pas de clé Anthropic configurée. Validé par défaut.",
-            "score": 80
-        }
-        
-    print(f"   [AI FILTERING] Analyse par Claude de l'annonce atypique : {brand} {model} ({year}) - Prix initial : {price:,} DZD...")
+    return {"is_credible": "needs_ai", "corrected_price": price}
+
+def evaluate_credibility(listing: dict) -> dict:
+    """Backward compatible single listing wrapper."""
+    return evaluate_credibility_batch([listing])[0]
+
+def evaluate_credibility_batch(listings: list) -> list:
+    """
+    Évalue un lot d'annonces automobiles.
+    Exécute le pré-filtrage algorithmique puis regroupe les annonces suspectes par lots de 20
+    pour l'API Claude Haiku.
+    """
+    results = [None] * len(listings)
+    ai_queue = []
     
-    system_prompt = (
-        "Vous êtes l'IA experte de QimatnaDz chargée de valider la crédibilité des annonces de voitures d'occasion en Algérie "
-        "et de corriger les erreurs de prix fréquentes.\n"
-        "Règles du marché Algérien :\n"
-        "- Les gens omettent parfois des zéros (ex: '350000' DZD au lieu de '3500000' DZD pour 350 millions centimes).\n"
-        "- Les gens écrivent parfois en millions de centimes au lieu de dinars (ex: '350' ou '350.5' au lieu de '3500000' DZD).\n"
-        "- Les prix inférieurs à 200 000 DZD pour des voitures récentes (ex: Golf 2022) sont souvent des arnaques ou des apports de crédit (crédit leasing), pas le prix total du véhicule. Marquez-les comme non crédibles ('is_credible': false).\n"
-        "- Les voitures de luxe (Porsche, récents Mercedes Classe G) peuvent valoir plus de 20 000 000 DZD.\n"
-        "Répondez UNIQUEMENT avec un objet JSON structuré comme suit, sans aucun autre texte d'introduction :\n"
-        "{\n"
-        '  "is_credible": true/false,\n'
-        '  "corrected_price": int (en DZD, corrigé si erreur évidente, ou égal au prix initial, ou null si non crédible),\n'
-        '  "reason": "explication claire en français de votre décision",\n'
-        '  "credibility_score": int (0 à 100)\n'
-        "}"
-    )
-    
-    user_message = (
-        f"Marque: {brand}\n"
-        f"Modèle: {model}\n"
-        f"Année: {year}\n"
-        f"Kilométrage: {mileage:,} km\n"
-        f"Prix initial: {price:,} DZD\n"
-        f"Source: {source}\n"
-        f"Lien: {url}\n"
-    )
-    
-    try:
-        api_url = "https://api.anthropic.com/v1/messages"
-        headers = {
-            "x-api-key": ANTHROPIC_KEY,
-            "anthropic-version": "2023-06-01",
-            "content-type": "application/json"
-        }
-        payload = {
-            "model": "claude-haiku-4-5",
-            "max_tokens": 300,
-            "system": system_prompt,
-            "messages": [
-                {"role": "user", "content": user_message}
-            ],
-            "temperature": 0.0
-        }
-        
-        response = requests.post(api_url, json=payload, headers=headers, timeout=12)
-        if response.status_code == 200:
-            resp_data = response.json()
-            content_text = resp_data["content"][0]["text"].strip()
-            
-            # Extraire l'objet JSON de la réponse brute
-            json_match = re.search(r'\{.*\}', content_text, re.DOTALL)
-            if json_match:
-                result = json.loads(json_match.group(0))
-                return {
-                    "is_credible": bool(result.get("is_credible", True)),
-                    "corrected_price": result.get("corrected_price") or price,
-                    "reason": result.get("reason", "Validé avec succès par l'IA."),
-                    "score": int(result.get("credibility_score", 90))
-                }
+    # 1. Pre-filter
+    for i, lst in enumerate(listings):
+        pre_res = run_algorithmic_prefilter(lst)
+        if pre_res.get("is_credible") != "needs_ai":
+            results[i] = pre_res
         else:
-            print(f"      [AI WARN] Anthropic API HTTP {response.status_code}: {response.text}")
-    except Exception as e:
-        print(f"      [AI WARN] Exception pendant le filtrage IA: {e}")
+            ai_queue.append((i, lst, pre_res.get("corrected_price")))
+
+    if not ai_queue:
+        return results
+
+    if not ANTHROPIC_KEY or ANTHROPIC_KEY == "...":
+        for i, lst, price in ai_queue:
+            results[i] = {"is_credible": True, "corrected_price": price, "reason": "Pas de clé Anthropic configurée. Validé par défaut.", "score": 80}
+        return results
+
+    # 2. AI Batch Processing (Chunk by 20)
+    chunk_size = 20
+    for chunk_start in range(0, len(ai_queue), chunk_size):
+        chunk = ai_queue[chunk_start:chunk_start + chunk_size]
         
-    # Par défaut si l'API échoue, on accepte l'annonce pour ne pas pénaliser le scraping
-    return {
-        "is_credible": True,
-        "corrected_price": price,
-        "reason": "Échec de validation IA (erreur API). Accepté par défaut.",
-        "score": 75
-    }
+        system_prompt = (
+            "Vous êtes l'IA experte de QimatnaDz chargée de valider la crédibilité des annonces de voitures d'occasion en Algérie.\n\n"
+            "RÈGLES DU MARCHÉ ALGÉRIEN :\n"
+            "1. Zéros manquants : '350 000' pour une voiture de 2020 signifie 3 500 000 DZD (350 millions de centimes).\n"
+            "2. Format Millions : '350' ou '350.5' signifie 3 500 000 DZD.\n"
+            "3. Descriptions : Si la description indique 'moteur coulé', 'accidenté', 'sbigha', 'choc', 'chassis refrappé', 'carte grise', 'mawra9a', un prix anormalement bas devient LOGIQUE et crédible.\n"
+            "4. Leasings : Un prix faible (ex: 1.5M pour une voiture de 2024) sans mention de dommage grave est un apport de crédit/leasing ou une arnaque (is_credible = false).\n\n"
+            "EXEMPLES À SUIVRE STRICTEMENT :\n"
+            "- Exemple 1 : Prix 350, Modèle Ibiza 2021, Desc: 'Trés propre' -> Action : Erreur format. Correction = 3500000. is_credible = true.\n"
+            "- Exemple 2 : Prix 1500, Modèle Golf 2024, Desc: 'Neuve' -> Action : C'est un apport. is_credible = false.\n"
+            "- Exemple 3 : Prix 800000, Modèle Leon 2019, Desc: 'Moteur hs' -> Action : Justifié par la panne. is_credible = true, pas de correction.\n"
+            "- Exemple 4 : Prix 1800000, Modèle Hyundai Tucson 2019, Desc: 'Très propre mais numéro de châssis refrappé / carte grise en cours' -> Action : Justifié par problème de conformité/papiers. is_credible = true, pas de correction.\n\n"
+            "RÉPONDEZ UNIQUEMENT EN JSON STRICT, UN TABLEAU DE RÉSULTATS DANS LE MÊME ORDRE :\n"
+            "[\n"
+            "  {\n"
+            "    \"id\": \"identifiant fourni\",\n"
+            "    \"is_credible\": true/false,\n"
+            "    \"corrected_price\": int ou null,\n"
+            "    \"reason\": \"explication claire\",\n"
+            "    \"credibility_score\": int (0 à 100)\n"
+            "  }\n"
+            "]"
+        )
+        
+        user_message_parts = []
+        for j, (_, lst, price) in enumerate(chunk):
+            desc = str(lst.get("description", ""))[:200].replace("\n", " ") # Keep it compact
+            msg = (
+                f"Item ID: {j}\n"
+                f"Marque: {lst.get('brand')}\n"
+                f"Modèle: {lst.get('model')}\n"
+                f"Année: {lst.get('year')}\n"
+                f"Kilométrage: {lst.get('mileage')} km\n"
+                f"Prix initial: {price} DZD\n"
+                f"Description: {desc}\n"
+                "---"
+            )
+            user_message_parts.append(msg)
+            
+        user_message = "\n".join(user_message_parts)
+        
+        print(f"   [AI FILTERING] Traitement d'un lot de {len(chunk)} annonces...")
+        
+        try:
+            api_url = "https://api.anthropic.com/v1/messages"
+            headers = {
+                "x-api-key": ANTHROPIC_KEY,
+                "anthropic-version": "2023-06-01",
+                "content-type": "application/json"
+            }
+            payload = {
+                "model": "claude-haiku-4-5",
+                "max_tokens": 1500,
+                "system": system_prompt,
+                "messages": [{"role": "user", "content": user_message}],
+                "temperature": 0.0
+            }
+            
+            response = requests.post(api_url, json=payload, headers=headers, timeout=20)
+            if response.status_code == 200:
+                resp_data = response.json()
+                content_text = resp_data["content"][0]["text"].strip()
+                
+                # Log cost
+                usage = resp_data.get("usage", {})
+                in_tokens = usage.get("input_tokens", 0)
+                out_tokens = usage.get("output_tokens", 0)
+                if in_tokens > 0 or out_tokens > 0:
+                    log_ai_cost(in_tokens, out_tokens)
+                
+                json_match = re.search(r'\[.*\]', content_text, re.DOTALL)
+                if json_match:
+                    ai_results = json.loads(json_match.group(0))
+                    for k, ai_res in enumerate(ai_results):
+                        original_index = chunk[k][0]
+                        results[original_index] = {
+                            "is_credible": bool(ai_res.get("is_credible", True)),
+                            "corrected_price": ai_res.get("corrected_price") or chunk[k][2],
+                            "reason": ai_res.get("reason", "Validé par IA."),
+                            "score": int(ai_res.get("credibility_score", 90))
+                        }
+                else:
+                    raise Exception("Format JSON tableau non trouvé.")
+            else:
+                raise Exception(f"HTTP {response.status_code}: {response.text}")
+                
+        except Exception as e:
+            print(f"      [AI WARN] Erreur Batch: {e}")
+            for k, (_, lst, price) in enumerate(chunk):
+                results[chunk[k][0]] = {
+                    "is_credible": True,
+                    "corrected_price": price,
+                    "reason": "Échec validation IA. Accepté par défaut.",
+                    "score": 75
+                }
+                
+    return results

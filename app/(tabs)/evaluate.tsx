@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView, TextInput, TouchableOpacity, Dimensions, I18nManager } from 'react-native';
+import { View, Text, ScrollView, TextInput, TouchableOpacity, Dimensions, I18nManager, KeyboardAvoidingView, Platform } from 'react-native';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
@@ -34,7 +34,7 @@ export default function EvaluateScreen() {
     mileage: '',
     condition: 'bon',
     paint: 'origine',
-    engine: 'bon' as 'neuf' | 'bon' | 'fatigue',
+    engine: 'bon' as 'neuf' | 'bon' | 'fatigue' | 'swappe',
     fuel: 'essence' as 'essence' | 'diesel' | 'gpl' | 'hybride',
     engine_details: '',
     trim_details: '',
@@ -42,9 +42,25 @@ export default function EvaluateScreen() {
     trim: undefined as string | undefined,
     document_status: 'safia' as 'safia' | 'licence_delai',
     transmission: 'manuelle' as 'manuelle' | 'automatique',
+    is_gulf_spec: false,
+    has_aftermarket: false,
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleMileageChange = (text: string) => {
+    const rawValue = text.replace(/[^0-9]/g, '');
+    if (rawValue) {
+      const formattedValue = parseInt(rawValue, 10).toLocaleString('fr-FR');
+      setForm({ ...form, mileage: formattedValue });
+    } else {
+      setForm({ ...form, mileage: '' });
+    }
+  };
+
   const handleEvaluate = () => {
+    if (isSubmitting) return;
+
     if (!form.brand || !form.model) {
       alert(t('evaluate.error_model'));
       return;
@@ -54,14 +70,26 @@ export default function EvaluateScreen() {
       alert(t('evaluate.error_year'));
       return;
     }
-    if (!form.mileage || isNaN(Number(form.mileage))) {
+    
+    const rawMileage = form.mileage.replace(/[^0-9]/g, '');
+    if (!rawMileage || isNaN(Number(rawMileage))) {
       alert(t('evaluate.error_mileage'));
       return;
     }
+
+    setIsSubmitting(true);
+    
     router.push({
       pathname: '/result',
-      params: form,
+      params: {
+        ...form,
+        mileage: rawMileage,
+        is_gulf_spec: form.is_gulf_spec ? 'true' : 'false',
+        has_aftermarket: form.has_aftermarket ? 'true' : 'false',
+      },
     });
+
+    setTimeout(() => setIsSubmitting(false), 1000);
   };
 
   const SelectionChip = ({ id, label, icon: Icon, selected, onSelect, color = Colors.primary }: any) => (
@@ -86,7 +114,8 @@ export default function EvaluateScreen() {
   return (
     <SafeAreaView className="flex-1 bg-background">
       <StatusBar style="dark" />
-      <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={{ flex: 1 }}>
+        <ScrollView className="flex-1" showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
         <View className="px-6 pt-8 pb-32">
           <View className={`mb-10 ${I18nManager.isRTL ? 'items-end' : 'items-start'}`}>
             <Text className="text-primary text-5xl font-display font-bold">{t('evaluate.title')}</Text>
@@ -147,8 +176,11 @@ export default function EvaluateScreen() {
 
                 <View className={`flex-row justify-between ${I18nManager.isRTL ? 'flex-row-reverse' : ''}`}>
                   <View className="w-[48%]">
-                    <Text className={`text-text-secondary font-body text-xs uppercase tracking-widest mb-3 mx-1 ${I18nManager.isRTL ? 'text-right' : 'text-left'}`}>
+                    <Text className={`text-text-secondary font-body text-xs uppercase tracking-widest mb-1 mx-1 ${I18nManager.isRTL ? 'text-right' : 'text-left'}`}>
                       {t('evaluate.year')}
+                    </Text>
+                    <Text className={`text-gray-400 font-body text-[9px] mb-2 mx-1 ${I18nManager.isRTL ? 'text-right' : 'text-left'}`}>
+                      Année de fabrication
                     </Text>
                     <TextInput 
                       placeholder="2020"
@@ -167,13 +199,13 @@ export default function EvaluateScreen() {
                     </Text>
                     <View className={`bg-gray-50 rounded-2xl px-3 py-3.5 flex-row items-center border border-gray-100 ${I18nManager.isRTL ? 'flex-row-reverse' : ''}`}>
                       <TextInput 
-                        placeholder="85000"
+                        placeholder="85 000"
                         placeholderTextColor="#9CA3AF"
                         style={{ outlineStyle: 'none', minWidth: 0, textAlign: I18nManager.isRTL ? 'right' : 'left' } as any}
-                        keyboardType="numeric"
+                        keyboardType="number-pad"
                         className="flex-1 font-body text-text-primary text-sm"
                         value={form.mileage}
-                        onChangeText={(t) => setForm({ ...form, mileage: t })}
+                        onChangeText={handleMileageChange}
                       />
                       <Text className={`text-text-secondary font-body text-[10px] ${I18nManager.isRTL ? 'mr-1' : 'ml-1'}`}>km</Text>
                     </View>
@@ -224,6 +256,12 @@ export default function EvaluateScreen() {
                       selected={form.paint === 'choc'} onSelect={(id: any) => setForm({...form, paint: id})} 
                     />
                   </View>
+                  <View className={`mt-2 px-1 ${I18nManager.isRTL ? 'items-end' : 'items-start'}`}>
+                    {form.paint === 'origine' && <Text className="text-gray-500 font-body text-[11px] leading-4">00 Sbigha : Aucune retouche, peinture d'usine.</Text>}
+                    {form.paint === 'raccord' && <Text className="text-gray-500 font-body text-[11px] leading-4">Raccord : Petit raccord à froid ou retouche minime sans peinture majeure.</Text>}
+                    {form.paint === 'repeinte' && <Text className="text-gray-500 font-body text-[11px] leading-4">Voile : Peinture refaite pour l'esthétique (rayures), sans choc.</Text>}
+                    {form.paint === 'choc' && <Text className="text-gray-500 font-body text-[11px] leading-4">Choc réparé : Accident ayant touché la structure ou froissé la tôle.</Text>}
+                  </View>
                 </View>
 
                 <View>
@@ -267,6 +305,10 @@ export default function EvaluateScreen() {
                       id="fatigue" label={t('evaluate.engine_bad')} icon={AlertTriangle} color="#D97706"
                       selected={form.engine === 'fatigue'} onSelect={(id: any) => setForm({...form, engine: id})} 
                     />
+                    <SelectionChip 
+                      id="swappe" label="Moteur Swappé / Changé" icon={AlertTriangle} color="#EA580C"
+                      selected={form.engine === 'swappe'} onSelect={(id: any) => setForm({...form, engine: id})} 
+                    />
                   </View>
                 </View>
 
@@ -282,6 +324,22 @@ export default function EvaluateScreen() {
                     <SelectionChip 
                       id="automatique" label={t('evaluate.trans_auto')} icon={Sparkles} color="#4F46E5"
                       selected={form.transmission === 'automatique'} onSelect={(id: any) => setForm({...form, transmission: id})} 
+                    />
+                  </View>
+                </View>
+
+                <View>
+                  <Text className={`text-text-secondary font-body text-xs uppercase tracking-widest mb-4 mx-1 ${I18nManager.isRTL ? 'text-right' : 'text-left'}`}>
+                    Équipements & Origine
+                  </Text>
+                  <View className={`flex-row flex-wrap ${I18nManager.isRTL ? 'flex-row-reverse' : ''}`}>
+                    <SelectionChip 
+                      id="gulf" label="Gulf Specs / Importé" icon={Sparkles} color="#00B89A"
+                      selected={form.is_gulf_spec} onSelect={() => setForm({...form, is_gulf_spec: !form.is_gulf_spec})} 
+                    />
+                    <SelectionChip 
+                      id="aftermarket" label="Accessoires ajoutés (Jantes...)" icon={Sparkles} color="#00B89A"
+                      selected={form.has_aftermarket} onSelect={() => setForm({...form, has_aftermarket: !form.has_aftermarket})} 
                     />
                   </View>
                 </View>
@@ -316,17 +374,19 @@ export default function EvaluateScreen() {
 
             <TouchableOpacity 
               onPress={handleEvaluate}
+              disabled={isSubmitting}
               activeOpacity={0.85}
-              className={`bg-accent py-6 rounded-[28px] items-center shadow-2xl shadow-accent/40 flex-row justify-center ${I18nManager.isRTL ? 'flex-row-reverse' : ''}`}
+              className={`bg-accent py-6 rounded-[28px] items-center shadow-2xl shadow-accent/40 flex-row justify-center ${I18nManager.isRTL ? 'flex-row-reverse' : ''} ${isSubmitting ? 'opacity-70' : ''}`}
             >
-              <Text className={`text-primary text-2xl font-body font-bold ${I18nManager.isRTL ? 'ml-2' : 'mr-2'}`}>
-                {t('evaluate.calculate')}
+              <Text allowFontScaling={false} className={`text-primary text-2xl font-body font-bold ${I18nManager.isRTL ? 'ml-2' : 'mr-2'}`}>
+                {isSubmitting ? 'Calcul...' : t('evaluate.calculate')}
               </Text>
               {I18nManager.isRTL ? <ChevronLeft size={24} color={Colors.primary} /> : <ChevronRight size={24} color={Colors.primary} />}
             </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </KeyboardAvoidingView>
+  </SafeAreaView>
   );
 }

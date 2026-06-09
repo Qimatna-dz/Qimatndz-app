@@ -165,12 +165,17 @@ function classifyVehicleSegment(brand: string, model: string, bodyType: string):
 
   // 3. Detect Large/Prestige SUVs (Segment E/F-SUVs)
   const prestigeSuvKeywords = ['q7', 'q8', 'x5', 'x6', 'x7', 'gle', 'gls', 'g-class', 'classe g', 'cayenne', 'macan', 'rangerover', 'range rover', 'vogue', 'velar', 'defender', 'prado', 'land cruiser', 'landcruiser', 'patrol', 'touareg'];
-  if ((premiumBrands.some(b => normBrand.includes(b)) || prestigeBrands.some(b => normBrand.includes(b))) && (bodyType === 'SUV' || prestigeSuvKeywords.some(k => normModel.includes(k)))) {
+  if (prestigeSuvKeywords.some(k => normModel.includes(k))) {
     return 'suv_prestige';
   }
 
   // 4. Detect Family SUVs (Segment C/D-SUVs)
   if (bodyType === 'SUV' || normModel.includes('tucson') || normModel.includes('sportage') || normModel.includes('tiguan') || normModel.includes('qashqai') || normModel.includes('kuga') || normModel.includes('rav4') || normModel.includes('crv') || normModel.includes('koleos') || normModel.includes('dashing') || normModel.includes('traveller')) {
+    // If it's a premium brand but not in the prestige list (e.g. Q3, Q5, GLC, X3), we give it a slightly higher base than a normal SUV.
+    // We can return 'suv_premium' which we will map to 9_000_000
+    if (premiumBrands.some(b => normBrand.includes(b)) || prestigeBrands.some(b => normBrand.includes(b))) {
+       return 'suv_premium';
+    }
     return 'suv_routier';
   }
 
@@ -211,24 +216,25 @@ function getSegmentFloor(bodyType: string, year: number): number {
 }
 
 const CONDITION_MULTIPLIERS: Record<string, number> = {
-  excellent: 1.08,
+  excellent: 1.05,
   bon:       1.00,
-  moyen:     0.88,
-  mauvais:   0.74,
+  moyen:     0.95,
+  mauvais:   0.85,
 };
 
 const PAINT_MULTIPLIERS: Record<string, number> = {
-  origine:  1.12,
+  origine:  1.05,
   raccord:   1.00,
   retouches: 1.00,
-  repeinte:  0.85,
-  choc:      0.65,
+  repeinte:  0.92,
+  choc:      0.75,
 };
 
 const ENGINE_MULTIPLIERS: Record<string, number> = {
-  neuf:    1.05,
+  neuf:    1.03,
   bon:     1.00,
-  fatigue: 0.75,
+  fatigue: 0.90,
+  swappe:  0.95,
 };
 
 const FUEL_MULTIPLIERS: Record<string, number> = {
@@ -288,169 +294,123 @@ const TRIM_MULTIPLIERS: Record<string, number> = {
 };
 
 const FALLBACK_MEDIANS: Record<string, number> = {
-  // Renault — recalibrated to 2025 Algerian market
-  'Renault Symbol':           1_800_000,
-  'Renault Clio':             2_800_000,
-  'Renault Clio 4':           2_600_000,
-  'Renault Clio 5':           3_400_000, // FIX: was 3.8M, real market ~3.4M
-  'Renault Symbol Sensation': 2_200_000,
-  'Renault Megane':           3_800_000,
-  'Renault Megane 4':         4_200_000,
+  // Renault — Générations séparées
+  'Renault Symbol G1':        1_300_000, // 2008-2012
+  'Renault Symbol G2':        1_800_000, // 2013-2017
+  'Renault Symbol G3':        2_400_000, // 2018-2022
+  'Renault Clio 2':           1_100_000,
+  'Renault Clio 3':           1_500_000,
+  'Renault Clio 4':           2_500_000,
+  'Renault Clio 5':           3_500_000,
+  'Renault Megane 3':         1_800_000,
+  'Renault Megane 4':         4_000_000,
   'Renault Kangoo':           3_200_000,
   'Renault Express':          3_400_000,
 
-  // Dacia — supply improved since Chinese brands arrival
-  'Dacia Logan':              2_200_000,
-  'Dacia Sandero':            2_800_000,
-  'Dacia Sandero Stepway':    3_400_000, // FIX: was 4.2M
-  'Dacia Duster':             4_200_000,
+  // Dacia
+  'Dacia Logan G1':           1_100_000, // 2006-2012
+  'Dacia Logan G2':           1_800_000, // 2013-2020
+  'Dacia Logan G3':           2_600_000, // 2021+
+  'Dacia Sandero G2':         2_200_000,
+  'Dacia Sandero Stepway G2': 2_800_000, // 2013-2020
+  'Dacia Sandero Stepway G3': 3_600_000, // 2021+
+  'Dacia Duster G1':          2_200_000,
+  'Dacia Duster G2':          4_000_000,
 
-  // Toyota — split refuge models from standard
-  'Toyota Corolla':           5_500_000,
-  'Toyota Yaris':             2_500_000, // FIX: was 3.2M
-  'Toyota Yaris Style':       3_200_000,
-  'Toyota Hilux':             8_500_000,
-  'Toyota Hilux Single Cabin': 6_800_000,
-  'Toyota Hilux Double Cabin': 9_500_000,
-  'Toyota Land Cruiser':      26_000_000,
-  'Toyota Land Cruiser LC300 VXR': 26_000_000,
-  'Toyota Land Cruiser LC300 GR Sport': 28_500_000,
-  'Toyota Prado':             16_500_000,
-  'Toyota Prado Adventure':   18_000_000,
+  // Toyota
+  'Toyota Yaris G2':          1_500_000, // 2006-2011
+  'Toyota Yaris G3':          2_500_000, // 2012-2019
+  'Toyota Yaris G4':          4_200_000, // 2020+
+  'Toyota Corolla G10':       2_000_000, // 2007-2013
+  'Toyota Corolla G11':       3_500_000, // 2014-2019
+  'Toyota Corolla G12':       5_500_000, // 2020+
+  'Toyota Hilux G7':          4_500_000, // 2005-2015
+  'Toyota Hilux G8':          8_500_000, // 2016+
+  'Toyota Land Cruiser J200': 12_000_000,
+  'Toyota Land Cruiser J300': 26_000_000,
 
-  // Hyundai — recalibrated
-  'Hyundai Elantra':          5_000_000,
-  'Hyundai Tucson':           6_500_000, // FIX: was 6.8M
-  'Hyundai Tucson Ultimate':  8_000_000,
-  'Hyundai Tucson Executive': 7_000_000,
-  'Hyundai Tucson GLS':       6_000_000,
-  'Hyundai Accent':           2_800_000,
-  'Hyundai Accent Extreme':   3_200_000,
-  'Hyundai Creta':            5_800_000, // FIX: was 5.2M
-  'Hyundai Creta Executive':  6_200_000,
-  'Hyundai i10':              2_000_000,
-  'Hyundai Grand i10':        2_600_000,
-
-  // Peugeot — ref is multi-year weighted
+  // Peugeot
   'Peugeot 206':              1_000_000,
-  'Peugeot 208':              1_800_000, // FIX: was 3.2M (new price anchor, wrong)
-  'Peugeot 208 GT Line':      2_200_000,
-  'Peugeot 301':              2_000_000,
-  'Peugeot 3008':             6_200_000,
-  'Peugeot 3008 GT Line':     7_500_000,
+  'Peugeot 207':              1_300_000,
+  'Peugeot 208 G1':           1_800_000, // 2012-2019
+  'Peugeot 208 G2':           3_400_000, // 2020+
+  'Peugeot 301':              1_800_000,
+  'Peugeot 308 G1':           1_500_000, // 2007-2013
+  'Peugeot 308 G2':           3_000_000, // 2014-2021
+  'Peugeot 3008 G1':          2_200_000, // 2009-2016
+  'Peugeot 3008 G2':          5_500_000, // 2017+
   'Peugeot Partner':          3_200_000,
 
   // Volkswagen
-  'Volkswagen Polo':          3_200_000,
-  'Volkswagen Golf':          4_500_000,
-  'Volkswagen Golf 7':        4_500_000,
-  'Volkswagen Golf 7 Highline': 4_900_000,
-  'Volkswagen Golf 8':        6_200_000,
-  'Volkswagen Tiguan':        7_200_000,
-  'Volkswagen Tiguan R-Line': 8_200_000,
-  'Volkswagen Caddy':         5_000_000,
-
-  // Kia
-  'Kia Picanto':              3_200_000,
-  'Kia Picanto GT-Line':      3_600_000,
-  'Kia Sportage':             6_200_000, // FIX: was 6.8M
-  'Kia Sportage GT-Line':     7_800_000,
-  'Kia Sportage EX':          6_800_000,
-  'Kia Rio':                  3_200_000,
-
-  // Suzuki
-  'Suzuki Swift':             2_800_000,
-  'Suzuki Alto':              1_600_000,
+  'Volkswagen Polo 5':        1_800_000, // 2009-2017
+  'Volkswagen Polo 6':        3_600_000, // 2018+
+  'Volkswagen Golf 5':        1_500_000, // 2003-2008
+  'Volkswagen Golf 6':        2_200_000, // 2009-2012
+  'Volkswagen Golf 7':        4_200_000, // 2013-2020
+  'Volkswagen Golf 8':        6_200_000, // 2020+
+  'Volkswagen Tiguan G1':     2_800_000, // 2007-2015
+  'Volkswagen Tiguan G2':     6_500_000, // 2016+
+  'Volkswagen Caddy G3':      2_500_000, // 2004-2015
+  'Volkswagen Caddy G4':      4_500_000, // 2015-2020
+  'Volkswagen Caddy G5':      6_500_000, // 2021+
 
   // Seat / Skoda
-  'Seat Ibiza':               3_000_000,
-  'Seat Leon':                4_500_000,
-  'Skoda Octavia':            5_000_000,
+  'Seat Ibiza 3':             1_200_000, // 2002-2008
+  'Seat Ibiza 4':             1_700_000, // 2008-2017
+  'Seat Ibiza 5':             3_200_000, // 2017+
+  'Seat Leon 2':              1_600_000, // 2005-2012
+  'Seat Leon 3':              3_800_000, // 2012-2020
+  'Seat Leon 4':              5_500_000, // 2020+
+  'Skoda Octavia 2':          1_800_000, // 2004-2013
+  'Skoda Octavia 3':          4_200_000, // 2013-2020
+  'Skoda Octavia 4':          6_000_000, // 2020+
+  'Skoda Fabia 2':            1_400_000, // 2007-2014
+  'Skoda Fabia 3':            2_500_000, // 2014-2021
 
-  // Chinese Brands — recalibrated with improved supply 2024-2025
+  // Hyundai
+  'Hyundai Accent Era':       1_500_000, // 2006-2011
+  'Hyundai Accent RB':        2_400_000, // 2011-2017
+  'Hyundai Tucson G2':        2_500_000, // 2009-2015
+  'Hyundai Tucson G3':        4_500_000, // 2015-2020
+  'Hyundai Tucson G4':        6_800_000, // 2020+
+  'Hyundai i10 G1':           1_200_000, // 2007-2013
+  'Hyundai Grand i10':        2_200_000, // 2013-2019
+  'Hyundai Creta G1':         3_800_000, // 2015-2020
+
+  // Kia
+  'Kia Picanto G1':           1_100_000, // 2004-2011
+  'Kia Picanto G2':           1_800_000, // 2011-2017
+  'Kia Picanto G3':           3_200_000, // 2017+
+  'Kia Sportage G3':          3_000_000, // 2010-2015
+  'Kia Sportage G4':          4_800_000, // 2015-2021
+  'Kia Sportage G5':          7_500_000, // 2021+
+  'Kia Rio G3':               1_600_000, // 2011-2017
+  'Kia Rio G4':               3_000_000, // 2017+
+
+  // Chinese Brands
   'Jetour Dashing':           4_500_000,
   'Jetour Traveller T2':      8_000_000,
   'Geely Coolray':            3_800_000,
-  'Geely Coolray GF':         4_200_000,
-  'Geely Coolray GL':         3_800_000,
   'Geely Monjaro':            7_800_000,
   'Geely GX3 Pro':            2_800_000,
-  'Geely GX3 Pro GF':         3_200_000,
   'Geely Emgrand':            3_000_000,
-  'Geely Emgrand GF':         3_200_000,
   'Chery Tiggo 2 Pro':        2_600_000,
-  'Chery Tiggo 2 Pro Luxury': 3_000_000,
-  'Chery Tiggo 4 Pro':        3_200_000, // FIX: was 3.5M
-  'Chery Tiggo 4 Pro Luxury': 3_600_000,
+  'Chery Tiggo 4 Pro':        3_200_000,
   'Chery Tiggo 7 Pro':        3_800_000,
-  'Chery Tiggo 7 Pro Luxury': 4_200_000,
   'Chery Tiggo 8 Pro':        4_500_000,
-  'Chery Tiggo 8 Pro Luxury': 4_900_000,
   'Chery Arrizo 5':           3_000_000,
-  'Chery Arrizo 5 Luxury':    3_300_000,
   'BYD Dolphin':              5_200_000,
-  'BYD Dolphin Premium':      5_500_000,
   'BYD Seagull':              3_500_000,
-  'BYD Seagull Standard':     3_800_000,
   'DFSK Glory 580':           3_200_000,
   'DFSK Glory 600':           4_500_000,
   'MG ZS':                    4_200_000,
   'MG HS':                    6_000_000,
   'Changan Alsvin':           3_000_000,
-
-  // Stellantis (Fiat / Opel)
   'Fiat 500':                 2_600_000,
   'Fiat Tipo':                3_000_000,
   'Opel Astra':               4_800_000,
   'Opel Corsa':               3_500_000,
   'Opel Mokka':               4_500_000,
-
-  // Mercedes premium models
-  'Mercedes G-Class':              38_000_000,
-  'Mercedes-Benz G-Class':         38_000_000,
-  'Mercedes Classe G':             38_000_000,
-  'Mercedes-Benz Classe G':        38_000_000,
-  'Mercedes G Class':              38_000_000,
-  'Mercedes Classe G G63 AMG':     65_000_000,
-  'Mercedes Classe G G350d':       38_000_000,
-  'Mercedes Classe S':             26_000_000,
-  'Mercedes-Benz Classe S':        26_000_000,
-  'Mercedes Classe E':             15_000_000,
-  'Mercedes-Benz Classe E':        15_000_000,
-  'Mercedes Classe E E220d AMG':   18_000_000,
-  'Mercedes Classe C':             11_000_000,
-  'Mercedes-Benz Classe C':        11_000_000,
-  'Mercedes GLE':                  22_000_000,
-  'Mercedes-Benz GLE':             22_000_000,
-  'Mercedes GLE AMG Line':         24_000_000,
-  'Mercedes GLC':                  15_000_000,
-  'Mercedes-Benz GLC':             15_000_000,
-
-  // Land Rover premium models
-  'Land Rover Range Rover': 26_000_000,
-  'Range Rover':            26_000_000,
-  'Range Rover Sport':      24_000_000,
-  'Range Rover Vogue':      28_000_000,
-  'Range Rover Evoque':     11_000_000,
-  'Range Rover Velar':      15_000_000,
-
-  // Porsche premium models
-  'Porsche Cayenne':     24_000_000,
-  'Porsche Cayenne GTS': 28_000_000,
-  'Porsche Macan':       16_500_000,
-  'Porsche 911':         38_000_000,
-
-  // BMW premium models
-  'BMW Série 5': 12_500_000,
-  'BMW Série 7': 24_000_000,
-  'BMW X5':      22_000_000,
-  'BMW X5 M Sport': 24_000_000,
-  'BMW X6':      24_000_000,
-
-  // Audi premium models
-  'Audi A6': 12_000_000,
-  'Audi Q7': 18_500_000,
-  'Audi Q8': 26_000_000,
 };
 
 const CATEGORY_FALLBACK_MEDIANS: Record<string, number> = {
@@ -573,9 +533,9 @@ Deno.serve(async (req: Request) => {
     // 1. RÉCUPÉRATION DU CONTEXTE GLOBAL (Multi-Sources)
     const [mediansRes, listingsRes, transactionsRes, expertRes, catalogRes] = await Promise.all([
       supabase.from('prix_medians').select('*').eq('brand', brand).eq('year', year),
-      supabase.from('listings').select('price_asked, model, source, listing_type, price_before_taxes, customs_taxes, year, mileage, wilaya, condition').eq('brand', brand).gte('year', year - 2).lte('year', year + 2).limit(200),
-      supabase.from('real_transactions').select('brand, model, final_price, year').eq('brand', brand).gte('year', year - 1).lte('year', year + 1).limit(100),
-      supabase.from('expert_prices').select('brand, model, price, year').eq('brand', brand).gte('year', year - 1).lte('year', year + 1).limit(100),
+      supabase.from('listings').select('price_asked, model, source, listing_type, price_before_taxes, customs_taxes, year, mileage, wilaya, condition').eq('brand', brand).eq('year', year).limit(200),
+      supabase.from('real_transactions').select('brand, model, final_price, year').eq('brand', brand).eq('year', year).limit(100),
+      supabase.from('expert_prices').select('brand, model, price, year').eq('brand', brand).eq('year', year).limit(100),
       supabase.from('vehicle_catalog').select('body_type, model').eq('brand', brand)
     ]);
 
@@ -623,7 +583,7 @@ Deno.serve(async (req: Request) => {
     const rawListings = occasionListings.map((l: any) => l.price_asked).filter((p: number) => p > 100000);
     const filteredListings = removeOutliers(rawListings);
     filteredListings.forEach((p: number) => {
-      weightedPrices.push({ price: Math.round(p * 0.88), weight: 1 });
+      weightedPrices.push({ price: Math.round(p * 0.95), weight: 1 });
       breakdown.listings++;
     });
 
@@ -636,12 +596,12 @@ Deno.serve(async (req: Request) => {
     let isFallback = false;
 
     if (finalMatchedMedians) {
-      avgPrice = finalMatchedMedians.prix_median;
-      priceMin = finalMatchedMedians.prix_min || Math.round(avgPrice * 0.88);
-      priceMax = finalMatchedMedians.prix_max || Math.round(avgPrice * 1.12);
+      avgPrice = finalMatchedMedians.prix_median * 0.91; // 1. Ajustement Ouedkniss (Souk)
+      priceMin = finalMatchedMedians.prix_min ? finalMatchedMedians.prix_min * 0.91 : Math.round(avgPrice * 0.88);
+      priceMax = finalMatchedMedians.prix_max ? finalMatchedMedians.prix_max * 0.91 : Math.round(avgPrice * 1.12);
     } else if (weightedPoints >= 5) {
-      avgPrice = weightedMedian(weightedPrices);
-      const allPrices = weightedPrices.map(w => w.price).sort((a: number, b: number) => a - b);
+      avgPrice = weightedMedian(weightedPrices) * 0.91; // 1. Ajustement Ouedkniss (Souk)
+      const allPrices = weightedPrices.map(w => w.price * 0.91).sort((a: number, b: number) => a - b);
       const p10 = allPrices[Math.floor(allPrices.length * 0.1)] || allPrices[0];
       const p90 = allPrices[Math.floor(allPrices.length * 0.9)] || allPrices[allPrices.length - 1];
       priceMin = p10;
@@ -650,108 +610,124 @@ Deno.serve(async (req: Request) => {
       isFallback = true;
       const key = `${brand} ${model}`;
       const bodyType = matchedCatalog?.body_type || 'berline';
-      const categoryBase = CATEGORY_FALLBACK_MEDIANS[bodyType] || 1500000;
       
-      // Smart fuzzy matching lookup with dynamic brand-prestige multiplier fallback
-      let baseMedian = categoryBase;
-      const normalizedKey = key.toLowerCase().replace(/[^a-z0-9]/g, '');
-      const normalizedModel = model.toLowerCase().replace(/[^a-z0-9]/g, '');
+      // RECHERCHE GÉNÉRATIONNELLE INTELLIGENTE
+      let baseMedian = CATEGORY_FALLBACK_MEDIANS[bodyType] || 2_400_000;
       
-      if (FALLBACK_MEDIANS[key]) {
+      const getGenerationKey = (b: string, m: string, y: number) => {
+         const nm = m.toLowerCase();
+         if (nm.includes('golf')) {
+            if (y <= 2008) return 'Volkswagen Golf 5';
+            if (y <= 2012) return 'Volkswagen Golf 6';
+            if (y <= 2020) return 'Volkswagen Golf 7';
+            return 'Volkswagen Golf 8';
+         }
+         if (nm.includes('clio')) {
+            if (y <= 2005) return 'Renault Clio 2';
+            if (y <= 2012) return 'Renault Clio 3';
+            if (y <= 2019) return 'Renault Clio 4';
+            return 'Renault Clio 5';
+         }
+         if (nm.includes('ibiza')) {
+            if (y <= 2008) return 'Seat Ibiza 3';
+            if (y <= 2017) return 'Seat Ibiza 4';
+            return 'Seat Ibiza 5';
+         }
+         if (nm.includes('symbol')) {
+            if (y <= 2012) return 'Renault Symbol G1';
+            if (y <= 2017) return 'Renault Symbol G2';
+            return 'Renault Symbol G3';
+         }
+         if (nm.includes('208')) {
+            if (y <= 2019) return 'Peugeot 208 G1';
+            return 'Peugeot 208 G2';
+         }
+         if (nm.includes('leon')) {
+            if (y <= 2012) return 'Seat Leon 2';
+            if (y <= 2020) return 'Seat Leon 3';
+            return 'Seat Leon 4';
+         }
+         if (nm.includes('picanto')) {
+            if (y <= 2011) return 'Kia Picanto G1';
+            if (y <= 2017) return 'Kia Picanto G2';
+            return 'Kia Picanto G3';
+         }
+         return null;
+      };
+
+      const genKey = getGenerationKey(brand, model, year);
+
+      if (genKey && FALLBACK_MEDIANS[genKey]) {
+         baseMedian = FALLBACK_MEDIANS[genKey];
+      } else if (FALLBACK_MEDIANS[key]) {
         baseMedian = FALLBACK_MEDIANS[key];
-      } else if (FALLBACK_MEDIANS[model]) {
-        baseMedian = FALLBACK_MEDIANS[model];
       } else {
-        const foundKey = Object.keys(FALLBACK_MEDIANS).find(k => {
-          const normK = k.toLowerCase().replace(/[^a-z0-9]/g, '');
-          return normalizedKey.includes(normK) || normK.includes(normalizedKey) || normalizedModel.includes(normK) || normK.includes(normalizedModel);
-        });
-        if (foundKey) {
-          baseMedian = FALLBACK_MEDIANS[foundKey];
-        } else {
-          // Segment-based systematic classification!
-          const segment = classifyVehicleSegment(brand, model, bodyType);
-          const SEGMENT_BASES: Record<string, number> = {
-            citadine_budget:   1_600_000,
-            citadine_standard: 2_800_000, // FIX: was 3.2M
-            citadine_premium:  5_000_000,
-            berline_standard:  2_400_000, // FIX: was 2.8M
-            berline_premium:   9_000_000,
-            crossover_compact: 3_600_000, // FIX: was 4.2M
-            suv_routier:       6_000_000, // FIX: was 6.8M
-            suv_prestige:      22_000_000,
-            utilitaire_pickup: 8_500_000,
-          };
-
-          const segmentBase = SEGMENT_BASES[segment] || 2_400_000;
+        const segment = classifyVehicleSegment(brand, model, bodyType);
+        const SEGMENT_BASES: Record<string, number> = {
+          citadine_budget: 1_600_000, citadine_standard: 2_800_000, citadine_premium: 5_000_000,
+          berline_standard: 2_400_000, berline_premium: 9_000_000, crossover_compact: 3_600_000,
+          suv_routier: 6_000_000, suv_premium: 9_000_000, suv_prestige: 22_000_000, utilitaire_pickup: 8_500_000,
+        };
+        baseMedian = SEGMENT_BASES[segment] || 2_400_000;
+      }
+      
+      // 3. EVENT-DRIVEN HOURLY CACHE OVERRIDE
+      try {
+        const { data: hourlyData } = await supabase
+          .from('model_prices_hourly')
+          .select('computed_median')
+          .ilike('model_id', `%${model}%`)
+          .limit(1)
+          .single();
           
-          // Apply lightweight brand multipliers to fine-tune the segment base
-          const normBrand = brand.toLowerCase();
-          let brandMultiplier = 1.0;
-          
-          const prestigeBrands = ['porsche', 'bentley', 'ferrari', 'lamborghini', 'maserati', 'rollsroyce', 'rolls-royce', 'astonmartin', 'aston-martin', 'mclaren', 'bugatti'];
-          const premiumBrands = ['mercedes', 'mercedes-benz', 'mercedesbenz', 'bmw', 'audi', 'landrover', 'land-rover', 'rangerover', 'range-rover', 'lexus', 'jaguar', 'volvo', 'alfaromeo', 'alfa-romeo', 'tesla', 'jeep', 'cadillac', 'lincoln', 'infiniti'];
-          const budgetBrands = ['dacia', 'suzuki', 'fiat', 'geely', 'chery', 'changan', 'dfsk', 'jac', 'greatwall', 'great-wall', 'baic', 'byd', 'mg', 'gac', 'foton', 'maruti', 'lada', 'lifan', 'zotye'];
-
-          if (prestigeBrands.some(b => normBrand.includes(b))) {
-            brandMultiplier = 1.25;
-          } else if (premiumBrands.some(b => normBrand.includes(b))) {
-            brandMultiplier = 1.12;
-          } else if (budgetBrands.some(b => normBrand.includes(b))) {
-            brandMultiplier = 0.82;
-          }
-          
-          baseMedian = Math.round(segmentBase * brandMultiplier);
+        if (hourlyData && hourlyData.computed_median) {
+           console.log(`[EVENT-DRIVEN] Found hourly median for ${model}: ${hourlyData.computed_median}`);
+           baseMedian = hourlyData.computed_median;
         }
+      } catch (e) {
+        // Ignore, table might not exist yet or no data
       }
       
-      // All baselines are now 2026-aligned. refYear is always 2026.
-      let refYear = DEFAULT_REF_YEAR;
-      let yearlyCompoundingRate = 0.11; // Standard default for future years
-      
-      const normBrandForRate = brand.toLowerCase();
-      
-      const highDemandPremium = ['toyota land cruiser', 'toyota prado', 'toyota hilux', 'mercedes-benz g-class', 'mercedes g-class', 'mercedes-benz classe g', 'mercedes classe g', 'mercedes g class', 'porsche cayenne', 'porsche 911', 'bmw x5'];
-      const isHighDemandPremium = highDemandPremium.some(h => normalizedKey.includes(h.replace(/[^a-z0-9]/g, '')));
-      
-      if (isHighDemandPremium) {
-        yearlyCompoundingRate = 0.175; // Premium imports: +17.5% per year due to exceptional demand & imports restrictions
-      } else if (['porsche', 'bentley', 'ferrari', 'lamborghini', 'maserati', 'rollsroyce', 'rolls-royce', 'astonmartin', 'aston-martin', 'mclaren', 'bugatti', 'mercedes', 'mercedes-benz', 'bmw', 'audi', 'landrover', 'land-rover', 'rangerover', 'range-rover', 'lexus', 'jaguar'].some(b => normBrandForRate.includes(b))) {
-        yearlyCompoundingRate = 0.14; // Premium/luxury: +14% per year
-      } else if (['fiat', 'geely', 'chery', 'changan', 'dfsk', 'jac', 'byd', 'mg', 'gac', 'opel', 'dacia', 'suzuki'].some(b => normBrandForRate.includes(b))) {
-        yearlyCompoundingRate = 0.07; // Dealership imports (Fiat, Geely, Chery): stabilized +7% per year
+      let refYear = 2018; 
+      if (genKey) {
+         if (genKey.includes('Golf 5') || genKey.includes('Clio 2') || genKey.includes('Ibiza 3') || genKey.includes('G1')) refYear = 2008;
+         else if (genKey.includes('Golf 6') || genKey.includes('Clio 3') || genKey.includes('Ibiza 4')) refYear = 2011;
+         else if (genKey.includes('Golf 7') || genKey.includes('Clio 4') || genKey.includes('G2')) refYear = 2016;
+         else if (genKey.includes('Golf 8') || genKey.includes('Clio 5') || genKey.includes('Ibiza 5') || genKey.includes('G3')) refYear = 2021;
       } else {
-        yearlyCompoundingRate = 0.125; // Standard high demand (Renault, Clio, Golf, Tucson, Picanto): +12.5% per year
+         const normModelAnchor = model.toLowerCase();
+         const normBrandAnchor = brand.toLowerCase();
+         if (['jetour', 'geely', 'chery', 'byd', 'dfsk', 'fiat', 'opel', 'jac', 'baic', 'changan'].some(b => normBrandAnchor.includes(b))) {
+            refYear = 2024;
+         } else if (normModelAnchor.includes('golf 8') || normModelAnchor.includes('clio 5') || normModelAnchor.includes('megane 4') || normModelAnchor.includes('tucson') || normModelAnchor.includes('stepway 3')) {
+            refYear = 2022;
+         } else if (normModelAnchor.includes('hilux') || normModelAnchor.includes('land cruiser') || normModelAnchor.includes('prado')) {
+            refYear = 2022;
+         }
       }
 
-      const referenceYearForAdjust = Math.min(year, 2026); // Go up to 2026
-      const yearDiff = referenceYearForAdjust - refYear;
+      const deltaYear = year - refYear;
       let adjusted = baseMedian;
-      if (yearDiff >= 0) {
-        // Newer cars compound at our custom segment-aware Algerian macro inflation rates
-        adjusted = baseMedian * Math.pow(1 + yearlyCompoundingRate, yearDiff);
+      
+      if (deltaYear > 0) {
+         adjusted = baseMedian * (1 + Math.min(0.20, deltaYear * 0.04));
       } else {
-        // Brand-aware retroactive depreciation going backward because used cars hold their value exceptionally well in Algeria
-        let decayRate = 0.05; // Standard: -5% per year (FIX: was 0.04)
-        const normBrand = brand.toLowerCase();
-        const normModel = model.toLowerCase();
-
-        // FIX: Only true refuge/workhorse models get slow decay
-        const isTrueRefuge = normModel.includes('hilux') || normModel.includes('landcruiser') ||
-          normModel.includes('land cruiser') || normModel.includes('prado') ||
-          (normBrand === 'dacia' && (normModel.includes('duster') || normModel.includes('logan')));
-        const isPremium = ['mercedes', 'mercedes-benz', 'bmw', 'audi', 'landrover', 'land-rover', 'rangerover', 'range-rover', 'porsche', 'lexus'].some(b => normBrand.includes(b));
-        const isBudgetOrChinese = ['geely', 'chery', 'changan', 'dfsk', 'jac', 'baic', 'byd', 'mg', 'gac', 'foton', 'maruti', 'lada', 'lifan', 'zotye'].some(b => normBrand.includes(b));
-
-        if (isTrueRefuge) {
-          decayRate = 0.025;
-        } else if (isPremium) {
-          decayRate = 0.060;
-        } else if (isBudgetOrChinese) {
-          decayRate = 0.080;
-        }
-        
-        adjusted = baseMedian * Math.pow(1 - decayRate, Math.abs(yearDiff));
+         const absDelta = Math.abs(deltaYear);
+         let decayPercent = 0;
+         
+         if (absDelta <= 3) {
+           decayPercent = absDelta * 0.10; // -10% pour ans 1 à 3
+         } else if (absDelta <= 8) {
+           decayPercent = (3 * 0.10) + ((absDelta - 3) * 0.05); // -5% pour ans 4 à 8
+         } else {
+           decayPercent = (3 * 0.10) + (5 * 0.05) + ((absDelta - 8) * 0.02); // -2% pour ans 9+
+         }
+         
+         if (model.toLowerCase().includes('hilux') || model.toLowerCase().includes('land cruiser') || brand.toLowerCase().includes('dacia')) {
+           decayPercent = decayPercent / 1.5;
+         }
+         
+         adjusted = baseMedian * (1 - Math.min(0.55, decayPercent));
       }
       
       // Ajustement par Finition (Trim) dans le fallback
@@ -773,14 +749,77 @@ Deno.serve(async (req: Request) => {
     
     // 1. Ajustement Kilométrage (Lissage sur base 20k km/an)
     const expectedMileage = (2026 - year) * 20000;
-    const mileageDiff = mileage - expectedMileage;
-    // -3% par tranche de 15 000 km au dessus de la moyenne
-    if (mileageDiff > 0) {
-      avgPrice *= Math.pow(0.97, mileageDiff / 15000);
-    } else if (mileageDiff < 0) {
-      // +2% par tranche de 15 000 km en dessous (gain limité à +15% max)
-      avgPrice *= Math.min(1.15, Math.pow(1.02, Math.abs(mileageDiff) / 15000));
+    let mileageDiff = mileage - expectedMileage;
+    const carAge = 2026 - year;
+    
+    // Bouclier : Si la voiture a plus de 10 ans, le kilométrage excédentaire n'est presque plus sanctionné
+    if (carAge > 10 && mileageDiff > 0) mileageDiff *= 0.2;
+    else if (carAge > 6 && mileageDiff > 0) mileageDiff *= 0.5;
+
+    if (mileageDiff > 0) avgPrice *= Math.pow(0.97, mileageDiff / 15000);
+    else if (mileageDiff < 0) avgPrice *= Math.min(1.15, Math.pow(1.02, Math.abs(mileageDiff) / 15000));
+
+    // 2. Modificateurs Additifs pour éviter "l'effondrement"
+    let totalModifierPercentage = 0;
+
+    // Condition générale
+    if (condition === 'excellent') totalModifierPercentage += 0.05;
+    else if (condition === 'moyen') totalModifierPercentage -= 0.05;
+    else if (condition === 'mauvais') totalModifierPercentage -= 0.15;
+
+    // Moteur
+    if (engine === 'neuf') totalModifierPercentage += 0.05;
+    else if (engine === 'fatigue' || engine === 'swappe') totalModifierPercentage -= 0.15;
+
+    // Peinture (Sbigha) & Bouclier d'Âge
+    if (paint) {
+      let paintMalus = 0;
+      if (paint === 'origine') totalModifierPercentage += 0.05; // Bonus Zéro Sbigha
+      else if (paint === 'raccord') paintMalus = -0.05;
+      else if (paint === 'repeinte') paintMalus = -0.10;
+      else if (paint === 'choc') paintMalus = -0.15;
+
+      // Bouclier d'âge additif : l'âge réduit l'impact de la sbigha
+      if (paintMalus < 0) {
+        if (carAge > 10) paintMalus *= 0.5; // -15% devient -7.5% pour une vieille voiture
+        else if (carAge > 5) paintMalus *= 0.7; // -15% devient -10.5%
+      }
+      totalModifierPercentage += paintMalus;
     }
+
+    // VTC penalty logic
+    const localNormModel = model.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const isVtcModel = ['symbol', 'logan', 'stepway', '301', 'celysee', 'ibiza', 'rapid'].some(m => localNormModel.includes(m));
+    const annualAvgForVtc = mileage / Math.max(1, 2026 - year);
+    let isExTaxi = false;
+
+    if (isVtcModel && annualAvgForVtc > 40000) {
+       isExTaxi = true;
+       totalModifierPercentage -= 0.15; // -15% severe direct penalty for Ex-Taxi/VTC
+    }
+
+    // Application des modificateurs additifs
+    avgPrice = avgPrice * (1 + totalModifierPercentage);
+
+    // Plancher de Sécurité Absolu (Safety Floor)
+    // Une voiture roulante ne peut pas s'effondrer sous 70% de son estimation initiale
+    const absoluteFloor = avgPriceOriginal * 0.70;
+    if (avgPrice < absoluteFloor) {
+      avgPrice = absoluteFloor;
+    }
+
+    // Bonus Carburant & Options (Brut ou Multiplicatif final)
+    const multFuel = fuel ? (FUEL_MULTIPLIERS[fuel] || 1.0) : 1.0;
+    avgPrice *= multFuel;
+
+    // Documents et Transmission
+    if (document_status === 'licence_delai') {
+      if (carAge <= 1) avgPrice *= 0.80;
+      else if (carAge === 2) avgPrice *= 0.90;
+      else avgPrice *= 0.95;
+    }
+    const multTransmission = transmission ? (TRANSMISSION_MULTIPLIERS[transmission] || 1.0) : 1.0;
+    avgPrice *= multTransmission;
 
     // 1.5 Wilaya Regional adjustment (Oran, Alger, Constantine have higher demand, south has slightly lower)
     if (wilaya) {
@@ -795,27 +834,9 @@ Deno.serve(async (req: Request) => {
       }
     }
 
-    const multCondition = CONDITION_MULTIPLIERS[condition] || 1.0;
-    const multPaint = paint ? (PAINT_MULTIPLIERS[paint] || 1.0) : 1.0;
-    const multEngine = engine ? (ENGINE_MULTIPLIERS[engine] || 1.0) : 1.0;
-    const multFuel = fuel ? (FUEL_MULTIPLIERS[fuel] || 1.0) : 1.0;
-    const multDocument = document_status ? (DOCUMENT_MULTIPLIERS[document_status] || 1.0) : 1.0;
-    const multTransmission = transmission ? (TRANSMISSION_MULTIPLIERS[transmission] || 1.0) : 1.0;
-    
-    // Fix 00 Compteur bug: do not apply condition / paint / engine multipliers to reduce price for a brand new car
-    let stateMultiplier = 1.0;
-    if (mileage > 100) {
-      stateMultiplier = multCondition * multPaint * multEngine * multFuel * multDocument * multTransmission;
-    } else {
-      // For 00 Compteur, papers and transmission might still apply (e.g. automatic transmission premium or mujahideen license discount)
-      stateMultiplier = multDocument * multTransmission;
-    }
-
-    // Apply condition, paint, and engine adjustments globally
-    avgPrice *= stateMultiplier;
-
-    // Apply dynamic trend markups from macro_indices table
+    // Apply dynamic trend markups from macro_indices table and market_news_signals
     try {
+      // 1. Static macro indices
       const { data: macroData } = await supabase.from('macro_indices').select('key, value');
       if (macroData) {
         const asianBrandMarkupItem = macroData.find((m: any) => m.key === 'asian_brand_markup');
@@ -831,13 +852,25 @@ Deno.serve(async (req: Request) => {
             avgPrice *= asianBrandMarkup;
           }
 
-          // FIX: under_3y_markup only for 2-5 year old cars, NOT brand-new (year >= currentYear-1)
-          const carAge = new Date().getFullYear() - year;
-          if (carAge >= 2 && carAge <= 5) {
+          const carAgeMacro = new Date().getFullYear() - year;
+          if (carAgeMacro >= 2 && carAgeMacro <= 5) {
             avgPrice *= under3yMarkup;
           }
         }
       }
+
+      // 2. Real-Time Event-Driven Signals (Conjoncture)
+      const { data: signalData } = await supabase
+        .from('market_news_signals')
+        .select('current_coef')
+        .order('captured_at', { ascending: false })
+        .limit(1)
+        .single();
+        
+      if (signalData && signalData.current_coef) {
+         avgPrice *= parseFloat(signalData.current_coef);
+      }
+      
     } catch (e) {
       console.warn('Could not apply database trend multipliers:', e);
     }
@@ -853,21 +886,21 @@ Deno.serve(async (req: Request) => {
 
     if (mileage <= 100 && year >= currentYear - 2 && year < currentYear && isFallback) {
       // FIX: 00 Compteur premium ONLY applies in fallback mode (no DB median).
-      // When we have a real DB median, it already reflects brand-new price — do NOT double-count.
-      avgPrice *= 1.25;
+      avgPrice = avgPriceOriginal * 1.25 * (1 + totalModifierPercentage);
     } else if (mileage <= 5000 && year >= currentYear - 5 && year < currentYear && isFallback) {
       // Zone Quasi-Neuf: Transition douce — fallback only
       const quasiNewFactor = 1.25 * Math.pow(0.992, mileage / 1000);
-      avgPrice = (avgPrice / stateMultiplier) * quasiNewFactor * (multCondition * multPaint * multEngine);
+      avgPrice = avgPriceOriginal * quasiNewFactor * (1 + totalModifierPercentage);
     } else if (!isFallback) {
       // DB median mode: just enforce the cap — price cannot exceed what the DB median implies for a brand-new example
-      const zeroKmPrice = finalMatchedMedians.prix_median * 1.15;
+      const baseMedianForCap = finalMatchedMedians?.prix_median ? (finalMatchedMedians.prix_median * 0.91) : avgPriceOriginal;
+      const zeroKmPrice = baseMedianForCap * 1.15;
       if (avgPrice > zeroKmPrice) {
         avgPrice = zeroKmPrice * 0.95;
       }
     } else {
       // Fallback + older/normal car: cap at inferred new price
-      const zeroKmPrice = (avgPrice / stateMultiplier) * 1.15;
+      const zeroKmPrice = avgPriceOriginal * 1.15;
       if (avgPrice >= zeroKmPrice) {
         avgPrice = zeroKmPrice * 0.95;
       }

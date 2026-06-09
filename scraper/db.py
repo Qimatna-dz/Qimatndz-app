@@ -65,6 +65,11 @@ def insert_listing(data: dict, client: Client = None) -> bool:
         if listing_exists(url):
             return False
 
+        # Garantir que scraped_at est toujours défini pour que time_decay_weight fonctionne
+        # Sans ça, toutes les annonces reçoivent weight=1 (stale) au lieu de weight=3 (frais)
+        if "scraped_at" not in data or not data["scraped_at"]:
+            data["scraped_at"] = datetime.now(timezone.utc).isoformat()
+
         # Apply AI Credibility & Price Correction Filter
         try:
             from credibility_filter import evaluate_credibility
@@ -102,6 +107,96 @@ def insert_listing(data: dict, client: Client = None) -> bool:
     except Exception as e:
         print(f"Database error: {e}")
         return False
+
+def insert_listings_batch(listings: list, client: Client = None) -> tuple[int, int]:
+    """Inserts a batch of listings, applying credibility filter in bulk."""
+    if client is None:
+        client = get_supabase_client()
+
+    # 1. Efficient Bulk Deduplication
+    scraped_urls = [lst.get("url") for lst in listings if lst.get("url")]
+    existing_urls = set()
+    
+    # Query Supabase in chunks of 100 to avoid N+1 and connection limits
+    chunk_size = 100
+    for i in range(0, len(scraped_urls), chunk_size):
+        chunk = scraped_urls[i:i + chunk_size]
+        try:
+            res = client.table("listings").select("url").in_("url", chunk).execute()
+            for r in res.data:
+                if 'url' in r:
+                    existing_urls.add(r['url'])
+        except Exception as e:
+            print(f"Error checking duplicates chunk: {e}")
+
+    new_listings = []
+    skipped = 0
+    for lst in listings:
+        url = lst.get("url")
+        if not url or url in existing_urls:
+            skipped += 1
+            continue
+            
+        # Remove fields that do not exist in the database schema
+        lst.pop("description", None)
+        
+        if "scraped_at" not in lst or not lst["scraped_at"]:
+            lst["scraped_at"] = datetime.now(timezone.utc).isoformat()
+            
+        source = lst.get("source", "unknown")
+        if "source_weight" not in lst:
+            lst["source_weight"] = 0.95 if source == "sogauto" else (0.85 if source == "ouedkniss" else 0.75)
+            
+        new_listings.append(lst)
+
+    if not new_listings:
+        return 0, skipped
+
+    # 2. Batch AI Credibility Filter
+    try:
+        from credibility_filter import evaluate_credibility_batch
+        cred_results = evaluate_credibility_batch(new_listings)
+        
+        valid_listings = []
+        for i, cred_res in enumerate(cred_results):
+            lst = new_listings[i]
+            if not cred_res.get("is_credible", True):
+                print(f"   [FILTER SUSPECT REJECT] {lst.get('brand')} {lst.get('model')} ({lst.get('year')}) "
+                      f"annoncé à {lst.get('price_asked'):,} DZD rejeté ! Raison : {cred_res.get('reason')}")
+                skipped += 1
+                continue
+                
+            corrected_price = cred_res.get("corrected_price")
+            if corrected_price and corrected_price != lst.get("price_asked"):
+                print(f"   [AI PRICE FIXED] 👍 {lst.get('brand')} {lst.get('model')} ({lst.get('year')}) "
+                      f"corrigé de {lst.get('price_asked'):,} DZD à {corrected_price:,} DZD !")
+                lst["price_asked"] = corrected_price
+                
+            valid_listings.append(lst)
+    except Exception as filter_err:
+        print(f"   [WARN] Filtre de crédibilité batch inaccessible : {filter_err}. Passage direct.")
+        valid_listings = new_listings
+
+    # 3. Bulk Insert
+    if not valid_listings:
+        return 0, skipped
+        
+    inserted = 0
+    try:
+        # We manually deduplicated via existing_urls, so we can just bulk insert
+        res = client.table("listings").insert(valid_listings).execute()
+        inserted = len(res.data) if hasattr(res, 'data') and res.data else len(valid_listings)
+    except Exception as e:
+        print(f"Database bulk insert error: {e}")
+        # Fallback to individual inserts if bulk fails
+        for lst in valid_listings:
+            try:
+                client.table("listings").insert(lst).execute()
+                inserted += 1
+            except Exception as inner_e:
+                print(f"Failed to insert {lst.get('url')}: {inner_e}")
+                
+    return inserted, skipped
 
 def get_vehicle_catalog(client: Client = None) -> list:
     """Fetches the reference catalog of vehicles."""

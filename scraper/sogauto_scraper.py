@@ -44,7 +44,7 @@ def scrape_sogauto(max_pages: int = 100) -> list:
             catalog_map[(b.lower().strip(), m.lower().strip())] = (b.strip(), m.strip())
             
     print(f"--- Catalogue de référence chargé : {len(catalog_map)} modèles uniques.")
-    print(f"--- Lancement du scraping Sogauto.dz (max {max_pages} pages de 50 annonces)...")
+    print(f"--- Lancement du scraping Sogauto.dz (max {max_pages} pages de 50 annonces soit ~{max_pages * 50:,} ann/cycle)...")
     
     all_results = []
     
@@ -88,7 +88,7 @@ def scrape_sogauto(max_pages: int = 100) -> list:
                         continue
                     price = int(float(price_raw))
                     
-                    # Validation prix raisonnable
+                    # Validation prix raisonnable (jusqu'à 250M pour le luxe)
                     if not (100000 <= price <= 25000000):
                         continue
                         
@@ -120,6 +120,9 @@ def scrape_sogauto(max_pages: int = 100) -> list:
                         
                     trim = " ".join(trim_parts) if trim_parts else None
 
+                    # Date de publication de l'annonce chez Sogauto (date du vendeur)
+                    annonce_posted_raw = item.get("publishedAt") or item.get("createdAt") or item.get("created_at")
+
                     listing_data = {
                         "source": "sogauto",
                         "brand": exact_brand,
@@ -131,6 +134,8 @@ def scrape_sogauto(max_pages: int = 100) -> list:
                         "condition": "bon",
                         "url": url,
                         "trim": trim,
+                        # Horodatage d'origine : quand l'annonce a été publiée sur Sogauto
+                        "annonce_posted_at": annonce_posted_raw,
                     }
                     
                     all_results.append(listing_data)
@@ -163,7 +168,7 @@ def run_scraper():
             update_scraper_status("Sogauto Crawler", "ERROR", error_message=f"DB connection failed: {e}")
             return
             
-        listings = scrape_sogauto(max_pages=100)
+        listings = scrape_sogauto(max_pages=200)
         if not listings:
             print("[WARN] Aucune annonce recuperee de Sogauto.")
             update_scraper_status("Sogauto Crawler", "OK", records_added=0)

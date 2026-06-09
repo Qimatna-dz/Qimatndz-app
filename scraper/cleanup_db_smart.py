@@ -39,27 +39,31 @@ def purify_database():
 
     print("\n2. Analyse et nettoyage en cours...")
     
+    from credibility_filter import evaluate_credibility_batch
+    
+    payloads = []
     for l in listings:
+        payloads.append({
+            "brand": l.get("brand"),
+            "model": l.get("model"),
+            "year": l.get("year"),
+            "mileage": l.get("mileage"),
+            "price_asked": l.get("price_asked"),
+            "source": l.get("source"),
+            "url": l.get("url"),
+            "description": l.get("description", "")
+        })
+        
+    print(f"\n2. Analyse et nettoyage en cours de {len(payloads)} annonces via Batch...")
+    results = evaluate_credibility_batch(payloads)
+    
+    for i, result in enumerate(results):
+        l = listings[i]
         listing_id = l.get("id")
         brand = l.get("brand")
         model = l.get("model")
         year = l.get("year")
         price = l.get("price_asked")
-        mileage = l.get("mileage")
-        url = l.get("url")
-        
-        # Build evaluation payload
-        payload = {
-            "brand": brand,
-            "model": model,
-            "year": year,
-            "mileage": mileage,
-            "price_asked": price,
-            "source": l.get("source"),
-            "url": url
-        }
-        
-        result = evaluate_credibility(payload)
         
         if not result.get("is_credible", True):
             # Suspicious - DELETE

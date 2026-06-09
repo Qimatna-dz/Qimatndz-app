@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>QimatnaDz — Dashboard</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
@@ -292,7 +294,9 @@ body::before {
     </div>
     <div class="top-right">
       <div class="live-pill"><div class="live-dot"></div> En direct</div>
-      <button class="period-btn on">Réel</button>
+      <button class="period-btn on" onclick="fetchLiveStats()" style="display:flex; align-items:center; gap:6px; padding:0.5rem 1rem; cursor:pointer;">
+        <span style="font-size:0.9rem;">🔄</span> Actualiser
+      </button>
       <button class="period-btn" onclick="handleLogout(event)" style="background:none; border:1px solid var(--danger); color:var(--danger); margin-left:0.5rem; cursor:pointer;">🚪 Déconnexion</button>
     </div>
   </div>
@@ -400,6 +404,16 @@ body::before {
           <div style="font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink-60); margin-bottom:0.6rem;">
             Statut des collectes automatiques
           </div>
+          <div class="flex items-center justify-between p-3 mb-4 bg-gray-50 rounded-lg border border-gray-100">
+              <div class="flex items-center gap-3">
+                  <span class="relative flex h-3 w-3">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-3 w-3 bg-teal-500"></span>
+                  </span>
+                  <span class="text-sm font-semibold text-gray-800" style="font-family:'Figtree'">Scraper Ouedkniss (Flux A)</span>
+              </div>
+              <span class="text-xs font-medium text-teal-600 bg-teal-50 px-2 py-1 rounded-md" id="heartbeat-status">Actif (Dernier ping: il y a 12 min)</span>
+          </div>
           <div style="display:flex; flex-direction:column; gap:0.6rem;" id="scraperStatusList">
             <div style="font-size:0.8rem; color:var(--ink-30); text-align:center; padding:1rem 0;">Chargement des scrapers...</div>
           </div>
@@ -424,15 +438,120 @@ body::before {
     </div>
   </div>
 
+  <!-- 👁️ Observabilité (Pipeline & AI) -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6" style="margin-bottom:1.5rem;">
+      <!-- Taux de Rejet Haiku -->
+      <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-2">
+              <h3 class="text-sm font-bold text-gray-500 uppercase tracking-wider">Rejet Filtre IA (Haiku)</h3>
+              <span class="text-xl font-bold text-teal-600" id="aiRejectionRate">--%</span>
+          </div>
+          <div class="w-full bg-gray-100 rounded-full h-2 mb-2">
+              <div class="bg-teal-500 h-2 rounded-full" id="aiRejectionBar" style="width: 0%"></div>
+          </div>
+          <p class="text-xs text-gray-400">Pourcentage d'annonces rejetées par Claude sur les dernières 24h.</p>
+      </div>
+
+      <!-- Coût API IA -->
+      <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-2">
+              <h3 class="text-sm font-bold text-gray-500 uppercase tracking-wider">Coût API IA (Mois)</h3>
+              <span class="text-xl font-bold text-indigo-600" id="aiCostTotal">$0.00</span>
+          </div>
+          <p class="text-xs text-gray-400">Dépense cumulée pour le filtrage de crédibilité.</p>
+      </div>
+
+      <!-- Angles Morts -->
+      <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-2">
+              <h3 class="text-sm font-bold text-gray-500 uppercase tracking-wider">Radar Angles Morts</h3>
+              <span class="text-xl font-bold text-amber-500" id="failedQueriesTotal">--</span>
+          </div>
+          <p class="text-xs text-gray-400">Requêtes utilisateurs avec "Confiance Faible".</p>
+          <div id="failedQueriesList" class="mt-3 text-xs font-medium text-gray-700 space-y-1">
+              <div class="text-gray-400 italic">Chargement...</div>
+          </div>
+      </div>
+  </div>
+
+  <!-- 🚨 Sécurité & Contrôle Marché Card -->
+  <div class="bg-white p-6 rounded-2xl shadow-sm border border-red-100 mb-6" style="margin-bottom:1.5rem;">
+      <div class="flex items-center justify-between mb-4">
+          <h3 class="text-lg font-bold text-gray-900" style="font-family:'Playfair Display', serif;">🚨 Sécurité & Contrôle Marché</h3>
+          <span class="text-xs text-red-500 bg-red-50 px-2 py-1 rounded border border-red-100">Zone de danger</span>
+      </div>
+
+      <div class="mb-6 pb-6 border-b border-gray-100">
+          <div class="flex justify-between items-end mb-2">
+              <div>
+                  <label class="text-sm font-bold text-gray-800 uppercase tracking-wider">Modificateur Global</label>
+                  <p class="text-xs text-gray-500 mt-1">Abaisser tous les prix en cas d'ouverture des douanes ou crise.</p>
+              </div>
+              <span class="text-lg font-bold text-red-600" id="global-modifier-value">0%</span>
+          </div>
+          <div class="flex items-center gap-4">
+              <input type="range" id="global-modifier-slider" min="-30" max="0" value="0" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-red-500" style="accent-color: #ef4444;">
+              <button id="btn-save-modifier" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-bold rounded-lg transition-colors shadow-sm">
+                  Forcer
+              </button>
+          </div>
+      </div>
+
+      <div class="mb-6 pb-6 border-b border-gray-100">
+          <label class="text-sm font-bold text-gray-800 uppercase tracking-wider block mb-2">Kill Switch (Geler un modèle)</label>
+          <p class="text-xs text-gray-500 mb-3">Bloque les estimations d'un véhicule attaqué par des spéculateurs.</p>
+          
+          <div class="flex gap-3 mb-4">
+              <input type="text" id="freeze-model-input" placeholder="Ex: Seat Leon..." class="flex-1 px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500">
+              <button id="btn-freeze-model" class="px-4 py-2 bg-gray-800 hover:bg-black text-white text-sm font-bold rounded-lg transition-colors">
+                  Geler (Kill)
+              </button>
+          </div>
+
+          <div class="bg-red-50 rounded-lg p-3 border border-red-100" id="frozen-models-list">
+              <p class="text-xs text-red-600 font-medium mb-2">Modèles actuellement gelés :</p>
+              <!-- Loaded via JS -->
+          </div>
+      </div>
+
+      <div class="mb-6 pb-6 border-b border-gray-100">
+          <label class="text-sm font-bold text-gray-800 uppercase tracking-wider block mb-2">Force Override (Prix Expert)</label>
+          <p class="text-xs text-gray-500 mb-3">Imposer un prix fixe (écrase l'algorithme). Renseignez Marque, Modèle, Année et Prix.</p>
+          <div class="flex gap-2">
+              <input type="text" id="override-brand" placeholder="Marque" class="w-1/4 px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm">
+              <input type="text" id="override-model" placeholder="Modèle" class="w-1/4 px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm">
+              <input type="number" id="override-year" placeholder="Année" class="w-1/5 px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm">
+              <input type="number" id="override-price" placeholder="Prix DZD" class="w-1/4 px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm">
+              <button id="btn-force-override" class="px-3 py-2 bg-amber-500 hover:bg-amber-600 text-white text-sm font-bold rounded-lg transition-colors">
+                  Injecter
+              </button>
+          </div>
+      </div>
+
+      <div>
+          <label class="text-sm font-bold text-gray-800 uppercase tracking-wider block mb-2">Bannissement Utilisateur / IP</label>
+          <p class="text-xs text-gray-500 mb-3">Couper l'accès à un spéculateur ou bot identifié.</p>
+          <div class="flex gap-3">
+              <input type="text" id="ban-input" placeholder="ID Supabase ou Adresse IP..." class="flex-1 px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm">
+              <button id="btn-ban-user" class="px-4 py-2 bg-red-800 hover:bg-red-900 text-white text-sm font-bold rounded-lg transition-colors">
+                  Bannir
+              </button>
+          </div>
+      </div>
+  </div>
+
   <div class="row-3">
-    <!-- Activity pending state -->
+    <!-- Activité Temps Réel (Histogramme) -->
     <div class="card">
-      <div class="card-h"><div class="card-title">Activité des Estimations</div></div>
-      <div class="card-b" style="display:flex; align-items:center; justify-content:center; height:160px; color:var(--ink-30); font-size:0.8rem; text-align:center;">
-        <div>
-          <div style="font-size:1.5rem; margin-bottom:8px;">📈</div>
-          Moteur analytique en attente d'intégrations supplémentaires.
+      <div class="card-h">
+        <div class="card-title">⏱️ Activité en Temps Réel (Estimations / 24h)</div>
+        <div class="card-sub" style="display:flex; align-items:center; gap:6px;">
+          <span class="live-dot" style="display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--cyan);"></span>
+          Trafic en direct
         </div>
+      </div>
+      <div class="card-b" style="height:160px; display:flex; align-items:flex-end; gap:4px; padding-top:1rem;" id="activityHistogram">
+        <div style="width:100%; text-align:center; color:var(--ink-30); font-size:0.8rem; margin-bottom:2rem;">Chargement du trafic...</div>
       </div>
     </div>
     
@@ -482,13 +601,16 @@ body::before {
 ══════════════════════════════════ -->
 <div class="view" id="par-wilaya">
   <div class="topbar">
-    <div><div class="page-h">Par Wilaya</div><div class="page-sub">Répartition géographique du trafic réel</div></div>
+    <div><div class="page-h">Par Wilaya</div><div class="page-sub">Répartition géographique du marché (Annonces)</div></div>
   </div>
-  <div class="card row-full">
-    <div class="card-h"><div class="card-title">Toutes les wilayas réelles</div><div class="card-sub">Classées par estimations enregistrées en base</div></div>
-    <div class="card-b">
-      <div class="bar-row" id="realWilayasDetailedList">
-        <div style="font-size:0.8rem; color:var(--ink-30); text-align:center; padding:2rem 0;">Aucune estimation enregistrée en base.</div>
+  <div class="card row-full" style="height: 650px; display: flex; flex-direction: column;">
+    <div class="card-h">
+      <div class="card-title">Carte Interactive de l'Algérie</div>
+      <div class="card-sub">Survolez ou cliquez sur une wilaya pour voir le volume de véhicules en vente. Utilisez la molette pour zoomer et glissez pour pivoter.</div>
+    </div>
+    <div class="card-b" style="flex: 1; padding: 0; position: relative;">
+      <div id="algeriaMapContainer" style="width: 100%; height: 100%;">
+        <div style="font-size:0.8rem; color:var(--ink-30); text-align:center; padding-top:4rem;">Chargement de la carte...</div>
       </div>
     </div>
   </div>
@@ -499,14 +621,16 @@ body::before {
 ══════════════════════════════════ -->
 <div class="view" id="par-pays">
   <div class="topbar">
-    <div><div class="page-h">Par Pays</div><div class="page-sub">Répartition internationale du trafic</div></div>
+    <div><div class="page-h">Par Pays</div><div class="page-sub">Répartition internationale du marché</div></div>
   </div>
-  <div class="card row-full">
-    <div class="card-h"><div class="card-title">Trafic International</div></div>
-    <div class="card-b" style="display:flex; align-items:center; justify-content:center; height:240px; color:var(--ink-30); font-size:0.85rem; text-align:center;">
-      <div>
-        <div style="font-size:2rem; margin-bottom:12px;">🌍</div>
-        QimatnaDz cible exclusivement l'Algérie. Aucun trafic international n'est actuellement ciblé.
+  <div class="card row-full" style="height: 650px; display: flex; flex-direction: column;">
+    <div class="card-h">
+      <div class="card-title">Carte Interactive du Monde</div>
+      <div class="card-sub">Survolez ou cliquez sur un pays pour voir la répartition du marché. Utilisez la molette pour zoomer et glissez pour pivoter.</div>
+    </div>
+    <div class="card-b" style="flex: 1; padding: 0; position: relative;">
+      <div id="worldMapContainer" style="width: 100%; height: 100%;">
+        <div style="font-size:0.8rem; color:var(--ink-30); text-align:center; padding-top:4rem;">Chargement de la carte...</div>
       </div>
     </div>
   </div>
@@ -691,6 +815,12 @@ const checkAdminPrivileges = async (user) => {
       // Load Supabase statistics & sync
       await fetchLiveStats();
       await fetchAllUsers();
+      await fetchFrozenModels();
+      await fetchGlobalModifier();
+
+      // Set up auto-refresh every 30 seconds
+      if (window.liveStatsInterval) clearInterval(window.liveStatsInterval);
+      window.liveStatsInterval = setInterval(fetchLiveStats, 30000);
     } else {
       await _supabase.auth.signOut();
       throw new Error("Accès refusé. Vous devez disposer des droits d'administrateur.");
@@ -708,6 +838,7 @@ const checkAdminPrivileges = async (user) => {
 
 const handleLogout = async (e) => {
   e.preventDefault();
+  if (window.liveStatsInterval) clearInterval(window.liveStatsInterval);
   await _supabase.auth.signOut();
   currentUser = null;
   document.getElementById('loginOverlay').style.display = 'flex';
@@ -737,7 +868,11 @@ const fetchLiveStats = async () => {
       { data: scraperData },
       { data: exchangeRatesEUR },
       { data: macroIndices },
-      { data: recentValuations }
+      { data: recentValuations },
+      { data: pipelineMetrics },
+      { data: aiCostData },
+      { data: failedQueriesData },
+      { data: activity24h }
     ] = await Promise.all([
       _supabase.from('profiles').select('*', { count: 'exact', head: true }),
       _supabase.from('valuations').select('*', { count: 'exact', head: true }),
@@ -747,41 +882,41 @@ const fetchLiveStats = async () => {
       _supabase.from('scraper_status').select('*').order('scraper_name'),
       _supabase.from('exchange_rates').select('buy_rate, sell_rate').eq('currency_code', 'EUR').order('created_at', { ascending: false }).limit(1),
       _supabase.from('macro_indices').select('key, value'),
-      _supabase.from('valuations').select('wilaya, created_at').order('created_at', { ascending: false }).limit(100)
+      _supabase.from('valuations').select('created_at').order('created_at', { ascending: false }).limit(100), // No wilaya column
+      _supabase.from('pipeline_metrics').select('rejection_rate').order('date', { ascending: false }).limit(1),
+      _supabase.from('ai_cost_logs').select('cost_usd'),
+      _supabase.from('failed_queries').select('*').order('query_count', { ascending: false }).limit(3),
+      _supabase.from('valuations').select('created_at').gte('created_at', new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString())
     ]);
 
     const usersCount = totalProfiles || 0;
     const activeCount = usersCount; // Real registrees
 
-    // Helper to safely set text content
-    const setKPI = (id, value) => {
-      const el = document.getElementById(id);
-      if (el) el.textContent = value;
-    };
+    const setElText = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
 
     // 1. Render KPIs
-    setKPI('kpiTotalUsers', usersCount.toLocaleString());
-    setKPI('kpiTotalUsers2', usersCount.toLocaleString());
-    setKPI('kpiActiveUsers', activeCount.toLocaleString());
-    setKPI('kpiActiveUsers2', activeCount.toLocaleString());
-    setKPI('kpiActiveUsers3', activeCount.toLocaleString());
-    setKPI('kpiInactiveUsers', "0");
-    setKPI('kpiInactiveUsers2', "0");
-    setKPI('kpiNewUsers', usersCount.toLocaleString());
-    setKPI('totalUsersSubtitle', usersCount.toLocaleString());
+    setElText('kpiTotalUsers', usersCount.toLocaleString());
+    setElText('kpiTotalUsers2', usersCount.toLocaleString());
+    setElText('kpiActiveUsers', activeCount.toLocaleString());
+    setElText('kpiActiveUsers2', activeCount.toLocaleString());
+    setElText('kpiActiveUsers3', activeCount.toLocaleString());
+    setElText('kpiInactiveUsers', "0");
+    setElText('kpiInactiveUsers2', "0");
+    setElText('kpiNewUsers', usersCount.toLocaleString());
+    setElText('totalUsersSubtitle', usersCount.toLocaleString());
 
-    setKPI('kpiValuationsToday', (totalValuations || 0).toLocaleString());
+    setElText('kpiValuationsToday', (totalValuations || 0).toLocaleString());
 
     // 2. Render Annonces Split KPI Card
     const fluxA = totalListings || 0;
     const fluxB = totalRealTransactions || 0;
     const totalData = fluxA + fluxB;
-    setKPI('kpiTotalData', totalData.toLocaleString());
-    setKPI('fluxACount', fluxA.toLocaleString());
-    setKPI('fluxBCount', fluxB.toLocaleString());
+    setElText('kpiTotalData', totalData.toLocaleString());
+    setElText('fluxACount', fluxA.toLocaleString());
+    setElText('fluxBCount', fluxB.toLocaleString());
 
     // 3. Render Daily Ingestion Volume
-    setKPI('ingestionVolume24h', (ingestion24h || 0).toLocaleString());
+    setElText('ingestionVolume24h', (ingestion24h || 0).toLocaleString());
 
     // 4. Render Exchange Rates
     if (exchangeRatesEUR && exchangeRatesEUR.length > 0) {
@@ -834,8 +969,84 @@ const fetchLiveStats = async () => {
       scraperList.innerHTML = '<div style="font-size:0.8rem; color:var(--ink-30); text-align:center; padding:1rem 0;">Aucun statut de scraper disponible.</div>';
     }
 
-    // 7. Aggregate Top Wilayas dynamically from actual database valuations!
-    renderTopWilayas(recentValuations);
+    // Top Wilayas is now rendered using listingsData after we fetch it below.
+
+    // 7.5 Render Real-Time Activity Histogram (24h)
+    const histoContainer = document.getElementById('activityHistogram');
+    if (histoContainer) {
+      histoContainer.innerHTML = '';
+      if (activity24h && activity24h.length > 0) {
+        // Build 24h buckets (0 = oldest, 23 = newest)
+        const buckets = new Array(24).fill(0);
+        const now = Date.now();
+        activity24h.forEach(val => {
+          const t = new Date(val.created_at).getTime();
+          const hourDiff = Math.floor((now - t) / (60 * 60 * 1000));
+          if (hourDiff >= 0 && hourDiff < 24) {
+            buckets[23 - hourDiff]++;
+          }
+        });
+
+        const maxVal = Math.max(...buckets, 1); // Avoid div by 0
+        
+        buckets.forEach((val, idx) => {
+          const heightPct = (val / maxVal) * 100;
+          const isCurrentHour = idx === 23;
+          const color = isCurrentHour ? 'var(--cyan)' : 'var(--ink-30)';
+          const bgColor = isCurrentHour ? 'var(--cyan-soft)' : 'var(--ink-05)';
+          
+          histoContainer.insertAdjacentHTML('beforeend', `
+            <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; group">
+              <div style="font-size:0.6rem; color:var(--ink-60); margin-bottom:4px; font-weight:600; opacity:${val > 0 ? 1 : 0};">${val}</div>
+              <div style="width:100%; max-width:24px; height:${Math.max(2, heightPct)}%; background:${bgColor}; border-top:2px solid ${color}; border-radius:4px 4px 0 0; transition:height 0.8s ease;"></div>
+            </div>
+          `);
+        });
+      } else {
+        histoContainer.innerHTML = '<div style="width:100%; text-align:center; color:var(--ink-30); font-size:0.8rem; margin-bottom:2rem;">Aucun trafic détecté sur les dernières 24h.</div>';
+      }
+    }
+
+    // 8. Render Observability Metrics
+    const rejectionRate = pipelineMetrics && pipelineMetrics.length > 0 ? (pipelineMetrics[0].rejection_rate || 0) : 0;
+    setElText('aiRejectionRate', parseFloat(rejectionRate).toFixed(1) + '%');
+    const bar = document.getElementById('aiRejectionBar');
+    if (bar) {
+        bar.style.width = rejectionRate + '%';
+        bar.style.backgroundColor = rejectionRate > 20 ? 'var(--danger)' : 'var(--cyan)';
+    }
+
+    const totalCost = aiCostData ? aiCostData.reduce((acc, row) => acc + (row.cost_usd || 0), 0) : 0;
+    setElText('aiCostTotal', '$' + totalCost.toFixed(2));
+
+    const fList = document.getElementById('failedQueriesList');
+    if (fList) {
+        setElText('failedQueriesTotal', failedQueriesData ? failedQueriesData.length.toString() : '0');
+        if (failedQueriesData && failedQueriesData.length > 0) {
+            fList.innerHTML = failedQueriesData.map((q, i) => `
+                <div class="flex justify-between items-center py-1 border-b border-gray-50 last:border-0">
+                    <span class="text-xs">${i+1}. ${q.brand} ${q.model} (${q.year})</span>
+                    <span class="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full">${q.query_count} échecs</span>
+                </div>
+            `).join('');
+        } else {
+            fList.innerHTML = '<div class="text-gray-400 italic text-center py-2">Aucun angle mort détecté.</div>';
+        }
+    }
+
+    // Fetch real market listings data for maps and top wilayas
+    const { data: listingsData } = await _supabase
+      .from('listings')
+      .select('wilaya')
+      .not('wilaya', 'is', null)
+      .limit(3000); // Sample up to 3000 listings
+
+    // Render Top Wilayas widget with real data
+    renderTopWilayas(listingsData);
+
+    // 9. Render Interactive Maps
+    initAlgeriaMap(listingsData);
+    initWorldMap(listingsData);
 
     // Finalize sync labels
     syncLabel.textContent = 'Mise à jour il y a quelques secondes';
@@ -954,18 +1165,19 @@ function renderTable(tbodyId, users) {
     </tr>`).join('');
 }
 
-const renderTopWilayas = (valuations) => {
+const renderTopWilayas = (marketData) => {
   const wilayaList = document.getElementById('topWilayasList');
   const detailedList = document.getElementById('realWilayasDetailedList');
   if (!wilayaList && !detailedList) return;
   
   const wilayaCounts = {};
-  let totalValuations = 0;
-  if (valuations && valuations.length > 0) {
-    valuations.forEach(val => {
-      const w = val.wilaya || 'Alger';
-      wilayaCounts[w] = (wilayaCounts[w] || 0) + 1;
-      totalValuations++;
+  let totalListings = 0;
+  if (marketData && marketData.length > 0) {
+    marketData.forEach(val => {
+      if (!val.wilaya) return;
+      const wName = val.wilaya.trim().split('-').pop().trim();
+      wilayaCounts[wName] = (wilayaCounts[wName] || 0) + 1;
+      totalListings++;
     });
   }
 
@@ -973,12 +1185,12 @@ const renderTopWilayas = (valuations) => {
   
   const renderRow = ([name, count], maxCount) => {
     const wPercent = maxCount > 0 ? Math.round((count / maxCount) * 100) : 0;
-    const pctShare = totalValuations > 0 ? Math.round((count / totalValuations) * 100) : 0;
+    const pctShare = totalListings > 0 ? Math.round((count / totalListings) * 100) : 0;
     return `
       <div>
         <div class="b-top">
           <span class="b-name">🏙 ${name}</span>
-          <span class="b-val">${count} cotes · ${pctShare}%</span>
+          <span class="b-val">${count} annonces · ${pctShare}%</span>
         </div>
         <div class="b-track"><div class="b-fill fill-dark" style="width:${wPercent}%"></div></div>
       </div>
@@ -992,20 +1204,202 @@ const renderTopWilayas = (valuations) => {
     if (wilayaList) {
       wilayaList.innerHTML = sortedWilayas.slice(0, 5).map(w => renderRow(w, maxCount)).join('');
     }
-    
-    // Render detailed wilayas view
-    if (detailedList) {
-      detailedList.innerHTML = sortedWilayas.map((w, idx) => `
-        <div style="margin-bottom:0.50rem;">
-          <div style="font-size:0.75rem; color:var(--ink-30); font-weight:600; margin-bottom:2px;">#0${idx + 1}</div>
-          ${renderRow(w, maxCount)}
-        </div>
-      `).join('');
-    }
   } else {
     const noData = '<div style="font-size:0.8rem; color:var(--ink-30); text-align:center; padding:1.5rem 0;">Aucune estimation enregistrée en base.</div>';
     if (wilayaList) wilayaList.innerHTML = noData;
-    if (detailedList) detailedList.innerHTML = noData;
+  }
+};
+
+// ==========================================
+// INTERACTIVE MAP (ALGERIA)
+// ==========================================
+let mapInstance = null;
+const initAlgeriaMap = async (marketData) => {
+  const container = document.getElementById('algeriaMapContainer');
+  if (!container) return;
+
+  // Aggregate data by wilaya (normalize strings like '16 - Alger' to 'Alger')
+  const wilayaDataMap = {};
+  if (marketData && marketData.length > 0) {
+    marketData.forEach(v => {
+      if (!v.wilaya) return;
+      let wName = v.wilaya.trim().split('-').pop().trim();
+      wilayaDataMap[wName] = (wilayaDataMap[wName] || 0) + 1;
+    });
+  }
+
+  const seriesData = Object.keys(wilayaDataMap).map(k => ({
+    name: k,
+    value: wilayaDataMap[k]
+  }));
+
+  try {
+    if (!echarts.getMap('Algeria')) {
+      // Load GeoJSON locally
+      const res = await fetch('/algeria.json');
+      const geoJson = await res.json();
+      echarts.registerMap('Algeria', geoJson);
+    }
+
+    if (!mapInstance) {
+      mapInstance = echarts.init(container);
+    }
+
+    const option = {
+      tooltip: {
+        trigger: 'item',
+        formatter: function(params) {
+          const val = params.value || 0;
+          return `<div style="font-family:'Figtree'; font-weight:600;">${params.name}</div>
+                  <div style="color:var(--cyan); font-size:1.1rem; font-weight:700;">${val} <span style="font-size:0.7rem; font-weight:400; color:#fff">véhicules en vente</span></div>`;
+        },
+        backgroundColor: 'rgba(13, 14, 16, 0.85)',
+        borderColor: 'transparent',
+        textStyle: { color: '#fff' }
+      },
+      visualMap: {
+        left: 'right',
+        min: 0,
+        max: Math.max(...Object.values(wilayaDataMap), 5), // Lowered max threshold slightly to make colors pop more
+        inRange: {
+          color: ['#e2e8f0', '#5eead4', '#14b8a6', '#0f766e'] // Tailwind slate-200 to teal colors
+        },
+        text: ['High', 'Low'],
+        calculable: true,
+        show: false
+      },
+      series: [
+        {
+          name: 'Véhicules (Marché)',
+          type: 'map',
+          map: 'Algeria',
+          roam: true,
+          scaleLimit: { min: 1, max: 10 },
+          itemStyle: {
+            borderColor: '#94a3b8', // slate-400 for visible borders
+            borderWidth: 1,
+            areaColor: '#e2e8f0' // slate-200 for empty regions
+          },
+          emphasis: {
+            itemStyle: {
+              areaColor: '#ffc107',
+              shadowOffsetX: 0,
+              shadowOffsetY: 0,
+              shadowBlur: 10,
+              borderWidth: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.3)'
+            },
+            label: { show: true, color: '#0d0e10', fontWeight: 'bold' }
+          },
+          label: {
+            show: false
+          },
+          data: seriesData
+        }
+      ]
+    };
+
+    mapInstance.setOption(option);
+
+    // On click event -> native JS alert or console
+    mapInstance.off('click');
+    mapInstance.on('click', function (params) {
+      const val = params.value || 0;
+      alert(`📍 Wilaya de ${params.name}\n🚗 ${val} véhicules actuellement en vente sur le marché.`);
+    });
+
+  } catch (e) {
+    console.error("Map initialization failed", e);
+    container.innerHTML = '<div style="font-size:0.8rem; color:var(--danger); text-align:center; padding-top:4rem;">Erreur lors du chargement de la carte.</div>';
+  }
+};
+
+// ==========================================
+// INTERACTIVE MAP (WORLD)
+// ==========================================
+let worldMapInstance = null;
+const initWorldMap = async (marketData) => {
+  const container = document.getElementById('worldMapContainer');
+  if (!container) return;
+
+  // We assign all current Qimatna market data to Algeria (since it's a DZ app)
+  const totalListings = marketData ? marketData.length : 0;
+  const worldDataMap = { 'Algeria': totalListings };
+
+  const seriesData = Object.keys(worldDataMap).map(k => ({
+    name: k,
+    value: worldDataMap[k]
+  }));
+
+  try {
+    if (!echarts.getMap('World')) {
+      const res = await fetch('/world.json');
+      const geoJson = await res.json();
+      echarts.registerMap('World', geoJson);
+    }
+
+    if (!worldMapInstance) {
+      worldMapInstance = echarts.init(container);
+    }
+
+    const option = {
+      tooltip: {
+        trigger: 'item',
+        formatter: function(params) {
+          const val = params.value || 0;
+          return `<div style="font-family:'Figtree'; font-weight:600;">${params.name}</div>
+                  <div style="color:var(--cyan); font-size:1.1rem; font-weight:700;">${val} <span style="font-size:0.7rem; font-weight:400; color:#fff">véhicules répertoriés</span></div>`;
+        },
+        backgroundColor: 'rgba(13, 14, 16, 0.85)',
+        borderColor: 'transparent',
+        textStyle: { color: '#fff' }
+      },
+      visualMap: {
+        left: 'right',
+        min: 0,
+        max: Math.max(...Object.values(worldDataMap), 5),
+        inRange: {
+          color: ['#e2e8f0', '#5eead4', '#14b8a6', '#0f766e']
+        },
+        show: false
+      },
+      series: [
+        {
+          name: 'Marché Automobile',
+          type: 'map',
+          map: 'World',
+          roam: true,
+          scaleLimit: { min: 0.5, max: 10 },
+          itemStyle: {
+            borderColor: '#94a3b8',
+            borderWidth: 0.5,
+            areaColor: '#e2e8f0'
+          },
+          emphasis: {
+            itemStyle: {
+              areaColor: '#ffc107',
+              shadowBlur: 10,
+              shadowColor: 'rgba(0, 0, 0, 0.3)'
+            },
+            label: { show: true, color: '#0d0e10', fontWeight: 'bold' }
+          },
+          label: { show: false },
+          data: seriesData
+        }
+      ]
+    };
+
+    worldMapInstance.setOption(option);
+
+    worldMapInstance.off('click');
+    worldMapInstance.on('click', function (params) {
+      const val = params.value || 0;
+      alert(`📍 Pays : ${params.name}\n🚗 ${val} annonces traitées en temps réel sur ce territoire.`);
+    });
+
+  } catch (e) {
+    console.error("World map initialization failed", e);
+    container.innerHTML = '<div style="font-size:0.8rem; color:var(--danger); text-align:center; padding-top:4rem;">Erreur lors du chargement de la carte mondiale.</div>';
   }
 };
 
@@ -1025,8 +1419,139 @@ function go(viewId) {
     }
   });
 
+  if (viewId === 'par-wilaya' && mapInstance) {
+    setTimeout(() => mapInstance.resize(), 100);
+  }
+  if (viewId === 'par-pays' && worldMapInstance) {
+    setTimeout(() => worldMapInstance.resize(), 100);
+  }
+
   setTimeout(animateBars, 100);
 }
+
+// ==========================================
+// ANTI-FRAGILE SECURITY LOGIC
+// ==========================================
+
+document.getElementById('global-modifier-slider').addEventListener('input', function(e) {
+    document.getElementById('global-modifier-value').innerText = e.target.value + '%';
+});
+
+document.getElementById('btn-save-modifier').addEventListener('click', async function() {
+    const val = document.getElementById('global-modifier-slider').value;
+    const newModifier = 1.0 + (parseInt(val) / 100);
+    const { error } = await _supabase
+        .from('global_market_modifier')
+        .update({ modifier_value: newModifier })
+        .eq('id', 1);
+        
+    if(!error) alert('Modificateur global appliqué en temps réel à l\'app mobile !');
+    else alert('Erreur : ' + error.message);
+});
+
+document.getElementById('btn-freeze-model').addEventListener('click', async function() {
+    const modelInput = document.getElementById('freeze-model-input').value.trim();
+    if(!modelInput) return;
+    
+    // We update vehicle_catalog using ilike to catch variants
+    const { error } = await _supabase
+        .from('vehicle_catalog')
+        .update({ is_frozen: true })
+        .ilike('model', `%${modelInput}%`);
+        
+    if(!error) {
+        document.getElementById('freeze-model-input').value = '';
+        fetchFrozenModels();
+    } else {
+        alert('Erreur: ' + error.message);
+    }
+});
+
+async function fetchFrozenModels() {
+    const { data, error } = await _supabase
+        .from('vehicle_catalog')
+        .select('brand, model')
+        .eq('is_frozen', true);
+        
+    const list = document.getElementById('frozen-models-list');
+    if(!error && data) {
+        let html = '<p class="text-xs text-red-600 font-medium mb-2">Modèles actuellement gelés :</p>';
+        if(data.length === 0) {
+            html += '<div class="text-xs text-gray-500 italic px-2">Aucun modèle gelé.</div>';
+        } else {
+            data.forEach(item => {
+                html += `
+                <div class="flex items-center justify-between bg-white px-3 py-2 rounded border border-red-100 mb-1">
+                    <span class="text-sm font-bold text-gray-800">${item.brand} ${item.model}</span>
+                    <button class="text-xs text-blue-600 hover:underline font-medium" onclick="unfreezeModel('${item.model.replace(/'/g, "\\'")}')">Débloquer</button>
+                </div>`;
+            });
+        }
+        list.innerHTML = html;
+    }
+}
+
+window.unfreezeModel = async function(model) {
+    const { error } = await _supabase
+        .from('vehicle_catalog')
+        .update({ is_frozen: false })
+        .eq('model', model);
+    if(!error) fetchFrozenModels();
+};
+
+async function fetchGlobalModifier() {
+    const { data } = await _supabase.from('global_market_modifier').select('modifier_value').eq('id', 1).single();
+    if(data) {
+        const valPercent = Math.round((data.modifier_value - 1.0) * 100);
+        document.getElementById('global-modifier-slider').value = valPercent;
+        document.getElementById('global-modifier-value').innerText = valPercent + '%';
+    }
+}
+
+// Force Override Logic
+document.getElementById('btn-force-override').addEventListener('click', async function() {
+    const brand = document.getElementById('override-brand').value.trim();
+    const model = document.getElementById('override-model').value.trim();
+    const year = parseInt(document.getElementById('override-year').value);
+    const price = parseInt(document.getElementById('override-price').value);
+
+    if(!brand || !model || isNaN(year) || isNaN(price)) {
+        alert("Veuillez remplir tous les champs correctement.");
+        return;
+    }
+
+    const { error } = await _supabase
+        .from('expert_prices')
+        .upsert({ brand: brand.toLowerCase(), model: model.toLowerCase(), year, price }, { onConflict: 'brand,model,year' });
+        
+    if(!error) {
+        alert("Prix expert injecté ! Il écrase désormais l'algorithme.");
+        document.getElementById('override-brand').value = '';
+        document.getElementById('override-model').value = '';
+        document.getElementById('override-year').value = '';
+        document.getElementById('override-price').value = '';
+    } else {
+        alert("Erreur: " + error.message);
+    }
+});
+
+// Ban User / IP Logic
+document.getElementById('btn-ban-user').addEventListener('click', async function() {
+    const banTarget = document.getElementById('ban-input').value.trim();
+    if(!banTarget) return;
+
+    let isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(banTarget);
+    const payload = isUUID ? { user_id: banTarget, reason: "Banni par l'admin" } : { ip_address: banTarget, reason: "Banni par l'admin" };
+
+    const { error } = await _supabase.from('banned_users').insert([payload]);
+
+    if(!error) {
+        alert("Cible bannie avec succès.");
+        document.getElementById('ban-input').value = '';
+    } else {
+        alert("Erreur: " + error.message);
+    }
+});
 
 function handleUsersSearch(query) {
   const q = query.toLowerCase().trim();

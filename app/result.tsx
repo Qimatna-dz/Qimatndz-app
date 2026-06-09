@@ -157,9 +157,9 @@ export default function ResultScreen() {
             </Text>
           </View>
           
-          <View className={`flex-row items-center mt-4 ${I18nManager.isRTL ? 'flex-row-reverse' : ''}`}>
+          <View className={`flex-row items-center mt-4 flex-wrap gap-2 ${I18nManager.isRTL ? 'flex-row-reverse' : ''}`}>
             {results && (
-              <View className={`px-4 py-2 rounded-full flex-row items-center ${I18nManager.isRTL ? 'ml-3' : 'mr-3'} ${
+              <View className={`px-4 py-2 rounded-full flex-row items-center ${
                 results.verdict === 'bonne_affaire' ? 'bg-green-100' : 
                 results.verdict === 'surevalue' ? 'bg-red-100' : 'bg-primary/10'
               }`}>
@@ -167,7 +167,7 @@ export default function ResultScreen() {
                   results.verdict === 'bonne_affaire' ? '#166534' : 
                   results.verdict === 'surevalue' ? '#991B1B' : Colors.primary
                 } />
-                <Text className={`font-display font-bold text-xs uppercase tracking-tight ${I18nManager.isRTL ? 'mr-2' : 'ml-2'} ${
+                <Text className={`font-display font-bold text-xs uppercase tracking-tight ml-2 ${
                   results.verdict === 'bonne_affaire' ? 'text-green-800' : 
                   results.verdict === 'surevalue' ? 'text-red-800' : 'text-primary'
                 }`}>
@@ -176,23 +176,77 @@ export default function ResultScreen() {
                 </Text>
               </View>
             )}
-            <View className={`px-3 py-1.5 rounded-full flex-row items-center ${loading ? 'bg-gray-100' : (!results ? 'bg-red-50' : (results.confiance === 'faible' ? 'bg-amber-50' : 'bg-primary/5'))} ${I18nManager.isRTL ? 'flex-row-reverse' : ''}`}>
-              <View className={`w-2 h-2 rounded-full ${loading ? 'bg-gray-400' : (!results ? 'bg-red-500' : (results.confiance === 'faible' ? 'bg-amber-500' : 'bg-primary'))} ${I18nManager.isRTL ? 'ml-2' : 'mr-2'}`} />
-              <Text className={`font-body text-[11px] font-bold ${loading ? 'text-gray-500' : (!results ? 'text-red-700' : (results.confiance === 'faible' ? 'text-amber-700' : 'text-primary'))}`}>
-                {loading ? t('result.calculating') : (!results ? t('result.failed') : `${t('result.confidence')} ${results.confiance}`)}
-              </Text>
-            </View>
+
+            {!results && !loading && (
+              <View className="px-3 py-1.5 rounded-full flex-row items-center bg-red-50">
+                <View className="w-2 h-2 rounded-full mr-2 bg-red-500" />
+                <Text className="font-body text-[11px] font-bold text-red-700">{t('result.failed')}</Text>
+              </View>
+            )}
+            {loading && (
+              <View className="px-3 py-1.5 rounded-full flex-row items-center bg-gray-100">
+                <View className="w-2 h-2 rounded-full mr-2 bg-gray-400" />
+                <Text className="font-body text-[11px] font-bold text-gray-500">{t('result.calculating')}</Text>
+              </View>
+            )}
           </View>
+
         </View>
 
         {loading ? (
-          <View className="py-20 items-center justify-center">
-            <ActivityIndicator size="large" color={Colors.primary} />
-            <Text className="text-text-secondary font-body mt-4">{t('result.analyzing')}</Text>
+          <View className="pb-20">
+            {/* Skeleton Loader - Fluid & Animated equivalent */}
+            <View className="bg-gray-100 p-6 rounded-[32px] mb-8 opacity-50">
+              <View className="h-6 w-1/3 bg-gray-200 rounded-md mb-4" />
+              <View className="h-4 w-full bg-gray-200 rounded-md mb-2" />
+              <View className="h-4 w-5/6 bg-gray-200 rounded-md" />
+            </View>
+            <View className="mb-8">
+              <View className="h-4 w-1/4 bg-gray-200 rounded-md mb-4" />
+              <View className="h-32 bg-gray-100 rounded-[32px] w-full mb-4 opacity-50" />
+              <View className="flex-row justify-between">
+                <View className="h-24 bg-gray-100 rounded-[32px] w-[48%] opacity-50" />
+                <View className="h-24 bg-gray-100 rounded-[32px] w-[48%] opacity-50" />
+              </View>
+            </View>
+            <View className="flex-row justify-center py-4">
+              <ActivityIndicator size="small" color={Colors.primary} />
+              <Text className="text-text-secondary font-body ml-2">{t('result.analyzing') || "Analyse en cours..."}</Text>
+            </View>
           </View>
         ) : error ? (
-          <View className="py-20 items-center justify-center">
-            <Text className="text-danger font-body text-center">{error}</Text>
+          <View className="py-12 px-6 items-center justify-center bg-gray-50 rounded-[32px] border border-gray-100 mx-1">
+            <Bot size={48} color="#9CA3AF" className="mb-4" />
+            <Text className="text-text-primary font-display font-bold text-xl text-center mb-2">Modèle rare ou introuvable</Text>
+            <Text className="text-text-secondary font-body text-center px-2 leading-6 mb-6">
+              Ce modèle ({params.brand} {params.model}) est rare ou en cours d'analyse par notre algorithme. Laissez votre contact pour recevoir une alerte dès que sa cote est disponible.
+            </Text>
+            {showNotificationForm ? (
+              <View className="w-full">
+                <TextInput
+                  placeholder="Votre Email ou Numéro"
+                  className="bg-white rounded-2xl px-4 py-3 mb-3 border border-gray-200 font-body"
+                  value={contactInfo}
+                  onChangeText={setContactInfo}
+                />
+                <TouchableOpacity 
+                  onPress={handleSubmitNotification}
+                  className="bg-primary py-3 rounded-2xl items-center"
+                >
+                  <Text className="text-white font-body font-bold">{notificationSubmitted ? "Bien reçu !" : "M'alerter"}</Text>
+                </TouchableOpacity>
+                <Text className="text-gray-400 font-body text-[10px] text-center mt-3">
+                  🔒 Votre contact est 100% privé et ne sera utilisé que par notre robot pour l'alerte.
+                </Text>
+              </View>
+            ) : (
+              <TouchableOpacity 
+                onPress={() => setShowNotificationForm(true)}
+                className="bg-primary px-8 py-3.5 rounded-2xl"
+              >
+                <Text className="text-white font-body font-bold">Me notifier</Text>
+              </TouchableOpacity>
+            )}
           </View>
         ) : results ? (
           <View className="pb-20">
@@ -263,6 +317,16 @@ export default function ResultScreen() {
                   <PriceCard label={t('result.high_range')} price={results.fourchette_max || 0} />
                 </View>
               </View>
+
+              <View className="mt-5 bg-blue-50/80 px-4 py-3.5 rounded-2xl border border-blue-100 flex-row items-center">
+                <Text className="text-xl mr-3">💡</Text>
+                <View className="flex-1">
+                  <Text className={`text-blue-900 font-display font-bold text-sm mb-0.5 ${I18nManager.isRTL ? 'text-right' : 'text-left'}`}>Pourquoi ce prix ?</Text>
+                  <Text className={`text-blue-800/80 font-body text-xs leading-4 ${I18nManager.isRTL ? 'text-right' : 'text-left'}`}>
+                    C'est une moyenne du marché réel (ventes confirmées), sans la marge de "gonflage" habituelle des annonces en ligne.
+                  </Text>
+                </View>
+              </View>
             </View>
 
             {/* Évaluation Globale Section */}
@@ -275,10 +339,27 @@ export default function ResultScreen() {
                   </View>
                 </View>
 
-                {/* Alerts */}
-                {results.alertes && results.alertes.length > 0 && (
+                {/* [Défi 2] Alertes choc de marché — style orange distinct des alertes physiques */}
+                {results.alertes && results.alertes.some(a => a.includes('Choc de marché') || a.includes('📈') || a.includes('📉')) && (
+                  <View className="bg-orange-50 border border-orange-200 p-4 rounded-2xl mb-3">
+                    <View className="flex-row items-center mb-2">
+                      <Text className="text-orange-800 font-display font-bold text-sm">🚨 Volatility Alert — Marché en Mouvement</Text>
+                    </View>
+                    {results.alertes.filter(a => a.includes('Choc de marché') || a.includes('📈') || a.includes('📉')).map((alerte, idx) => (
+                      <View key={idx} className={`flex-row items-start mt-1 ${I18nManager.isRTL ? 'flex-row-reverse' : ''}`}>
+                        <Text className={`text-orange-800 font-body text-xs flex-1 ${I18nManager.isRTL ? 'text-right' : 'text-left'}`}>{alerte}</Text>
+                      </View>
+                    ))}
+                    <Text className="text-orange-600 font-body text-[10px] mt-2 italic">
+                      Les estimations intègrent automatiquement ces variations. La fourchette peut être plus large que d'habitude.
+                    </Text>
+                  </View>
+                )}
+
+                {/* Alertes physiques (kilométrage, etc.) — style rouge */}
+                {results.alertes && results.alertes.some(a => !a.includes('Choc de marché') && !a.includes('📈') && !a.includes('📉')) && (
                   <View className="bg-red-50 border border-red-100 p-4 rounded-2xl mb-4">
-                    {results.alertes.map((alerte, idx) => (
+                    {results.alertes.filter(a => !a.includes('Choc de marché') && !a.includes('📈') && !a.includes('📉')).map((alerte, idx) => (
                       <View key={idx} className={`flex-row items-start mb-2 ${I18nManager.isRTL ? 'flex-row-reverse' : ''}`}>
                         <Shield size={16} color="#991B1B" />
                         <Text className={`text-red-800 font-body text-xs flex-1 ${I18nManager.isRTL ? 'mr-2 text-right' : 'ml-2 text-left'}`}>{alerte}</Text>
@@ -372,7 +453,10 @@ export default function ResultScreen() {
               </View>
             </View>
             <View className="mt-10 px-6">
-              <Text className="text-text-secondary text-[10px] font-body text-center leading-4">
+              <Text className="text-text-secondary text-[11px] font-body text-center leading-5 mb-2">
+                Les prix indiqués sont des estimations basées sur le marché actuel. Une marge de négociation standard de 5 à 10 % est conseillée.
+              </Text>
+              <Text className="text-gray-400 text-[10px] font-body text-center leading-4">
                 {t('result.disclaimer')}
               </Text>
             </View>

@@ -206,7 +206,7 @@ export const ShareCard = React.forwardRef<View, ShareCardProps>(
         {/* ── FOOTER ── */}
         <View style={styles.footer}>
           <Text style={styles.footerNote}>
-            {t('share.footer_note')}
+            Estimation neutre basée sur le marché réel. Prix standard hors accessoires aftermarket ajoutés. {t('share.footer_note')}
           </Text>
           <Text style={styles.footerUrl}>qimatnadz.com</Text>
         </View>
