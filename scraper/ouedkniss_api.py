@@ -17,33 +17,20 @@ HEADERS = {
 
 # Query GraphQL pour les annonces automobiles
 SEARCH_QUERY = """
-query SearchListings($query: String!, $page: Int!) {
-  searchAnnouncements(
-    q: $query
-    categorySlug: "automobiles"
-    page: $page
-    count: 48
-  ) {
-    announcements {
-      id
-      title
-      pricePreview {
-        price
-        priceUnit
-        currency
-      }
-      store {
-        wilaya { name code }
-      }
-      params {
-        label
-        value
-        valueLabel
-      }
-      slug
-      createdAt
+query SearchQuery($q: String, $filter: SearchFilterInput) {
+    search(q: $q, filter: $filter) {
+        announcements {
+            data {
+                id
+                title
+                slug
+                description
+                price
+                createdAt: refreshedAt
+                cities { name region { name } }
+            }
+        }
     }
-  }
 }
 """
 
@@ -73,9 +60,20 @@ FALLBACK_MODELS_TO_SCRAPE = [
     ("Seat", "Ibiza"), ("Seat", "Leon"),
     ("Skoda", "Octavia"),
     ("Mercedes", "Classe C"), ("Mercedes", "Classe E"), ("Mercedes", "Classe G"),
-    ("BMW", "Série 3"), ("BMW", "Série 5"), ("BMW", "X5"), ("BMW", "X6"),
-    ("Audi", "A4"), ("Audi", "A6"), ("Audi", "Q5"), ("Audi", "Q7"),
+    ("Mercedes", "GLC"), ("Mercedes", "GLE"), ("Mercedes", "GLA"), ("Mercedes", "GLB"),
+    ("BMW", "Série 3"), ("BMW", "Série 5"), ("BMW", "X3"), ("BMW", "X5"), ("BMW", "X6"),
+    ("Audi", "A4"), ("Audi", "A6"), ("Audi", "Q3"), ("Audi", "Q5"), ("Audi", "Q7"),
     ("Porsche", "Cayenne"), ("Porsche", "Macan"),
+    ("Volvo", "XC60"), ("Volvo", "XC40"),
+    ("Land Rover", "Defender"), ("Land Rover", "Discovery"), ("Range Rover", "Sport"),
+    ("Mitsubishi", "L200"), ("Mitsubishi", "Pajero"), ("Mitsubishi", "ASX"),
+    ("Nissan", "Qashqai"), ("Nissan", "X-Trail"), ("Nissan", "Juke"), ("Nissan", "Patrol"),
+    ("Ford", "Kuga"), ("Ford", "Explorer"), ("Ford", "Ranger"),
+    ("Honda", "CR-V"), ("Honda", "HR-V"), ("Honda", "Civic"),
+    ("Mazda", "CX-5"), ("Mazda", "3"), ("Mazda", "6"),
+    ("Subaru", "Outback"), ("Subaru", "Forester"),
+    ("Haval", "H6"), ("Haval", "Jolion"),
+    ("JAC", "S4"), ("JAC", "J7"),
 ]
 
 def get_models_to_scrape() -> list:
@@ -155,8 +153,8 @@ def normalize_price(price_data: dict) -> int | None:
 
     price = int(price)
 
-    # Validation : prix raisonnable pour une voiture en Algérie
-    if 100000 <= price <= 25000000:
+    # Max = 250M DZD pour couvrir G-Class, Porsche, véhicules de grand luxe importés
+    if 100_000 <= price <= 250_000_000:
         return price
     return None
 
@@ -168,8 +166,16 @@ def scrape_model_graphql(brand: str, model: str, max_pages: int = 15) -> list:
     for page in range(1, max_pages + 1):
         try:
             payload = {
+                "operationName": "SearchQuery",
                 "query": SEARCH_QUERY,
-                "variables": {"query": query_string, "page": page}
+                "variables": {
+                    "q": query_string,
+                    "filter": {
+                        "categorySlug": "automobiles",
+                        "page": page,
+                        "count": 48
+                    }
+                }
             }
 
             response = requests.post(
@@ -186,8 +192,9 @@ def scrape_model_graphql(brand: str, model: str, max_pages: int = 15) -> list:
             data = response.json()
             announcements = (
                 data.get("data", {})
-                    .get("searchAnnouncements", {})
-                    .get("announcements", [])
+                    .get("search", {})
+                    .get("announcements", {})
+                    .get("data", [])
             )
 
             if not announcements:
@@ -210,65 +217,49 @@ def scrape_model_graphql(brand: str, model: str, max_pages: int = 15) -> list:
 def parse_announcement(ann: dict, brand: str, model: str) -> dict | None:
     """Parse une annonce GraphQL en dict propre."""
     try:
-        price = normalize_price(ann.get("pricePreview"))
-        if not price:
+        raw_price = ann.get("price")
+        if not raw_price:
+            return None
+        
+        try:
+            price = int(raw_price)
+        except:
+            return None
+            
+        if price < 100_000:
+            price = price * 100 # On part du principe que c'est en Da "raccourci" (10000 -> 1 000 000 DA)
+            
+        if not (100_000 <= price <= 250_000_000):
             return None
 
-        params = ann.get("params") or []
-
-        # Année
-        year_str = extract_param(params, ["année", "year", "annee", "سنة"])
+        # Titre pour extraire l'année
+        title = ann.get("title") or ""
         year = None
-        if year_str:
-            import re
-            match = re.search(r'(19|20)\d{2}', str(year_str))
-            if match:
-                year = int(match.group(0))
+        import re
+        match = re.search(r'(19|20)\d{2}', title)
+        if match:
+            year = int(match.group(0))
 
-        # Kilométrage
-        km_str = extract_param(params, ["kilométrage", "km", "كيلومتر", "kilometrage"])
-        mileage = None
-        if km_str:
-            import re
-            nums = re.sub(r'\D', '', str(km_str))
-            if nums:
-                mileage = int(nums)
+        if not year:
+            return None
 
         # Wilaya
         wilaya = "Alger"
-        store = ann.get("store") or {}
-        wilaya_data = store.get("wilaya") or {}
-        if wilaya_data.get("name"):
-            wilaya = wilaya_data["name"]
-
-        # Titre pour extraire l'année si params ne l'a pas
-        title = ann.get("title") or ""
-        if not year:
-            import re
-            match = re.search(r'(19|20)\d{2}', title)
-            if match:
-                year = int(match.group(0))
-
-        if not year:
-            return None
-
-        # Extraire finition et motorisation pour le sous-modèle (trim)
-        finition = extract_param(params, ["finition", "finish", "النسخة"])
-        motorisation = extract_param(params, ["motorisation", "moteur", "engine", "المحرك"])
-        version = extract_param(params, ["version"])
-        
-        trim_parts = []
-        if finition and str(finition).strip() and str(finition).lower() != "none":
-            trim_parts.append(str(finition).strip())
-        if motorisation and str(motorisation).strip() and str(motorisation).lower() != "none":
-            trim_parts.append(str(motorisation).strip())
-        if version and str(version).strip() and str(version).lower() != "none":
-            trim_parts.append(str(version).strip())
-            
-        trim = " ".join(trim_parts) if trim_parts else None
+        cities = ann.get("cities") or []
+        if cities and len(cities) > 0:
+            region = cities[0].get("region") or {}
+            if region.get("name"):
+                wilaya = region.get("name")
 
         slug = ann.get("slug") or ann.get("id") or ""
         url = f"https://www.ouedkniss.com/{slug}"
+
+
+        # Date de publication de l'annonce SUR Ouedkniss (≠ scraped_at qui est notre date de collecte)
+        annonce_created_at = ann.get("createdAt")
+
+        mileage = None
+        trim = None
 
         return {
             "source": "ouedkniss",
@@ -281,6 +272,8 @@ def parse_announcement(ann: dict, brand: str, model: str) -> dict | None:
             "condition": "bon",
             "url": url,
             "trim": trim,
+            # Horodatage de l'annonce d'origine (quand le vendeur a posté sur Ouedkniss)
+            "annonce_posted_at": annonce_created_at,
         }
 
     except Exception as e:
@@ -288,8 +281,12 @@ def parse_announcement(ann: dict, brand: str, model: str) -> dict | None:
         return None
 
 
-def scrape_all(max_pages_per_model: int = 15) -> list:
-    """Scrape tous les modèles du catalogue Supabase (ou fallback statique)."""
+def scrape_all(max_pages_per_model: int = 50) -> list:
+    """Scrape tous les modèles du catalogue Supabase (ou fallback statique).
+    
+    max_pages_per_model=50 : couvre ~2 400 annonces par modèle populaire (50 pages × 48 ann).
+    Sur un catalogue de 80 modèles → potentiellement ~192 000 annonces brutes / cycle.
+    """
     all_results = []
     models_to_scrape = get_models_to_scrape()
 
