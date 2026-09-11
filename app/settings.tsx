@@ -197,7 +197,7 @@ export default function SettingsScreen() {
                   <View className="bg-white p-5 rounded-2xl border border-gray-100">
                     <Text className="text-primary font-display font-bold text-sm mb-2">1. Nature de l'Estimation</Text>
                     <Text className="text-text-secondary font-body text-xs leading-5">
-                      Qimatna Dz est un outil d'estimation de prix indicatif de véhicules d'occasion et neufs sur le marché algérien. Les cotes fournies sont issues de modèles statistiques avancés et de l'intelligence artificielle Claude, analysant le marché en temps réel. Elles ne constituent en aucun cas une expertise technique obligatoire ou une offre contractuelle d'achat ou de vente.
+                      Qimatna Dz est un outil d'estimation de prix indicatif de véhicules d'occasion et neufs sur le marché algérien. Les cotes fournies sont issues de modèles statistiques avancés analysant le marché en temps réel. Elles ne constituent en aucun cas une expertise technique obligatoire ou une offre contractuelle d'achat ou de vente.
                     </Text>
                   </View>
 

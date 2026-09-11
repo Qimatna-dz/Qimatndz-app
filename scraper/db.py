@@ -51,7 +51,7 @@ def listing_exists(url: str) -> bool:
         return False
 
 def insert_listing(data: dict, client: Client = None) -> bool:
-    """Inserts a listing; skips duplicates by URL (deduplication) and filters suspicious listings using AI."""
+    """Inserts a listing; skips duplicates by URL (deduplication) and tags suspicious listings."""
     try:
         if client is None:
             client = get_supabase_client()
@@ -70,24 +70,23 @@ def insert_listing(data: dict, client: Client = None) -> bool:
         if "scraped_at" not in data or not data["scraped_at"]:
             data["scraped_at"] = datetime.now(timezone.utc).isoformat()
 
-        # Apply AI Credibility & Price Correction Filter
+        # Apply Credibility Filter (Deterministic)
         try:
             from credibility_filter import evaluate_credibility
             cred_res = evaluate_credibility(data)
             
-            if not cred_res.get("is_credible", True):
-                print(f"   [FILTER SUSPECT REJECT] {data.get('brand')} {data.get('model')} ({data.get('year')}) "
-                      f"annoncé à {data.get('price_asked'):,} DZD rejeté ! Raison : {cred_res.get('reason')} "
-                      f"(Score: {cred_res.get('score')}/100)")
-                return False
+            data["status"] = cred_res.get("status", "VALID")
+            data["status_reason"] = cred_res.get("reason", None)
                 
             old_price = data.get("price_asked")
             corrected_price = cred_res.get("corrected_price")
             
             if corrected_price and corrected_price != old_price:
-                print(f"   [AI PRICE FIXED] 👍 {data.get('brand')} {data.get('model')} ({data.get('year')}) "
-                      f"corrigé de {old_price:,} DZD à {corrected_price:,} DZD ! Raison : {cred_res.get('reason')}")
                 data["price_asked"] = corrected_price
+                
+            corrected_mileage = cred_res.get("corrected_mileage")
+            if corrected_mileage and corrected_mileage != data.get("mileage"):
+                data["mileage"] = corrected_mileage
                 
         except Exception as filter_err:
             print(f"   [WARN] Filtre de crédibilité inaccessible : {filter_err}. Passage direct.")
@@ -152,7 +151,7 @@ def insert_listings_batch(listings: list, client: Client = None) -> tuple[int, i
     if not new_listings:
         return 0, skipped
 
-    # 2. Batch AI Credibility Filter
+    # 2. Batch Credibility Filter
     try:
         from credibility_filter import evaluate_credibility_batch
         cred_results = evaluate_credibility_batch(new_listings)
@@ -160,17 +159,16 @@ def insert_listings_batch(listings: list, client: Client = None) -> tuple[int, i
         valid_listings = []
         for i, cred_res in enumerate(cred_results):
             lst = new_listings[i]
-            if not cred_res.get("is_credible", True):
-                print(f"   [FILTER SUSPECT REJECT] {lst.get('brand')} {lst.get('model')} ({lst.get('year')}) "
-                      f"annoncé à {lst.get('price_asked'):,} DZD rejeté ! Raison : {cred_res.get('reason')}")
-                skipped += 1
-                continue
-                
+            lst["status"] = cred_res.get("status", "VALID")
+            lst["status_reason"] = cred_res.get("reason", None)
+            
             corrected_price = cred_res.get("corrected_price")
             if corrected_price and corrected_price != lst.get("price_asked"):
-                print(f"   [AI PRICE FIXED] 👍 {lst.get('brand')} {lst.get('model')} ({lst.get('year')}) "
-                      f"corrigé de {lst.get('price_asked'):,} DZD à {corrected_price:,} DZD !")
                 lst["price_asked"] = corrected_price
+                
+            corrected_mileage = cred_res.get("corrected_mileage")
+            if corrected_mileage and corrected_mileage != lst.get("mileage"):
+                lst["mileage"] = corrected_mileage
                 
             valid_listings.append(lst)
     except Exception as filter_err:

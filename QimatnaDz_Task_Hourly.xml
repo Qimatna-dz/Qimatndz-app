@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-16"?>
+<Task version="1.4" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
+  <RegistrationInfo>
+    <Date>2026-06-08T13:00:00</Date>
+    <Author>QimatnaDz</Author>
+    <Description>Collecte horaire des annonces automobiles (Ouedkniss + Sogauto) et calcul des prix médians. Lance run_scrapers_automated.bat chaque heure.</Description>
+    <URI>\QimatnaDz_Scraper</URI>
+  </RegistrationInfo>
+
+  <Triggers>
+    <!-- Toutes les heures, indéfiniment, à partir de minuit -->
+    <TimeTrigger>
+      <Repetition>
+        <Interval>PT1H</Interval>
+        <StopAtDurationEnd>false</StopAtDurationEnd>
+      </Repetition>
+      <StartBoundary>2026-06-08T00:00:00</StartBoundary>
+      <Enabled>true</Enabled>
+    </TimeTrigger>
+    <!-- Démarrage automatique au boot si une exécution a été manquée -->
+    <BootTrigger>
+      <Enabled>true</Enabled>
+    </BootTrigger>
+  </Triggers>
+
+  <Principals>
+    <Principal id="Author">
+      <LogonType>InteractiveToken</LogonType>
+      <RunLevel>HighestAvailable</RunLevel>
+    </Principal>
+  </Principals>
+
+  <Settings>
+    <MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>
+    <DisallowStartIfOnBatteries>true</DisallowStartIfOnBatteries>
+    <StopIfGoingOnBatteries>true</StopIfGoingOnBatteries>
+    <AllowHardTerminate>true</AllowHardTerminate>
+    <StartWhenAvailable>true</StartWhenAvailable>
+    <!-- Délai max d'exécution : 3h (le scraping complet peut prendre du temps) -->
+    <ExecutionTimeLimit>PT3H</ExecutionTimeLimit>
+    <Enabled>true</Enabled>
+    <Hidden>false</Hidden>
+    <RunOnlyIfNetworkAvailable>true</RunOnlyIfNetworkAvailable>
+    <WakeToRun>false</WakeToRun>
+  </Settings>
+
+  <Actions Context="Author">
+    <Exec>
+      <Command>d:\Qimatna Dz\run_scrapers_automated.bat</Command>
+      <WorkingDirectory>d:\Qimatna Dz</WorkingDirectory>
+    </Exec>
+  </Actions>
+</Task>

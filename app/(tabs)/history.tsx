@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, TouchableOpacity, ActivityIndicator, RefreshControl } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { Clock as ClockIcon, ChevronRight as ChevronRightIcon, Car as CarIcon, Trash2 as Trash2Icon } from 'lucide-react-native';
 
@@ -13,6 +14,7 @@ import { useIsFocused } from '@react-navigation/native';
 import { Colors } from '../../constants/theme';
 
 export default function HistoryScreen() {
+  const router = useRouter();
   const [history, setHistory] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
@@ -47,6 +49,24 @@ export default function HistoryScreen() {
     <TouchableOpacity 
       className="bg-white border border-gray-100 rounded-2xl p-4 mb-4 flex-row items-center shadow-sm"
       activeOpacity={0.7}
+      onPress={() => router.push({
+        pathname: '/result',
+        params: {
+          brand: item.brand,
+          model: item.model,
+          year: item.year?.toString() || '',
+          mileage: item.mileage?.toString() || '',
+          condition: item.condition || '',
+          paint: item.paint || '',
+          engine: item.engine || '',
+          engine_details: item.engine_details || '',
+          trim_details: item.trim_details || '',
+          wilaya: item.wilaya || '',
+          trim: item.trim || '',
+          document_status: item.document_status || '',
+          transmission: item.transmission || ''
+        }
+      })}
     >
       <View className="bg-primary/5 w-12 h-12 rounded-xl items-center justify-center mr-4">
         <Car size={24} color={Colors.primary} />

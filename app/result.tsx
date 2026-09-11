@@ -70,6 +70,35 @@ export default function ResultScreen() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // ─── Signal de Tendance Macro (EUR/DZD → impact marché auto) ───
+  const [marketTrend, setMarketTrend] = useState<{
+    signal: 'hausse' | 'stable' | 'baisse' | null;
+    pct: number;
+    eurRate: number;
+  }>({ signal: null, pct: 0, eurRate: 0 });
+
+  useEffect(() => {
+    // Charger le signal de tendance depuis macro_indices (non-bloquant)
+    async function loadMacroTrend() {
+      try {
+        const { data } = await supabase
+          .from('macro_indices')
+          .select('key, value')
+          .in('key', ['market_trend', 'market_trend_pct', 'eur_rate_current']);
+        
+        if (data && data.length > 0) {
+          const trend = data.find((d: any) => d.key === 'market_trend')?.value;
+          const pct = parseFloat(data.find((d: any) => d.key === 'market_trend_pct')?.value || '0');
+          const eur = parseFloat(data.find((d: any) => d.key === 'eur_rate_current')?.value || '0');
+          if (trend) setMarketTrend({ signal: trend as any, pct, eurRate: eur });
+        }
+      } catch (e) {
+        // Non-bloquant — silencieux si indisponible
+      }
+    }
+    loadMacroTrend();
+  }, []);
+
   useEffect(() => {
     async function load() {
       try {
@@ -116,12 +145,12 @@ export default function ResultScreen() {
     kilometrage: Number(params.mileage),
     carburant: 'essence', // Default fuel type placeholder for share card
     wilaya: (params.wilaya || 'Algérie') as string,
-    prixConseil: results?.prix_estime || 0,
-    prixMin: results?.fourchette_min || 0,
-    prixMax: results?.fourchette_max || 0,
-    score: results?.score_justification || 80,
-    verdict: (results?.verdict || 'prix_marche') as 'bonne_affaire' | 'prix_marche' | 'surevalue',
-    conseil: results?.conseil_negociation || '',
+    prixConseil: results?.estimated_value || 0,
+    prixMin: results?.quick_sale || 0,
+    prixMax: results?.patient_sale || 0,
+    score: results?.confidence || 80,
+    verdict: 'prix_marche' as 'bonne_affaire' | 'prix_marche' | 'surevalue',
+    conseil: '',
   };
 
   const { cardRef, shareAsImage } = useShareResult(coteData);
@@ -159,20 +188,10 @@ export default function ResultScreen() {
           
           <View className={`flex-row items-center mt-4 flex-wrap gap-2 ${I18nManager.isRTL ? 'flex-row-reverse' : ''}`}>
             {results && (
-              <View className={`px-4 py-2 rounded-full flex-row items-center ${
-                results.verdict === 'bonne_affaire' ? 'bg-green-100' : 
-                results.verdict === 'surevalue' ? 'bg-red-100' : 'bg-primary/10'
-              }`}>
-                <CheckCircle size={14} color={
-                  results.verdict === 'bonne_affaire' ? '#166534' : 
-                  results.verdict === 'surevalue' ? '#991B1B' : Colors.primary
-                } />
-                <Text className={`font-display font-bold text-xs uppercase tracking-tight ml-2 ${
-                  results.verdict === 'bonne_affaire' ? 'text-green-800' : 
-                  results.verdict === 'surevalue' ? 'text-red-800' : 'text-primary'
-                }`}>
-                  {results.verdict === 'bonne_affaire' ? t('result.good_deal') : 
-                   results.verdict === 'surevalue' ? t('result.overvalued') : t('result.market_price')}
+              <View className="px-4 py-2 rounded-full flex-row items-center bg-primary/10">
+                <CheckCircle size={14} color={Colors.primary} />
+                <Text className="font-display font-bold text-xs uppercase tracking-tight ml-2 text-primary">
+                  {t('result.market_price')}
                 </Text>
               </View>
             )}
@@ -250,7 +269,7 @@ export default function ResultScreen() {
           </View>
         ) : results ? (
           <View className="pb-20">
-            {results.confiance === 'faible' && (
+            {(results.confidence_level === 'VERY_LOW_DATA' || results.confidence_level === 'LOW_DATA') && (
               <View className="bg-[#00B89A]/5 border border-[#00B89A]/15 p-6 rounded-[32px] mb-8">
                 <View className={`flex-row items-center mb-4 ${I18nManager.isRTL ? 'flex-row-reverse' : ''}`}>
                   <Shield size={24} color="#00B89A" />
@@ -307,14 +326,14 @@ export default function ResultScreen() {
                 </View>
               </View>
 
-              <PriceCard label={t('result.recommended_price')} price={results.prix_estime || 0} isMain />
+              <PriceCard label={t('result.recommended_price')} price={results.estimated_value || 0} isMain />
               
               <View className={`flex-row justify-between mt-4 ${I18nManager.isRTL ? 'flex-row-reverse' : ''}`}>
                 <View className="w-[48%]">
-                  <PriceCard label={t('result.low_range')} price={results.fourchette_min || 0} />
+                  <PriceCard label={t('result.low_range')} price={results.quick_sale || 0} />
                 </View>
                 <View className="w-[48%]">
-                  <PriceCard label={t('result.high_range')} price={results.fourchette_max || 0} />
+                  <PriceCard label={t('result.high_range')} price={results.patient_sale || 0} />
                 </View>
               </View>
 
@@ -335,53 +354,22 @@ export default function ResultScreen() {
                 <View className={`flex-row items-center justify-between mb-4 ${I18nManager.isRTL ? 'flex-row-reverse' : ''}`}>
                   <Text className="text-text-primary font-display font-bold text-xl">{t('result.global_eval')}</Text>
                   <View className="bg-primary px-3 py-1 rounded-lg">
-                    <Text className="text-white font-display font-bold">{results.score_justification}/100</Text>
+                    <Text className="text-white font-display font-bold">{results.confidence}/100</Text>
                   </View>
                 </View>
 
-                {/* [Défi 2] Alertes choc de marché — style orange distinct des alertes physiques */}
-                {results.alertes && results.alertes.some(a => a.includes('Choc de marché') || a.includes('📈') || a.includes('📉')) && (
-                  <View className="bg-orange-50 border border-orange-200 p-4 rounded-2xl mb-3">
-                    <View className="flex-row items-center mb-2">
-                      <Text className="text-orange-800 font-display font-bold text-sm">🚨 Volatility Alert — Marché en Mouvement</Text>
-                    </View>
-                    {results.alertes.filter(a => a.includes('Choc de marché') || a.includes('📈') || a.includes('📉')).map((alerte, idx) => (
-                      <View key={idx} className={`flex-row items-start mt-1 ${I18nManager.isRTL ? 'flex-row-reverse' : ''}`}>
-                        <Text className={`text-orange-800 font-body text-xs flex-1 ${I18nManager.isRTL ? 'text-right' : 'text-left'}`}>{alerte}</Text>
-                      </View>
-                    ))}
-                    <Text className="text-orange-600 font-body text-[10px] mt-2 italic">
-                      Les estimations intègrent automatiquement ces variations. La fourchette peut être plus large que d'habitude.
-                    </Text>
-                  </View>
-                )}
-
-                {/* Alertes physiques (kilométrage, etc.) — style rouge */}
-                {results.alertes && results.alertes.some(a => !a.includes('Choc de marché') && !a.includes('📈') && !a.includes('📉')) && (
-                  <View className="bg-red-50 border border-red-100 p-4 rounded-2xl mb-4">
-                    {results.alertes.filter(a => !a.includes('Choc de marché') && !a.includes('📈') && !a.includes('📉')).map((alerte, idx) => (
-                      <View key={idx} className={`flex-row items-start mb-2 ${I18nManager.isRTL ? 'flex-row-reverse' : ''}`}>
-                        <Shield size={16} color="#991B1B" />
-                        <Text className={`text-red-800 font-body text-xs flex-1 ${I18nManager.isRTL ? 'mr-2 text-right' : 'ml-2 text-left'}`}>{alerte}</Text>
-                      </View>
-                    ))}
-                  </View>
-                )}
-
                 {/* Factors List */}
                 <View className="flex flex-col gap-3">
-                  {results.facteurs.map((facteur, idx) => (
+                  {results.factors?.map((facteur, idx) => (
                     <View key={idx} className={`bg-white p-4 rounded-2xl border border-gray-100 flex-row items-center shadow-sm ${I18nManager.isRTL ? 'flex-row-reverse' : ''}`}>
                       <View className={`w-2 h-10 rounded-full ${I18nManager.isRTL ? 'ml-4' : 'mr-4'} ${
-                        facteur.impact === 'positif' ? 'bg-green-500' : 
-                        facteur.impact === 'negatif' ? 'bg-red-500' : 'bg-gray-300'
+                        facteur.adjustment > 0 ? 'bg-green-500' : 
+                        facteur.adjustment < 0 ? 'bg-red-500' : 'bg-gray-300'
                       }`} />
                       <View className="flex-1">
                         <View className={`flex-row items-center justify-between ${I18nManager.isRTL ? 'flex-row-reverse' : ''}`}>
-                          <Text className={`text-text-primary font-bold text-sm ${I18nManager.isRTL ? 'text-right' : 'text-left'}`}>{facteur.nom || (facteur as any).facteur}</Text>
-                          {facteur.poids && (
-                            <Text className="text-text-secondary text-[10px] uppercase font-bold tracking-tight">{t('result.weight')} {facteur.poids}</Text>
-                          )}
+                          <Text className={`text-text-primary font-bold text-sm ${I18nManager.isRTL ? 'text-right' : 'text-left'}`}>{facteur.nom}</Text>
+                          <Text className="text-text-secondary text-[10px] uppercase font-bold tracking-tight">{(facteur.adjustment * 100).toFixed(0)}%</Text>
                         </View>
                         <Text className={`text-text-secondary font-body text-xs mt-1 ${I18nManager.isRTL ? 'text-right' : 'text-left'}`} numberOfLines={2}>
                           {facteur.explication}
@@ -391,39 +379,70 @@ export default function ResultScreen() {
                   ))}
                 </View>
 
-                {/* Advice Card */}
-                <View className="bg-primary/5 p-6 rounded-[32px] border border-primary/10 mt-6">
-                  <View className={`flex-row items-center mb-3 ${I18nManager.isRTL ? 'flex-row-reverse' : ''}`}>
-                    <Bot size={20} color={Colors.primary} />
-                    <Text className={`text-primary font-display font-bold text-lg ${I18nManager.isRTL ? 'mr-2' : 'ml-2'}`}>{t('result.negotiation_advice')}</Text>
+                {/* ─── Badge Tendance Macro ─── */}
+                {marketTrend.signal && (
+                  <View className={`mt-4 px-4 py-3 rounded-2xl flex-row items-center justify-between ${
+                    marketTrend.signal === 'hausse' ? 'bg-orange-50 border border-orange-200' :
+                    marketTrend.signal === 'baisse' ? 'bg-blue-50 border border-blue-200' :
+                    'bg-gray-50 border border-gray-200'
+                  }`}>
+                    <View className={`flex-row items-center ${I18nManager.isRTL ? 'flex-row-reverse' : ''}`}>
+                      <Text className="text-base mr-2">
+                        {marketTrend.signal === 'hausse' ? '📈' : marketTrend.signal === 'baisse' ? '📉' : '📊'}
+                      </Text>
+                      <View>
+                        <Text className={`font-display font-bold text-sm ${
+                          marketTrend.signal === 'hausse' ? 'text-orange-800' :
+                          marketTrend.signal === 'baisse' ? 'text-blue-800' :
+                          'text-gray-700'
+                        }`}>
+                          {marketTrend.signal === 'hausse' ? 'Marché en hausse' :
+                           marketTrend.signal === 'baisse' ? 'Marché en baisse' :
+                           'Marché stable'}
+                        </Text>
+                        <Text className="text-gray-500 font-body text-[10px]">
+                          EUR/DZD :{' '}
+                          <Text className={`font-bold ${
+                            marketTrend.signal === 'hausse' ? 'text-orange-600' :
+                            marketTrend.signal === 'baisse' ? 'text-blue-600' :
+                            'text-gray-600'
+                          }`}>
+                            {marketTrend.pct >= 0 ? '+' : ''}{marketTrend.pct.toFixed(1)}% sur 7j
+                          </Text>
+                        </Text>
+                      </View>
+                    </View>
+                    {marketTrend.eurRate > 0 && (
+                      <View className="items-end">
+                        <Text className="text-gray-400 font-body text-[9px] uppercase tracking-wider">Taux square</Text>
+                        <Text className="text-gray-700 font-display font-bold text-sm">{marketTrend.eurRate.toFixed(0)} DZD</Text>
+                      </View>
+                    )}
                   </View>
-                  <Text className={`text-text-primary font-body text-sm leading-6 ${I18nManager.isRTL ? 'text-right' : 'text-left'}`}>
-                    {results.conseil_negociation}
-                  </Text>
-                </View>
+                )}
+
+                {/* Conseil contextuel si hausse forte */}
+                {marketTrend.signal === 'hausse' && marketTrend.pct >= 3 && (
+                  <View className="mt-2 bg-orange-50 border border-orange-100 px-4 py-3 rounded-2xl">
+                    <Text className={`text-orange-800 font-body text-xs leading-5 ${I18nManager.isRTL ? 'text-right' : 'text-left'}`}>
+                      ⚡ La hausse du EUR/DZD signifie que les voitures d'importation récentes vont probablement monter dans les prochaines semaines. Bonne période pour vendre.
+                    </Text>
+                  </View>
+                )}
+                {marketTrend.signal === 'baisse' && marketTrend.pct <= -3 && (
+                  <View className="mt-2 bg-blue-50 border border-blue-100 px-4 py-3 rounded-2xl">
+                    <Text className={`text-blue-800 font-body text-xs leading-5 ${I18nManager.isRTL ? 'text-right' : 'text-left'}`}>
+                      💡 La baisse du EUR/DZD peut créer une légère pression à la baisse sur les prix. Bon moment pour négocier en tant qu'acheteur.
+                    </Text>
+                  </View>
+                )}
+
+                {/* Advice Card Removed */}
               </View>
             )}
 
-            {/* Import Option Section */}
-            {results.import_option?.disponible && (
-              <View className="bg-indigo-50 border border-indigo-100 p-6 rounded-[32px] mb-8">
-                <View className={`flex-row items-center mb-3 ${I18nManager.isRTL ? 'flex-row-reverse' : ''}`}>
-                  <Globe size={24} color="#4338CA" />
-                  <Text className={`text-indigo-900 font-display font-bold text-xl ${I18nManager.isRTL ? 'mr-3' : 'ml-3'}`}>{t('result.import_option')}</Text>
-                </View>
-                <Text className={`text-indigo-800 font-body text-sm leading-5 mb-4 ${I18nManager.isRTL ? 'text-right' : 'text-left'}`}>
-                  {results.import_option.details}
-                </Text>
-                {results.import_option.prix_total_estime && (
-                  <View className="bg-white p-4 rounded-2xl items-center shadow-sm">
-                    <Text className="text-indigo-900 font-display font-bold text-2xl">
-                      {results.import_option.prix_total_estime.toLocaleString()} DZD
-                    </Text>
-                    <Text className="text-indigo-500 font-body text-[10px] uppercase font-bold mt-1">{t('result.total_landed_cost')}</Text>
-                  </View>
-                )}
-              </View>
-            )}
+
+            {/* Import Option Section Removed */}
 
 
             {/* Actions */}

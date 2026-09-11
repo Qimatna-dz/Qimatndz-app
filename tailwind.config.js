@@ -5,19 +5,19 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#0D0E10", // Ink
-        accent: "#00B89A",  // Cyan (Marque)
-        background: "#F8F6F2", // Paper
-        paper2: "#F2EFE9",
+        primary: "#1A1A1A", // Black
+        accent: "#E6DAC3",  // Beige
+        background: "#FFFFFF", // White
+        paper2: "#F8F6F2",
         white: "#FFFFFF",
-        ink: "#0D0E10",
+        ink: "#1A1A1A",
         danger: "#D94F2A",
         success: "#00B89A",
         warning: "#9A6500",
         text: {
-          primary: "#0D0E10",
-          secondary: "rgba(13,14,16,0.6)",
-          muted: "rgba(13,14,16,0.3)",
+          primary: "#1A1A1A",
+          secondary: "rgba(26,26,26,0.6)",
+          muted: "rgba(26,26,26,0.3)",
         }
       },
       fontFamily: {

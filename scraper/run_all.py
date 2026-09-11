@@ -2,30 +2,46 @@
 """
 run_all.py — Orchestrateur global des scrapers QimatnaDz.
 Exécute tous les collecteurs de données séquentiellement :
+  0. Nettoyage annonces périmées (cleanup_old_listings.py)
   1. Taux du Square (rate_scraper.py)
   2. Annonces Sogauto (sogauto_scraper.py)
   3. Annonces Ouedkniss GraphQL (main_v2.py --scrape)
   4. Offres Concessionnaires Chine (china_scraper.py)
+  5. Compilation médians + détection chocs (update_medians_optimized.py)
 """
 
 import sys
 import os
+import time
 import subprocess
 from pathlib import Path
+from datetime import datetime
 
-def run_script(script_name: str, args: list = []) -> bool:
+def send_discord_alert(title: str, description: str, color: int = 16711680):
+    """Envoie une alerte Discord (nécessite DISCORD_WEBHOOK_URL dans .env)."""
+    webhook_url = os.getenv("DISCORD_WEBHOOK_URL")
+    if not webhook_url:
+        return
+    try:
+        import requests
+        requests.post(webhook_url, json={"embeds": [{"title": title, "description": description, "color": color}]}, timeout=5)
+    except Exception:
+        pass
+
+def run_script(script_name: str, args: list = []) -> tuple[bool, float]:
+    """Exécute un script et retourne (succès, durée_secondes)."""
     script_path = Path(__file__).parent / script_name
     print("\n" + "=" * 60)
-    print(f"🚀 LANCEMENT DU SCRAPER : {script_name} {' '.join(args)}")
+    print(f"🚀 LANCEMENT : {script_name} {' '.join(args)}")
     print("=" * 60)
     
     if not script_path.exists():
         print(f"❌ Erreur : Le fichier {script_name} n'existe pas dans le dossier scraper.")
-        return False
-        
+        return False, 0.0
+    
+    start = time.time()
     cmd = [sys.executable, str(script_path)] + args
     try:
-        # Run subprocess and stream output to terminal
         process = subprocess.Popen(
             cmd,
             stdout=subprocess.PIPE,
@@ -35,64 +51,93 @@ def run_script(script_name: str, args: list = []) -> bool:
             universal_newlines=True
         )
         
-        # Read output in real-time
         if process.stdout:
             for line in process.stdout:
                 print(f"  [{script_name}] {line.strip()}")
                 
         process.wait()
+        elapsed = time.time() - start
         
         if process.returncode == 0:
-            print(f"✅ Terminé avec succès : {script_name}")
-            return True
+            print(f"✅ Terminé ({elapsed:.1f}s) : {script_name}")
+            return True, elapsed
         else:
-            print(f"⚠️ Terminé avec code de retour non-nul ({process.returncode}) : {script_name}")
-            return False
+            print(f"⚠️  Code retour non-nul ({process.returncode}) en {elapsed:.1f}s : {script_name}")
+            return False, elapsed
             
     except Exception as e:
-        print(f"❌ Erreur critique lors de l'exécution de {script_name} : {e}")
-        return False
+        elapsed = time.time() - start
+        print(f"❌ Erreur critique ({elapsed:.1f}s) lors de {script_name} : {e}")
+        return False, elapsed
 
 def main():
+    run_start = time.time()
+    run_date = datetime.now().strftime('%Y-%m-%d %H:%M')
+    
     print("=" * 70)
-    print(" 📡 QIMATNADZ — ACCÉLÉRATEUR DE COLLECTE DE DATA AUTOMATIQUE")
+    print(f" 📡 QIMATNADZ — INGESTION DE DATA AUTOMATIQUE ({run_date})")
     print("=" * 70)
     print(f"Dossier de travail : {Path(__file__).parent.resolve()}")
     
-    # 0. [DÉFI 1] Nettoyage des annonces périmées (> 90 jours)
-    # CRITIQUE : doit tourner AVANT le scraping pour que les médians
-    # reflètent UNIQUEMENT le marché actuel, pas le passé.
+    results = {}
+
+    # 0. Nettoyage des annonces périmées (> 90 jours) — AVANT le scraping
     print("\n" + "=" * 60)
     print("🧹 ÉTAPE 0 : NETTOYAGE DES DONNÉES PÉRIMÉES (> 90 JOURS)")
     print("=" * 60)
-    run_script("cleanup_old_listings.py")
+    results['cleanup'] = run_script("cleanup_old_listings.py")
     
-    # 1. Scrape Exchange Rates (multi-source avec fallback)
-    run_script("rate_scraper.py")
+    # 1. Scrape Exchange Rates
+    results['rates'] = run_script("rate_scraper.py")
     
-    # 2. Scrape Sogauto (Now configured for 100 pages!)
-    run_script("sogauto_scraper.py")
+    # 2. Scrape Sogauto
+    results['sogauto'] = run_script("sogauto_scraper.py")
     
-    # 3. Scrape Ouedkniss GraphQL (Now configured for 15 pages per model!)
-    run_script("main_v2.py", ["--scrape"])
+    # 3. Scrape Ouedkniss GraphQL
+    results['ouedkniss'] = run_script("main_v2.py", ["--scrape"])
     
-    # 4. Scrape China Imports
+    # 4. Scrape China Imports (non-bloquant)
     try:
-        run_script("china_scraper.py")
+        results['china'] = run_script("china_scraper.py")
     except Exception:
-        pass
+        results['china'] = (False, 0.0)
         
-    # 5. Calcul des Prix Médians + Détection Chocs + Baselines Dynamiques
+    # 5. Compilation des prix médians + Détection Chocs + Baselines Dynamiques
     print("\n" + "=" * 60)
     print("🧠 ÉTAPE FINALE : COMPILATION DES STATISTIQUES")
-    print("   → Calcul médians, détection chocs de marché, baselines dynamiques")
+    print("   → Médians, chocs de marché, baselines, auto-calibration")
     print("=" * 60)
-    run_script("update_medians_optimized.py")
-        
+    results['medians'] = run_script("update_medians_optimized.py")
+
+    # 6. Analyse Macro & Signal de Tendance (EUR/DZD → impact marché auto)
+    print("\n" + "=" * 60)
+    print("📊 ÉTAPE MACRO : SIGNAL DE TENDANCE MARCHÉ")
+    print("   → Variation EUR/DZD 7j → Signal hausse/stable/baisse")
+    print("=" * 60)
+    results['macro'] = run_script("update_macro_index.py")
+
+    # ─── RAPPORT FINAL ───
+
+    total_elapsed = time.time() - run_start
+    successes = sum(1 for ok, _ in results.values() if ok)
+    failures = len(results) - successes
+    
     print("\n" + "=" * 70)
-    print(" 🎉 SYSTÈME D'INGESTION TERMINÉ AVEC SUCCÈS !")
-    print(" Votre base de données Supabase a été enrichie et les Cotes Officielles sont à jour.")
+    print(f" 🎉 PIPELINE TERMINÉ en {total_elapsed:.0f}s")
+    print(f" ✅ {successes} étapes réussies | ❌ {failures} échec(s)")
+    print(" Détail :")
+    for name, (ok, dur) in results.items():
+        status = "✅" if ok else "❌"
+        print(f"   {status} {name:<20} {dur:5.1f}s")
     print("=" * 70)
+    
+    if failures > 0:
+        failed_names = [name for name, (ok, _) in results.items() if not ok]
+        send_discord_alert(
+            "⚠️ Pipeline QimatnaDz — Échec(s) détecté(s)",
+            f"**Date :** {run_date}\n**Durée totale :** {total_elapsed:.0f}s\n**Étapes en échec :** {', '.join(failed_names)}\n**Résultat :** {successes}/{len(results)} étapes réussies",
+            16753920
+        )
 
 if __name__ == "__main__":
     main()

@@ -57,7 +57,17 @@ def scrape_sogauto(max_pages: int = 100) -> list:
         
         print(f"   Page {page} - Requete API...")
         try:
-            response = requests.get(API_URL, params=params, headers=HEADERS, timeout=15)
+            max_retries = 3
+            for attempt in range(max_retries):
+                try:
+                    response = requests.get(API_URL, params=params, headers=HEADERS, timeout=30)
+                    break
+                except requests.exceptions.RequestException as e:
+                    if attempt == max_retries - 1:
+                        raise
+                    print(f"   [WARN] Erreur connexion (tentative {attempt+1}/{max_retries}): {e}. Nouvelle tentative...")
+                    time.sleep(3)
+                    
             if response.status_code != 200:
                 print(f"   [WARN] Status code {response.status_code} page {page}. Fin du scraping.")
                 break

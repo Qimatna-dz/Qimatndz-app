@@ -21,21 +21,56 @@ from db import get_supabase_client
 # Seuil de détection d'un choc de marché (10% de variation = alerte)
 MARKET_SHOCK_THRESHOLD_PCT = 10.0
 
-# Nb minimum d'annonces réelles pour alimenter market_baselines
-MIN_ANNONCES_FOR_BASELINE = 15
+# ─────────────────────────────────────────────────────────────────────────────
+# AMÉLIORATION B — Seuils adaptatifs par segment pour market_baselines
+# Remplace MIN_ANNONCES_FOR_BASELINE = 15 (trop élevé pour les véhicules rares)
+# Les SUV premium ont rarement 15 annonces — résultat : baselines jamais mises à jour.
+# ─────────────────────────────────────────────────────────────────────────────
+BASELINE_THRESHOLDS_BY_SEGMENT = {
+    'citadine_budget':   10,  # Alto, QQ — marché liquide, beaucoup d'annonces
+    'citadine_standard': 10,  # Clio, Yaris — très disponibles
+    'citadine_premium':   6,  # Mini, A1 — moins fréquents
+    'berline_standard':  10,  # Symbol, Logan — très disponibles
+    'berline_premium':    4,  # BMW Série 3, A4 — rares
+    'crossover_compact':  8,  # Coolray, KX1 — moyen
+    'suv_routier':        5,  # Tucson, GLC — peu d'annonces simultanées
+    'suv_premium':        3,  # X5, Q7 — très rares
+    'suv_prestige':       2,  # Cayenne, G-Class — 2 annonces = données fiables
+    'utilitaire_pickup':  5,  # Hilux — marché spécialisé
+}
+MIN_ANNONCES_FOR_BASELINE = 10  # Valeur de fallback si segment inconnu
 
-# FIX 2 : Auto-calibration des prix hardcodés (FALLBACK_MEDIANS)
-# Dictionnaire des années de référence au milieu de chaque génération
+# ─────────────────────────────────────────────────────────────────────────────
+# AMÉLIORATION C — Auto-calibration généralisée
+# Au lieu d'un dict statique de 9 modèles, on vérifie TOUS les modèles en DB
+# qui ont >= MIN_CALIBRATION_ANNONCES annonces. Le seuil d'alerte est ECART_ALERT_PCT.
+# ─────────────────────────────────────────────────────────────────────────────
+MIN_CALIBRATION_ANNONCES = 5     # Minimum d'annonces pour déclencher la vérification
+ECART_ALERT_PCT = 12.0           # Seuil d'écart (12%) pour logguer un avertissement
+
+# Dictionnaire de référence hérité (conservé pour compatibilité + priorité sur les clés connues)
 AUTO_CALIBRATION_CHECK_DICT = {
     ('renault', 'symbol', 2010): ('Renault Symbol G1', 1300000),
     ('renault', 'symbol', 2015): ('Renault Symbol G2', 1800000),
     ('renault', 'symbol', 2020): ('Renault Symbol G3', 2400000),
-    ('renault', 'clio', 2015): ('Renault Clio 4', 2500000),
-    ('renault', 'clio', 2021): ('Renault Clio 5', 3500000),
-    ('dacia', 'duster', 2013): ('Dacia Duster G1', 2200000),
-    ('dacia', 'duster', 2019): ('Dacia Duster G2', 3200000),
-    ('peugeot', '208', 2015): ('Peugeot 208 G1', 2100000),
-    ('peugeot', '208', 2022): ('Peugeot 208 G2', 3400000),
+    ('renault', 'clio', 2015):   ('Renault Clio 4',    2500000),
+    ('renault', 'clio', 2021):   ('Renault Clio 5',    3500000),
+    ('dacia', 'duster', 2013):   ('Dacia Duster G1',   2200000),
+    ('dacia', 'duster', 2019):   ('Dacia Duster G2',   3200000),
+    ('peugeot', '208', 2015):    ('Peugeot 208 G1',    2100000),
+    ('peugeot', '208', 2022):    ('Peugeot 208 G2',    3400000),
+    # Ajouts
+    ('toyota', 'yaris', 2015):   ('Toyota Yaris G3',   2500000),
+    ('toyota', 'yaris', 2022):   ('Toyota Yaris G4',   4200000),
+    ('toyota', 'hilux', 2016):   ('Toyota Hilux G8',   8500000),
+    ('hyundai', 'tucson', 2017): ('Hyundai Tucson G3',  4500000),
+    ('hyundai', 'tucson', 2022): ('Hyundai Tucson G4',  6800000),
+    ('kia', 'sportage', 2018):   ('Kia Sportage G4',   4800000),
+    ('kia', 'sportage', 2023):   ('Kia Sportage G5',   7500000),
+    ('volkswagen', 'golf', 2016):('Volkswagen Golf 7',  5200000),
+    ('volkswagen', 'golf', 2021):('Volkswagen Golf 8',  6200000),
+    ('geely', 'coolray', 2022):  ('Geely Coolray',      3800000),
+    ('chery', 'tiggo 4 pro', 2022): ('Chery Tiggo 4 Pro', 3200000),
 }
 
 
@@ -455,9 +490,10 @@ def run_optimized_aggregation():
             total_errors += 1
             print(f"   [UPSERT ERR] {brand} {model} ({year}): {err}")
 
-        # [Défi 3] Alimenter market_baselines si données suffisantes
-        if nb_annonces >= MIN_ANNONCES_FOR_BASELINE:
-            segment = classify_segment(brand, model)
+        # ── AMÉLIORATION B : Seuils adaptatifs par segment pour market_baselines ──
+        segment = classify_segment(brand, model)
+        threshold = BASELINE_THRESHOLDS_BY_SEGMENT.get(segment, MIN_ANNONCES_FOR_BASELINE)
+        if nb_annonces >= threshold:
             confiance = 'haute' if nb_annonces >= 15 else ('moyenne' if nb_annonces >= 5 else 'faible')
             baselines_to_upsert.append({
                 "brand": brand,
@@ -469,12 +505,13 @@ def run_optimized_aggregation():
                 "updated_at": datetime.now().isoformat()
             })
 
-        # FIX 2 : Détection des écarts d'auto-calibration
+        # ── AMÉLIORATION C : Auto-calibration généralisée ──
+        # Priorité 1 : Vérifier dans le dict statique hérité (clés connues)
         calib_key = (normalize_name(brand), normalize_name(model), year)
-        if calib_key in AUTO_CALIBRATION_CHECK_DICT and nb_annonces >= 5:
+        if calib_key in AUTO_CALIBRATION_CHECK_DICT and nb_annonces >= MIN_CALIBRATION_ANNONCES:
             gen_name, fallback_price = AUTO_CALIBRATION_CHECK_DICT[calib_key]
             ecart_pct = ((median_val - fallback_price) / fallback_price) * 100
-            if abs(ecart_pct) > 8.0:
+            if abs(ecart_pct) > ECART_ALERT_PCT:
                 action = 'AUGMENTER' if ecart_pct > 0 else 'BAISSER'
                 calibration_logs_to_insert.append({
                     "brand": brand,
@@ -486,6 +523,27 @@ def run_optimized_aggregation():
                     "action_recommandee": action,
                     "nb_annonces": nb_annonces
                 })
+        elif nb_annonces >= MIN_CALIBRATION_ANNONCES:
+            # Priorité 2 : Auto-calibration généralisée pour tout modèle avec données suffisantes
+            # On compare le médian DB calculé vs le médian précédent (si disponible)
+            # Cela génère un historique de dérive qui aide à mettre à jour les FALLBACK_MEDIANS
+            norm_key_prev = (normalize_name(brand), normalize_name(model), 'standard', year)
+            prix_ref = existing_medians.get(norm_key_prev)
+            if prix_ref and prix_ref > 0:
+                derive_pct = ((median_val - prix_ref) / prix_ref) * 100
+                # Seulement alerter les dérives importantes sur 1 seul cycle
+                if abs(derive_pct) > ECART_ALERT_PCT * 1.5:  # 18% seuil pour éviter le bruit
+                    action = 'RÉVISER À LA HAUSSE' if derive_pct > 0 else 'RÉVISER À LA BAISSE'
+                    calibration_logs_to_insert.append({
+                        "brand": brand,
+                        "model": model,
+                        "generation_key": f"{brand} {model} {year}",
+                        "prix_fallback_median": prix_ref,
+                        "prix_marche_reel": median_val,
+                        "ecart_pct": round(derive_pct, 2),
+                        "action_recommandee": action,
+                        "nb_annonces": nb_annonces
+                    })
 
     # 7. [Défi 2] Insérer les alertes de choc de marché
     if market_alerts_to_insert:

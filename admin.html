@@ -261,13 +261,6 @@ body::before {
 
   <div class="nav-group">Utilisateurs</div>
   <div class="nav-link" onclick="go('tous-users')">👥 Tous</div>
-  <div class="nav-link" onclick="go('actifs')">✓ Actifs</div>
-  <div class="nav-link" onclick="go('inactifs')">○ Inactifs</div>
-
-  <div class="nav-group">Plateformes</div>
-  <div class="nav-link" onclick="go('web')">🌐 Web</div>
-  <div class="nav-link" onclick="go('ios')">🍎 iOS</div>
-  <div class="nav-link" onclick="go('android')">▶ Android</div>
 
   <div class="sidebar-foot">
     <div class="user-chip">
@@ -346,12 +339,12 @@ body::before {
           <div style="display:flex; gap:0.75rem; align-items:center;">
             <div style="flex:1; display:flex; align-items:center; background:var(--paper); border:1px solid var(--border-light); border-radius:10px; padding:0.4rem 0.8rem;">
               <span style="font-size:0.8rem; color:var(--ink-30); margin-right:6px;">Achat:</span>
-              <input type="number" id="squareBuyRate" class="search-input" style="border:none; background:none; padding:0; font-size:0.9rem; font-weight:600; width:100%; outline:none;" value="282" step="0.5">
+              <input type="number" id="squareBuyRate" class="search-input" style="border:none; background:none; padding:0; font-size:0.9rem; font-weight:600; width:100%; outline:none;" placeholder="-" step="0.5">
               <span style="font-size:0.8rem; color:var(--ink-60); margin-left:4px;">DZD</span>
             </div>
             <div style="flex:1; display:flex; align-items:center; background:var(--paper); border:1px solid var(--border-light); border-radius:10px; padding:0.4rem 0.8rem;">
               <span style="font-size:0.8rem; color:var(--ink-30); margin-right:6px;">Vente:</span>
-              <input type="number" id="squareSellRate" class="search-input" style="border:none; background:none; padding:0; font-size:0.9rem; font-weight:600; width:100%; outline:none;" value="280" step="0.5">
+              <input type="number" id="squareSellRate" class="search-input" style="border:none; background:none; padding:0; font-size:0.9rem; font-weight:600; width:100%; outline:none;" placeholder="-" step="0.5">
               <span style="font-size:0.8rem; color:var(--ink-60); margin-left:4px;">DZD</span>
             </div>
             <button class="filter-btn on" onclick="saveExchangeRate()" style="height:38px; padding:0 1rem; border-radius:10px; font-weight:600; flex-shrink:0; border:none; outline:none; cursor:pointer;">Enregistrer</button>
@@ -404,16 +397,6 @@ body::before {
           <div style="font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink-60); margin-bottom:0.6rem;">
             Statut des collectes automatiques
           </div>
-          <div class="flex items-center justify-between p-3 mb-4 bg-gray-50 rounded-lg border border-gray-100">
-              <div class="flex items-center gap-3">
-                  <span class="relative flex h-3 w-3">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-3 w-3 bg-teal-500"></span>
-                  </span>
-                  <span class="text-sm font-semibold text-gray-800" style="font-family:'Figtree'">Scraper Ouedkniss (Flux A)</span>
-              </div>
-              <span class="text-xs font-medium text-teal-600 bg-teal-50 px-2 py-1 rounded-md" id="heartbeat-status">Actif (Dernier ping: il y a 12 min)</span>
-          </div>
           <div style="display:flex; flex-direction:column; gap:0.6rem;" id="scraperStatusList">
             <div style="font-size:0.8rem; color:var(--ink-30); text-align:center; padding:1rem 0;">Chargement des scrapers...</div>
           </div>
@@ -449,7 +432,7 @@ body::before {
           <div class="w-full bg-gray-100 rounded-full h-2 mb-2">
               <div class="bg-teal-500 h-2 rounded-full" id="aiRejectionBar" style="width: 0%"></div>
           </div>
-          <p class="text-xs text-gray-400">Pourcentage d'annonces rejetées par Claude sur les dernières 24h.</p>
+          <p class="text-xs text-gray-400">Pourcentage d'annonces rejetées par les filtres statistiques sur les dernières 24h.</p>
       </div>
 
       <!-- Coût API IA -->
@@ -587,11 +570,11 @@ body::before {
   </div>
   <div class="card row-full">
     <div class="card-h"><div class="card-title">Statistiques de Sessions</div></div>
-    <div class="card-b" style="display:flex; align-items:center; justify-content:center; height:240px; color:var(--ink-30); font-size:0.85rem; text-align:center;">
-      <div>
-        <div style="font-size:2rem; margin-bottom:12px;">📊</div>
-        Les outils de tracking d'audience (Google Analytics/Amplitude) ne sont pas encore intégrés.
-      </div>
+    <div class="card-b" style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:240px; color:var(--ink); font-size:1rem; text-align:center;">
+      <div style="font-size:2.5rem; margin-bottom:12px;">📈</div>
+      <div style="font-family:'Playfair Display', serif; font-size:1.8rem; font-weight:600;" id="totalSessionsCount">0</div>
+      <div style="color:var(--ink-60); font-size:0.85rem;">Sessions uniques actives (7 derniers jours)</div>
+      <div style="font-size:0.75rem; color:var(--ink-30); margin-top:1rem;">Inclut les utilisateurs inscrits et les invités (Guest Sessions).</div>
     </div>
   </div>
 </div>
@@ -653,86 +636,6 @@ body::before {
         <thead><tr><th>Utilisateur</th><th>Rôle</th><th>Date d'inscription</th></tr></thead>
         <tbody id="usersTableBody"></tbody>
       </table>
-    </div>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════
-     ACTIFS
-══════════════════════════════════ -->
-<div class="view" id="actifs">
-  <div class="topbar"><div><div class="page-h">Utilisateurs actifs</div><div class="page-sub">Activité en temps réel</div></div></div>
-  <div class="card row-full">
-    <div class="card-h"><div class="card-title">Filtre d'activité</div></div>
-    <div class="card-b" style="display:flex; align-items:center; justify-content:center; height:200px; color:var(--ink-30); font-size:0.85rem; text-align:center;">
-      <div>
-        <div style="font-size:2rem; margin-bottom:12px;">👥</div>
-        Tous vos utilisateurs réels sont répertoriés de manière exhaustive dans l'onglet principal "Tous".
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════
-     INACTIFS
-══════════════════════════════════ -->
-<div class="view" id="inactifs">
-  <div class="topbar"><div><div class="page-h">Utilisateurs inactifs</div><div class="page-sub">Activité en temps réel</div></div></div>
-  <div class="card row-full">
-    <div class="card-h"><div class="card-title">Filtre d'inactivité</div></div>
-    <div class="card-b" style="display:flex; align-items:center; justify-content:center; height:200px; color:var(--ink-30); font-size:0.85rem; text-align:center;">
-      <div>
-        <div style="font-size:2rem; margin-bottom:12px;">👥</div>
-        Tous vos utilisateurs réels sont répertoriés de manière exhaustive dans l'onglet principal "Tous".
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════
-     WEB
-══════════════════════════════════ -->
-<div class="view" id="web">
-  <div class="topbar"><div><div class="page-h">Web App</div><div class="page-sub">Supervision plateforme</div></div></div>
-  <div class="card row-full">
-    <div class="card-h"><div class="card-title">Supervision Plateforme Web</div></div>
-    <div class="card-b" style="display:flex; align-items:center; justify-content:center; height:240px; color:var(--ink-30); font-size:0.85rem; text-align:center;">
-      <div>
-        <div style="font-size:2rem; margin-bottom:12px;">💻</div>
-        Statistiques spécifiques en attente de déploiement analytique Web.
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════
-     IOS
-══════════════════════════════════ -->
-<div class="view" id="ios">
-  <div class="topbar"><div><div class="page-h">App Store — iOS</div><div class="page-sub">Supervision plateforme</div></div></div>
-  <div class="card row-full">
-    <div class="card-h"><div class="card-title">Supervision Plateforme iOS</div></div>
-    <div class="card-b" style="display:flex; align-items:center; justify-content:center; height:240px; color:var(--ink-30); font-size:0.85rem; text-align:center;">
-      <div>
-        <div style="font-size:2rem; margin-bottom:12px;">🍎</div>
-        Statistiques de téléchargements et crashlogs en attente de déploiement App Store Connect.
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════
-     ANDROID
-══════════════════════════════════ -->
-<div class="view" id="android">
-  <div class="topbar"><div><div class="page-h">Play Store — Android</div><div class="page-sub">Supervision plateforme</div></div></div>
-  <div class="card row-full">
-    <div class="card-h"><div class="card-title">Supervision Plateforme Android</div></div>
-    <div class="card-b" style="display:flex; align-items:center; justify-content:center; height:240px; color:var(--ink-30); font-size:0.85rem; text-align:center;">
-      <div>
-        <div style="font-size:2rem; margin-bottom:12px;">▶</div>
-        Statistiques de téléchargements et crashlogs en attente de déploiement Google Play Console.
-      </div>
     </div>
   </div>
 </div>
@@ -872,7 +775,9 @@ const fetchLiveStats = async () => {
       { data: pipelineMetrics },
       { data: aiCostData },
       { data: failedQueriesData },
-      { data: activity24h }
+      { data: activity24h },
+      { count: activeProfilesCount },
+      { count: activeGuestsCount }
     ] = await Promise.all([
       _supabase.from('profiles').select('*', { count: 'exact', head: true }),
       _supabase.from('valuations').select('*', { count: 'exact', head: true }),
@@ -886,13 +791,18 @@ const fetchLiveStats = async () => {
       _supabase.from('pipeline_metrics').select('rejection_rate').order('date', { ascending: false }).limit(1),
       _supabase.from('ai_cost_logs').select('cost_usd'),
       _supabase.from('failed_queries').select('*').order('query_count', { ascending: false }).limit(3),
-      _supabase.from('valuations').select('created_at').gte('created_at', new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString())
+      _supabase.from('valuations').select('created_at').gte('created_at', new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString()),
+      _supabase.from('profiles').select('*', { count: 'exact', head: true }).gte('last_seen', new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString()),
+      _supabase.from('guest_sessions').select('*', { count: 'exact', head: true }).gte('last_seen', new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString())
     ]);
 
     const usersCount = totalProfiles || 0;
-    const activeCount = usersCount; // Real registrees
+    const activeCount = (activeProfilesCount || 0) + (activeGuestsCount || 0); // Real active registrees + guests
 
     const setElText = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+
+    // Update Sessions tab
+    setElText('totalSessionsCount', activeCount.toLocaleString());
 
     // 1. Render KPIs
     setElText('kpiTotalUsers', usersCount.toLocaleString());
@@ -1060,16 +970,21 @@ const fetchLiveStats = async () => {
 
 const fetchAllUsers = async () => {
   try {
-    const { data: profiles, error } = await _supabase
+    const { data: profiles, error: errProfiles } = await _supabase
       .from('profiles')
       .select('email, full_name, is_admin, created_at')
       .order('created_at', { ascending: false });
-    if (error) throw error;
+    if (errProfiles) throw errProfiles;
+
+    const { data: guests, error: errGuests } = await _supabase
+      .from('guest_sessions')
+      .select('guest_id, last_seen, created_at')
+      .order('created_at', { ascending: false });
+    if (errGuests) throw errGuests;
 
     const baseColors = ['#0d0e10', '#6366f1', '#f59e0b', '#00b89a', '#ec4899', '#8b5cf6', '#14b8a6', '#f97316', '#64748b'];
 
-    cachedUsers = (profiles || []).map((p, idx) => {
-      return {
+    const mappedProfiles = (profiles || []).map((p, idx) => ({
         name: p.full_name || 'Utilisateur Anonyme',
         email: p.email || 'anon@qimatna.dz',
         status: p.is_admin ? 'admin' : 'user',
@@ -1078,8 +993,20 @@ const fetchAllUsers = async () => {
         evals: 0,
         last: new Date(p.created_at).toLocaleDateString('fr-DZ', { day: 'numeric', month: 'long', year: 'numeric' }),
         color: baseColors[idx % baseColors.length]
-      };
-    });
+    }));
+
+    const mappedGuests = (guests || []).map((g, idx) => ({
+        name: 'Invité (Non Inscrit)',
+        email: g.guest_id ? `ID: ${g.guest_id.substring(0,8)}...` : 'N/A',
+        status: 'guest',
+        platform: 'mobile',
+        wilaya: 'Inconnu',
+        evals: 0,
+        last: new Date(g.created_at).toLocaleDateString('fr-DZ', { day: 'numeric', month: 'long', year: 'numeric' }),
+        color: '#9ca3af' // gray for guests
+    }));
+
+    cachedUsers = [...mappedProfiles, ...mappedGuests];
 
     renderTable('usersTableBody', cachedUsers);
   } catch (err) {
@@ -1157,12 +1084,18 @@ function renderTable(tbodyId, users) {
     return;
   }
 
-  tbody.innerHTML = users.map(u => `
+  tbody.innerHTML = users.map(u => {
+    let pillClass = 'pill-active';
+    let pillText = 'Utilisateur';
+    if (u.status === 'admin') { pillClass = 'pill-new'; pillText = 'Super Admin'; }
+    if (u.status === 'guest') { pillClass = 'pill-inactive'; pillText = 'Invité'; }
+    return `
     <tr>
       <td><div class="u-cell"><div class="u-av" style="background:${u.color}">${initials(u.name)}</div><div><div class="u-name">${u.name}</div><div class="u-email">${u.email}</div></div></div></td>
-      <td><span class="pill ${u.status === 'admin' ? 'pill-new' : 'pill-active'}">${u.status === 'admin' ? 'Super Admin' : 'Utilisateur'}</span></td>
+      <td><span class="pill ${pillClass}">${pillText}</span></td>
       <td style="color:var(--ink-60);font-size:0.78rem">${u.last}</td>
-    </tr>`).join('');
+    </tr>`;
+  }).join('');
 }
 
 const renderTopWilayas = (marketData) => {
@@ -1236,7 +1169,8 @@ const initAlgeriaMap = async (marketData) => {
   try {
     if (!echarts.getMap('Algeria')) {
       // Load GeoJSON locally
-      const res = await fetch('/algeria.json');
+      const res = await fetch('./algeria.json');
+      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
       const geoJson = await res.json();
       echarts.registerMap('Algeria', geoJson);
     }
@@ -1310,7 +1244,7 @@ const initAlgeriaMap = async (marketData) => {
 
   } catch (e) {
     console.error("Map initialization failed", e);
-    container.innerHTML = '<div style="font-size:0.8rem; color:var(--danger); text-align:center; padding-top:4rem;">Erreur lors du chargement de la carte.</div>';
+    container.innerHTML = '<div style="font-size:0.8rem; color:var(--danger); text-align:center; padding-top:4rem;">Erreur lors du chargement de la carte.<br><br>⚠️ Si vous avez ouvert ce fichier localement (file://), les navigateurs bloquent le chargement de la carte.<br>Veuillez lancer un serveur local (ex: <b>npx serve public</b> ou Live Server) pour afficher les cartes.</div>';
   }
 };
 
@@ -1333,7 +1267,8 @@ const initWorldMap = async (marketData) => {
 
   try {
     if (!echarts.getMap('World')) {
-      const res = await fetch('/world.json');
+      const res = await fetch('./world.json');
+      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
       const geoJson = await res.json();
       echarts.registerMap('World', geoJson);
     }
@@ -1399,7 +1334,7 @@ const initWorldMap = async (marketData) => {
 
   } catch (e) {
     console.error("World map initialization failed", e);
-    container.innerHTML = '<div style="font-size:0.8rem; color:var(--danger); text-align:center; padding-top:4rem;">Erreur lors du chargement de la carte mondiale.</div>';
+    container.innerHTML = '<div style="font-size:0.8rem; color:var(--danger); text-align:center; padding-top:4rem;">Erreur lors du chargement de la carte mondiale.<br><br>⚠️ Veuillez lancer un serveur local (ex: <b>npx serve public</b> ou Live Server) pour afficher les cartes (restrictions de sécurité file://).</div>';
   }
 };
 
